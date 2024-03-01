@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'codebase-ng';
+  year = new Date().getFullYear();
 }
