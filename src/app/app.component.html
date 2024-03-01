@@ -1,10 +1,9 @@
 <nz-layout class="layout">
   <nz-header>
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
-      <li nz-menu-item>Dashboard</li>
-      <li nz-menu-item>nav 1</li>
-      <li nz-menu-item>nav 2</li>
-      <li nz-menu-item>nav 3</li>
+      <li *ngFor="let menu of codebase.navMenus" nz-menu-item>
+        {{menu.name}}
+      </li>
     </ul>
   </nz-header>
   <nz-content>

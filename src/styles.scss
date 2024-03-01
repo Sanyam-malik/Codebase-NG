@@ -1,4 +1,4 @@
-
+  
   h1, h2, h3, h4, h5, h6, p, span, div {
     color: #f5f5f5bf;
   }
@@ -59,8 +59,13 @@
     a, a:hover {
       color: white;
     }
+    background-color: #3c3b3b;
     border-radius: 5px;
     border-color: transparent;
+  }
+
+  .ant-table-tbody > tr.ant-table-placeholder:hover > td {
+    background: transparent;
   }
 
   .ant-pagination-next .ant-pagination-item-link, .ant-pagination-prev .ant-pagination-item-link {

@@ -1,14 +1,22 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NzTableSortOrder, NzTableSortFn, NzTableFilterList, NzTableFilterFn } from 'ng-zorro-antd/table';
 
 interface DataItem {
-  name: string;
-  age: number;
-  address: string;
+  date: string,
+  description: string,
+  filename: string,
+  level: string,
+  name: string,
+  notes: string,
+  status: string,
+  type: string,
+  url: string
 }
 
 interface ColumnItem {
   name: string;
+  allowFilter: boolean
   sortOrder: NzTableSortOrder | null;
   sortFn: NzTableSortFn<DataItem> | null;
   listOfFilter: NzTableFilterList;
@@ -24,61 +32,55 @@ interface ColumnItem {
   styleUrl: './problems.component.scss'
 })
 export class ProblemsComponent {
-  listOfColumns: ColumnItem[] = [
-    {
-      name: 'Name',
-      sortOrder: null,
-      sortFn: (a: DataItem, b: DataItem) => a.name.localeCompare(b.name),
-      sortDirections: ['ascend', 'descend', null],
-      filterMultiple: true,
-      listOfFilter: [
-        { text: 'Joe', value: 'Joe' },
-        { text: 'Jim', value: 'Jim', byDefault: true }
-      ],
-      filterFn: (list: string[], item: DataItem) => list.some(name => item.name.indexOf(name) !== -1)
-    },
-    {
-      name: 'Age',
-      sortOrder: 'descend',
-      sortFn: (a: DataItem, b: DataItem) => a.age - b.age,
-      sortDirections: ['descend', null],
-      listOfFilter: [],
-      filterFn: null,
-      filterMultiple: true
-    },
-    {
-      name: 'Address',
-      sortOrder: null,
-      sortDirections: ['ascend', 'descend', null],
-      sortFn: (a: DataItem, b: DataItem) => a.address.length - b.address.length,
-      filterMultiple: false,
-      listOfFilter: [
-        { text: 'London', value: 'London' },
-        { text: 'Sidney', value: 'Sidney' }
-      ],
-      filterFn: (address: string, item: DataItem) => item.address.indexOf(address) !== -1
-    }
-  ];
-  listOfData: DataItem[] = [
-    {
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
-    },
-    {
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
-    },
-    {
-      name: 'Jim Red',
-      age: 32,
-      address: 'London No. 2 Lake Park'
-    }
-  ];
+
+  listOfData: DataItem[] = [];
+  listOfColumns: ColumnItem[] = [];
+
+  constructor(private route: ActivatedRoute) {
+    const data = this.route.snapshot.data['apiResponse']['problems'];
+    this.listOfData =  data as DataItem[];
+    this.listOfColumns = [
+      {
+        name: 'Name',
+        sortOrder: 'ascend',
+        allowFilter: false,
+        sortFn: (a: DataItem, b: DataItem) => a.name.localeCompare(b.name),
+        sortDirections: ['ascend', 'descend', null],
+        filterMultiple: false,
+        listOfFilter: [],
+        filterFn: null
+      },
+      {
+        name: 'Type',
+        sortOrder: null,
+        allowFilter: true,
+        sortFn: (a: DataItem, b: DataItem) => a.type.localeCompare(b.type),
+        sortDirections: ['ascend', 'descend', null],
+        filterMultiple: true,
+        listOfFilter: [...new Set(this.listOfData.map(problem => problem.type))].map(type => ({ text: type, value: type })) as NzTableFilterList,
+        filterFn: (list: string[], item: DataItem) => list.some(type => item.type.toLowerCase().indexOf(type.toLowerCase()) !== -1)
+      },
+      {
+        name: 'Level',
+        sortOrder: null,
+        allowFilter: true,
+        sortFn: (a: DataItem, b: DataItem) => a.level.localeCompare(b.level),
+        sortDirections: ['ascend', 'descend', null],
+        filterMultiple: true,
+        listOfFilter: [...new Set(this.listOfData.map(problem => problem.level))].map(level => ({ text: level, value: level })) as NzTableFilterList,
+        filterFn: (list: string[], item: DataItem) => list.some(level => item.level.toLowerCase().indexOf(level.toLowerCase()) !== -1)
+      },
+      {
+        name: 'Status',
+        sortOrder: null,
+        allowFilter: true,
+        sortFn: (a: DataItem, b: DataItem) => a.status.localeCompare(b.status),
+        sortDirections: ['ascend', 'descend', null],
+        filterMultiple: true,
+        listOfFilter: [...new Set(this.listOfData.map(problem => problem.status))].map(status => ({ text: status, value: status })) as NzTableFilterList,
+        filterFn: (list: string[], item: DataItem) => list.some(status => item.status.toLowerCase().indexOf(status.toLowerCase()) !== -1)
+      }
+    ];
+  }
+  
 }

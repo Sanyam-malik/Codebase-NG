@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProblemsComponent } from './problems/problems.component';
 import { ProblemViewComponent } from './problem-view/problem-view.component';
+import { getResolver } from './get.resolver';
 
 const routes: Routes = [
   {
@@ -16,11 +17,25 @@ const routes: Routes = [
   },
   {
     path: 'problem',
-    component: ProblemsComponent
+    component: ProblemsComponent,
+    resolve: {
+      apiResponse: getResolver
+    },
+    data: {
+      url: '/problems',
+      options: {}
+    }
   },
   {
-    path: 'view',
-    component: ProblemViewComponent
+    path: 'problem/:id',
+    component: ProblemViewComponent,
+    resolve: {
+      apiResponse: getResolver
+    },
+    data: {
+      url: '/problems',
+      options: {}
+    }
   }
 ];
 

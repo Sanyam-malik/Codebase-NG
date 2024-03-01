@@ -1,4 +1,17 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+interface DataItem {
+    date: string,
+    description: string,
+    filename: string,
+    level: string,
+    name: string,
+    notes: string,
+    status: string,
+    type: string,
+    url: string
+  }
 
 @Component({
   selector: 'app-problem-view',
@@ -6,6 +19,20 @@ import { Component } from '@angular/core';
   styleUrl: './problem-view.component.scss'
 })
 export class ProblemViewComponent {
+    
+    name: string | null | undefined;
+    item: DataItem | undefined;
+
+    constructor(private route: ActivatedRoute) {}
+
+    ngOnInit() {
+        this.name = this.route.snapshot.paramMap.get('name');
+        if(this.name) {
+            const list = (this.route.snapshot.data['apiResponse']['problems'] as DataItem[]).filter(e => e.name === this.name);
+            this.item = list[0];
+        }
+    }
+
   code = `
 package KunalHomework;
 
