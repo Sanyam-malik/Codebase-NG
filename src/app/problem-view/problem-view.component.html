@@ -1,12 +1,12 @@
 <ng-container *ngIf="item">
-    <div style="display: flow-root;">
-        <div style="float: left;">
+    <div style="display: flex;justify-content: space-between;">
+        <div>
             <h1 style="margin: 0%;">Problem: <span class="color-primary">{{ item.name }}</span></h1>
             <h2 style="margin: 0%;"> <span class="color-primary">{{item.type}}</span></h2>
             <h3>{{ item.level }}</h3>
         </div>
-        <div style="float: right;">
-            <h2 style="text-align: center;padding: 0.5rem 0px;">Status: <span class="color-primary">{{ item.status }}</span></h2>
+        <div style="text-align: right;">
+            <h2 style="padding: 0.5rem 0px;">Status: <span class="color-primary">{{ item.status }}</span></h2>
             <a *ngIf="button" class="btn-primary" [href]="item.url"><img [src]="button.icon">View on {{button.name}}</a>
         </div>
     </div>
