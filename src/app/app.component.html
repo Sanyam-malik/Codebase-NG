@@ -1,14 +1,17 @@
 <nz-layout class="layout">
   <nz-header>
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
-      <li *ngFor="let menu of codebase.navMenus" nz-menu-item>
+      <li nz-menu-item routerLink="/problems" class="nohover">
+        <img src="../assets/logo.png" height="40">&nbsp;&nbsp;Codebase
+      </li>
+      <li *ngFor="let menu of codebase.navMenus" nz-menu-item routerLink="/problem/type/{{menu.name.toLowerCase()}}">
         {{menu.name}}
       </li>
     </ul>
   </nz-header>
   <nz-content>
     <nz-breadcrumb>
-      <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+      <nz-breadcrumb-item *ngFor="let menu of codebase.runningNav">{{menu.name}}</nz-breadcrumb-item>
     </nz-breadcrumb>
     <div class="inner-content">
       <router-outlet></router-outlet>

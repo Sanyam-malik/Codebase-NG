@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NzTableSortOrder, NzTableSortFn, NzTableFilterList, NzTableFilterFn } from 'ng-zorro-antd/table';
 import { Problem } from '../problem';
+import { CodebaseService } from '../codebase.service';
 
 interface ColumnItem {
   name: string;
@@ -22,12 +23,129 @@ interface ColumnItem {
 })
 export class ProblemsComponent {
 
+  isTypeFilter: boolean = false;
+  isStatusFilter: boolean = false;
+  isLevelFilter: boolean = false;
   listOfData: Problem[] = [];
   listOfColumns: ColumnItem[] = [];
 
-  constructor(private route: ActivatedRoute) {
-    const data = this.route.snapshot.data['apiResponse']['problems'];
-    this.listOfData =  data as Problem[];
+  get type(){
+    const type = this.route.snapshot.paramMap.get('type');
+    if(type) {
+      return this.codebase.getType(type.toLowerCase())?.name;
+    } else {
+      return undefined
+    }
+  }
+
+  get level(){
+    const level = this.route.snapshot.paramMap.get('level');
+    if(level) {
+      return level.substring(0, 1).toUpperCase()+level.substring(1).toLowerCase();
+    } else {
+      return undefined
+    }
+  }
+
+  get status(){
+    const status = this.route.snapshot.paramMap.get('status');
+    if(status) {
+      return status.substring(0, 1).toUpperCase()+status.substring(1).toLowerCase();
+    } else {
+      return undefined
+    }
+  }
+
+  constructor(private route: ActivatedRoute, private router: Router, private codebase: CodebaseService) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    var data: Problem[] = this.route.snapshot.data['apiResponse']['problems'];
+    
+    if(String(router.url).includes("/type")) {
+      this.isTypeFilter = true;
+      const type = this.route.snapshot.paramMap.get('type');
+      data = data.filter(e=> e.type.toLowerCase() == type);
+
+      this.codebase.runningNav = [
+        {
+          name: 'Home',
+          url: '/dashboard'
+        },
+        {
+          name: 'Problems',
+          url: '/problems'
+        },
+        {
+          name: 'Type',
+          url: `/problem/types`
+        },
+        {
+          name: this.type ? this.type : '',
+          url: `/problem/status/${this.type}`
+        }
+      ]
+
+    } else if(String(router.url).includes("/status")) {
+      this.isStatusFilter = true;
+      const status = this.route.snapshot.paramMap.get('status');
+      data = data.filter(e=> e.status.toLowerCase() == status);
+
+      this.codebase.runningNav = [
+        {
+          name: 'Home',
+          url: '/dashboard'
+        },
+        {
+          name: 'Problems',
+          url: '/problems'
+        },
+        {
+          name: 'Status',
+          url: `/problem/statuses}`
+        },
+        {
+          name: this.status ? this.status : '',
+          url: `/problem/status/${this.status}`
+        }
+      ]
+
+    } else if(String(router.url).includes("/level")) {
+      this.isLevelFilter = true;
+      const level = this.route.snapshot.paramMap.get('level');
+      data = data.filter(e=> e.level.toLowerCase() == level);
+
+      this.codebase.runningNav = [
+        {
+          name: 'Home',
+          url: '/dashboard'
+        },
+        {
+          name: 'Problems',
+          url: '/problems'
+        },
+        {
+          name: 'Level',
+          url: `/problem/levels`
+        },
+        {
+          name: this.level ? this.level : '',
+          url: `/problem/level/${this.level}`
+        }
+      ]
+    } else {
+      this.codebase.runningNav = [
+        {
+          name: 'Home',
+          url: '/dashboard'
+        },
+        {
+          name: 'Problems',
+          url: '/problems'
+        }
+      ]
+    }
+    
+    this.listOfData =  data;
+    
     this.listOfColumns = [
       {
         name: 'Name',

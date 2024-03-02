@@ -17,6 +17,11 @@ const routes: Routes = [
   },
   {
     path: 'problem',
+    redirectTo: 'problems',
+    pathMatch: 'full'
+  },
+  {
+    path: 'problems',
     component: ProblemsComponent,
     resolve: {
       apiResponse: getResolver
@@ -27,7 +32,40 @@ const routes: Routes = [
     }
   },
   {
-    path: 'problem/:id',
+    path: 'problem/type/:type',
+    component: ProblemsComponent,
+    resolve: {
+      apiResponse: getResolver
+    },
+    data: {
+      url: '/problems',
+      options: {}
+    }
+  },
+  {
+    path: 'problem/level/:level',
+    component: ProblemsComponent,
+    resolve: {
+      apiResponse: getResolver
+    },
+    data: {
+      url: '/problems',
+      options: {}
+    }
+  },
+  {
+    path: 'problem/status/:status',
+    component: ProblemsComponent,
+    resolve: {
+      apiResponse: getResolver
+    },
+    data: {
+      url: '/problems',
+      options: {}
+    }
+  },
+  {
+    path: 'problem/statement/:id',
     component: ProblemViewComponent,
     resolve: {
       apiResponse: getResolver

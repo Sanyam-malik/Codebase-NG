@@ -45,13 +45,17 @@
   }
 
   .ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover {
-    background-color: transparent;
-    border-bottom: 4px solid #09a430;
+    .ant-menu-title-content {
+      color: white;
+    }
+    background-color: #09a430;
   }
 
   .ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected, .ant-menu.ant-menu-dark .ant-menu-item-selected {
-    background-color: transparent;
-    border-bottom: 4px solid #09a430;
+    .ant-menu-title-content {
+      color: white;
+    }
+    background-color: #09a430;
   }
 
   .ant-badge-status-text, .ant-breadcrumb, .ant-breadcrumb .anticon, .ant-btn, .ant-ribbon {
@@ -219,6 +223,10 @@
     border-bottom: none;
   }
 
+  .ant-breadcrumb-link {
+    cursor: default;
+  }
+
   .btn-primary {
     background: white;
     color: rgb(40, 40, 40);
@@ -229,4 +237,13 @@
     img {
       height: 35px;
     }
+  }
+
+  .underline {
+    text-decoration: underline;
+  }
+
+  .nohover {
+    color: initial;
+    background-color: transparent !important;
   }

@@ -1,4 +1,7 @@
-<h1>Problems</h1>
+<h1 *ngIf="!isStatusFilter && !isTypeFilter && !isLevelFilter">All Problems</h1>
+<h1 *ngIf="isTypeFilter">All Problems Related to <span class="color-primary underline">{{type}}</span></h1>
+<h1 *ngIf="isLevelFilter">All <span class="color-primary underline">{{level}}</span> Problems</h1>
+<h1 *ngIf="isStatusFilter">All Problems Having <span class="color-primary underline">{{status}}</span> as Status</h1>
 
 <nz-table #filterTable [nzData]="listOfData" nzTableLayout="fixed">
     <thead>
@@ -27,7 +30,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of filterTable.data">
-        <td><a routerLink="/problem/{{data.id}}">{{ data.name }}</a></td>
+        <td><a routerLink="/problem/statement/{{data.id}}">{{ data.name }}</a></td>
         <td>{{ data.type }}</td>
         <td>{{ data.level }}</td>
         <td>{{ data.status }}</td>
