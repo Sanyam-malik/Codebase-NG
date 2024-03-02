@@ -10,6 +10,10 @@ import { environment } from '../environments/environment.development';
 })
 export class AppComponent implements OnInit {
 
+  title = 'codebase-ng';
+  year = new Date().getFullYear();
+
+
   constructor(private http: HttpClient, public codebase: CodebaseService) {
     
   }
@@ -17,7 +21,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     if(this.codebase.navMenus.length == 0) {
       this.http.get(environment.baseURL+"/problem/types").subscribe((response: any) => {
-        console.log(response['problem_types']);
         this.codebase.navMenus = response['problem_types'].sort((a: any, b: any) => (a['name'] < b['name'] ? -1 : 1));
       },err => {
         
@@ -25,11 +28,37 @@ export class AppComponent implements OnInit {
 
       })
     }
+
+    if(this.codebase.platforms.length == 0) {
+      this.http.get(environment.baseURL+"/platforms").subscribe((response: any) => {
+        this.codebase.platforms = response['platforms'];
+      },err => {
+        
+      },() => {
+
+      })
+    }
+
+    if(this.codebase.trackers.length == 0) {
+      this.http.get(environment.baseURL+"/trackers").subscribe((response: any) => {
+        this.codebase.trackers = response['trackers']
+      },err => {
+        
+      },() => {
+
+      })
+    }
+
+    if(this.codebase.reminders.length == 0) {
+      this.http.get(environment.baseURL+"/reminders").subscribe((response: any) => {
+        this.codebase.reminders = response['reminders']
+      },err => {
+        
+      },() => {
+
+      })
+    }
+    
   }
-  
-  title = 'codebase-ng';
-  year = new Date().getFullYear();
-
-
 
 }

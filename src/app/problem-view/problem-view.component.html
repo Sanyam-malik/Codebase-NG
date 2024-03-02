@@ -1,30 +1,41 @@
-<h1>Problem: <span class="color-primary">89898</span> &nbsp;<span class="color-status">(Completed)</span></h1>
-<h2 style="margin: 0%;">Ava Max - Sweet but Psycho [Official Music Video] <span class="color-primary">[Easy]</span></h2>
-<h3 class="color-primary">Arrays</h3>
-<div class="companies">
-    <nz-tag [nzColor]="'#f50'">#f50</nz-tag>
-    <nz-tag [nzColor]="'#2db7f5'">#2db7f5</nz-tag>
-    <nz-tag [nzColor]="'#87d068'">#87d068</nz-tag>
-    <nz-tag [nzColor]="'#108ee9'">#108ee9</nz-tag>
-</div>
-
-<nz-collapse [nzBordered]="false">
-    <nz-collapse-panel [nzHeader]="'Description'" [nzActive]="true">
-        <div class="description">
-
+<ng-container *ngIf="item">
+    <div style="display: flow-root;">
+        <div style="float: left;">
+            <h1 style="margin: 0%;">Problem: <span class="color-primary">{{ item.name }}</span></h1>
+            <h2 style="margin: 0%;"> <span class="color-primary">{{item.type}}</span></h2>
+            <h3>{{ item.level }}</h3>
         </div>
-    </nz-collapse-panel>
+        <div style="float: right;">
+            <h2 class="color-primary" style="text-align: center;"> {{ item.status }}</h2>
+            <div class="companies">
+                <nz-tag [nzColor]="'#f50'">#f50</nz-tag>
+                <nz-tag [nzColor]="'#2db7f5'">#2db7f5</nz-tag>
+                <nz-tag [nzColor]="'#87d068'">#87d068</nz-tag>
+                <nz-tag [nzColor]="'#108ee9'">#108ee9</nz-tag>
+            </div>
+        </div>
+    </div>
     
-    <nz-collapse-panel [nzHeader]="'Code'" [nzActive]="false">
-        <div class="codeblock">
-            <pre><code [highlight]="code"></code></pre>
-        </div>
-    </nz-collapse-panel>
 
-    <nz-collapse-panel [nzHeader]="'Notes'" [nzActive]="false">
-        <div class="notes">
-            
-        </div>
-    </nz-collapse-panel>
-</nz-collapse>
+    <nz-collapse [nzBordered]="false">
+        <nz-collapse-panel [nzHeader]="'Description'" [nzActive]="true">
+            <div class="description" [innerHTML]="item.description">
 
+            </div>
+        </nz-collapse-panel>
+        
+        <nz-collapse-panel [nzHeader]="'Code'" [nzActive]="false">
+            <div class="codeblock">
+                <pre><code [highlight]="item.code"></code></pre>
+            </div>
+        </nz-collapse-panel>
+
+        <nz-collapse-panel [nzHeader]="'Notes'" [nzActive]="false">
+            <div class="notes" [innerHTML]="item.notes">
+                
+            </div>
+        </nz-collapse-panel>
+    </nz-collapse>
+
+
+</ng-container>
