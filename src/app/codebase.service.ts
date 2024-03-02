@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { Platform } from './platform';
 import { Menu } from './menu';
 import { BreadcrumbItem } from './breadcrumb-item';
+import { Reminder } from './reminder';
+import { Tracker } from './tracker';
+import { Company } from './company';
+import { Setting } from './setting';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +14,11 @@ export class CodebaseService {
 
   navMenus: Menu[] = [];
   runningNav: BreadcrumbItem[] = [];
-  trackers: any = [];
-  reminders: any = [];
+  trackers: Tracker[] = [];
+  reminders: Reminder[] = [];
   platforms: Platform[] = [];
+  companies: Company[] = [];
+  setting: Setting[] = [];
 
   constructor() {
 
@@ -24,8 +30,7 @@ export class CodebaseService {
       return list[0];
     } else {
       return undefined;
-    }
-    
+    } 
   }
 
   getType(name: string | undefined) {

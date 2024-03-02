@@ -1,7 +1,7 @@
 <nz-layout class="layout">
   <nz-header>
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
-      <li nz-menu-item routerLink="/problems" class="nohover">
+      <li nz-menu-item routerLink="/dashboard" class="nohover">
         <img src="../assets/logo.png" height="40">&nbsp;&nbsp;Codebase
       </li>
       <li *ngFor="let menu of codebase.navMenus" nz-menu-item routerLink="/problem/type/{{menu.name.toLowerCase()}}">
