@@ -8,6 +8,14 @@
     background: #09a430;
   }
 
+  a {
+    color: #f5f5f5bf;
+  }
+
+  a:hover, a:focus {
+    color: #09a430;
+  }
+
   .ant-layout-header, .ant-layout-footer {
     color: #f5f5f5bf;
     background-color: rgb(40 40 40/1);
@@ -209,4 +217,16 @@
 
   .ant-collapse-borderless > .ant-collapse-item {
     border-bottom: none;
+  }
+
+  .btn-primary {
+    background: white;
+    color: rgb(40, 40, 40);
+    padding: 1rem;
+    border-radius: 4rem;
+    font-size: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    img {
+      height: 35px;
+    }
   }

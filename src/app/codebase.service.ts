@@ -17,9 +17,14 @@ export class CodebaseService {
 
   }
 
-  getPlatform(url: string) {
-    const list = this.platforms.filter(item => url.includes(item.name.toLowerCase()) || url.includes(item.url.toLowerCase()));
-    return list[0];
+  getPlatform(url: string | undefined) {
+    if(url) {
+      const list = this.platforms.filter(item => url.includes(item.name.toLowerCase()) || url.includes(item.url.toLowerCase()));
+      return list[0];
+    } else {
+      return undefined;
+    }
+    
   }
 
 }
