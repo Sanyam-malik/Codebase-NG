@@ -4,7 +4,8 @@ import { CodebaseService } from '../../codebase.service';
 
 export interface PlotData {
   y: number,
-  color: string
+  color: string,
+  events?: any
 }
 
 @Component({
@@ -48,7 +49,13 @@ export class CompaniesComponent {
         categories.push(company.company);
         data.push({
           y: company.count,
-          color: this.codebase.getColor()
+          color: this.codebase.getColor(),
+          events: {
+            click:(event: any) => {
+              const category = event.point.category;
+              window.open(`/problem/company/${String(category).toLowerCase()}`, '_self');
+            }
+          }
         })
       }
 

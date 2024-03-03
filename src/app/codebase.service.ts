@@ -87,6 +87,15 @@ export class CodebaseService {
     }
   }
 
+  getCompany(name: string | undefined) {
+    if(name) {
+      const list = this.companies.filter(item => item.name.toLowerCase() == name);
+      return list[0];
+    } else {
+      return undefined;
+    }
+  }
+
   clearData() {
     this.runningTheme = "dark";
     this.navMenus= [];

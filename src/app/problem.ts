@@ -9,5 +9,6 @@ export interface Problem {
     status: string,
     type: string,
     url: string,
-    code: string
+    code: string,
+    companies: string
 }

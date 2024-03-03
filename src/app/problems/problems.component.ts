@@ -24,6 +24,7 @@ interface ColumnItem {
 export class ProblemsComponent {
 
   isTypeFilter: boolean = false;
+  isCompanyFilter: boolean = false;
   isStatusFilter: boolean = false;
   isLevelFilter: boolean = false;
   listOfData: Problem[] = [];
@@ -33,6 +34,15 @@ export class ProblemsComponent {
     const type = this.route.snapshot.paramMap.get('type');
     if(type) {
       return this.codebase.getType(type.toLowerCase())?.name;
+    } else {
+      return undefined
+    }
+  }
+
+  get company(){
+    const company = this.route.snapshot.paramMap.get('company');
+    if(company) {
+      return this.codebase.getCompany(company.toLowerCase())?.name;
     } else {
       return undefined
     }
@@ -63,7 +73,7 @@ export class ProblemsComponent {
     if(String(router.url).includes("/type")) {
       this.isTypeFilter = true;
       const type = this.route.snapshot.paramMap.get('type');
-      data = data.filter(e=> e.type.toLowerCase() == type);
+      data = data.filter(e=> e.type && e.type.toLowerCase() == type);
 
       this.codebase.runningNav = [
         {
@@ -84,10 +94,34 @@ export class ProblemsComponent {
         }
       ]
 
+    } else if(String(router.url).includes("/company")) {
+      this.isCompanyFilter = true;
+      const company = this.route.snapshot.paramMap.get('company');
+      data = data.filter(e=> e.companies && e.companies.toLowerCase().includes(company ? company : ""));
+
+      this.codebase.runningNav = [
+        {
+          name: 'Home',
+          url: '/dashboard'
+        },
+        {
+          name: 'Problems',
+          url: '/problems'
+        },
+        {
+          name: 'Company',
+          url: `/problem/company`
+        },
+        {
+          name: this.company ? this.company : '',
+          url: `/problem/company/${this.company}`
+        }
+      ]
+
     } else if(String(router.url).includes("/status")) {
       this.isStatusFilter = true;
       const status = this.route.snapshot.paramMap.get('status');
-      data = data.filter(e=> e.status.toLowerCase() == status);
+      data = data.filter(e=> e.status && e.status.toLowerCase() == status);
 
       this.codebase.runningNav = [
         {
@@ -111,7 +145,7 @@ export class ProblemsComponent {
     } else if(String(router.url).includes("/level")) {
       this.isLevelFilter = true;
       const level = this.route.snapshot.paramMap.get('level');
-      data = data.filter(e=> e.level.toLowerCase() == level);
+      data = data.filter(e=> e.level && e.level.toLowerCase() == level);
 
       this.codebase.runningNav = [
         {

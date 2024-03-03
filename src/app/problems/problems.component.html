@@ -1,7 +1,8 @@
-<h1 *ngIf="!isStatusFilter && !isTypeFilter && !isLevelFilter">All Problems</h1>
+<h1 *ngIf="!isStatusFilter && !isTypeFilter && !isLevelFilter && !isCompanyFilter">All Problems</h1>
 <h1 *ngIf="isTypeFilter">All Problems Related to <span class="color-primary underline">{{type}}</span></h1>
 <h1 *ngIf="isLevelFilter">All <span class="color-primary underline">{{level}}</span> Problems</h1>
 <h1 *ngIf="isStatusFilter">All Problems Having <span class="color-primary underline">{{status}}</span> as Status</h1>
+<h1 *ngIf="isCompanyFilter">All Problems Asked in <span class="color-primary underline">{{company}}</span></h1>
 
 <nz-table #filterTable [nzData]="listOfData" nzTableLayout="fixed">
     <thead>

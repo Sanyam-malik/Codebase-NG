@@ -43,6 +43,17 @@ const routes: Routes = [
     }
   },
   {
+    path: 'problem/company/:company',
+    component: ProblemsComponent,
+    resolve: {
+      apiResponse: getResolver
+    },
+    data: {
+      url: '/problems',
+      options: {}
+    }
+  },
+  {
     path: 'problem/level/:level',
     component: ProblemsComponent,
     resolve: {
