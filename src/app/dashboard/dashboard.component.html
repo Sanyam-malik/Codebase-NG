@@ -12,7 +12,7 @@
 </div>
 
 <div class="grid">
-    <app-problem-count [text]="'Total Problem Solved'" [count]="'0'"></app-problem-count>
-    <app-problem-count [text]="'Monthly Progress'" [count]="'0'"></app-problem-count>
-    <app-problem-focus [text]="'Focus of Month'" [focus]="'Arrays'"></app-problem-focus>
+    <app-problem-count *ngIf="totalCount != undefined" [text]="'Total Problem Solved'" [count]="this.totalCount"></app-problem-count>
+    <app-problem-count *ngIf="monthCount != undefined" [text]="'Monthly Progress'" [count]="this.monthCount"></app-problem-count>
+    <app-problem-focus *ngIf="monthFocus" [text]="'Focus of Month'" [focus]="this.monthFocus"></app-problem-focus>
 </div>

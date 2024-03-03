@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 export class ProblemCountComponent {
 
   @Input("text") text: string = "";
-  @Input("count") count: string = "";
+  @Input("count") count: number = 0;
 
 
 }

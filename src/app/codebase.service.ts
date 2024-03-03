@@ -6,6 +6,7 @@ import { Reminder } from './reminder';
 import { Tracker } from './tracker';
 import { Company } from './company';
 import { Setting } from './setting';
+import { Analytics } from './analytics';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class CodebaseService {
   platforms: Platform[] = [];
   companies: Company[] = [];
   settings: Setting[] = [];
+  analytics: Analytics | undefined;
 
   constructor() {
 
