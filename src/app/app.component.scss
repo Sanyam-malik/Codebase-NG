@@ -11,6 +11,7 @@
   }
 
   nz-header {
+    border-bottom: 1px solid var(--primaryColor);
     position: fixed;
     width: 100%;
     z-index: 2;
@@ -26,11 +27,11 @@
   }
 
   nz-breadcrumb {
-    margin: 16px 0;
+    margin: 1rem 0;
   }
 
   .inner-content {
-    padding: 24px 0px;
+    padding: 1rem 0px;
     min-height: 380px;
   }
 
