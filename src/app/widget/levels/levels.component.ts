@@ -8,6 +8,7 @@ export interface PlotData {
   color: string,
   sliced: boolean,
   selected: boolean
+  events?: any
 }
 
 @Component({
@@ -52,7 +53,13 @@ export class LevelsComponent {
           y: level.count,
           color: this.codebase.getColor(),
           sliced: true,
-          selected: false
+          selected: false,
+          events: {
+            click:(event: any) => {
+              const name = event.point.name;
+              window.open(`/problem/level/${String(name).toLowerCase()}`, '_self');
+            }
+          }
         })
       }
       return {

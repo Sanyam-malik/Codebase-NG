@@ -5,7 +5,8 @@ import { CodebaseService } from '../../codebase.service';
 
 export interface PlotData {
   y: number,
-  color: string
+  color: string,
+  events?: any
 }
 
 @Component({
@@ -50,7 +51,13 @@ export class StatusComponent implements OnInit {
         categories.push(status.status);
         data.push({
           y: status.count,
-          color: this.codebase.getColor()
+          color: this.codebase.getColor(),
+          events: {
+            click:(event: any) => {
+              const category = event.point.category;
+              window.open(`/problem/status/${String(category).toLowerCase()}`, '_self');
+            }
+          }
         })
       }
 

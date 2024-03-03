@@ -7,7 +7,8 @@ export interface PlotData {
   y: number,
   color: string,
   sliced: boolean,
-  selected: boolean
+  selected: boolean,
+  events?: any
 }
 
 @Component({
@@ -60,13 +61,29 @@ export class TypesComponent {
       const data: PlotData[] = [];
       countMap.forEach((names, count) => {
         const name = names.join(', '); // Join names with the same count
-        data.push({
+        if(names.length > 1){
+          data.push({
+              name: name,
+              y: count,
+              color: this.codebase.getColor(),
+              sliced: true,
+              selected: false
+          });
+        } else {
+          data.push({
             name: name,
             y: count,
             color: this.codebase.getColor(),
             sliced: true,
-            selected: false
+            selected: false,
+            events: {
+              click:(event: any) => {
+                const name = event.point.name;
+                window.open(`/problem/type/${String(name).toLowerCase()}`, '_self');
+              }
+            }
         });
+        }
       });
 
       return { "data": data };
