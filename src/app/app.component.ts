@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CodebaseService } from './codebase.service';
 import { environment } from '../environments/environment.development';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +11,12 @@ import { environment } from '../environments/environment.development';
 })
 export class AppComponent implements OnInit {
 
-  title = 'codebase-ng';
+  title = 'Codebase';
   year = new Date().getFullYear();
 
 
-  constructor(public codebase: CodebaseService) {
-    
+  constructor(private titleService: Title, public codebase: CodebaseService) {
+    this.titleService.setTitle(this.title);
   }
   
   ngOnInit(): void {
