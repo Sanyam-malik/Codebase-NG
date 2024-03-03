@@ -62,6 +62,29 @@ export class CodebaseService {
     }
   }
 
+  clearData() {
+    this.runningTheme = "dark";
+    this.navMenus= [];
+    this.runningNav = [];
+    this.trackers = [];
+    this.reminders = [];
+    this.platforms = [];
+    this.companies = [];
+    this.settings= [];
+    this.analytics = undefined;
+  }
+
+  refreshDatabase() {
+    this.http.post(environment.baseURL+"/update", null).subscribe((response: any) => {
+      this.clearData();
+      window.location.reload();
+    },err => {
+      
+    },() => {
+
+    })
+  }
+
   getData() {
     const http = this.http;
     const codebase = this;

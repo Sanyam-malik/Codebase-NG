@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CodebaseService } from '../codebase.service';
-import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'; 
+import { faArrowCircleRight, faArrowsRotate } from '@fortawesome/free-solid-svg-icons'; 
 
 @Component({
   selector: 'app-dashboard',
@@ -10,10 +10,12 @@ import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
 export class DashboardComponent implements OnInit {
   
   arrowRight: any;
+  arrowRotate: any;
   
-  constructor(private codebase: CodebaseService) {
+  constructor(public codebase: CodebaseService) {
     this.codebase.runningNav = [];
     this.arrowRight = faArrowCircleRight;
+    this.arrowRotate = faArrowsRotate;
   }
 
   ngOnInit(): void {
