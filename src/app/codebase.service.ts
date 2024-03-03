@@ -17,6 +17,8 @@ export class CodebaseService {
 
   runningTheme: string = "dark";
   navMenus: Menu[] = [];
+  statuses: string[] = [];
+  levels: string[] = [];
   runningNav: BreadcrumbItem[] = [];
   trackers: Tracker[] = [];
   reminders: Reminder[] = [];
@@ -61,6 +63,24 @@ export class CodebaseService {
   getType(name: string | undefined) {
     if(name) {
       const list = this.navMenus.filter(item => item.name.toLowerCase() == name);
+      return list[0];
+    } else {
+      return undefined;
+    }
+  }
+
+  getStatus(name: string | undefined) {
+    if(name) {
+      const list = this.statuses.filter(item => item.toLowerCase() == name);
+      return list[0];
+    } else {
+      return undefined;
+    }
+  }
+
+  getLevel(name: string | undefined) {
+    if(name) {
+      const list = this.levels.filter(item => item.toLowerCase() == name);
       return list[0];
     } else {
       return undefined;
@@ -134,6 +154,26 @@ export class CodebaseService {
     if(codebase.navMenus.length == 0) {
       http.get(environment.baseURL+"/problem/types").subscribe((response: any) => {
         codebase.navMenus = response['problem_types'].sort((a: any, b: any) => (a['name'] < b['name'] ? -1 : 1));
+      },err => {
+        
+      },() => {
+  
+      })
+    }
+
+    if(codebase.navMenus.length == 0) {
+      http.get(environment.baseURL+"/problem/levels").subscribe((response: any) => {
+        codebase.levels = response['problem_levels'];
+      },err => {
+        
+      },() => {
+  
+      })
+    }
+
+    if(codebase.navMenus.length == 0) {
+      http.get(environment.baseURL+"/problem/statuses").subscribe((response: any) => {
+        codebase.statuses = response['problem_statuses'];
       },err => {
         
       },() => {

@@ -18,7 +18,7 @@
             <div class="description" [innerHTML]="item.description"></div>
         </nz-collapse-panel>
         
-        <nz-collapse-panel *ngIf="item.code" [nzHeader]="'Code'" [nzActive]="false">
+        <nz-collapse-panel *ngIf="item.code" [nzHeader]="'Code'" [nzActive]="!item.description ? true : false">
             <div class="codeblock">
                 <pre><code [highlight]="item.code"></code></pre>
             </div>

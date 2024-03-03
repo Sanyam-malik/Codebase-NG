@@ -41,7 +41,7 @@ export class ProblemsComponent {
   get level(){
     const level = this.route.snapshot.paramMap.get('level');
     if(level) {
-      return level.substring(0, 1).toUpperCase()+level.substring(1).toLowerCase();
+      return this.codebase.getLevel(level.toLowerCase());
     } else {
       return undefined
     }
@@ -50,7 +50,7 @@ export class ProblemsComponent {
   get status(){
     const status = this.route.snapshot.paramMap.get('status');
     if(status) {
-      return status.substring(0, 1).toUpperCase()+status.substring(1).toLowerCase();
+      return this.codebase.getStatus(status.toLowerCase());
     } else {
       return undefined
     }
