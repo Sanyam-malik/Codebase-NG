@@ -1,24 +1,39 @@
+:root {
+  --primary-color: #09a430;
+  --secondary-color: #068626;
+  --header-color: rgb(40 40 40);
+  --background-color: rgb(26, 26, 26);
+  --alternative-table-color: rgba(255, 255, 255, 0.12);
+  --text-primary-color: #f5f5f5bf;
+  --text-secondary-color: white;
+  --box-color: #1E1E1E;
+  --box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  --pagination-disabled-bg-color: #39383840;
+  --pagination-active-bg-color: rgb(92 92 92);
+  --pagination-bg-color: #3c3b3b;
+  --pagination-txt-color: white;
+  }
   
   h1, h2, h3, h4, h5, h6, p, span, div {
-    color: #f5f5f5bf;
+    color: var(--text-primary-color);
   }
 
   ::selection {
-    color: #fff;
-    background: #09a430;
+    color: var(--text-secondary-color);
+    background: var(--primary-color)
   }
 
   a {
-    color: #f5f5f5bf;
+    color: var(--text-primary-color);;
   }
 
   a:hover, a:focus {
-    color: #09a430;
+    color: var(--secondary-color);
   }
 
   .ant-layout-header, .ant-layout-footer {
-    color: #f5f5f5bf;
-    background-color: rgb(40 40 40/1);
+    color: var(--text-primary-color);
+    background-color: var(--header-color);
   }
 
   .ant-menu-dark .ant-menu-sub, .ant-menu.ant-menu-dark, .ant-menu.ant-menu-dark .ant-menu-sub {
@@ -27,7 +42,6 @@
   }
 
   .ant-table-footer, .ant-table-thead > tr > th {
-    color: rgba(0, 0, 0, .85);
     background: transparent;
   }
 
@@ -36,26 +50,26 @@
   }
 
   .ant-layout-content {
-    background: rgb(26 26 26/1);
+    background: var(--background-color);
   }
 
   .ant-breadcrumb-separator, .anticon, .ant-table-column-sorter-down.active, .ant-table-column-sorter-up.active {
-    color: #09a430;
+    color: var(--primary-color);
     font-weight: bold;
   }
 
   .ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover {
     .ant-menu-title-content {
-      color: white;
+      color: var(--text-secondary-color);
     }
-    background-color: #09a430;
+    background-color: var(--primary-color);
   }
 
   .ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected, .ant-menu.ant-menu-dark .ant-menu-item-selected {
     .ant-menu-title-content {
-      color: white;
+      color: var(--text-secondary-color)
     }
-    background-color: #09a430;
+    background-color: var(--primary-color);
   }
 
   .ant-badge-status-text, .ant-breadcrumb, .ant-breadcrumb .anticon, .ant-btn, .ant-ribbon {
@@ -69,9 +83,9 @@
   .ant-pagination-item, .ant-pagination-prev, .ant-pagination-next {
     font-weight: bold;
     a, a:hover {
-      color: white;
+      color: var(--text-secondary-color);
     }
-    background-color: #3c3b3b;
+    background-color: var(--pagination-bg-color);
     border-radius: 5px;
     border-color: transparent;
   }
@@ -94,17 +108,21 @@
     transition: all .3s;
   }
 
+  .ant-pagination-item:hover {
+    border-color: var(--primary-color);
+  }
+
   .ant-pagination-disabled, .ant-pagination-disabled:hover {
     cursor: not-allowed;
-    background: #39383840;
+    background: var(--pagination-disabled-bg-color);
   }
 
   .ant-pagination-item-active {
-    background: rgb(92 92 92/1);
+    background: var(--pagination-active-bg-color);
   }
 
   .ant-breadcrumb {
-    color: #f5f5f5bf;
+    color: var(--primary-color);
   }
 
   .ant-table-tbody > tr.ant-table-row:hover > td, .ant-table-tbody > tr > td.ant-table-cell-row-hover {
@@ -112,7 +130,7 @@
   }
 
   .ant-table-thead, .ant-table-tbody {
-    background: rgb(26 26 26/1);
+    background: var(--background-color);
   }
 
   .ant-table-tbody > tr > td {
@@ -120,11 +138,11 @@
   }
 
   .ant-table-thead > tr > th, .ant-table.ant-table-bordered > .ant-table-container > .ant-table-body > table > thead > tr:not(:last-child) > th, .ant-table.ant-table-bordered > .ant-table-container > .ant-table-content > table > thead > tr:not(:last-child) > th, .ant-table.ant-table-bordered > .ant-table-container > .ant-table-header > table > thead > tr:not(:last-child) > th, .ant-table.ant-table-bordered > .ant-table-container > .ant-table-summary > table > thead > tr:not(:last-child) > th {
-    border-bottom: 2px solid #09a430;
+    border-bottom: 2px solid var(--primary-color);
   }
 
   .ant-table-row:nth-child(2n) {
-    background-color: rgba(255, 255, 255, 0.12);
+    background-color: var(--alternative-table-color);
   }
 
   .ant-table-filter-dropdown {
@@ -132,7 +150,7 @@
   }
 
   .ant-dropdown-menu, .ant-table-filter-dropdown {
-    background-color: rgb(26 26 26/1);
+    background-color: var(--header-color);
   }
 
   .ant-dropdown-menu-item {
@@ -141,18 +159,18 @@
   }
 
   .ant-dropdown-menu-item-selected, .ant-dropdown-menu-submenu-title-selected{
-    background-color: rgba(255, 255, 255, 0.12);
+    background-color: var(--alternative-table-color);
     border-top: none;
   }
 
   .ant-dropdown-menu-item:hover {
-    background-color: rgba(255, 255, 255, 0.12);
+    background-color: var(--alternative-table-color);
   }
 
   .ant-btn-primary {
-    color: #f5f5f5bf;
-    border-color: #09a430;
-    background: #09a430;
+    color: var(--text-primary-color);
+    border-color: var(--primary-color);
+    background: var(--primary-color);
   }
 
   .ant-table-filter-dropdown-btns {
@@ -160,52 +178,52 @@
   }
 
   .ant-btn-primary:focus, .ant-btn-primary:hover {
-    color: #f5f5f5bf;
-    border-color: #068626;
-    background: #068626;
+    color: var(--text-primary-color);
+    border-color: var(--secondary-color);
+    background: var(--secondary-color);
   }
 
   .ant-checkbox-checked .ant-checkbox-inner {
-    background-color: #068626;
-    border-color: #068626;
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
   }
 
   .ant-radio-inner::after {
-    background-color: #068626;
+    background-color: var(--secondary-color);
   }
 
   .ant-radio-checked .ant-radio-inner {
-    border-color: #068626;
+    border-color: var(--secondary-color);
   }
 
 
   .ant-table-filter-dropdown .ant-dropdown-menu:empty::after {
     font-size: 1rem;
-    color: #f5f5f5bf;
+    color: var(--text-primary-color);
   }
 
   .color-primary {
-    color: #068626;
+    color: var(--secondary-color);
   }
 
   .color-status {
-    color: #f5f5f5bf;
+    color: var(--text-primary-color);
   }
 
   .codeblock {
     height: fit-content;
     max-height: 60vh;
     overflow: scroll;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    box-shadow: var(--box-shadow);
   }
 
   .description, .notes {
     height: fit-content;
     padding: 0.8%;
-    background: #1E1E1E;
+    background: var(--box-color);
     max-height: 60vh;
     overflow: scroll;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    box-shadow: var(--box-shadow);
   }
 
   .ant-collapse{
@@ -214,9 +232,9 @@
   }
 
   .ant-collapse > .ant-collapse-item > .ant-collapse-header, .ant-collapse-content-box {
-    color: #f5f5f5bf;
+    color: var(--text-primary-color);
     font-size: 1rem;
-    background-color: rgb(40, 40, 40);
+    background-color: var(--header-color);
   }
 
   .ant-collapse-borderless > .ant-collapse-item {
@@ -232,12 +250,12 @@
   }
 
   .btn-primary {
-    background: white;
-    color: rgb(40, 40, 40);
+    background: var(--text-secondary-color);
+    color: var(--header-color);
     padding: 1rem;
     border-radius: 4rem;
     font-size: 1rem;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    box-shadow: var(--box-shadow);
     img {
       height: 35px;
     }
