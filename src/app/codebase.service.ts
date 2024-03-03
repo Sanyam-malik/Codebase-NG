@@ -12,16 +12,32 @@ import { Setting } from './setting';
 })
 export class CodebaseService {
 
+  runningTheme: string = "dark";
   navMenus: Menu[] = [];
   runningNav: BreadcrumbItem[] = [];
   trackers: Tracker[] = [];
   reminders: Reminder[] = [];
   platforms: Platform[] = [];
   companies: Company[] = [];
-  setting: Setting[] = [];
+  settings: Setting[] = [];
 
   constructor() {
 
+  }
+
+  initTheme() {
+    const theme = this.getConfig(this.runningTheme+"Theme");
+    for (const [key, value] of Object.entries(theme)) {
+      document.documentElement.style.setProperty(`--${key}`, value);
+    }
+  }
+
+  switchTheme() {
+    this.runningTheme = this.runningTheme === 'dark' ? 'light' : 'dark';
+  }
+
+  getConfig(key: string) {
+    return this.settings.filter(e => e.key === key)[0];
   }
 
   getPlatform(url: string | undefined) {
