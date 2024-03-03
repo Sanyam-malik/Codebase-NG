@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CodebaseService } from '../codebase.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
-
+  
+  constructor(private codebase: CodebaseService) {
+    this.codebase.runningNav = []
+  }
 }
