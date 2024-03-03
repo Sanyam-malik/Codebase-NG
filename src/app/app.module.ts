@@ -17,6 +17,7 @@ import { ProblemViewComponent } from './problem-view/problem-view.component';
 import { HIGHLIGHT_OPTIONS, HighlightModule } from 'ngx-highlightjs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { WidgetModule } from './widget/widget.module';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 registerLocaleData(en);
 
@@ -38,7 +39,8 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    WidgetModule
+    WidgetModule,
+    HighchartsChartModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

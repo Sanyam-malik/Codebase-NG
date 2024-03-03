@@ -6,6 +6,7 @@ import { StatusComponent } from './status/status.component';
 import { TypesComponent } from './types/types.component';
 import { ProblemFocusComponent } from './problem-focus/problem-focus.component';
 import { ProblemCountComponent } from './problem-count/problem-count.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 
 
@@ -19,7 +20,8 @@ import { ProblemCountComponent } from './problem-count/problem-count.component';
     ProblemCountComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    HighchartsChartModule
   ], 
   exports: [
     CompaniesComponent,
