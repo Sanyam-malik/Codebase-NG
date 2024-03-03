@@ -77,6 +77,7 @@ export class CodebaseService {
     this.companies = [];
     this.settings= [];
     this.analytics = undefined;
+    localStorage.removeItem('themePref');
   }
 
   refreshDatabase() {
