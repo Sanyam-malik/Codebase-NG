@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CodebaseService } from '../codebase.service';
+import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'; 
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +9,11 @@ import { CodebaseService } from '../codebase.service';
 })
 export class DashboardComponent {
   
+  arrowRight: any;
+  
   constructor(private codebase: CodebaseService) {
-    this.codebase.runningNav = []
+    this.codebase.runningNav = [];
+
+    this.arrowRight = faArrowCircleRight;
   }
 }

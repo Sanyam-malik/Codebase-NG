@@ -15,6 +15,7 @@ import { ZorroModule } from './zorro/zorro.module';
 import { ProblemsComponent } from './problems/problems.component';
 import { ProblemViewComponent } from './problem-view/problem-view.component';
 import { HIGHLIGHT_OPTIONS, HighlightModule } from 'ngx-highlightjs';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 registerLocaleData(en);
 
@@ -34,7 +35,8 @@ registerLocaleData(en);
     HttpClientModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FontAwesomeModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
