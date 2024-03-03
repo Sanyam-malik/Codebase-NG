@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Problem } from '../problem';
 import { CodebaseService } from '../codebase.service';
 import { Platform } from '../platform';
+import { faCode } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-problem-view',
@@ -14,6 +15,7 @@ export class ProblemViewComponent {
     id: number | undefined;
     item: Problem | undefined;
     button: Platform | undefined;
+    codeIcon = faCode;
 
     constructor(private route: ActivatedRoute, private codebase: CodebaseService) {}
 
