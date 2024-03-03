@@ -27,6 +27,10 @@ export class DashboardComponent implements OnInit {
     return this.codebase.analytics ? this.codebase.analytics.month_count : 0;
   }
 
+  get prevMonthCount() {
+    return this.codebase.analytics ? this.codebase.analytics.prev_month_count : 0;
+  }
+
   get monthFocus() {
     return this.codebase.analytics ? this.codebase.analytics.month_focus : "";
   }
