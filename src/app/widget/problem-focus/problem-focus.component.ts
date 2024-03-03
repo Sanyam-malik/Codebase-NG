@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CodebaseService } from '../../codebase.service';
 
 @Component({
   selector: 'app-problem-focus',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './problem-focus.component.scss'
 })
 export class ProblemFocusComponent {
+  @Input("text") text: string = "";
+  @Input("focus") focus: string = "";
 
+  constructor(private codebase: CodebaseService) {
+
+  }
 }

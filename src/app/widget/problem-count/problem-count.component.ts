@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-problem-count',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './problem-count.component.scss'
 })
 export class ProblemCountComponent {
+
+  @Input("text") text: string = "";
+  @Input("count") count: string = "";
+
 
 }

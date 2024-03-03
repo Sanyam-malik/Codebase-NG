@@ -20,6 +20,14 @@ import { ProblemCountComponent } from './problem-count/problem-count.component';
   ],
   imports: [
     CommonModule
+  ], 
+  exports: [
+    CompaniesComponent,
+    LevelsComponent,
+    StatusComponent,
+    TypesComponent,
+    ProblemFocusComponent,
+    ProblemCountComponent
   ]
 })
 export class WidgetModule { }

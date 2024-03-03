@@ -58,6 +58,26 @@ export class AppComponent implements OnInit {
 
       })
     }
+
+    if(this.codebase.companies.length == 0) {
+      this.http.get(environment.baseURL+"/companies").subscribe((response: any) => {
+        this.codebase.companies = response['companies']
+      },err => {
+        
+      },() => {
+
+      })
+    }
+
+    if(this.codebase.settings.length == 0) {
+      this.http.get(environment.baseURL+"/settings").subscribe((response: any) => {
+        this.codebase.settings = response['settings']
+      },err => {
+        
+      },() => {
+
+      })
+    }
     
   }
 

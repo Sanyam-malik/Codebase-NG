@@ -16,6 +16,7 @@ import { ProblemsComponent } from './problems/problems.component';
 import { ProblemViewComponent } from './problem-view/problem-view.component';
 import { HIGHLIGHT_OPTIONS, HighlightModule } from 'ngx-highlightjs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { WidgetModule } from './widget/widget.module';
 
 registerLocaleData(en);
 
@@ -36,7 +37,8 @@ registerLocaleData(en);
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    WidgetModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
