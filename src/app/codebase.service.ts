@@ -85,6 +85,42 @@ export class CodebaseService {
     })
   }
 
+  getColor() {
+    if(this.runningTheme === 'dark') {
+      return this.getRandomDarkColor();
+    } else {
+      return this.getRandomLightColor();
+    }
+  }
+
+  getRandomDarkColor() {
+    var red = Math.floor(Math.random() * 128); // Random value between 0 and 127
+    var green = Math.floor(Math.random() * 128); // Random value between 0 and 127
+    var blue = Math.floor(Math.random() * 128); // Random value between 0 and 127
+
+    // Construct the color string in hexadecimal format
+    var color = '#' +
+        ('00' + red.toString(16)).slice(-2) +
+        ('00' + green.toString(16)).slice(-2) +
+        ('00' + blue.toString(16)).slice(-2);
+
+    return color;
+  }
+
+  getRandomLightColor() {
+    var red = Math.floor(Math.random() * 128) + 128; // Random value between 128 and 255
+    var green = Math.floor(Math.random() * 128) + 128; // Random value between 128 and 255
+    var blue = Math.floor(Math.random() * 128) + 128; // Random value between 128 and 255
+
+    // Construct the color string in hexadecimal format
+    var color = '#' +
+        ('00' + red.toString(16)).slice(-2) +
+        ('00' + green.toString(16)).slice(-2) +
+        ('00' + blue.toString(16)).slice(-2);
+
+    return color;
+  }
+
   getData() {
     const http = this.http;
     const codebase = this;
