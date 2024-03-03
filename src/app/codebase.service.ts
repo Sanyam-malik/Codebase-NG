@@ -26,22 +26,27 @@ export class CodebaseService {
   analytics: Analytics | undefined;
 
   constructor(private http: HttpClient) {
-
+    const selectedTheme = localStorage.getItem('themePref');
+    if(selectedTheme) {
+      this.runningTheme = selectedTheme;
+    }
   }
 
   initTheme() {
-    const theme = this.getConfig(this.runningTheme+"Theme");
-    for (const [key, value] of Object.entries(theme)) {
-      document.documentElement.style.setProperty(`--${key}`, value);
+    const theme = JSON.parse(this.getConfig(this.runningTheme+"Theme").config);
+    for (const key of Object.keys(theme)) {
+      document.documentElement.style.setProperty(`--${key}`, theme[key]);
     }
   }
 
   switchTheme() {
     this.runningTheme = this.runningTheme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('themePref', this.runningTheme);
+    this.initTheme();
   }
 
   getConfig(key: string) {
-    return this.settings.filter(e => e.key === key)[0];
+    return this.settings.filter(e => e.name.includes(key))[0];
   }
 
   getPlatform(url: string | undefined) {
@@ -178,6 +183,7 @@ export class CodebaseService {
     if(codebase.settings.length == 0) {
       http.get(environment.baseURL+"/settings").subscribe((response: any) => {
         codebase.settings = response['settings']
+        this.initTheme();
       },err => {
         
       },() => {

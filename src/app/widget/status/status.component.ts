@@ -34,7 +34,6 @@ export class StatusComponent implements OnInit {
   ngOnInit(): void {
     this.interval = setTimeout(() => {
       if(this.statuses) {
-        console.log(this.statuses);  
         this.loadChart();
         this.isLoaded = true;
         clearTimeout(this.interval);

@@ -4,10 +4,45 @@
     </div>
     <div>
         <h1 style="margin: 0%;">
+            <ng-container *ngIf="showStartTimer">
+                <a class="btn-primary" (click)="stopTimer()">
+                    <fa-icon [icon]="startTimerIcon" ></fa-icon>
+                    Stop Timer
+                </a>&nbsp;
+
+                <ng-container *ngIf="!isPaused">
+                    <a class="btn-primary" (click)="pauseTimer()">
+                        <fa-icon [icon]="startTimerIcon" ></fa-icon>
+                        Pause Timer
+                    </a>&nbsp;
+                </ng-container>
+
+                <ng-container *ngIf="isPaused">
+                    <a class="btn-primary" (click)="resumeTimer()">
+                        <fa-icon [icon]="startTimerIcon" ></fa-icon>
+                        Resume Timer
+                    </a>&nbsp;
+                </ng-container>
+
+            </ng-container>
+            
+            <ng-container *ngIf="!showStartTimer">
+                <a class="btn-primary" (click)="startTimer()">
+                    <fa-icon [icon]="startTimerIcon" ></fa-icon>
+                    {{'Start Timer'}}
+                </a>&nbsp;
+            </ng-container>
+            
+            <a class="btn-primary" (click)="codebase.switchTheme()">
+                <fa-icon [icon]="switchTheme" ></fa-icon>
+                Switch Theme
+            </a>&nbsp;
+            
             <a class="btn-primary" (click)="codebase.refreshDatabase()">
                 <fa-icon [icon]="arrowRotate"></fa-icon>
                 Refresh Database
             </a>&nbsp;
+            
             <a class="btn-primary" routerLink="/problems">View All Problems
                 <fa-icon [icon]="arrowRight"></fa-icon>
             </a>
@@ -15,11 +50,18 @@
     </div>
 </div>
 
+<div *ngIf="showStartTimer" class="center-div" style="margin: 2rem 2rem;">
+    <div>
+        <h1 style="font-size: 5rem;">{{ minutes | number :'2.0' }}:{{ seconds | number: '2.0'}}</h1>
+    </div>
+</div>
+
 <div class="grid4">
     <app-problem-count *ngIf="totalCount != undefined" [text]="'Total Problem Solved'" [count]="this.totalCount"></app-problem-count>
     <app-problem-count *ngIf="monthCount != undefined" [text]="'This Month Progress'" [count]="this.monthCount"></app-problem-count>
     <app-problem-count *ngIf="prevMonthCount != undefined" [text]="'Previous Month Progress'" [count]="this.prevMonthCount"></app-problem-count>
-    <app-problem-focus *ngIf="monthFocus" [text]="'Focus of Month'" [focus]="this.monthFocus"></app-problem-focus>
+    <app-problem-focus *ngIf="monthFocus != 'No Information'" [text]="'Focus of Month'" [focus]="this.monthFocus"></app-problem-focus>
+    <app-problem-focus *ngIf="monthFocus == 'No Information'" [text]="'Focus of Previous Month'" [focus]="this.prevMonthFocus"></app-problem-focus>
 </div>
 
 

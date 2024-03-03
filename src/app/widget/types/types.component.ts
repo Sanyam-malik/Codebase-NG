@@ -35,7 +35,6 @@ export class TypesComponent {
   ngOnInit(): void {
     this.interval = setTimeout(() => {
       if(this.types) {
-        console.log(this.types);  
         this.loadChart();
         this.isLoaded = true;
         clearTimeout(this.interval);
@@ -94,7 +93,7 @@ export class TypesComponent {
         text: ''   
       },
       tooltip : {
-        pointFormat: '{series.name}: <b>{point.percentage:.0f}</b>'
+        pointFormat: '{series.name}: <b>{point.y}</b>'
       },
       plotOptions : {
         pie: {

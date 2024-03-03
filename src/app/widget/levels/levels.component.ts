@@ -35,7 +35,6 @@ export class LevelsComponent {
   ngOnInit(): void {
     this.interval = setTimeout(() => {
       if(this.levels) {
-        console.log(this.levels);  
         this.loadChart();
         this.isLoaded = true;
         clearTimeout(this.interval);
@@ -56,7 +55,6 @@ export class LevelsComponent {
           selected: false
         })
       }
-
       return {
         "data": data
       }
@@ -81,7 +79,7 @@ export class LevelsComponent {
         text: ''   
       },
       tooltip : {
-        pointFormat: '{series.name}: <b>{point.percentage:.0f}</b>'
+        pointFormat: '{series.name}: <b>{point.y}</b>'
       },
       plotOptions : {
         pie: {

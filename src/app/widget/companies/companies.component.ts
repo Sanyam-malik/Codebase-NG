@@ -32,7 +32,6 @@ export class CompaniesComponent {
   ngOnInit(): void {
     this.interval = setTimeout(() => {
       if(this.companies) {
-        console.log(this.companies);  
         this.loadChart();
         this.isLoaded = true;
         clearTimeout(this.interval);
