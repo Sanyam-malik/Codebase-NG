@@ -1,21 +1,21 @@
 export interface CompanyAnalytic {
     company: string,
-    count: string
+    count: number
 }
 
 export interface LevelAnalytic {
     level: string,
-    count: string
+    count: number
 }
 
 export interface StatusAnalytic {
     status: string,
-    count: string
+    count: number
 }
 
 export interface TypeAnalytic {
     type: string,
-    count: string
+    count: number
 }
 
 export interface Analytics {

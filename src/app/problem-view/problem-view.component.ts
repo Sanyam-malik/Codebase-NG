@@ -23,6 +23,21 @@ export class ProblemViewComponent {
             const data = this.route.snapshot.data['apiResponse']['problems'];
             this.item = data[this.id - 1];
             this.button = this.codebase.getPlatform(this.item?.url);
+
+            this.codebase.runningNav = [
+                {
+                    name: 'Home',
+                    url: '/dashboard'
+                },
+                {
+                    name: 'Problem',
+                    url: '/problems'
+                },
+                {
+                    name: this.item ? this.item.name : "",
+                    url: `/problem/view/`+this.item?.name
+                }
+            ]
         }
         
     }

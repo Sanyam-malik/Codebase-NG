@@ -1,8 +1,11 @@
 <div class="dashcard">
     <h2 style="font-size:1.5rem;">Problems Solved by Level</h2>
-    <highcharts-chart
+    <highcharts-chart *ngIf="isLoaded"
     [Highcharts]="Highcharts"
     [options]="chartOptions"
     style="width: 85%; height: auto; display: block;margin: 2rem;"
     ></highcharts-chart>
+    <div *ngIf="!isLoaded" class="center-div" style="width: 85%; height: 20rem;">
+        <h2 style="margin: 0%;font-size:1.5rem;">Loading....</h2>
+    </div>
 </div>

@@ -336,3 +336,11 @@
   .highcharts-point {
     stroke: none !important;
   }
+
+  .center-div{
+    display: flex;
+    text-align: center;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+  }

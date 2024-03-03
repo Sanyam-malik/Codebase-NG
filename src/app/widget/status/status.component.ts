@@ -1,5 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
+import { CodebaseService } from '../../codebase.service';
+
+
+export interface PlotData {
+  y: number,
+  color: string
+}
 
 @Component({
   selector: 'app-status',
@@ -7,80 +14,123 @@ import * as Highcharts from 'highcharts';
   styleUrl: './status.component.scss'
 })
 
-export class StatusComponent {
+export class StatusComponent implements OnInit {
+
+  get statuses() {
+    if(this.codebase.analytics && this.codebase.analytics.statuses) {
+      return this.codebase.analytics.statuses;
+    } else {
+      return undefined;
+    }
+  }
+
   Highcharts: typeof Highcharts = Highcharts; // required
-  chartOptions: Highcharts.Options = {
-    chart: {
-      type: 'bar',
-      plotBorderWidth: undefined,
-      plotShadow: false,
-      backgroundColor: 'transparent',
-      borderColor: 'transparent',
-    },
-    title: {
-      text: '',
-    },
-    xAxis: {
-      categories: ['Africa', 'America', 'Asia', 'Europe'],
-      labels: {
-        style: {
-          fontWeight: 'bold',
-          color: 'var(--textPrimaryColor)'
-        }
-      },
-      title: {
-        text: null
-      },
-      gridLineWidth: 1,
-      gridLineColor: 'var(--textPrimaryColor)',
-      lineWidth: 0
-    },
-    yAxis: {
-      min: 0,
-      title: {
-        text: ''
-      },
-      labels: {
-        style: {
-          fontWeight: 'bold',
-          color: 'var(--textPrimaryColor)'
-        }
-      },
-      gridLineWidth: 0
-    },
-    plotOptions: {
-      bar: {
-        borderRadius: '50%',
-        dataLabels: {
-          style: {
-            color: 'var(--textPrimaryColor)',
-            textOutline: 'none',
-          }
-        }, 
-        groupPadding: 0.1
+  chartOptions: Highcharts.Options = {};
+  isLoaded: boolean = false;
+  interval: any;
+
+  constructor(private codebase: CodebaseService) {}
+  
+  ngOnInit(): void {
+    this.interval = setTimeout(() => {
+      if(this.statuses) {
+        console.log(this.statuses);  
+        this.loadChart();
+        this.isLoaded = true;
+        clearTimeout(this.interval);
       }
-    },
-    legend: {
-      enabled: false,
-    },
-    credits: {
-      enabled: false
-    },
-    series: [
-      {
-        name: 'Problems Solved',
+    }, 1000);
+  }
+
+  generatePlots() {
+    if(this.statuses) {
+      var categories: string[] = [];
+      var data: PlotData[] = [];
+
+      for(var status of this.statuses) {
+        categories.push(status.status);
+        data.push({
+          y: status.count,
+          color: this.codebase.getColor()
+        })
+      }
+
+      return {
+        "categories": categories,
+        "data": data
+      }
+    } else {
+      return {};
+    }
+  }
+
+  loadChart() {
+    const map = this.generatePlots();
+    this.chartOptions = {
+      chart: {
         type: 'bar',
-        data: [
-          {
-            y: 23,
-            color: 'var(--primaryColor)'
-          },
-          {
-            y: 24,
+        plotBorderWidth: undefined,
+        plotShadow: false,
+        backgroundColor: 'transparent',
+        borderColor: 'transparent',
+      },
+      title: {
+        text: '',
+      },
+      xAxis: {
+        categories: map['categories'],
+        labels: {
+          style: {
+            fontWeight: 'bold',
             color: 'var(--textPrimaryColor)'
           }
-        ]
-      }
-  ]
-  };
+        },
+        title: {
+          text: null
+        },
+        gridLineWidth: 1,
+        gridLineColor: 'var(--textPrimaryColor)',
+        lineWidth: 0
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: ''
+        },
+        labels: {
+          style: {
+            fontWeight: 'bold',
+            color: 'var(--textPrimaryColor)'
+          }
+        },
+        gridLineWidth: 0
+      },
+      plotOptions: {
+        bar: {
+          borderRadius: '50%',
+          dataLabels: {
+            style: {
+              color: 'var(--textPrimaryColor)',
+              textOutline: 'none',
+            }
+          }, 
+          groupPadding: 0.1
+        }
+      },
+      legend: {
+        enabled: false,
+      },
+      credits: {
+        enabled: false
+      },
+      series: [
+        {
+          name: 'Problems',
+          type: 'bar',
+          data: map['data']
+        }
+      ]
+    };
+  }
+  
 }
