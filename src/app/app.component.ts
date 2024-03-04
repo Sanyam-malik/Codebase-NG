@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CodebaseService } from './codebase.service';
-import { environment } from '../environments/environment.development';
+import { environment } from '../environments/environment';
 import { Title } from '@angular/platform-browser';
 
 @Component({

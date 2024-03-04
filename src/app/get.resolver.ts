@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
-import { environment } from '../environments/environment.development';
+import { environment } from '../environments/environment';
 
 export const getResolver: ResolveFn<any> = (route:ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const http = inject(HttpClient);
