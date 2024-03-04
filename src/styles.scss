@@ -6,6 +6,7 @@
     --alternativeTableColor: rgba(255, 255, 255, 0.12);
     --textPrimaryColor: #f5f5f5bf;
     --textSecondaryColor: white;
+    --boxText: white;
     --boxColor: #1E1E1E;
     --boxShadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     --paginationDisabledBGColor: #39383840;
@@ -220,6 +221,7 @@
   .description, .notes {
     height: fit-content;
     padding: 0.8%;
+    color: var(--boxText);
     background: var(--boxColor);
     max-height: 60vh;
     overflow: scroll;
@@ -343,4 +345,8 @@
     margin: auto;
     justify-content: center;
     align-items: center;
+  }
+
+  .ant-checkbox-group, .ant-collapse {
+    box-shadow: var(--boxShadow);
   }

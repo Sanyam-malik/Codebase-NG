@@ -45,6 +45,7 @@ export class CodebaseService {
     this.runningTheme = this.runningTheme === 'dark' ? 'light' : 'dark';
     localStorage.setItem('themePref', this.runningTheme);
     this.initTheme();
+    window.location.reload();
   }
 
   getConfig(key: string) {
