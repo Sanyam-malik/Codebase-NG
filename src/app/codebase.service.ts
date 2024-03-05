@@ -97,7 +97,6 @@ export class CodebaseService {
 
   getCompany(name: string | undefined) {
     if(name) {
-      console.log(this.companies);
       const list = this.companies.filter(item => item.name.toLowerCase() == name);
       return list[0];
     } else {
