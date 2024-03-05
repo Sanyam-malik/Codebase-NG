@@ -47,10 +47,7 @@ export class CodebaseService {
     for (const key of Object.keys(theme)) {
       document.documentElement.style.setProperty(`--${key}`, theme[key]);
     }
-  }
 
-  switchTheme() {
-    this.runningTheme = this.runningTheme === 'dark' ? "light" : "dark";
     var codeState: Codestate = this.getState("codestate");
     if(codeState) {
       codeState.themePref = this.runningTheme;
@@ -60,6 +57,10 @@ export class CodebaseService {
       }
     }
     this.saveState("codestate", codeState);
+  }
+
+  switchTheme() {
+    this.runningTheme = this.runningTheme === 'dark' ? "light" : "dark";
     this.initTheme();
     window.location.reload();
   }
