@@ -7,6 +7,22 @@
       <li *ngFor="let menu of codebase.navMenus" nz-menu-item routerLink="/problem/type/{{menu.name.toLowerCase()}}">
         {{menu.name}}
       </li>
+      <li nz-menu-item *ngIf="showStartTimer" class="nohover" style="float: right;">
+        <div>
+          <h3 style="margin: 0%;">
+            <ng-container *ngIf="!isPaused">
+              <fa-icon (click)="pauseTimer()" [icon]="pauseIcon" ></fa-icon>&nbsp;
+            </ng-container>
+
+            <ng-container *ngIf="isPaused">
+              <fa-icon (click)="resumeTimer()" [icon]="playIcon" ></fa-icon>&nbsp;
+            </ng-container>
+
+            <fa-icon (click)="stopTimer()" [icon]="stopIcon" ></fa-icon>&nbsp;
+            <b>{{ minutes | number :'2.0' }}:{{ seconds | number: '2.0'}}</b>
+          </h3>
+        </div>
+      </li>
     </ul>
   </nz-header>
   <nz-content>

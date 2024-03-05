@@ -1,30 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CodebaseService } from '../codebase.service';
-import { faArrowCircleRight, faArrowsRotate, faCircleHalfStroke, faStopwatch } from '@fortawesome/free-solid-svg-icons'; 
+import { faArrowCircleRight, faArrowsRotate, faCircleHalfStroke, faStopwatch, faPause, faPlay, faStop } from '@fortawesome/free-solid-svg-icons'; 
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   
   startTimerIcon: any = faStopwatch;
+  pauseIcon: any = faPause;
+  playIcon: any  = faPlay;
+  stopIcon: any = faStop;
   arrowRight: any = faArrowCircleRight;
   arrowRotate: any = faArrowsRotate;
   switchTheme: any = faCircleHalfStroke;
-  showStartTimer: boolean = false;
-
-  minutes: number = 0;
-  seconds: number = 0;
-  timer: any;
-  isPaused: boolean = false;
+  
   
   constructor(public codebase: CodebaseService) {
     this.codebase.runningNav = [];
+    this.codebase.isDashboardRunning = true;
+  }
+
+  ngOnDestroy(): void {
+    this.codebase.isDashboardRunning = false;
   }
 
   ngOnInit(): void {
+  }
+
+  get showStartTimer() {
+    return this.codebase.showStartTimer;
+  }
+
+  get isPaused() {
+    return this.codebase.isPaused;
+  }
+
+  get minutes() {
+    return this.codebase.minutes;
+  }
+
+  get seconds() {
+    return this.codebase.seconds;
   }
 
   get totalCount() {
@@ -48,31 +67,18 @@ export class DashboardComponent implements OnInit {
   }
 
   startTimer() {
-    this.showStartTimer = true;
-    this.minutes = 0;
-    this.seconds = 0;
-    this.timer = setInterval(() => {
-      if (!this.isPaused) {
-        this.seconds++;
-        if (this.seconds === 60) {
-          this.seconds = 0;
-          this.minutes++;
-        }
-      }
-    }, 1000);
+    this.codebase.startTimer();
   }
 
   resumeTimer() {
-    this.isPaused = false;
+    this.codebase.resumeTimer();
   }
 
   pauseTimer() {
-    this.isPaused = true;
+    this.codebase.pauseTimer();
   }
 
   stopTimer() {
-    this.showStartTimer = false;
-    this.isPaused = false;
-    clearInterval(this.timer);
+    this.codebase.stopTimer();
   }
 }

@@ -27,6 +27,13 @@ export class CodebaseService {
   settings: Setting[] = [];
   analytics: Analytics | undefined;
 
+  showStartTimer: boolean = false;
+  isDashboardRunning = false;
+  minutes: number = 0;
+  seconds: number = 0;
+  timer: any;
+  isPaused: boolean = false;
+
   constructor(private http: HttpClient) {
     const selectedTheme = localStorage.getItem('themePref');
     if(selectedTheme) {
@@ -251,6 +258,35 @@ export class CodebaseService {
   
       })
     }
+  }
+
+  startTimer() {
+    this.showStartTimer = true;
+    this.minutes = 0;
+    this.seconds = 0;
+    this.timer = setInterval(() => {
+      if (!this.isPaused) {
+        this.seconds++;
+        if (this.seconds === 60) {
+          this.seconds = 0;
+          this.minutes++;
+        }
+      }
+    }, 1000);
+  }
+
+  resumeTimer() {
+    this.isPaused = false;
+  }
+
+  pauseTimer() {
+    this.isPaused = true;
+  }
+
+  stopTimer() {
+    this.showStartTimer = false;
+    this.isPaused = false;
+    clearInterval(this.timer);
   }
 
 }

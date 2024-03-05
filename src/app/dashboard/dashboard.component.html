@@ -6,20 +6,20 @@
         <h1 style="margin: 0%;">
             <ng-container *ngIf="showStartTimer">
                 <a class="btn-primary" (click)="stopTimer()">
-                    <fa-icon [icon]="startTimerIcon" ></fa-icon>
+                    <fa-icon [icon]="stopIcon" ></fa-icon>
                     Stop Timer
                 </a>&nbsp;
 
                 <ng-container *ngIf="!isPaused">
                     <a class="btn-primary" (click)="pauseTimer()">
-                        <fa-icon [icon]="startTimerIcon" ></fa-icon>
+                        <fa-icon [icon]="pauseIcon" ></fa-icon>
                         Pause Timer
                     </a>&nbsp;
                 </ng-container>
 
                 <ng-container *ngIf="isPaused">
                     <a class="btn-primary" (click)="resumeTimer()">
-                        <fa-icon [icon]="startTimerIcon" ></fa-icon>
+                        <fa-icon [icon]="playIcon" ></fa-icon>
                         Resume Timer
                     </a>&nbsp;
                 </ng-container>
