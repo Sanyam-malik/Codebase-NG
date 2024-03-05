@@ -7,7 +7,7 @@
       <li *ngFor="let menu of codebase.navMenus" nz-menu-item routerLink="/problem/type/{{menu.name.toLowerCase()}}">
         {{menu.name}}
       </li>
-      <li nz-menu-item *ngIf="showStartTimer" class="nohover" style="float: right;">
+      <li nz-menu-item *ngIf="showStartTimer && !isDashboardActive" class="nohover" style="float: right;">
         <div>
           <h3 style="margin: 0%;">
             <ng-container *ngIf="!isPaused">
