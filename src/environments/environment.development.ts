@@ -1,3 +1,3 @@
 export const environment = {
-    "baseURL": window.location.origin+"/api"
+    "baseURL": "http://localhost:5000/api"
 };

@@ -4,6 +4,9 @@
             <h1 style="margin: 0%;">Problem: <span class="color-primary">{{ item.name }}</span></h1>
             <h2 style="margin: 0%;"> <span class="color-primary">{{item.type}}</span></h2>
             <h3>{{ item.level }}</h3>
+            <div>
+                <nz-tag *ngFor="let company of companies" [nzColor]="company['color']">{{company['name']}}</nz-tag>
+            </div>
         </div>
         <div style="text-align: right;">
             <h2 style="padding: 0.5rem 0px;">Status: <span class="color-primary">{{ item.status }}</span></h2>

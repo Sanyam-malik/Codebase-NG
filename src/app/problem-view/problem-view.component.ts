@@ -4,6 +4,7 @@ import { Problem } from '../problem';
 import { CodebaseService } from '../codebase.service';
 import { Platform } from '../platform';
 import { faCode } from '@fortawesome/free-solid-svg-icons';
+import { Company } from '../company';
 
 @Component({
   selector: 'app-problem-view',
@@ -16,6 +17,7 @@ export class ProblemViewComponent {
     item: Problem | undefined;
     button: Platform | undefined;
     codeIcon = faCode;
+    companies: Company[] = [];
 
     constructor(private route: ActivatedRoute, private codebase: CodebaseService) {}
 
@@ -25,7 +27,6 @@ export class ProblemViewComponent {
             const data = this.route.snapshot.data['apiResponse']['problems'];
             this.item = data[this.id - 1];
             this.button = this.codebase.getPlatform(this.item?.url);
-
             this.codebase.runningNav = [
                 {
                     name: 'Home',
@@ -39,7 +40,17 @@ export class ProblemViewComponent {
                     name: this.item ? this.item.name : "",
                     url: `/problem/view/`+this.item?.name
                 }
-            ]
+            ];
+
+            const list = this.item?.companies.split(",")
+            if (list) {
+                for(var item of list) {
+                   this.companies.push({
+                    "name": item,
+                    "color": this.codebase.getColor()
+                   }) 
+                }
+            }
         }
         
     }

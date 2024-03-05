@@ -350,3 +350,9 @@
   .ant-checkbox-group, .ant-collapse {
     box-shadow: var(--boxShadow);
   }
+
+  .ant-tag-has-color, .ant-tag-has-color .anticon-close, .ant-tag-has-color .anticon-close:hover, .ant-tag-has-color a, .ant-tag-has-color a:hover {
+    color: var(--textSecondaryColor);
+    padding: 0.4rem;
+    box-shadow: var(--boxShadow);
+  }
