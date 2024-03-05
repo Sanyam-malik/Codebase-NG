@@ -4,7 +4,7 @@
 <h1 *ngIf="isStatusFilter">All Problems Having <span class="color-primary underline">{{status}}</span> as Status</h1>
 <h1 *ngIf="isCompanyFilter">All Problems Asked in <span class="color-primary underline">{{company}}</span></h1>
 
-<nz-table #filterTable [nzData]="listOfData" nzTableLayout="fixed">
+<nz-table #filterTable [nzData]="listOfData" nzTableLayout="fixed" [nzPageIndex]="pageIndex" (nzPageIndexChange)="pageChange($event)">
     <thead>
       <tr>
         <ng-container *ngFor="let column of listOfColumns">

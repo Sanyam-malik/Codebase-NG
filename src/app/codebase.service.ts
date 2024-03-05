@@ -9,7 +9,7 @@ import { Setting } from './setting';
 import { Analytics } from './analytics';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { Codestate } from './codestate';
+import { Codestate, TableState } from './codestate';
 
 @Injectable({
   providedIn: 'root'
@@ -132,7 +132,7 @@ export class CodebaseService {
     this.companies = [];
     this.settings= [];
     this.analytics = undefined;
-    localStorage.removeItem('themePref');
+    localStorage.removeItem('codestate');
   }
 
   refreshDatabase() {
@@ -155,9 +155,9 @@ export class CodebaseService {
   }
 
   getRandomDarkColor() {
-    var red = Math.floor(Math.random() * 128); // Random value between 0 and 127
-    var green = Math.floor(Math.random() * 128); // Random value between 0 and 127
-    var blue = Math.floor(Math.random() * 128); // Random value between 0 and 127
+    var red = Math.floor(Math.random() * 128) + 60; // Random value between 0 and 127
+    var green = Math.floor(Math.random() * 128) + 60; // Random value between 0 and 127
+    var blue = Math.floor(Math.random() * 128) + 60; // Random value between 0 and 127
 
     // Construct the color string in hexadecimal format
     var color = '#' +
@@ -305,6 +305,40 @@ export class CodebaseService {
     this.showStartTimer = false;
     this.isPaused = false;
     clearInterval(this.timer);
+  }
+
+  getTableState(tableName: string | undefined | null) {
+    if(tableName) {
+      const state: Codestate = this.getState("codestate");
+      if(state?.tables) {
+        return state.tables.filter(e=> e.name.toLowerCase() === tableName.toLowerCase())[0];
+      } else {
+        return null;
+      }
+    } return null;
+  }
+
+  setTableState(tableName: string | undefined | null, index: number = 1) {
+    if(tableName) {
+      const state: Codestate = this.getState("codestate");
+      var tables: TableState[] | undefined = state.tables;
+      if(state && tables) {
+        tables = tables.filter(e=> e.name.toLowerCase() != tableName.toLowerCase());
+      } else {
+        tables = [];
+      }
+
+      tables.push({
+        name: tableName,
+        index: index
+      });
+
+      var codeState: Codestate = {
+        "themePref": this.runningTheme,
+        "tables": tables
+      }
+      this.saveState("codestate", codeState);
+    }
   }
 
 }

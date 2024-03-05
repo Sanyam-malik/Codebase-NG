@@ -29,6 +29,7 @@ export class ProblemsComponent {
   isLevelFilter: boolean = false;
   listOfData: Problem[] = [];
   listOfColumns: ColumnItem[] = [];
+  pageIndex: number = 1;
 
   get type(){
     const type = this.route.snapshot.paramMap.get('type');
@@ -74,6 +75,7 @@ export class ProblemsComponent {
       this.isTypeFilter = true;
       const type = this.route.snapshot.paramMap.get('type');
       data = data.filter(e=> e.type && e.type.toLowerCase() == type);
+      this.loadState(type);
 
       this.codebase.runningNav = [
         {
@@ -98,6 +100,7 @@ export class ProblemsComponent {
       this.isCompanyFilter = true;
       const company = this.route.snapshot.paramMap.get('company');
       data = data.filter(e=> e.companies && e.companies.toLowerCase().includes(company ? company : ""));
+      this.loadState(company);
 
       this.codebase.runningNav = [
         {
@@ -122,6 +125,7 @@ export class ProblemsComponent {
       this.isStatusFilter = true;
       const status = this.route.snapshot.paramMap.get('status');
       data = data.filter(e=> e.status && e.status.toLowerCase() == status);
+      this.loadState(status);
 
       this.codebase.runningNav = [
         {
@@ -146,6 +150,7 @@ export class ProblemsComponent {
       this.isLevelFilter = true;
       const level = this.route.snapshot.paramMap.get('level');
       data = data.filter(e=> e.level && e.level.toLowerCase() == level);
+      this.loadState(level);
 
       this.codebase.runningNav = [
         {
@@ -166,6 +171,7 @@ export class ProblemsComponent {
         }
       ]
     } else {
+      this.loadState("allproblems");
       this.codebase.runningNav = [
         {
           name: 'Home',
@@ -222,6 +228,30 @@ export class ProblemsComponent {
         filterFn: (list: string[], item: Problem) => list.some(status => item.status.toLowerCase().indexOf(status.toLowerCase()) !== -1)
       }
     ];
+  }
+
+  loadState(name: string | undefined | null){
+    const tablestate = this.codebase.getTableState(name);
+    if(tablestate) {
+      this.pageIndex = tablestate.index;
+    }
+  }
+
+  pageChange(pageNo: number) {
+    var name: string | undefined = "allproblems";
+    if(this.isCompanyFilter) {
+      name = this.company;
+    }
+    else if(this.isTypeFilter) {
+      name = this.type;
+    }
+    else if(this.isLevelFilter) {
+      name = this.level;
+    }
+    else if(this.isStatusFilter) {
+      name = this.status;
+    }
+    this.codebase.setTableState(name, pageNo);
   }
   
 }

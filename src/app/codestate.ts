@@ -5,5 +5,5 @@ export interface TableState {
 
 export interface Codestate {
     themePref: string,
-    tables?: TableState
+    tables?: TableState[]
 }
