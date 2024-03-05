@@ -19,6 +19,7 @@ export interface TypeAnalytic {
 }
 
 export interface Analytics {
+    "today_count": number,
     "total_count": number,
     "month_count": number,
     "month_focus": string,

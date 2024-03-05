@@ -56,12 +56,13 @@
     </div>
 </div>
 
-<div class="grid4">
-    <app-problem-count *ngIf="totalCount != undefined" [text]="'Total Problem Solved'" [count]="this.totalCount"></app-problem-count>
-    <app-problem-count *ngIf="monthCount != undefined" [text]="'This Month Progress'" [count]="this.monthCount"></app-problem-count>
-    <app-problem-count *ngIf="prevMonthCount != undefined" [text]="'Previous Month Progress'" [count]="this.prevMonthCount"></app-problem-count>
-    <app-problem-focus *ngIf="monthFocus != 'No Information'" [text]="'Focus of Month'" [focus]="this.monthFocus"></app-problem-focus>
-    <app-problem-focus *ngIf="monthFocus == 'No Information'" [text]="'Focus of Previous Month'" [focus]="this.prevMonthFocus"></app-problem-focus>
+<div class="grid3">
+    <app-problem-count [text]="'Total Problem Solved'" [count]="this.totalCount"></app-problem-count>
+    <app-problem-count [text]="'Today Progress'" [count]="this.todayCount"></app-problem-count>
+    <app-problem-count [text]="'This Month Progress'" [count]="this.monthCount"></app-problem-count>
+    <app-problem-focus [text]="'Focus of Month'" [focus]="this.monthFocus"></app-problem-focus>
+    <app-problem-count [text]="'Previous Month Progress'" [count]="this.prevMonthCount"></app-problem-count>    
+    <app-problem-focus [text]="'Focus of Previous Month'" [focus]="this.prevMonthFocus"></app-problem-focus>
 </div>
 
 
