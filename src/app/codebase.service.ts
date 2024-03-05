@@ -321,7 +321,7 @@ export class CodebaseService {
   setTableState(tableName: string | undefined | null, index: number = 1) {
     if(tableName) {
       const state: Codestate = this.getState("codestate");
-      var tables: TableState[] | undefined = state.tables;
+      var tables: TableState[] | undefined = state?.tables;
       if(state && tables) {
         tables = tables.filter(e=> e.name.toLowerCase() != tableName.toLowerCase());
       } else {
