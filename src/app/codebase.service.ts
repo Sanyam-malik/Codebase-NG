@@ -9,6 +9,7 @@ import { Setting } from './setting';
 import { Analytics } from './analytics';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
+import { Codestate } from './codestate';
 
 @Injectable({
   providedIn: 'root'
@@ -35,9 +36,9 @@ export class CodebaseService {
   isPaused: boolean = false;
 
   constructor(private http: HttpClient) {
-    const selectedTheme = localStorage.getItem('themePref');
-    if(selectedTheme) {
-      this.runningTheme = selectedTheme;
+    const codestate: Codestate = this.getState('codestate');
+    if(codestate?.themePref) {
+      this.runningTheme = codestate.themePref;
     }
   }
 
@@ -49,8 +50,16 @@ export class CodebaseService {
   }
 
   switchTheme() {
-    this.runningTheme = this.runningTheme === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('themePref', this.runningTheme);
+    this.runningTheme = this.runningTheme === 'dark' ? "light" : "dark";
+    var codeState: Codestate = this.getState("codestate");
+    if(codeState) {
+      codeState.themePref = this.runningTheme;
+    } else {
+      codeState = {
+        themePref: this.runningTheme
+      }
+    }
+    this.saveState("codestate", codeState);
     this.initTheme();
     window.location.reload();
   }
@@ -102,6 +111,15 @@ export class CodebaseService {
     } else {
       return undefined;
     }
+  }
+
+  saveState(storageKey:string, state: any): void {
+    localStorage.setItem(storageKey, JSON.stringify(state));
+  }
+
+  getState(storageKey: string): any {
+    const state = localStorage.getItem(storageKey);
+    return state ? JSON.parse(state) : null;
   }
 
   clearData() {

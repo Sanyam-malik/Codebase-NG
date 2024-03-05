@@ -54,4 +54,8 @@ export class ProblemViewComponent {
         }
         
     }
+
+    tagClick(name: string) {
+        window.open(`/problem/company/${String(name).toLowerCase()}`, '_self');
+    }
 }
