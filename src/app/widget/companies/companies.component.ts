@@ -72,7 +72,7 @@ export class CompaniesComponent {
     const map = this.generatePlots();
     this.chartOptions = {
       chart: {
-        type: 'bar',
+        type: 'column',
         plotBorderWidth: undefined,
         plotShadow: false,
         backgroundColor: 'transparent',
@@ -101,6 +101,9 @@ export class CompaniesComponent {
         title: {
           text: ''
         },
+        stackLabels: {
+          enabled: true
+        },
         labels: {
           style: {
             fontWeight: 'bold',
@@ -110,7 +113,8 @@ export class CompaniesComponent {
         gridLineWidth: 0
       },
       plotOptions: {
-        bar: {
+        column: {
+          stacking: 'normal',
           borderRadius: '50%',
           dataLabels: {
             style: {
@@ -130,7 +134,7 @@ export class CompaniesComponent {
       series: [
         {
           name: 'Problems',
-          type: 'bar',
+          type: 'column',
           data: map['data']
         }
       ]

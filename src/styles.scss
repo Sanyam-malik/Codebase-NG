@@ -252,8 +252,8 @@
   }
 
   .btn-code-action {
-    background: var(--textSecondaryColor);
-    color: var(--headerColor);
+    background: white;
+    color: rgb(40 40 40);
     padding: 1rem;
     border-radius: 4rem;
     font-size: 1rem;
@@ -280,8 +280,13 @@
   }
 
   .nohover {
-    color: initial;
     background-color: transparent !important;
+  }
+
+  .nohover > .ant-menu-item:hover {
+    .ant-menu-title-content {
+      color: var(--textPrimaryColor);
+    }
   }
 
   .grid3 {
