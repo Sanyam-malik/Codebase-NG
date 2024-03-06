@@ -280,12 +280,22 @@
   }
 
   .nohover {
+    color: var(--textPrimaryColor) !important;
+    .ant-menu-title-content {
+      color: var(--textPrimaryColor) !important;
+    }
+    .ant-menu-item-selected {
+      color: var(--textPrimaryColor) !important;
+    }
     background-color: transparent !important;
   }
 
-  .nohover > .ant-menu-item:hover {
+  .nohover:hover {
     .ant-menu-title-content {
-      color: var(--textPrimaryColor);
+      color: var(--textPrimaryColor) !important;
+    }
+    .ant-menu-item-selected {
+      color: var(--textPrimaryColor) !important;
     }
   }
 
