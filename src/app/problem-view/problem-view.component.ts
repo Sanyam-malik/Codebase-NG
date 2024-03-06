@@ -42,7 +42,7 @@ export class ProblemViewComponent {
                 }
             ];
 
-            const list = this.item?.companies.split(",")
+            const list = this.item?.companies?.split(",")
             if (list) {
                 for(var item of list) {
                    this.companies.push({
