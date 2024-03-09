@@ -74,6 +74,7 @@ export class LevelsComponent {
     const map = this.generatePlots();
     this.chartOptions = {
       chart : {
+        margin: [50, 50, 50, 50],
         plotBorderWidth: undefined,
         plotShadow: false,
         backgroundColor: 'transparent',
