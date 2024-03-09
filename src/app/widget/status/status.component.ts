@@ -113,7 +113,7 @@ export class StatusComponent implements OnInit {
       },
       plotOptions: {
         bar: {
-          borderRadius: '50%',
+          borderRadius: '10%',
           dataLabels: {
             style: {
               color: 'var(--textPrimaryColor)',

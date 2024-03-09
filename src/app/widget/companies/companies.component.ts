@@ -86,7 +86,8 @@ export class CompaniesComponent {
         labels: {
           style: {
             fontWeight: 'bold',
-            color: 'var(--textPrimaryColor)'
+            color: 'var(--textPrimaryColor)',
+            textOutline: "0px",
           }
         },
         title: {
@@ -102,12 +103,13 @@ export class CompaniesComponent {
           text: ''
         },
         stackLabels: {
-          enabled: true
+          enabled: false
         },
         labels: {
           style: {
             fontWeight: 'bold',
-            color: 'var(--textPrimaryColor)'
+            color: 'var(--textPrimaryColor)',
+            textOutline: "0px",
           }
         },
         gridLineWidth: 0
@@ -115,7 +117,7 @@ export class CompaniesComponent {
       plotOptions: {
         column: {
           stacking: 'normal',
-          borderRadius: '50%',
+          borderRadius: '20%',
           dataLabels: {
             style: {
               color: 'var(--textPrimaryColor)',
