@@ -84,7 +84,7 @@ export class CompaniesComponent {
   loadChart() {
     const fullMap = this.generatePlots();
     var height = fullMap['categories'] && fullMap['categories'].length > 0 ? 40 * fullMap['categories'].length : 400;
-    var miniheight = fullMap['categories'] && fullMap['categories'].length > 0 ? 40 * 15 : 400;
+    var miniheight = fullMap['categories'] && fullMap['categories'].length > 0 ? 40 * fullMap.data.slice(0, 15).length : 400;
 
     this.minifiedChartOptions = {
       chart: {
