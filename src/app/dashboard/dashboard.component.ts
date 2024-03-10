@@ -59,11 +59,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   get monthFocus() {
-    return this.codebase.analytics ? this.codebase.analytics.month_focus : "";
+    return this.codebase.analytics ? this.codebase.analytics.month_focus : "No Information";
   }
 
   get prevMonthFocus() {
-    return this.codebase.analytics ? this.codebase.analytics.prev_month_focus : "";
+    return this.codebase.analytics ? this.codebase.analytics.prev_month_focus : "No Information";
   }
 
   get todayCount() {
