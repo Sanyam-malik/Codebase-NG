@@ -8,6 +8,8 @@ import { ProblemFocusComponent } from './problem-focus/problem-focus.component';
 import { ProblemCountComponent } from './problem-count/problem-count.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { ZorroModule } from '../zorro/zorro.module';
+import { RemarksComponent } from './remarks/remarks.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -18,16 +20,19 @@ import { ZorroModule } from '../zorro/zorro.module';
     StatusComponent,
     TypesComponent,
     ProblemFocusComponent,
-    ProblemCountComponent
+    ProblemCountComponent,
+    RemarksComponent
   ],
   imports: [
     CommonModule,
     ZorroModule,
+    FontAwesomeModule,
     HighchartsChartModule
   ], 
   exports: [
     CompaniesComponent,
     LevelsComponent,
+    RemarksComponent,
     StatusComponent,
     TypesComponent,
     ProblemFocusComponent,

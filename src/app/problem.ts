@@ -10,5 +10,6 @@ export interface Problem {
     type: string,
     url: string,
     code: string,
-    companies: string
+    companies: string,
+    remarks: string
 }

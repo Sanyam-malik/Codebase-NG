@@ -76,6 +76,17 @@ const routes: Routes = [
     }
   },
   {
+    path: 'problem/remark/:remark',
+    component: ProblemsComponent,
+    resolve: {
+      apiResponse: getResolver
+    },
+    data: {
+      url: '/problems',
+      options: {}
+    }
+  },
+  {
     path: 'problem/statement/:id',
     component: ProblemViewComponent,
     resolve: {

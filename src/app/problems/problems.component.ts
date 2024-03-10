@@ -27,6 +27,7 @@ interface ColumnItem {
 export class ProblemsComponent {
 
   isTypeFilter: boolean = false;
+  isRemarkFilter: boolean = false;
   isCompanyFilter: boolean = false;
   isStatusFilter: boolean = false;
   isLevelFilter: boolean = false;
@@ -67,6 +68,15 @@ export class ProblemsComponent {
     const status = this.route.snapshot.paramMap.get('status');
     if(status) {
       return this.codebase.getStatus(status.toLowerCase());
+    } else {
+      return undefined
+    }
+  }
+
+  get remark(){
+    const remark = this.route.snapshot.paramMap.get('remark');
+    if(remark) {
+      return this.codebase.getRemark(remark.toLowerCase());
     } else {
       return undefined
     }
@@ -173,6 +183,30 @@ export class ProblemsComponent {
         {
           name: this.level ? this.level : '',
           url: `/problem/level/${this.level}`
+        }
+      ]
+    } else if(String(router.url).includes("/remark")) {
+      this.isRemarkFilter = true;
+      const remark = this.route.snapshot.paramMap.get('remark');
+      data = data.filter(e=> e.remarks && e.remarks.toLowerCase() == remark);
+      this.loadState(remark);
+
+      this.codebase.runningNav = [
+        {
+          name: 'Home',
+          url: '/dashboard'
+        },
+        {
+          name: 'Problems',
+          url: '/problems'
+        },
+        {
+          name: 'Remarks',
+          url: `/problem/remarks`
+        },
+        {
+          name: this.remark ? this.remark : '',
+          url: `/problem/remark/${this.remark}`
         }
       ]
     } else {

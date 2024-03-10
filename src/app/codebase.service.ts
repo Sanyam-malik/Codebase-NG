@@ -20,6 +20,7 @@ export class CodebaseService {
   navMenus: Menu[] = [];
   statuses: string[] = [];
   levels: string[] = [];
+  remarks: string[] = [];
   runningNav: BreadcrumbItem[] = [];
   trackers: Tracker[] = [];
   reminders: Reminder[] = [];
@@ -87,6 +88,15 @@ export class CodebaseService {
     }
   }
 
+  getRemark(name: string | undefined) {
+    if(name) {
+      const list = this.remarks.filter(item => item.toLowerCase() == name);
+      return list[0];
+    } else {
+      return undefined;
+    }
+  }
+
   getStatus(name: string | undefined) {
     if(name) {
       const list = this.statuses.filter(item => item.toLowerCase() == name);
@@ -125,13 +135,14 @@ export class CodebaseService {
 
   clearData() {
     this.runningTheme = "dark";
-    this.navMenus= [];
+    this.navMenus = [];
     this.runningNav = [];
     this.trackers = [];
     this.reminders = [];
     this.platforms = [];
     this.companies = [];
-    this.settings= [];
+    this.settings = [];
+    this.remarks = [];
     this.analytics = undefined;
     localStorage.removeItem('codestate');
   }
@@ -250,6 +261,16 @@ export class CodebaseService {
     if(codebase.companies.length == 0) {
       http.get(environment.baseURL+"/companies").subscribe((response: any) => {
         codebase.companies = response['companies']
+      },err => {
+        
+      },() => {
+  
+      })
+    }
+
+    if(codebase.remarks.length == 0) {
+      http.get(environment.baseURL+"/remarks").subscribe((response: any) => {
+        codebase.remarks = response['remarks']
       },err => {
         
       },() => {
