@@ -8,7 +8,8 @@
     <thead>
       <tr>
         <ng-container *ngFor="let column of listOfColumns">
-          <th *ngIf="column.allowFilter"
+          <th *ngIf="column.allowFilter && column.allowSort"
+            [nzWidth]="column.width"
             [nzSortOrder]="column.sortOrder"
             [nzSortFn]="column.sortFn"
             [nzSortDirections]="column.sortDirections"
@@ -19,11 +20,25 @@
             {{ column.name }}
           </th>
 
-          <th *ngIf="!column.allowFilter"
+          <th *ngIf="!column.allowFilter && column.allowSort"
+            [nzWidth]="column.width"
             [nzSortOrder]="column.sortOrder"
             [nzSortFn]="column.sortFn"
             [nzSortDirections]="column.sortDirections"
           >
+            {{ column.name }}
+          </th>
+
+          <th *ngIf="column.allowFilter && !column.allowSort"
+            [nzWidth]="column.width"
+            [nzFilterMultiple]="column.filterMultiple"
+            [nzFilters]="column.listOfFilter"
+            [nzFilterFn]="column.filterFn"
+          >
+            {{ column.name }}
+          </th>
+
+          <th *ngIf="!column.allowFilter && !column.allowSort" [nzWidth]="column.width">
             {{ column.name }}
           </th>
         </ng-container>
@@ -35,6 +50,14 @@
         <td>{{ data.type }}</td>
         <td>{{ data.level }}</td>
         <td>{{ data.status }}</td>
+        <td style="text-align: center;">
+          <div *ngIf="data.companies && data.companies.split(',').length > 0" style="justify-content: center;">
+            <nz-tag *ngFor="let company of data.companies.split(',')" [nzColor]="companiesColor[company]" (click)="tagClick(company)">{{company}}</nz-tag>
+          </div>
+          <ng-container *ngIf="!data.companies || data.companies.split(',').length == 0">
+            <div> No Company Information </div>
+          </ng-container>
+        </td>
       </tr>
     </tbody>
 </nz-table>

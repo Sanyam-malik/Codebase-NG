@@ -395,7 +395,8 @@
     border-radius: 1rem;
     font-size: 0.8rem;
     font-weight: bold;
-    padding: 1% 2%;
+    padding: 0.3% 0.8%;
+    margin: 0.4% 0.4% 0.4% auto;
     box-shadow: var(--boxShadow);
     cursor: pointer;
   }
@@ -408,4 +409,8 @@
   .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis, .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis {
     color: var(--primaryColor);
     font-weight: bold;
+  }
+
+  .ant-table-footer, .ant-table-thead > tr > th {
+    color:  var(--textPrimaryColor);
   }

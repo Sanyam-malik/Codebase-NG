@@ -156,9 +156,9 @@ export class CodebaseService {
   }
 
   getRandomDarkColor() {
-    var red = Math.floor(Math.random() * 128) + 60; // Random value between 0 and 127
-    var green = Math.floor(Math.random() * 128) + 60; // Random value between 0 and 127
-    var blue = Math.floor(Math.random() * 128) + 60; // Random value between 0 and 127
+    var red = Math.floor(Math.random() * 128) + 30; // Random value between 0 and 127
+    var green = Math.floor(Math.random() * 128) + 30; // Random value between 0 and 127
+    var blue = Math.floor(Math.random() * 128) + 30; // Random value between 0 and 127
 
     // Construct the color string in hexadecimal format
     var color = '#' +

@@ -24,9 +24,11 @@ export class CompaniesComponent {
   }
 
   Highcharts: typeof Highcharts = Highcharts; // required
-  chartOptions: Highcharts.Options = {};
+  minifiedChartOptions: Highcharts.Options = {};
+  fullChartOptions: Highcharts.Options = {};
   isLoaded: boolean = false;
   interval: any;
+  showMinified: boolean = true;
 
   constructor(private codebase: CodebaseService) {}
   
@@ -69,8 +71,8 @@ export class CompaniesComponent {
   }
 
   loadChart() {
-    const map = this.generatePlots();
-    this.chartOptions = {
+    const fullMap = this.generatePlots();
+    this.minifiedChartOptions = {
       chart: {
         type: 'column',
         plotBorderWidth: undefined,
@@ -82,7 +84,7 @@ export class CompaniesComponent {
         text: '',
       },
       xAxis: {
-        categories: map['categories'],
+        categories: fullMap['categories'],
         labels: {
           style: {
             fontWeight: 'bold',
@@ -137,7 +139,7 @@ export class CompaniesComponent {
         {
           name: 'Problems',
           type: 'column',
-          data: map['data']
+          data: fullMap['data']
         }
       ]
     };

@@ -4,15 +4,15 @@
             <h1 style="margin: 0%;">Problem: <span class="color-primary">{{ item.name }}</span></h1>
             <h2 style="margin: 0%;"> <span class="color-primary">{{item.type}}</span></h2>
             <h3>{{ item.level }}</h3>
-            <div *ngIf="companies.length > 0" style="display: flex;">
-                <nz-tag *ngFor="let company of companies" [nzColor]="company['color']" (click)="tagClick(company.name)">{{company['name']}}</nz-tag>
-            </div>
         </div>
         <div style="text-align: right;">
             <h2 style="padding: 0.5rem 0px;">Status: <span class="color-primary">{{ item.status }}</span></h2>
             <a *ngIf="button" class="btn-code-action" [href]="item.url"><img [src]="button.icon">View on {{button.name}}</a>
             <a *ngIf="!button" class="btn-code-action" [href]="item.url"><fa-icon class="color-primary" [icon]="codeIcon" ></fa-icon>&nbsp;View Problem Statement</a>
         </div>
+    </div>
+    <div *ngIf="companies.length > 0" style="width: 60%;">
+        <nz-tag *ngFor="let company of companies" [nzColor]="company['color']" (click)="tagClick(company.name)">{{company['name']}}</nz-tag>
     </div>
     
 

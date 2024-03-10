@@ -3,10 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NzTableSortOrder, NzTableSortFn, NzTableFilterList, NzTableFilterFn } from 'ng-zorro-antd/table';
 import { Problem } from '../problem';
 import { CodebaseService } from '../codebase.service';
+import { Company } from '../company';
 
 interface ColumnItem {
   name: string;
-  allowFilter: boolean
+  allowSort: boolean
+  allowFilter: boolean,
+  width: string,
   sortOrder: NzTableSortOrder | null;
   sortFn: NzTableSortFn<Problem> | null;
   listOfFilter: NzTableFilterList;
@@ -30,6 +33,7 @@ export class ProblemsComponent {
   listOfData: Problem[] = [];
   listOfColumns: ColumnItem[] = [];
   pageIndex: number = 1;
+  companiesColor:any = {};
 
   get type(){
     const type = this.route.snapshot.paramMap.get('type');
@@ -185,12 +189,21 @@ export class ProblemsComponent {
     }
     
     this.listOfData =  data;
-    
+    for (var item of data) {
+      const list = item.companies?.split(",")
+      if (list) {
+        for(var listItem of list) {
+          this.companiesColor[String(listItem)] =this.codebase.getColor(); 
+        }
+      }
+    }
     this.listOfColumns = [
       {
         name: 'Name',
         sortOrder: 'ascend',
+        width: '30%',
         allowFilter: false,
+        allowSort: true,
         sortFn: (a: Problem, b: Problem) => a.name.localeCompare(b.name),
         sortDirections: ['ascend', 'descend', null],
         filterMultiple: false,
@@ -200,7 +213,9 @@ export class ProblemsComponent {
       {
         name: 'Type',
         sortOrder: null,
+        width: '15%',
         allowFilter: true,
+        allowSort: true,
         sortFn: (a: Problem, b: Problem) => a.type.localeCompare(b.type),
         sortDirections: ['ascend', 'descend', null],
         filterMultiple: true,
@@ -210,7 +225,9 @@ export class ProblemsComponent {
       {
         name: 'Level',
         sortOrder: null,
+        width: '10%',
         allowFilter: true,
+        allowSort: true,
         sortFn: (a: Problem, b: Problem) => a.level.localeCompare(b.level),
         sortDirections: ['ascend', 'descend', null],
         filterMultiple: true,
@@ -220,12 +237,26 @@ export class ProblemsComponent {
       {
         name: 'Status',
         sortOrder: null,
+        width: '15%',
         allowFilter: true,
+        allowSort: true,
         sortFn: (a: Problem, b: Problem) => a.status.localeCompare(b.status),
         sortDirections: ['ascend', 'descend', null],
         filterMultiple: true,
         listOfFilter: [...new Set(this.listOfData.map(problem => problem.status))].map(status => ({ text: status, value: status })) as NzTableFilterList,
         filterFn: (list: string[], item: Problem) => list.some(status => item.status.toLowerCase().indexOf(status.toLowerCase()) !== -1)
+      },
+      {
+        name: 'Companies',
+        sortOrder: null,
+        width: '30%',
+        allowFilter: false,
+        allowSort: false,
+        sortFn: null,
+        sortDirections: [],
+        filterMultiple: true,
+        listOfFilter: [],
+        filterFn: null
       }
     ];
   }
@@ -252,6 +283,10 @@ export class ProblemsComponent {
       name = this.status;
     }
     this.codebase.setTableState(name, pageNo);
+  }
+
+  tagClick(name: string) {
+    window.open(`/problem/company/${String(name).toLowerCase()}`, '_self');
   }
   
 }
