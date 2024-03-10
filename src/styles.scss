@@ -414,3 +414,22 @@
   .ant-table-footer, .ant-table-thead > tr > th {
     color:  var(--textPrimaryColor);
   }
+
+  .ant-segmented-item-label {
+    color: var(--textPrimaryColor);
+    font-size: 1rem;
+  }
+
+  .ant-segmented-item-selected, .ant-segmented-thumb {
+    background-color: var(--backgroundColor);
+    border: 2px solid var(--primaryColor);
+  }
+
+  .ant-segmented-item {
+    padding: 1%;
+  }
+
+  .ant-segmented{
+    border: 1px solid transparent;
+    background-color: transparent;
+  }

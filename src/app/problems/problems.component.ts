@@ -34,6 +34,7 @@ export class ProblemsComponent {
   listOfColumns: ColumnItem[] = [];
   pageIndex: number = 1;
   companiesColor:any = {};
+  companies: any[] = [];
 
   get type(){
     const type = this.route.snapshot.paramMap.get('type');
@@ -189,13 +190,22 @@ export class ProblemsComponent {
     }
     
     this.listOfData =  data;
+    var companies: string[] = [];
     for (var item of data) {
       const list = item.companies?.split(",")
       if (list) {
         for(var listItem of list) {
+          companies.push(listItem);
           this.companiesColor[String(listItem)] =this.codebase.getColor(); 
         }
       }
+    }
+
+    for(var company of new Set(companies)) {
+      this.companies.push({
+        text: company,
+        value: company
+      });
     }
     this.listOfColumns = [
       {
@@ -250,13 +260,13 @@ export class ProblemsComponent {
         name: 'Companies',
         sortOrder: null,
         width: '30%',
-        allowFilter: false,
+        allowFilter: true,
         allowSort: false,
         sortFn: null,
         sortDirections: [],
         filterMultiple: true,
-        listOfFilter: [],
-        filterFn: null
+        listOfFilter: this.companies.sort((a, b) => a.text.localeCompare(b.text)),
+        filterFn: (list: string[], item: Problem) => list.some(company => item.companies && item.companies.toLowerCase().indexOf(company.toLowerCase()) !== -1)
       }
     ];
   }

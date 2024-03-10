@@ -5,6 +5,7 @@ import { CodebaseService } from '../../codebase.service';
 export interface PlotData {
   y: number,
   color: string,
+  category: string,
   events?: any
 }
 
@@ -29,6 +30,7 @@ export class CompaniesComponent {
   isLoaded: boolean = false;
   interval: any;
   showMinified: boolean = true;
+  options:string[] = ['Top 15 Companies', 'All Companies'];
 
   constructor(private codebase: CodebaseService) {}
   
@@ -42,16 +44,20 @@ export class CompaniesComponent {
     }, 1000);
   }
 
+  handleIndexChange(index: number) {
+    this.showMinified = index == 0;
+  }
+
   generatePlots() {
     if(this.companies) {
       var categories: string[] = [];
       var data: PlotData[] = [];
 
       for(var company of this.companies) {
-        categories.push(company.company);
         data.push({
           y: company.count,
           color: this.codebase.getColor(),
+          category: company.company,
           events: {
             click:(event: any) => {
               const category = event.point.category;
@@ -61,9 +67,14 @@ export class CompaniesComponent {
         })
       }
 
+      data.sort((a, b) => a.y > b.y ? -1 : 1);
+      for(var item of data) {
+        categories.push(item.category);
+      }
+
       return {
         "categories": categories,
-        "data": data
+        "data": data,
       }
     } else {
       return {};
@@ -72,9 +83,13 @@ export class CompaniesComponent {
 
   loadChart() {
     const fullMap = this.generatePlots();
+    var height = fullMap['categories'] && fullMap['categories'].length > 0 ? 40 * fullMap['categories'].length : 400;
+    var miniheight = fullMap['categories'] && fullMap['categories'].length > 0 ? 40 * 15 : 400;
+
     this.minifiedChartOptions = {
       chart: {
-        type: 'column',
+        type: 'bar',
+        height: miniheight,
         plotBorderWidth: undefined,
         plotShadow: false,
         backgroundColor: 'transparent',
@@ -138,7 +153,80 @@ export class CompaniesComponent {
       series: [
         {
           name: 'Problems',
-          type: 'column',
+          type: 'bar',
+          data: fullMap['data']?.slice(0, 15)
+        }
+      ]
+    };
+
+    this.fullChartOptions = {
+      chart: {
+        type: 'bar',
+        height: height,
+        plotBorderWidth: undefined,
+        plotShadow: false,
+        backgroundColor: 'transparent',
+        borderColor: 'transparent',
+      },
+      title: {
+        text: '',
+      },
+      xAxis: {
+        categories: fullMap['categories'],
+        labels: {
+          style: {
+            fontWeight: 'bold',
+            color: 'var(--textPrimaryColor)',
+            textOutline: "0px",
+          }
+        },
+        title: {
+          text: null
+        },
+        gridLineWidth: 1,
+        gridLineColor: 'var(--textPrimaryColor)',
+        lineWidth: 0
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: ''
+        },
+        stackLabels: {
+          enabled: false
+        },
+        labels: {
+          style: {
+            fontWeight: 'bold',
+            color: 'var(--textPrimaryColor)',
+            textOutline: "0px",
+          }
+        },
+        gridLineWidth: 0
+      },
+      plotOptions: {
+        column: {
+          stacking: 'normal',
+          borderRadius: '20%',
+          dataLabels: {
+            style: {
+              color: 'var(--textPrimaryColor)',
+              textOutline: 'none',
+            }
+          }, 
+          groupPadding: 0.1
+        }
+      },
+      legend: {
+        enabled: false,
+      },
+      credits: {
+        enabled: false
+      },
+      series: [
+        {
+          name: 'Problems',
+          type: 'bar',
           data: fullMap['data']
         }
       ]

@@ -7,6 +7,7 @@ import { TypesComponent } from './types/types.component';
 import { ProblemFocusComponent } from './problem-focus/problem-focus.component';
 import { ProblemCountComponent } from './problem-count/problem-count.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { ZorroModule } from '../zorro/zorro.module';
 
 
 
@@ -21,6 +22,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
   ],
   imports: [
     CommonModule,
+    ZorroModule,
     HighchartsChartModule
   ], 
   exports: [
