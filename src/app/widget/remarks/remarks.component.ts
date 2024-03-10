@@ -10,16 +10,12 @@ import { CodebaseService } from '../../codebase.service';
 export class RemarksComponent implements OnInit {
   
   listIcon: any  = faCircleArrowRight;
-  isLoaded: boolean = false;
 
   constructor(private codebase: CodebaseService) {
 
   }
 
   get remarks() {
-    if(!this.isLoaded && this.codebase.remarks.length > 0) {
-      this.isLoaded = true;
-    }
     return this.codebase.remarks;
   }
 
