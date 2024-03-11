@@ -28,6 +28,7 @@
     "ng-zorro-antd": "^17.2.0",
     "ngx-highlightjs": "^10.0.0",
     "rxjs": "~7.8.0",
+    "safe-pipe": "^3.0.4",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },

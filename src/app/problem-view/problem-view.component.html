@@ -18,7 +18,7 @@
 
     <nz-collapse [nzBordered]="false">
         <nz-collapse-panel *ngIf="item.description" [nzHeader]="'Description'" [nzActive]="true">
-            <div class="description" [innerHTML]="item.description"></div>
+            <div class="description" [innerHTML]="item.description | safe: 'html'"></div>
         </nz-collapse-panel>
         
         <nz-collapse-panel *ngIf="item.code" [nzHeader]="'Code'" [nzActive]="!item.description ? true : false">
@@ -28,7 +28,7 @@
         </nz-collapse-panel>
 
         <nz-collapse-panel *ngIf="item.notes" [nzHeader]="'Notes'" [nzActive]="false">
-            <div class="notes" [innerHTML]="item.notes"></div>
+            <div class="notes" [innerHTML]="item.notes | safe: 'html'"></div>
         </nz-collapse-panel>
     </nz-collapse>
 

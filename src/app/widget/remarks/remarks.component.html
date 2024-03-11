@@ -1,12 +1,12 @@
 <div class="dashcard">
-    <h2 style="font-size:1.5rem;">Problems by Remark</h2>
+    <h2 style="font-size:1.5rem;">Problems by Remarks</h2>
     <div *ngIf="remarks.length > 0" style="width:80%;height: 400px;margin: 2rem;overflow-y: auto;" class="list">
         <nz-list nzItemLayout="horizontal">
             <nz-list-item *ngFor="let remark of remarks" style="cursor: pointer;" (click)="redirectToRemarks(remark)">
-                <h2 style="margin: 0%;"> 
+                <h3 style="margin: 0%;"> 
                     <fa-icon [icon]="listIcon" style="color: var(--secondaryColor)"></fa-icon>
                     {{remark}}
-                </h2>
+                </h3>
             </nz-list-item>
         </nz-list>
     </div>

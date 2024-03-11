@@ -18,6 +18,7 @@ import { HIGHLIGHT_OPTIONS, HighlightModule } from 'ngx-highlightjs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { WidgetModule } from './widget/widget.module';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { SafePipe } from 'safe-pipe';
 
 registerLocaleData(en);
 
@@ -29,6 +30,7 @@ registerLocaleData(en);
     ProblemViewComponent
   ],
   imports: [
+    SafePipe,
     ZorroModule,
     BrowserModule,
     AppRoutingModule,
