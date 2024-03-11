@@ -188,7 +188,7 @@ export class ProblemsComponent {
     } else if(String(router.url).includes("/remark")) {
       this.isRemarkFilter = true;
       const remark = this.route.snapshot.paramMap.get('remark');
-      data = data.filter(e=> e.remarks && e.remarks.toLowerCase() == remark);
+      data = data.filter(e=> e.remarks && remark && e.remarks.toLowerCase().includes(remark));
       this.loadState(remark);
 
       this.codebase.runningNav = [
