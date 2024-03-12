@@ -10,6 +10,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { ZorroModule } from '../zorro/zorro.module';
 import { RemarksComponent } from './remarks/remarks.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { QuotesComponent } from './quotes/quotes.component';
 
 
 
@@ -21,7 +22,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TypesComponent,
     ProblemFocusComponent,
     ProblemCountComponent,
-    RemarksComponent
+    RemarksComponent,
+    QuotesComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     StatusComponent,
     TypesComponent,
     ProblemFocusComponent,
-    ProblemCountComponent
+    ProblemCountComponent,
+    QuotesComponent
   ]
 })
 export class WidgetModule { }
