@@ -12,7 +12,7 @@ export class TimelineComponent {
 
   }
 
-  isLoaded: boolean = false;
+  isLoaded: boolean = true;
   options:string[] = ['This Month', 'Previous Month', 'Full Timeline'];
   shownTimeline: number = 0;
   
@@ -35,6 +35,8 @@ export class TimelineComponent {
     this.shownTimeline = $event;
   }
 
-
+  objectEntries(obj: any): any {
+    return Object.keys(obj);
+  }
   
 }

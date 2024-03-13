@@ -1,7 +1,18 @@
 <div class="dashcard">
-    <h2 style="font-size:1.5rem;">Problems Solved by Companies</h2>
+    <h2 style="font-size:1.5rem;">Problem Timeline</h2>
     <nz-segmented [nzOptions]="options" (nzValueChange)="handleIndexChange($event)"></nz-segmented>
     
+    <nz-timeline *ngIf="isLoaded" style="padding: 3rem 3rem 1rem 3rem;">
+        <ng-container *ngFor="let key of objectEntries(timeline)">
+            <nz-timeline-item>
+                <p>{{key}}&nbsp;<span style="color: var(--secondaryColor);">({{timeline[key].length}} Problems)</span></p>
+                <a *ngFor="let val of timeline[key];let i = index" routerLink="/problem/type/{{val.id}}">
+                    {{val.name}}
+                    <span *ngIf="i !== timeline[key].length - 1">,&nbsp;</span>
+                </a>
+            </nz-timeline-item>
+        </ng-container>
+    </nz-timeline>
     
 
     <div *ngIf="!isLoaded" class="center-div" style="width: 85%; height: 20rem;">

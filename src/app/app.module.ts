@@ -19,6 +19,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { WidgetModule } from './widget/widget.module';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { SafePipe } from 'safe-pipe';
+import { NgxNavDrawerModule } from '@ngx-lite/nav-drawer';
 
 registerLocaleData(en);
 
@@ -42,7 +43,8 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     FontAwesomeModule,
     WidgetModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    NgxNavDrawerModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

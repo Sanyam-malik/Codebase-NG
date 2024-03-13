@@ -478,3 +478,45 @@
     margin-left: 12px;
     margin-right: 0%;
   }
+
+  .ngx-nav-drawer {
+    background-color: var(--backgroundColor) !important;
+    border-right: 2px solid var(--primaryColor) !important;
+    -ms-overflow-style: none !important;  /* IE and Edge */
+    scrollbar-width: none !important;  /* Firefox */
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    ::-webkit-scrollbar {
+      display: none !important;
+    }
+  }
+
+  .ant-segmented:not(.ant-segmented-disabled):focus, .ant-segmented:not(.ant-segmented-disabled):hover {
+    background-color: transparent;
+  }
+
+  .ant-timeline-item-head-blue {
+    color: var(--primaryColor);
+    border-color: var(--primaryColor);
+  }
+
+  .ant-timeline-item-tail {
+    border-left: 4px solid var(--backgroundColor);
+  }
+
+  .ant-timeline-item-head {
+    width: 13px;
+    height: 10px;
+    background-color: var(--primaryColor);
+  }
+
+  .ant-timeline-item-content {
+    font-size: medium;
+  }
+
+  .ant-timeline.ant-timeline-label .ant-timeline-item-label {
+    font-size: medium;
+  }
+
+  *:focus {
+    outline: none;
+  }

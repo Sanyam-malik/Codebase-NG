@@ -1,24 +1,4 @@
 <nz-layout class="layout">
-    <nz-drawer
-      [nzClosable]="true"
-      [nzVisible]="visible"
-      [nzPlacement]="'left'"
-      [nzTitle]="headerRef"
-      [nzWidth]="'max-content'"
-      [nzMask]="true"
-      (nzOnClose)="close()"
-    >
-      <ng-container *nzDrawerContent>
-        <ul nz-menu nzTheme="dark" nzMode="vertical">
-          <li *ngFor="let menu of codebase.navMenus" nz-menu-item routerLink="/problem/type/{{menu.name.toLowerCase()}}" style="padding: 1.5rem;
-          align-items: center;
-          display: flex;">
-            {{menu.name}}
-          </li>    
-        </ul>
-      </ng-container>
-    </nz-drawer>
-
     <ng-template #headerRef>
       <h4 class="nohover" style="margin: 0%;">
         <img src="../assets/logo.png" height="40" style="filter: grayscale(100%);-webkit-filter: grayscale(100%);">&nbsp;&nbsp;Problems Types
@@ -35,7 +15,7 @@
           <img src="../assets/logo.png" height="40" style="filter: grayscale(100%);-webkit-filter: grayscale(100%);">&nbsp;&nbsp;Codebase
         </span>
       </li>
-      <li nz-menu-item *ngIf="showStartTimer && !isDashboardActive" class="nohover" style="float: right;">
+      <li nz-menu-item *ngIf="showStartTimer && !isDashboardActive" class="nohover" style="float: right;padding-right: 0.5%;">
         <div>
           <h3 style="margin: 0%;">
             <ng-container *ngIf="!isPaused">
@@ -54,6 +34,21 @@
     </ul>
   </nz-header>
   <nz-content>
+    <ngx-nav-drawer [(open)]="visible">
+      <ul nz-menu nzTheme="dark" nzMode="vertical">
+        <li nz-menu-item class="nohover" style="padding: 2rem;display: flex;align-items: center;">
+          <span routerLink="/dashboard" style="display: inline-block;">
+            <img src="../assets/logo.png" height="40" style="filter: grayscale(100%);-webkit-filter: grayscale(100%);">&nbsp;&nbsp;Codebase
+          </span>
+        </li>
+        <li *ngFor="let menu of codebase.navMenus" nz-menu-item routerLink="/problem/type/{{menu.name.toLowerCase()}}" style="padding: 1.5rem;
+        align-items: center;
+        display: flex;">
+          {{menu.name}}
+        </li>    
+      </ul>
+    </ngx-nav-drawer>
+
     <nz-breadcrumb>
       <nz-breadcrumb-item *ngFor="let menu of codebase.runningNav">{{menu.name}}</nz-breadcrumb-item>
     </nz-breadcrumb>

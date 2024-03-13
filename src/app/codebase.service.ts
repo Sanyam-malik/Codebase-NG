@@ -55,7 +55,7 @@ export class CodebaseService {
       codeState.themePref = this.runningTheme;
     } else {
       codeState = {
-        themePref: this.runningTheme
+        themePref: this.runningTheme,
       }
     }
     this.saveState("codestate", codeState);

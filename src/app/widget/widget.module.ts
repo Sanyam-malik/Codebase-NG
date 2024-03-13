@@ -12,6 +12,7 @@ import { RemarksComponent } from './remarks/remarks.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { QuotesComponent } from './quotes/quotes.component';
 import { TimelineComponent } from './timeline/timeline.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -31,7 +32,8 @@ import { TimelineComponent } from './timeline/timeline.component';
     CommonModule,
     ZorroModule,
     FontAwesomeModule,
-    HighchartsChartModule
+    RouterModule,
+    HighchartsChartModule,
   ], 
   exports: [
     CompaniesComponent,
@@ -41,7 +43,8 @@ import { TimelineComponent } from './timeline/timeline.component';
     TypesComponent,
     ProblemFocusComponent,
     ProblemCountComponent,
-    QuotesComponent
+    QuotesComponent,
+    TimelineComponent
   ]
 })
 export class WidgetModule { }
