@@ -469,3 +469,12 @@
   .ant-drawer-content {
     background-color: var(--backgroundColor);
   }
+
+  .ant-drawer-header-title {
+    flex-direction: row-reverse;
+  }
+
+  .ant-drawer-close {
+    margin-left: 12px;
+    margin-right: 0%;
+  }

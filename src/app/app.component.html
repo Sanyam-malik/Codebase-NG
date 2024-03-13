@@ -1,10 +1,11 @@
 <nz-layout class="layout">
     <nz-drawer
-      [nzClosable]="false"
+      [nzClosable]="true"
       [nzVisible]="visible"
       [nzPlacement]="'left'"
       [nzTitle]="headerRef"
       [nzWidth]="'max-content'"
+      [nzMask]="true"
       (nzOnClose)="close()"
     >
       <ng-container *nzDrawerContent>
