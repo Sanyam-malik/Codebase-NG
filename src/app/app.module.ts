@@ -20,6 +20,7 @@ import { WidgetModule } from './widget/widget.module';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { SafePipe } from 'safe-pipe';
 import { NgxNavDrawerModule } from '@ngx-lite/nav-drawer';
+import { UrlToolPipe } from './url-tool.pipe';
 
 registerLocaleData(en);
 
@@ -28,7 +29,8 @@ registerLocaleData(en);
     AppComponent,
     DashboardComponent,
     ProblemsComponent,
-    ProblemViewComponent
+    ProblemViewComponent,
+    UrlToolPipe
   ],
   imports: [
     SafePipe,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import { CodebaseService } from '../../codebase.service';
+import { Router } from '@angular/router';
 
 
 export interface PlotData {
@@ -30,7 +31,7 @@ export class StatusComponent implements OnInit {
   isLoaded: boolean = false;
   interval: any;
 
-  constructor(private codebase: CodebaseService) {}
+  constructor(private codebase: CodebaseService, private router: Router) {}
   
   ngOnInit(): void {
     this.interval = setTimeout(() => {
@@ -55,7 +56,7 @@ export class StatusComponent implements OnInit {
           events: {
             click:(event: any) => {
               const category = event.point.category;
-              window.open(`/problem/status/${String(category).toLowerCase()}`, '_self');
+              this.router.navigate(['/problem/status', encodeURIComponent(String(category).toLowerCase())]);
             }
           }
         })

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faCircleArrowRight, faList, faStar } from '@fortawesome/free-solid-svg-icons';
 import { CodebaseService } from '../../codebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-remarks',
@@ -11,7 +12,7 @@ export class RemarksComponent implements OnInit {
   
   listIcon: any  = faCircleArrowRight;
 
-  constructor(private codebase: CodebaseService) {
+  constructor(private codebase: CodebaseService, private router: Router) {
 
   }
 
@@ -24,7 +25,8 @@ export class RemarksComponent implements OnInit {
   }
 
   redirectToRemarks(remark: string){
-    window.open(`/problem/remark/${String(remark).toLowerCase()}`, '_self');
+    console.log(encodeURIComponent(String(remark).toLowerCase()));
+    this.router.navigate(['/problem/remark', encodeURIComponent(String(remark).toLowerCase())]);
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import { CodebaseService } from '../../codebase.service';
+import { Router } from '@angular/router';
 
 export interface PlotData {
   name: string
@@ -31,7 +32,7 @@ export class TypesComponent {
   isLoaded: boolean = false;
   interval: any;
 
-  constructor(private codebase: CodebaseService) {}
+  constructor(private codebase: CodebaseService, private router: Router) {}
 
   ngOnInit(): void {
     this.interval = setTimeout(() => {
@@ -79,7 +80,7 @@ export class TypesComponent {
             events: {
               click:(event: any) => {
                 const name = event.point.name;
-                window.open(`/problem/type/${String(name).toLowerCase()}`, '_self');
+                this.router.navigate(['/problem/type', encodeURIComponent(String(name).toLowerCase())]);
               }
             }
         });

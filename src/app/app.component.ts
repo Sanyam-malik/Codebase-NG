@@ -4,6 +4,7 @@ import { CodebaseService } from './codebase.service';
 import { environment } from '../environments/environment';
 import { Title } from '@angular/platform-browser';
 import { faBars, faPause, faPlay, faStop, faStopwatch } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -31,8 +32,12 @@ export class AppComponent implements OnInit {
     this.visible = false;
   }
 
+  isActive(menuName: string): boolean {
+    return this.router.isActive(`/problem/type/${menuName}`, true);
+  }
 
-  constructor(private titleService: Title, public codebase: CodebaseService) {
+
+  constructor(private titleService: Title, public codebase: CodebaseService, private router: Router) {
     this.titleService.setTitle(this.title);
   }
 

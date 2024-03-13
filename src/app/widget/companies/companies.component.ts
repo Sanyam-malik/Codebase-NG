@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import { CodebaseService } from '../../codebase.service';
+import { Router } from '@angular/router';
 
 export interface PlotData {
   y: number,
@@ -32,7 +33,7 @@ export class CompaniesComponent {
   showMinified: boolean = true;
   options:string[] = ['Top 15 Companies', 'All Companies'];
 
-  constructor(private codebase: CodebaseService) {}
+  constructor(private codebase: CodebaseService, private router: Router) {}
   
   ngOnInit(): void {
     this.interval = setTimeout(() => {
@@ -61,7 +62,7 @@ export class CompaniesComponent {
           events: {
             click:(event: any) => {
               const category = event.point.category;
-              window.open(`/problem/company/${String(category).toLowerCase()}`, '_self');
+              this.router.navigate(['/problem/company', encodeURIComponent(String(category).toLowerCase())]);
             }
           }
         })

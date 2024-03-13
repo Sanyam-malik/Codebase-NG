@@ -40,7 +40,7 @@ export class ProblemsComponent {
   get type(){
     const type = this.route.snapshot.paramMap.get('type');
     if(type) {
-      return this.codebase.getType(type.toLowerCase())?.name;
+      return this.codebase.getType(decodeURIComponent(type.toLowerCase()))?.name;
     } else {
       return undefined
     }
@@ -49,7 +49,7 @@ export class ProblemsComponent {
   get company(){
     const company = this.route.snapshot.paramMap.get('company');
     if(company) {
-      return this.codebase.getCompany(company.toLowerCase())?.name;
+      return this.codebase.getCompany(decodeURIComponent(company.toLowerCase()))?.name;
     } else {
       return undefined
     }
@@ -58,7 +58,7 @@ export class ProblemsComponent {
   get level(){
     const level = this.route.snapshot.paramMap.get('level');
     if(level) {
-      return this.codebase.getLevel(level.toLowerCase());
+      return this.codebase.getLevel(decodeURIComponent(level.toLowerCase()));
     } else {
       return undefined
     }
@@ -67,7 +67,7 @@ export class ProblemsComponent {
   get status(){
     const status = this.route.snapshot.paramMap.get('status');
     if(status) {
-      return this.codebase.getStatus(status.toLowerCase());
+      return this.codebase.getStatus(decodeURIComponent(status.toLowerCase()));
     } else {
       return undefined
     }
@@ -76,19 +76,21 @@ export class ProblemsComponent {
   get remark(){
     const remark = this.route.snapshot.paramMap.get('remark');
     if(remark) {
-      return this.codebase.getRemark(remark.toLowerCase());
+      return this.codebase.getRemark(decodeURIComponent(remark.toLowerCase()));
     } else {
       return undefined
     }
   }
 
-  constructor(private route: ActivatedRoute, private router: Router, private codebase: CodebaseService) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  getFilteredData() {
     var data: Problem[] = this.route.snapshot.data['apiResponse']['problems'];
     
-    if(String(router.url).includes("/type")) {
+    if(String(this.router.url).includes("/type")) {
       this.isTypeFilter = true;
-      const type = this.route.snapshot.paramMap.get('type');
+      var type = this.route.snapshot.paramMap.get('type');
+      if(type) {
+        type = decodeURIComponent(type);
+      }
       data = data.filter(e=> e.type && e.type.toLowerCase() == type);
       this.loadState(type);
 
@@ -111,10 +113,13 @@ export class ProblemsComponent {
         }
       ]
 
-    } else if(String(router.url).includes("/company")) {
+    } else if(String(this.router.url).includes("/company")) {
       this.isCompanyFilter = true;
-      const company = this.route.snapshot.paramMap.get('company');
-      data = data.filter(e=> e.companies && e.companies.toLowerCase().includes(company ? company : ""));
+      var company = this.route.snapshot.paramMap.get('company');
+      if(company) {
+        company = decodeURIComponent(company);
+      }
+      data = data.filter(e => e.companies && e.companies.toLowerCase().includes(company ? company : ""));
       this.loadState(company);
 
       this.codebase.runningNav = [
@@ -136,9 +141,12 @@ export class ProblemsComponent {
         }
       ]
 
-    } else if(String(router.url).includes("/status")) {
+    } else if(String(this.router.url).includes("/status")) {
       this.isStatusFilter = true;
-      const status = this.route.snapshot.paramMap.get('status');
+      var status = this.route.snapshot.paramMap.get('status');
+      if(status) {
+        status = decodeURIComponent(status);
+      }
       data = data.filter(e=> e.status && e.status.toLowerCase() == status);
       this.loadState(status);
 
@@ -161,9 +169,12 @@ export class ProblemsComponent {
         }
       ]
 
-    } else if(String(router.url).includes("/level")) {
+    } else if(String(this.router.url).includes("/level")) {
       this.isLevelFilter = true;
-      const level = this.route.snapshot.paramMap.get('level');
+      var level = this.route.snapshot.paramMap.get('level');
+      if(level) {
+        level = decodeURIComponent(level);
+      }
       data = data.filter(e=> e.level && e.level.toLowerCase() == level);
       this.loadState(level);
 
@@ -185,9 +196,13 @@ export class ProblemsComponent {
           url: `/problem/level/${this.level}`
         }
       ]
-    } else if(String(router.url).includes("/remark")) {
+    } else if(String(this.router.url).includes("/remark")) {
       this.isRemarkFilter = true;
-      const remark = this.route.snapshot.paramMap.get('remark');
+      var remark = this.route.snapshot.paramMap.get('remark');
+      if(remark) {
+        remark = decodeURIComponent(remark);
+      }
+      console.log(remark);
       data = data.filter(e=> e.remarks && remark && e.remarks.toLowerCase().includes(remark));
       this.loadState(remark);
 
@@ -222,6 +237,13 @@ export class ProblemsComponent {
         }
       ]
     }
+
+    return data;
+  }
+
+  constructor(private route: ActivatedRoute, private router: Router, private codebase: CodebaseService) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    var data = this.getFilteredData();
     
     this.listOfData =  data;
     var companies: string[] = [];
@@ -235,10 +257,10 @@ export class ProblemsComponent {
       }
     }
 
-    for(var company of new Set(companies)) {
+    for(var comp of new Set(companies)) {
       this.companies.push({
-        text: company,
-        value: company
+        text: comp,
+        value: comp
       });
     }
     this.listOfColumns = [
