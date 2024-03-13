@@ -1,9 +1,23 @@
-<h1 *ngIf="!isStatusFilter && !isTypeFilter && !isLevelFilter && !isCompanyFilter && !isRemarkFilter">All Problems</h1>
-<h1 *ngIf="isTypeFilter">All Problems Related to <span class="color-primary underline">{{type}}</span></h1>
-<h1 *ngIf="isLevelFilter">All <span class="color-primary underline">{{level}}</span> Problems</h1>
-<h1 *ngIf="isStatusFilter">All Problems Having <span class="color-primary underline">{{status}}</span> as Status</h1>
-<h1 *ngIf="isCompanyFilter">All Problems Asked in <span class="color-primary underline">{{company}}</span></h1>
-<h1 *ngIf="isRemarkFilter">Problems With Remark <span class="color-primary underline">{{remark}}</span></h1>
+
+<div style="display:flex;justify-content: space-between;">
+  <div>
+    <h1 *ngIf="!isStatusFilter && !isTypeFilter && !isLevelFilter && !isCompanyFilter && !isRemarkFilter">All Problems</h1>
+    <h1 *ngIf="isTypeFilter">All Problems Related to <span class="color-primary underline">{{type}}</span></h1>
+    <h1 *ngIf="isLevelFilter">All <span class="color-primary underline">{{level}}</span> Problems</h1>
+    <h1 *ngIf="isStatusFilter">All Problems Having <span class="color-primary underline">{{status}}</span> as Status</h1>
+    <h1 *ngIf="isCompanyFilter">All Problems Asked in <span class="color-primary underline">{{company}}</span></h1>
+    <h1 *ngIf="isRemarkFilter">Problems With Remark <span class="color-primary underline">{{remark}}</span></h1>
+  </div>
+  
+  <div>
+    <nz-input-group [nzSuffix]="suffixIconSearch">
+      <input type="text" nz-input placeholder="Type Here to Search" [(ngModel)]="searchValue" (ngModelChange)="search()"/>
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <span nz-icon nzType="search"></span>
+    </ng-template>
+  </div>
+</div>
 
 <nz-table #filterTable [nzData]="listOfData" nzTableLayout="fixed" [nzPageIndex]="pageIndex" (nzPageIndexChange)="pageChange($event)">
     <thead>

@@ -32,10 +32,12 @@ export class ProblemsComponent {
   isStatusFilter: boolean = false;
   isLevelFilter: boolean = false;
   listOfData: Problem[] = [];
+  fullListOfData: Problem[] = [];
   listOfColumns: ColumnItem[] = [];
   pageIndex: number = 1;
   companiesColor:any = {};
   companies: any[] = [];
+  searchValue: string = '';
 
   get type(){
     const type = this.route.snapshot.paramMap.get('type');
@@ -202,7 +204,6 @@ export class ProblemsComponent {
       if(remark) {
         remark = decodeURIComponent(remark);
       }
-      console.log(remark);
       data = data.filter(e=> e.remarks && remark && e.remarks.toLowerCase().includes(remark));
       this.loadState(remark);
 
@@ -246,6 +247,7 @@ export class ProblemsComponent {
     var data = this.getFilteredData();
     
     this.listOfData =  data;
+    this.fullListOfData = data;
     var companies: string[] = [];
     for (var item of data) {
       const list = item.companies?.split(",")
@@ -325,6 +327,14 @@ export class ProblemsComponent {
         filterFn: (list: string[], item: Problem) => list.some(company => item.companies && item.companies.toLowerCase().indexOf(company.toLowerCase()) !== -1)
       }
     ];
+  }
+
+  search(): void {
+    if(this.searchValue.trim().length > 0) {
+      this.listOfData = this.fullListOfData.filter((item: Problem) => item.name.toLowerCase().indexOf(this.searchValue.toLowerCase()) !== -1);
+    } else {
+      this.listOfData = this.fullListOfData;
+    }
   }
 
   loadState(name: string | undefined | null){

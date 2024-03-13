@@ -1,6 +1,10 @@
 <div class="grid1" *ngIf="quote && author">
     <div class="dashcard">
-        <h1 style="font-style: italic;color: var(--secondaryColor);padding-left: 2%;padding-right: 2%;">{{quote}}</h1>
+        <h1 style="font-style: italic;padding-left: 2%;padding-right: 2%;">
+            <span>❝&nbsp;</span>
+            <span style="color: var(--secondaryColor);">{{quote}}</span>
+            <span>&nbsp;❞</span>
+        </h1>
         <h3 style="font-style: italic;"> - {{author}}</h3>
     </div>
 </div>
