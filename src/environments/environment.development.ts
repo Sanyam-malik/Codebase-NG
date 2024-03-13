@@ -1,3 +1,3 @@
 export const environment = {
-    "baseURL": "http://lordmaximus.duckdns.org:4500/api"
+    "baseURL": "http://localhost:5000/api"
 };

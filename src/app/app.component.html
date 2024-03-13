@@ -1,16 +1,38 @@
 <nz-layout class="layout">
-  <!-- <nz-back-top [nzTemplate]="tpl" [nzVisibilityHeight]="100">
-    <ng-template #tpl>
-      <div class="ant-back-top-inner">UP</div>
+    <nz-drawer
+      [nzClosable]="false"
+      [nzVisible]="visible"
+      [nzPlacement]="'left'"
+      [nzTitle]="headerRef"
+      [nzWidth]="'max-content'"
+      (nzOnClose)="close()"
+    >
+      <ng-container *nzDrawerContent>
+        <ul nz-menu nzTheme="dark" nzMode="vertical">
+          <li *ngFor="let menu of codebase.navMenus" nz-menu-item routerLink="/problem/type/{{menu.name.toLowerCase()}}" style="padding: 1.5rem;
+          align-items: center;
+          display: flex;">
+            {{menu.name}}
+          </li>    
+        </ul>
+      </ng-container>
+    </nz-drawer>
+
+    <ng-template #headerRef>
+      <h4 class="nohover" style="margin: 0%;">
+        <img src="../assets/logo.png" height="40" style="filter: grayscale(100%);-webkit-filter: grayscale(100%);">&nbsp;&nbsp;Problems Types
+      </h4>
     </ng-template>
-  </nz-back-top> -->
+  
   <nz-header>
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
-      <li nz-menu-item routerLink="/dashboard" class="nohover">
-        <img src="../assets/logo.png" height="40" style="filter: grayscale(100%);-webkit-filter: grayscale(100%);">&nbsp;&nbsp;Codebase
-      </li>
-      <li *ngFor="let menu of codebase.navMenus" nz-menu-item routerLink="/problem/type/{{menu.name.toLowerCase()}}">
-        {{menu.name}}
+      <li nz-menu-item class="nohover" style="padding-left: 0.5%;">
+        <span (click)="open()" style="color: var(--secondaryColor);display: inline-block;margin: 0px 10px 0px 0px;">
+          <fa-icon [icon]="barsIcon"></fa-icon>
+        </span>
+        <span routerLink="/dashboard" style="display: inline-block;">
+          <img src="../assets/logo.png" height="40" style="filter: grayscale(100%);-webkit-filter: grayscale(100%);">&nbsp;&nbsp;Codebase
+        </span>
       </li>
       <li nz-menu-item *ngIf="showStartTimer && !isDashboardActive" class="nohover" style="float: right;">
         <div>

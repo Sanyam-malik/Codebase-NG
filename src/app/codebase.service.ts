@@ -28,6 +28,7 @@ export class CodebaseService {
   companies: Company[] = [];
   settings: Setting[] = [];
   analytics: Analytics | undefined;
+  timeline: any = {};
 
   showStartTimer: boolean = false;
   isDashboardRunning = false;
@@ -292,6 +293,20 @@ export class CodebaseService {
     if(!codebase.analytics || Object.keys(codebase.analytics).length == 0) {
       http.get(environment.baseURL+"/analytics").subscribe((response: any) => {
         codebase.analytics = response['analytics'];
+      },err => {
+        
+      },() => {
+  
+      })
+    }
+
+    if(Object.keys(codebase.timeline).length == 0) {
+      http.get(environment.baseURL+"/timeline").subscribe((response: any) => {
+        codebase.timeline['full_timeline'] = response['full_timeline'];
+        codebase.timeline['current_timeline'] = response['current_timeline'];
+        codebase.timeline['previous_timeline'] = response['previous_timeline'];
+
+        console.log(codebase.timeline);
       },err => {
         
       },() => {

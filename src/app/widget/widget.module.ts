@@ -11,6 +11,7 @@ import { ZorroModule } from '../zorro/zorro.module';
 import { RemarksComponent } from './remarks/remarks.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { QuotesComponent } from './quotes/quotes.component';
+import { TimelineComponent } from './timeline/timeline.component';
 
 
 
@@ -23,7 +24,8 @@ import { QuotesComponent } from './quotes/quotes.component';
     ProblemFocusComponent,
     ProblemCountComponent,
     RemarksComponent,
-    QuotesComponent
+    QuotesComponent,
+    TimelineComponent
   ],
   imports: [
     CommonModule,

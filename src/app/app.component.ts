@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CodebaseService } from './codebase.service';
 import { environment } from '../environments/environment';
 import { Title } from '@angular/platform-browser';
-import { faPause, faPlay, faStop, faStopwatch } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faPause, faPlay, faStop, faStopwatch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +12,24 @@ import { faPause, faPlay, faStop, faStopwatch } from '@fortawesome/free-solid-sv
 })
 export class AppComponent implements OnInit {
 
+  visible = false;
+
   startTimerIcon: any = faStopwatch;
   pauseIcon: any = faPause;
   playIcon: any  = faPlay;
   stopIcon: any = faStop;
+  barsIcon: any = faBars;
 
   title = 'Codebase';
   year = new Date().getFullYear();
+
+  open(): void {
+    this.visible = true;
+  }
+
+  close(): void {
+    this.visible = false;
+  }
 
 
   constructor(private titleService: Title, public codebase: CodebaseService) {

@@ -460,3 +460,12 @@
   .ant-list-item-meta-description, .ant-list-item-meta-title {
     color: var(--textPrimaryColor);
   }
+
+  .ant-drawer-header {
+    background: var(--headerColor);
+    border-bottom-color: var(--secondaryColor);
+  }
+
+  .ant-drawer-content {
+    background-color: var(--backgroundColor);
+  }
