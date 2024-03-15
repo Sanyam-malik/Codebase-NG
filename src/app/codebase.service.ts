@@ -352,8 +352,6 @@ export class CodebaseService {
         codebase.timeline['full_timeline'] = response['full_timeline'];
         codebase.timeline['current_timeline'] = response['current_timeline'];
         codebase.timeline['previous_timeline'] = response['previous_timeline'];
-
-        console.log(codebase.timeline);
       },err => {
         
       },() => {
