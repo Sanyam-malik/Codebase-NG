@@ -15,6 +15,5 @@ export class AllComponent {
   constructor(private codebase: CodebaseService, private router: Router, private route: ActivatedRoute) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.data = this.route.snapshot.data['apiResponse']['problems'];
-    console.log(this.data);
   }
 }

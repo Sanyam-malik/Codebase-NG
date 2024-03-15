@@ -1,1 +1,1 @@
-<app-problems [data]="[]" [title]="title" [state]="state" [subtitle]="'Problems Asked in'">
+<app-problems *ngIf="company" [data]="data" [title]="company.name" [state]="company.name" [filter]="filter" [subtitle]="'Problems Asked in'" [breadcrumb]="breadcrumb">

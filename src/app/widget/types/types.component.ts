@@ -74,6 +74,7 @@ export class TypesComponent {
         } else {
           data.push({
             name: name,
+            slug: this.codebase.createSlug(name),
             y: count,
             color: this.codebase.getColor(),
             sliced: true,

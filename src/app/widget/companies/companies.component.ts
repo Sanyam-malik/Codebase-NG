@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 export interface PlotData {
   y: number,
+  slug: string,
   color: string,
   category: string,
   events?: any
@@ -57,12 +58,13 @@ export class CompaniesComponent {
       for(var company of this.companies) {
         data.push({
           y: company.count,
+          slug: company.slug,
           color: this.codebase.getColor(),
           category: company.company,
           events: {
             click:(event: any) => {
               const category = event.point.category;
-              this.router.navigate(['/problem/company', encodeURIComponent(String(category).toLowerCase())]);
+              this.router.navigate(['/problem/company', event.point.slug]);
             }
           }
         })

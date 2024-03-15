@@ -47,6 +47,7 @@ export class ProblemViewComponent {
                 for(var item of list) {
                    this.companies.push({
                     "name": item,
+                    "slug": this.codebase.createSlug(item),
                     "color": this.codebase.getColor()
                    }) 
                 }

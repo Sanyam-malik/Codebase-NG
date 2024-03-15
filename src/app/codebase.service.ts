@@ -12,6 +12,8 @@ import { environment } from '../environments/environment';
 import { Codestate, TableState } from './codestate';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Remark } from './remark';
+import { Level } from './level';
+import { Status } from './status';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +22,8 @@ export class CodebaseService {
 
   runningTheme: string = "dark";
   navMenus: Menu[] = [];
-  statuses: string[] = [];
-  levels: string[] = [];
+  statuses: Status[] = [];
+  levels: Level[] = [];
   remarks: Remark[] = [];
   runningNav: BreadcrumbItem[] = [];
   trackers: Tracker[] = [];
@@ -110,9 +112,9 @@ export class CodebaseService {
     } 
   }
 
-  getType(name: string | undefined) {
-    if(name) {
-      const list = this.navMenus.filter(item => item.name.toLowerCase() == name);
+  getType(slug: string | undefined) {
+    if(slug) {
+      const list = this.navMenus.filter(item => item.slug == slug);
       return list[0];
     } else {
       return undefined;
@@ -128,27 +130,27 @@ export class CodebaseService {
     }
   }
 
-  getStatus(name: string | undefined) {
-    if(name) {
-      const list = this.statuses.filter(item => item.toLowerCase() == name);
+  getStatus(slug: string | undefined) {
+    if(slug) {
+      const list = this.statuses.filter(item => item.slug == slug);
       return list[0];
     } else {
       return undefined;
     }
   }
 
-  getLevel(name: string | undefined) {
-    if(name) {
-      const list = this.levels.filter(item => item.toLowerCase() == name);
+  getLevel(slug: string | undefined) {
+    if(slug) {
+      const list = this.levels.filter(item => item.slug == slug);
       return list[0];
     } else {
       return undefined;
     }
   }
 
-  getCompany(name: string | undefined) {
-    if(name) {
-      const list = this.companies.filter(item => item.name.toLowerCase() == name);
+  getCompany(slug: string | undefined) {
+    if(slug) {
+      const list = this.companies.filter(item => item.slug == slug);
       return list[0];
     } else {
       return undefined;
@@ -421,6 +423,22 @@ export class CodebaseService {
       }
       this.saveState("codestate", codeState);
     }
+  }
+
+  createSlug(inputString: string) {
+    // Convert the string to lowercase and replace spaces with hyphens
+    let slug = inputString.toLowerCase().replace(/ /g, '-');
+    
+    // Remove any characters that are not alphanumeric or hyphens
+    slug = slug.replace(/[^a-z0-9\-]/g, '');
+    
+    // Remove multiple consecutive hyphens
+    slug = slug.replace(/\-+/g, '-');
+    
+    // Remove leading and trailing hyphens
+    slug = slug.replace(/^-+|-+$/g, '');
+    
+    return slug;
   }
 
 }

@@ -17,6 +17,12 @@ interface ColumnItem {
   sortDirections: NzTableSortOrder[];
 }
 
+interface Filter {
+  key: string,
+  value: string,
+  type?: string
+}
+
 
 @Component({
   selector: 'app-problems',
@@ -29,6 +35,8 @@ export class ProblemsComponent implements OnInit{
   @Input('title') title: string = '';
   @Input('subtitle') subtitle: string = '';
   @Input('state') stateName: string = '';
+  @Input('filter') filter: Filter | undefined;
+  @Input('breadcrumb') breadcrumb: any[] = [];
   
   listOfColumns: ColumnItem[] = [];
   listOfData: Problem[] = [];
@@ -37,9 +45,43 @@ export class ProblemsComponent implements OnInit{
   companiesColor:any = {};
   companies: any[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router, private codebase: CodebaseService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private codebase: CodebaseService) {
+    
+  }
 
   ngOnInit(): void {
+    if(this.filter) {
+      var key = this.filter.key;
+      var value = this.filter.value;
+      var data : any[] = this.fullListOfData as any[];
+      if(this.filter?.type == 'reverse') {
+        data = data.filter(e=> {
+          return !String(e[key]).toLowerCase().includes(value.toLowerCase());
+        });
+      } else {
+        data = data.filter(e=> {
+          return String(e[key]).toLowerCase().includes(value.toLowerCase());
+        });
+        console.log(data);
+      }
+      this.fullListOfData = data;
+    }
+
+    this.codebase.runningNav = [
+      {
+        name: 'Home',
+        url: '/dashboard'
+      },
+      {
+        name: 'Problems',
+        url: '/problems'
+      },
+    ]
+    
+    for(var bread of this.breadcrumb) {
+      this.codebase.runningNav.push(bread);
+    }
+
     this.listOfData = this.fullListOfData;
     this.loadState(this.stateName);
     
@@ -59,10 +101,7 @@ export class ProblemsComponent implements OnInit{
         text: comp,
         value: comp
       });
-    } 
-    
-    /* this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    */
+    }
 
     this.listOfColumns = [
       {

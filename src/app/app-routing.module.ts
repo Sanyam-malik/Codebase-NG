@@ -10,6 +10,7 @@ import { CompanyComponent } from './problems/company/company.component';
 import { LevelComponent } from './problems/level/level.component';
 import { StatusComponent } from './problems/status/status.component';
 import { RemarkComponent } from './problems/remark/remark.component';
+import { TypeComponent } from './problems/type/type.component';
 
 const routes: Routes = [
   {
@@ -39,7 +40,7 @@ const routes: Routes = [
   },
   {
     path: 'problem/type/:type',
-    component: ProblemsComponent,
+    component: TypeComponent,
     resolve: {
       apiResponse: getResolver
     },
