@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzTableSortOrder, NzTableSortFn, NzTableFilterList, NzTableFilterFn } from 'ng-zorro-antd/table';
 import { Problem } from '../problem';
@@ -23,7 +23,7 @@ interface ColumnItem {
   templateUrl: './problems.component.html',
   styleUrl: './problems.component.scss'
 })
-export class ProblemsComponent {
+export class ProblemsComponent implements OnInit{
 
   @Input('data') fullListOfData: Problem[] = [];
   @Input('title') title: string = '';
@@ -37,7 +37,9 @@ export class ProblemsComponent {
   companiesColor:any = {};
   companies: any[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router, private codebase: CodebaseService) {
+  constructor(private route: ActivatedRoute, private router: Router, private codebase: CodebaseService) {}
+
+  ngOnInit(): void {
     this.listOfData = this.fullListOfData;
     this.loadState(this.stateName);
     
