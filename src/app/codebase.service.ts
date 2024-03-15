@@ -33,6 +33,7 @@ export class CodebaseService {
   triggeredUpdate: boolean = false;
   prevUpdate: any;
 
+  isTabSwitched: boolean = false;
   showStartTimer: boolean = false;
   isDashboardRunning = false;
   minutes: number = 0;
@@ -45,9 +46,13 @@ export class CodebaseService {
     if(codestate?.themePref) {
       this.runningTheme = codestate.themePref;
     }
+
+    document.addEventListener('visibilitychange', () => {
+      this.isTabSwitched = document.visibilityState === 'hidden';
+    });
     
     setInterval(() => {
-      if(!this.triggeredUpdate) {
+      if(!this.triggeredUpdate && !this.isTabSwitched) {
         this.http.get(environment.baseURL+"/status").subscribe((response: any) => {
           if(response['message'] == 'sys-update') {
             this.prevUpdate = this.message.loading('System is undergoing database update.....', {nzDuration: 0}).messageId;

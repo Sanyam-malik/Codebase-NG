@@ -168,6 +168,11 @@
     background-color: var(--alternativeTableColor);
   }
 
+  .ant-btn {
+    display: inline-flex;
+    align-items: center;
+  }
+
   .ant-btn-primary {
     color: var(--textPrimaryColor);
     border-color: var(--primaryColor);
@@ -175,6 +180,8 @@
   }
 
   .ant-table-filter-dropdown-btns {
+    display: flex;
+    align-items: center;
     border-top: none;
   }
 
@@ -519,6 +526,25 @@
 
   .ant-message-notice-content {
     background: var(--backgroundColor);
+  }
+
+  .ant-popover-inner {
+    background-color: var(--backgroundColor);
+    box-shadow: var(--boxShadow);
+  }
+
+  .ant-popover-title {
+    color: var(--textPrimaryColor);
+    border-bottom: 1px solid var(--secondaryColor);
+    font-size: medium;
+  }
+
+  /* .ant-popover-content {
+    border: 1px solid var(--secondaryColor);
+  } */
+
+  .ant-popover-arrow-content::before {
+    background: -10px -10px no-repeat var(--backgroundColor);
   }
 
   *:focus {

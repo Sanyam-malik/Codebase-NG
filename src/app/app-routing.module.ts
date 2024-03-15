@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProblemsComponent } from './problems/problems.component';
 import { ProblemViewComponent } from './problem-view/problem-view.component';
 import { getResolver } from './get.resolver';
+import { SessionComponent } from './session/session.component';
 
 const routes: Routes = [
   {
@@ -96,6 +97,10 @@ const routes: Routes = [
       url: '/problems',
       options: {}
     }
+  },
+  {
+    path: 'session',
+    component: SessionComponent,
   }
 ];
 

@@ -21,6 +21,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { SafePipe } from 'safe-pipe';
 import { NgxNavDrawerModule } from '@ngx-lite/nav-drawer';
 import { UrlToolPipe } from './url-tool.pipe';
+import { SessionComponent } from './session/session.component';
 
 registerLocaleData(en);
 
@@ -30,7 +31,8 @@ registerLocaleData(en);
     DashboardComponent,
     ProblemsComponent,
     ProblemViewComponent,
-    UrlToolPipe
+    UrlToolPipe,
+    SessionComponent
   ],
   imports: [
     SafePipe,

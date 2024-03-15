@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CodebaseService } from '../codebase.service';
 import { faArrowCircleRight, faArrowsRotate, faCircleHalfStroke, faStopwatch, faPause, faPlay, faStop } from '@fortawesome/free-solid-svg-icons'; 
+import { faCodepen } from '@fortawesome/free-brands-svg-icons';
+import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,9 +19,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   arrowRight: any = faArrowCircleRight;
   arrowRotate: any = faArrowsRotate;
   switchTheme: any = faCircleHalfStroke;
+  sessionIcon: any = faCodepen;
+  urlValue: string = '';
+  showPopOver: boolean = false;
   
   
-  constructor(public codebase: CodebaseService) {
+  constructor(public codebase: CodebaseService, private router: Router, private message: NzMessageService) {
     this.codebase.runningNav = [];
     this.codebase.isDashboardRunning = true;
   }
@@ -85,4 +91,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   stopTimer() {
     this.codebase.stopTimer();
   }
+
+  startSession() {
+    if(this.urlValue.trim().length > 0) {
+      this.router.navigate(['/session'], { queryParams: { url: this.urlValue } });
+    } else {
+      this.message.error('Please enter a url to continue');
+    }
+  }
+
 }
