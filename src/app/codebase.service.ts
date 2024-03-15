@@ -30,6 +30,8 @@ export class CodebaseService {
   settings: Setting[] = [];
   analytics: Analytics | undefined;
   timeline: any = {};
+  triggeredUpdate: boolean = false;
+  prevUpdate: any;
 
   showStartTimer: boolean = false;
   isDashboardRunning = false;
@@ -43,24 +45,26 @@ export class CodebaseService {
     if(codestate?.themePref) {
       this.runningTheme = codestate.themePref;
     }
+    
     setInterval(() => {
-      this.http.get(environment.baseURL+"/status").subscribe((response: any) => {
-        if(response['message'] == 'sys-update') {
-          const id = this.message.loading('System is undergoing database update.....', { nzDuration: 0 }).messageId;
-          var timeoutId = setTimeout(() => {
-            this.message.remove(id);
-            this.clearData();
-            this.getData();
-            this.message.success('Database is Now Updated....');
-            clearTimeout(timeoutId);
-          }, 1000);
-        }
-      },err => {
-        
-      },() => {
-  
-      })
-    }, 2000);
+      if(!this.triggeredUpdate) {
+        this.http.get(environment.baseURL+"/status").subscribe((response: any) => {
+          if(response['message'] == 'sys-update') {
+            this.prevUpdate = this.message.loading('System is undergoing database update.....', {nzDuration: 0}).messageId;
+          } else {
+            if(this.prevUpdate) {
+              this.message.remove(this.prevUpdate);
+              this.message.success('Database update was successful.....');
+              this.prevUpdate = undefined;
+            }
+          }
+        },err => {
+          
+        },() => {
+    
+        })
+      }
+    }, 5000);
   }
 
   initTheme() {
@@ -167,20 +171,29 @@ export class CodebaseService {
   }
 
   refreshDatabase() {
-    const id = this.message.loading('Refreshing the Database....', { nzDuration: 0 }).messageId;
-    this.http.post(environment.baseURL+"/update", null).subscribe((response: any) => {
-      var timeoutId = setTimeout(() => {
-        this.message.remove(id);
-        this.clearData();
-        this.getData();
-        this.message.success('Database is Now Updated....');
-        clearTimeout(timeoutId);
-      }, 1500);
-    },err => {
-      
-    },() => {
+    if(!this.triggeredUpdate) {
+      this.triggeredUpdate = true;
+      const id = this.message.loading('Refreshing the Database....', { nzDuration: 0 }).messageId;
+      this.http.post(environment.baseURL+"/update", null).subscribe((response: any) => {
+        if(response['message'] == 'sys-update') {
+          this.message.remove(id);
+          this.message.warning('System is already under database update....')
+        } else {
+          var timeoutId = setTimeout(() => {
+            this.message.remove(id);
+            this.clearData();
+            this.getData();
+            this.message.success('Database is Now Updated....');
+            clearTimeout(timeoutId);
+            this.triggeredUpdate = false;
+          }, 1000);
+        }
+      },err => {
+        
+      },() => {
 
-    })
+      })
+    }
   }
 
   getColor() {
