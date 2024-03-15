@@ -4,10 +4,6 @@
     </div>
     <div>
         <h1 style="margin: 0%;">
-            <a class="btn-primary" nz-popover nzPopoverTitle="Title" [nzPopoverVisible]="showPopOver" [nzPopoverContent]="contentTemplate" [nzPopoverTrigger]="null" nzPopoverPlacement="bottom" (click)="showPopOver = !showPopOver">
-                <fa-icon [icon]="sessionIcon" ></fa-icon>
-                {{'Start Session'}}
-            </a>&nbsp;
 
             <ng-template #contentTemplate>
                 <nz-input-group>
@@ -42,6 +38,11 @@
             </ng-container>
             
             <ng-container *ngIf="!showStartTimer">
+                <a class="btn-primary" nz-popover nzPopoverTitle="Title" [nzPopoverVisible]="showPopOver" [nzPopoverContent]="contentTemplate" [nzPopoverTrigger]="null" nzPopoverPlacement="bottom" (click)="showPopOver = !showPopOver">
+                    <fa-icon [icon]="sessionIcon" ></fa-icon>
+                    {{'Start Session'}}
+                </a>&nbsp;
+
                 <a class="btn-primary" (click)="startTimer()">
                     <fa-icon [icon]="startTimerIcon" ></fa-icon>
                     {{'Start Timer'}}
