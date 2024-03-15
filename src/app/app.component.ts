@@ -32,8 +32,8 @@ export class AppComponent implements OnInit {
     this.visible = false;
   }
 
-  isActive(menuName: string): boolean {
-    return this.router.isActive(`/problem/type/${menuName}`, true);
+  isActive(slug: string): boolean {
+    return this.router.isActive(`/problem/type/${slug}`, true);
   }
 
 
