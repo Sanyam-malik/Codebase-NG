@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Problem } from '../problem';
 import { CodebaseService } from '../codebase.service';
 import { Platform } from '../platform';
@@ -19,7 +19,7 @@ export class ProblemViewComponent {
     codeIcon = faCode;
     companies: Company[] = [];
 
-    constructor(private route: ActivatedRoute, private codebase: CodebaseService) {}
+    constructor(private route: ActivatedRoute, private codebase: CodebaseService, private router: Router) {}
 
     ngOnInit() {
         this.id = Number(this.route.snapshot.paramMap.get('id'));
@@ -56,6 +56,6 @@ export class ProblemViewComponent {
     }
 
     tagClick(name: string) {
-        window.open(`/problem/company/${String(name).toLowerCase()}`, '_self');
+        this.router.navigate(['/problem/company', encodeURIComponent(String(name).toLowerCase())]);
     }
 }

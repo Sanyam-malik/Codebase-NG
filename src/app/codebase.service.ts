@@ -10,6 +10,7 @@ import { Analytics } from './analytics';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { Codestate, TableState } from './codestate';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Injectable({
   providedIn: 'root'
@@ -37,11 +38,29 @@ export class CodebaseService {
   timer: any;
   isPaused: boolean = false;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private message: NzMessageService) {
     const codestate: Codestate = this.getState('codestate');
     if(codestate?.themePref) {
       this.runningTheme = codestate.themePref;
     }
+    setInterval(() => {
+      this.http.get(environment.baseURL+"/status").subscribe((response: any) => {
+        if(response['message'] == 'sys-update') {
+          const id = this.message.loading('System is undergoing database update.....', { nzDuration: 0 }).messageId;
+          var timeoutId = setTimeout(() => {
+            this.message.remove(id);
+            this.clearData();
+            this.getData();
+            this.message.success('Database is Now Updated....');
+            clearTimeout(timeoutId);
+          }, 1000);
+        }
+      },err => {
+        
+      },() => {
+  
+      })
+    }, 2000);
   }
 
   initTheme() {
@@ -64,7 +83,6 @@ export class CodebaseService {
   switchTheme() {
     this.runningTheme = this.runningTheme === 'dark' ? "light" : "dark";
     this.initTheme();
-    window.location.reload();
   }
 
   getConfig(key: string) {
@@ -149,9 +167,15 @@ export class CodebaseService {
   }
 
   refreshDatabase() {
+    const id = this.message.loading('Refreshing the Database....', { nzDuration: 0 }).messageId;
     this.http.post(environment.baseURL+"/update", null).subscribe((response: any) => {
-      this.clearData();
-      window.location.reload();
+      var timeoutId = setTimeout(() => {
+        this.message.remove(id);
+        this.clearData();
+        this.getData();
+        this.message.success('Database is Now Updated....');
+        clearTimeout(timeoutId);
+      }, 1500);
     },err => {
       
     },() => {

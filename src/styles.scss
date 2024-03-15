@@ -517,6 +517,10 @@
     font-size: medium;
   }
 
+  .ant-message-notice-content {
+    background: var(--backgroundColor);
+  }
+
   *:focus {
     outline: none;
   }
