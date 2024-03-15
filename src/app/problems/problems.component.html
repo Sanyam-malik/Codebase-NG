@@ -4,14 +4,14 @@
     <h1>{{subtitle}} <span *ngIf="title" class="color-primary underline">{{title}}</span></h1>
   </div>
   
-  <div>
+  <!-- <div>
     <nz-input-group [nzSuffix]="suffixIconSearch">
       <input type="text" nz-input placeholder="Type Here to Search" [(ngModel)]="searchValue" (ngModelChange)="search()"/>
     </nz-input-group>
     <ng-template #suffixIconSearch>
       <span nz-icon nzType="search"></span>
     </ng-template>
-  </div>
+  </div> -->
 </div>
 
 <nz-table #filterTable [nzData]="listOfData" nzTableLayout="fixed" [nzPageIndex]="pageIndex" (nzPageIndexChange)="pageChange($event)">
@@ -48,7 +48,14 @@
             {{ column.name }}
           </th>
 
-          <th *ngIf="!column.allowFilter && !column.allowSort" [nzWidth]="column.width">
+          <th nzCustomFilter *ngIf="column.allowSearch && !column.allowFilter && !column.allowSort">
+            {{ column.name }}
+            <nz-filter-trigger [(nzVisible)]="visibleMap[column.name.toLowerCase()]" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+              <span nz-icon nzType="search"></span>
+            </nz-filter-trigger>
+          </th>
+
+          <th *ngIf="!column.allowFilter && !column.allowSort && !column.allowSearch" [nzWidth]="column.width">
             {{ column.name }}
           </th>
         </ng-container>
@@ -71,3 +78,13 @@
       </tr>
     </tbody>
 </nz-table>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+      <button nz-button nzSize="small" nzType="primary" (click)="search()">OK</button>
+      <button nz-button nzSize="small" nzType="text" (click)="reset()">Reset</button>
+    </div>
+  </div>
+</nz-dropdown-menu>

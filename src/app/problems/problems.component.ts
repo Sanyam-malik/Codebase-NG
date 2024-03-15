@@ -8,6 +8,7 @@ interface ColumnItem {
   name: string;
   allowSort: boolean
   allowFilter: boolean,
+  allowSearch: boolean,
   width: string,
   sortOrder: NzTableSortOrder | null;
   sortFn: NzTableSortFn<Problem> | null;
@@ -42,6 +43,10 @@ export class ProblemsComponent implements OnInit{
   listOfData: Problem[] = [];
   pageIndex: number = 1;
   searchValue: string = '';
+  visibleMap: any = {
+    name: false
+  };
+
   companiesColor:any = {};
   companies: any[] = [];
 
@@ -62,9 +67,8 @@ export class ProblemsComponent implements OnInit{
         data = data.filter(e=> {
           return String(e[key]).toLowerCase().includes(value.toLowerCase());
         });
-        console.log(data);
       }
-      this.fullListOfData = data;
+      this.fullListOfData = data.sort((a, b) => a.name.localeCompare(b.name));
     }
 
     this.codebase.runningNav = [
@@ -109,7 +113,8 @@ export class ProblemsComponent implements OnInit{
         sortOrder: 'ascend',
         width: '30%',
         allowFilter: false,
-        allowSort: true,
+        allowSort: false,
+        allowSearch: true,
         sortFn: (a: Problem, b: Problem) => a.name.localeCompare(b.name),
         sortDirections: ['ascend', 'descend', null],
         filterMultiple: false,
@@ -122,6 +127,7 @@ export class ProblemsComponent implements OnInit{
         width: '15%',
         allowFilter: true,
         allowSort: true,
+        allowSearch: false,
         sortFn: (a: Problem, b: Problem) => a.type.localeCompare(b.type),
         sortDirections: ['ascend', 'descend', null],
         filterMultiple: true,
@@ -134,6 +140,7 @@ export class ProblemsComponent implements OnInit{
         width: '10%',
         allowFilter: true,
         allowSort: true,
+        allowSearch: false,
         sortFn: (a: Problem, b: Problem) => a.level.localeCompare(b.level),
         sortDirections: ['ascend', 'descend', null],
         filterMultiple: true,
@@ -146,6 +153,7 @@ export class ProblemsComponent implements OnInit{
         width: '15%',
         allowFilter: true,
         allowSort: true,
+        allowSearch: false,
         sortFn: (a: Problem, b: Problem) => a.status.localeCompare(b.status),
         sortDirections: ['ascend', 'descend', null],
         filterMultiple: true,
@@ -158,6 +166,7 @@ export class ProblemsComponent implements OnInit{
         width: '30%',
         allowFilter: true,
         allowSort: false,
+        allowSearch: false,
         sortFn: null,
         sortDirections: [],
         filterMultiple: true,
@@ -173,6 +182,11 @@ export class ProblemsComponent implements OnInit{
     } else {
       this.listOfData = this.fullListOfData;
     }
+  }
+
+  reset() {
+    this.searchValue = '';
+    this.search();
   }
 
   loadState(name: string | undefined | null){
