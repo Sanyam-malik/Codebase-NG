@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CodebaseService } from '../../codebase.service';
 
 @Component({
-  selector: 'app-timeline',
+  selector: 'app-widget-timeline',
   templateUrl: './timeline.component.html',
   styleUrl: './timeline.component.scss'
 })

@@ -22,6 +22,12 @@ import { SafePipe } from 'safe-pipe';
 import { NgxNavDrawerModule } from '@ngx-lite/nav-drawer';
 import { UrlToolPipe } from './url-tool.pipe';
 import { SessionComponent } from './session/session.component';
+import { AllComponent } from './problems/all/all.component';
+import { LevelComponent } from './problems/level/level.component';
+import { TypeComponent } from './problems/type/type.component';
+import { StatusComponent } from './problems/status/status.component';
+import { CompanyComponent } from './problems/company/company.component';
+import { RemarkComponent } from './problems/remark/remark.component';
 
 registerLocaleData(en);
 
@@ -32,7 +38,13 @@ registerLocaleData(en);
     ProblemsComponent,
     ProblemViewComponent,
     UrlToolPipe,
-    SessionComponent
+    SessionComponent,
+    AllComponent,
+    LevelComponent,
+    TypeComponent,
+    StatusComponent,
+    CompanyComponent,
+    RemarkComponent
   ],
   imports: [
     SafePipe,

@@ -4,7 +4,8 @@ import { CodebaseService } from '../../codebase.service';
 import { Router } from '@angular/router';
 
 export interface PlotData {
-  name: string
+  name: string,
+  slug: string,
   y: number,
   color: string,
   sliced: boolean,
@@ -13,7 +14,7 @@ export interface PlotData {
 }
 
 @Component({
-  selector: 'app-levels',
+  selector: 'app-widget-levels',
   templateUrl: './levels.component.html',
   styleUrl: './levels.component.scss'
 })
@@ -51,14 +52,14 @@ export class LevelsComponent {
       for(var level of this.levels) {
         data.push({
           name: level.level,
+          slug: level.slug,
           y: level.count,
           color: this.codebase.getColor(),
           sliced: true,
           selected: false,
           events: {
             click:(event: any) => {
-              const name = event.point.name;
-              this.router.navigate(['/problem/level', encodeURIComponent(String(name).toLowerCase())]);
+              this.router.navigate(['/problem/level', event.point.slug]);
             }
           }
         })

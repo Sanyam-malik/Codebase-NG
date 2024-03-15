@@ -11,7 +11,7 @@ export interface PlotData {
 }
 
 @Component({
-  selector: 'app-companies',
+  selector: 'app-widget-companies',
   templateUrl: './companies.component.html',
   styleUrl: './companies.component.scss'
 })

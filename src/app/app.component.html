@@ -41,7 +41,7 @@
             <img src="../assets/logo.png" height="40" style="filter: grayscale(100%);-webkit-filter: grayscale(100%);">&nbsp;&nbsp;Codebase
           </span>
         </li>
-        <li *ngFor="let menu of codebase.navMenus" nz-menu-item routerLink="/problem/type/{{menu.name.toLowerCase() | urlTool:'encode'}}" [nzSelected]="isActive(menu.name.toLowerCase())" style="padding: 1.5rem;
+        <li *ngFor="let menu of codebase.navMenus" nz-menu-item routerLink="/problem/type/{{menu.slug}}" [nzSelected]="isActive(menu.name.toLowerCase())" style="padding: 1.5rem;
         align-items: center;
         display: flex;">
           {{menu.name}}

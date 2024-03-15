@@ -4,7 +4,8 @@ import { CodebaseService } from '../../codebase.service';
 import { Router } from '@angular/router';
 
 export interface PlotData {
-  name: string
+  name: string,
+  slug?: string,
   y: number,
   color: string,
   sliced: boolean,
@@ -13,7 +14,7 @@ export interface PlotData {
 }
 
 @Component({
-  selector: 'app-types',
+  selector: 'app-widget-types',
   templateUrl: './types.component.html',
   styleUrl: './types.component.scss'
 })
@@ -79,8 +80,7 @@ export class TypesComponent {
             selected: false,
             events: {
               click:(event: any) => {
-                const name = event.point.name;
-                this.router.navigate(['/problem/type', encodeURIComponent(String(name).toLowerCase())]);
+                this.router.navigate(['/problem/type', event.point.slug]);
               }
             }
         });

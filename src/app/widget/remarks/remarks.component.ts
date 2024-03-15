@@ -4,7 +4,7 @@ import { CodebaseService } from '../../codebase.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-remarks',
+  selector: 'app-widget-remarks',
   templateUrl: './remarks.component.html',
   styleUrl: './remarks.component.scss'
 })
@@ -24,9 +24,8 @@ export class RemarksComponent implements OnInit {
     
   }
 
-  redirectToRemarks(remark: string){
-    console.log(encodeURIComponent(String(remark).toLowerCase()));
-    this.router.navigate(['/problem/remark', encodeURIComponent(String(remark).toLowerCase())]);
+  redirectToRemarks(slug: string){
+    this.router.navigate(['/problem/remark', slug]);
   }
 
 }

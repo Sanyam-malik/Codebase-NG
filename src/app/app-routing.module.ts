@@ -5,6 +5,11 @@ import { ProblemsComponent } from './problems/problems.component';
 import { ProblemViewComponent } from './problem-view/problem-view.component';
 import { getResolver } from './get.resolver';
 import { SessionComponent } from './session/session.component';
+import { AllComponent } from './problems/all/all.component';
+import { CompanyComponent } from './problems/company/company.component';
+import { LevelComponent } from './problems/level/level.component';
+import { StatusComponent } from './problems/status/status.component';
+import { RemarkComponent } from './problems/remark/remark.component';
 
 const routes: Routes = [
   {
@@ -23,7 +28,7 @@ const routes: Routes = [
   },
   {
     path: 'problems',
-    component: ProblemsComponent,
+    component: AllComponent,
     resolve: {
       apiResponse: getResolver
     },
@@ -45,7 +50,7 @@ const routes: Routes = [
   },
   {
     path: 'problem/company/:company',
-    component: ProblemsComponent,
+    component: CompanyComponent,
     resolve: {
       apiResponse: getResolver
     },
@@ -56,7 +61,7 @@ const routes: Routes = [
   },
   {
     path: 'problem/level/:level',
-    component: ProblemsComponent,
+    component: LevelComponent,
     resolve: {
       apiResponse: getResolver
     },
@@ -67,7 +72,7 @@ const routes: Routes = [
   },
   {
     path: 'problem/status/:status',
-    component: ProblemsComponent,
+    component: StatusComponent,
     resolve: {
       apiResponse: getResolver
     },
@@ -78,7 +83,7 @@ const routes: Routes = [
   },
   {
     path: 'problem/remark/:remark',
-    component: ProblemsComponent,
+    component: RemarkComponent,
     resolve: {
       apiResponse: getResolver
     },

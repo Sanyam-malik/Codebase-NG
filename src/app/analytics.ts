@@ -1,20 +1,24 @@
 export interface CompanyAnalytic {
     company: string,
+    slug: string,
     count: number
 }
 
 export interface LevelAnalytic {
     level: string,
+    slug: string,
     count: number
 }
 
 export interface StatusAnalytic {
     status: string,
+    slug: string,
     count: number
 }
 
 export interface TypeAnalytic {
     type: string,
+    slug: string,
     count: number
 }
 

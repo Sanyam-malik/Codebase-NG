@@ -7,11 +7,12 @@ import { Router } from '@angular/router';
 export interface PlotData {
   y: number,
   color: string,
+  slug: string,
   events?: any
 }
 
 @Component({
-  selector: 'app-status',
+  selector: 'app-widget-status',
   templateUrl: './status.component.html',
   styleUrl: './status.component.scss'
 })
@@ -52,11 +53,11 @@ export class StatusComponent implements OnInit {
         categories.push(status.status);
         data.push({
           y: status.count,
+          slug: status.slug,
           color: this.codebase.getColor(),
           events: {
             click:(event: any) => {
-              const category = event.point.category;
-              this.router.navigate(['/problem/status', encodeURIComponent(String(category).toLowerCase())]);
+              this.router.navigate(['/problem/status', event.point.slug]);
             }
           }
         })

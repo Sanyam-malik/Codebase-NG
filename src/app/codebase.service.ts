@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { Codestate, TableState } from './codestate';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { Remark } from './remark';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class CodebaseService {
   navMenus: Menu[] = [];
   statuses: string[] = [];
   levels: string[] = [];
-  remarks: string[] = [];
+  remarks: Remark[] = [];
   runningNav: BreadcrumbItem[] = [];
   trackers: Tracker[] = [];
   reminders: Reminder[] = [];
@@ -118,9 +119,9 @@ export class CodebaseService {
     }
   }
 
-  getRemark(name: string | undefined) {
-    if(name) {
-      const list = this.remarks.filter(item => item.toLowerCase() == name);
+  getRemark(slug: string | undefined) {
+    if(slug) {
+      const list = this.remarks.filter(item => item.slug == slug);
       return list[0];
     } else {
       return undefined;
