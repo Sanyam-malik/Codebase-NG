@@ -55,6 +55,8 @@ export class CodebaseService {
             if(this.prevUpdate) {
               this.message.remove(this.prevUpdate);
               this.message.success('Database update was successful.....');
+              this.clearData();
+              this.getData();
               this.prevUpdate = undefined;
             }
           }
