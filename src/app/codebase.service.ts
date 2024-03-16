@@ -55,17 +55,17 @@ export class CodebaseService {
     });
     
     setInterval(() => {
-      if(!this.triggeredUpdate && !this.isTabSwitched) {
+      if(!this.triggeredUpdate) {
         this.http.get(environment.baseURL+"/status").subscribe((response: any) => {
           if(response['message'] == 'sys-update') {
-            this.prevUpdate = this.message.loading('System is undergoing database update.....', {nzDuration: 0}).messageId;
+            this.message.loading('System is undergoing database update.....');
+            this.prevUpdate = true;
           } else {
             if(this.prevUpdate) {
-              this.message.remove(this.prevUpdate);
               this.message.success('Database update was successful.....');
+              this.prevUpdate = false;
               this.clearData();
               this.getData();
-              this.prevUpdate = undefined;
             }
           }
         },err => {

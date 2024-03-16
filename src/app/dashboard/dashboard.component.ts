@@ -91,13 +91,4 @@ export class DashboardComponent implements OnInit, OnDestroy {
   stopTimer() {
     this.codebase.stopTimer();
   }
-
-  startSession() {
-    if(this.urlValue.trim().length > 0) {
-      this.router.navigate(['/session'], { queryParams: { url: this.urlValue } });
-    } else {
-      this.message.error('Please enter a url to continue');
-    }
-  }
-
 }
