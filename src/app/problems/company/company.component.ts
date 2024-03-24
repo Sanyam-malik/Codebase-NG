@@ -43,7 +43,8 @@ export class CompanyComponent implements OnInit {
     )
     this.filter = {
       key: 'companies',
-      value: this.company?.name
+      value: this.company?.name,
+      substringSearch: true
     }
   }
 

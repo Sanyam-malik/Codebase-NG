@@ -43,7 +43,8 @@ export class RemarkComponent implements OnInit {
     )
     this.filter = {
       key: 'remarks',
-      value: this.remark?.remark
+      value: this.remark?.remark,
+      substringSearch: true
     }
   }
 }

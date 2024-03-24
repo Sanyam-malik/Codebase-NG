@@ -183,20 +183,15 @@ export class CodebaseService {
   refreshDatabase() {
     if(!this.triggeredUpdate) {
       this.triggeredUpdate = true;
-      const id = this.message.loading('Refreshing the Database....', { nzDuration: 0 }).messageId;
+      this.message.loading('Sending the datebase update request....')
       this.http.post(environment.baseURL+"/update", null).subscribe((response: any) => {
         if(response['message'] == 'sys-update') {
-          this.message.remove(id);
-          this.message.warning('System is already under database update....')
+          this.message.warning('System is already under database update....');
         } else {
-          var timeoutId = setTimeout(() => {
-            this.message.remove(id);
-            this.clearData();
-            this.getData();
-            this.message.success('Database is Now Updated....');
-            clearTimeout(timeoutId);
+          setTimeout(() => {
             this.triggeredUpdate = false;
-          }, 1000);
+            this.prevUpdate = true;
+          }, 1500);
         }
       },err => {
         

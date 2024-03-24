@@ -21,7 +21,8 @@ interface ColumnItem {
 interface Filter {
   key: string,
   value: string,
-  type?: string
+  type?: string,
+  substringSearch?: boolean
 }
 
 
@@ -58,14 +59,24 @@ export class ProblemsComponent implements OnInit{
     if(this.filter) {
       var key = this.filter.key;
       var value = this.filter.value;
+      var subStringSearch = this.filter?.substringSearch ? this.filter.substringSearch : false;
       var data : any[] = this.fullListOfData as any[];
       if(this.filter?.type == 'reverse') {
         data = data.filter(e=> {
-          return !String(e[key]).toLowerCase().includes(value.toLowerCase());
+          if (subStringSearch) {
+            return !String(e[key]).toLowerCase().includes(value.toLowerCase());
+          } else {
+            return String(e[key]).toLowerCase() !== value.toLowerCase();
+          }
+          
         });
       } else {
         data = data.filter(e=> {
-          return String(e[key]).toLowerCase().includes(value.toLowerCase());
+          if (subStringSearch) {
+            return String(e[key]).toLowerCase().includes(value.toLowerCase());
+          } else {
+            return String(e[key]).toLowerCase() === value.toLowerCase();
+          }
         });
       }
       this.fullListOfData = data.sort((a, b) => a.name.localeCompare(b.name));
