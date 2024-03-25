@@ -18,7 +18,7 @@
       <li nz-menu-item class="nohover">
         <a nz-dropdown [nzDropdownMenu]="emenu" nzTrigger="click"><fa-icon [icon]="calendarIcon"></fa-icon>&nbsp;Events</a>
         <nz-dropdown-menu #emenu="nzDropdownMenu">
-          <ul nz-menu nzSelectable>
+          <ul nz-menu nzSelectable class="d-list-container">
             <li nz-menu-item *ngFor="let reminder of reminders" class="d-list">
               <div class="d-list-item">
                 <fa-icon [icon]="calendarIcon" size="3x"></fa-icon>
@@ -48,15 +48,15 @@
       <li nz-menu-item class="nohover">
         <a nz-dropdown [nzDropdownMenu]="pmenu"><fa-icon [icon]="videoIcon"></fa-icon>&nbsp;Playlists</a>
         <nz-dropdown-menu #pmenu="nzDropdownMenu">
-          <ul nz-menu nzSelectable>
+          <ul nz-menu nzSelectable class="d-list-container">
             
           </ul>
         </nz-dropdown-menu>
       </li>
       <li nz-menu-item class="nohover">
         <a nz-dropdown [nzDropdownMenu]="nmenu"><fa-icon [icon]="bookIcon"></fa-icon>&nbsp;Notes</a>
-        <nz-dropdown-menu #nmenu="nzDropdownMenu">
-          <ul nz-menu nzSelectable>
+        <nz-dropdown-menu #nmenu="nzDropdownMenu" class="d-list-container">
+          <ul nz-menu nzSelectable class="d-list-container">
             
           </ul>
         </nz-dropdown-menu>
@@ -64,7 +64,7 @@
       <li nz-menu-item class="nohover">
         <a nz-dropdown [nzDropdownMenu]="tmenu" nzTrigger="click"><fa-icon [icon]="thumbtackIcon"></fa-icon>&nbsp;Trackers</a>
         <nz-dropdown-menu #tmenu="nzDropdownMenu">
-          <ul nz-menu nzSelectable>
+          <ul nz-menu nzSelectable class="d-list-container">
             <li nz-menu-item *ngFor="let tracker of trackers" class="d-list">
               <div class="d-list-item">
                 <fa-icon [icon]="thumbtackIcon" size="2x"></fa-icon>
@@ -94,7 +94,7 @@
       <li nz-menu-item class="nohover">
         <a nz-dropdown [nzDropdownMenu]="lmenu"><fa-icon [icon]="linkIcon"></fa-icon>&nbsp;Links</a>
         <nz-dropdown-menu #lmenu="nzDropdownMenu">
-          <ul nz-menu nzSelectable>
+          <ul nz-menu nzSelectable class="d-list-container">
             <li nz-menu-item *ngFor="let platform of platforms" class="d-list">
               <div class="d-list-item">
                 <img [src]="platform.icon" width="50">
