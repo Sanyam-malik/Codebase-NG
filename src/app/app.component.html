@@ -15,6 +15,109 @@
           <img src="../assets/logo.png" height="40" style="filter: grayscale(100%);-webkit-filter: grayscale(100%);">&nbsp;&nbsp;Codebase
         </span>
       </li>
+      <li nz-menu-item class="nohover">
+        <a nz-dropdown [nzDropdownMenu]="emenu" nzTrigger="click"><fa-icon [icon]="calendarIcon"></fa-icon>&nbsp;Events</a>
+        <nz-dropdown-menu #emenu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item *ngFor="let reminder of reminders" class="d-list">
+              <div class="d-list-item">
+                <fa-icon [icon]="calendarIcon" size="3x"></fa-icon>
+              </div>
+              <div class="d-list-item">
+                <h4 class="d-title">
+                  {{reminder.name}}
+                </h4>
+                <div class="d-description">
+                  {{reminder.description}}
+                </div>
+              </div>
+            </li>
+            <li nz-menu-item class="d-list">
+              <div class="d-list-item">
+                <fa-icon [icon]="plusIcon" size="3x"></fa-icon>
+              </div>
+              <div class="d-list-item">
+                <h4 class="d-title">
+                  Create A New Event
+                </h4>
+              </div>
+            </li>
+          </ul>
+        </nz-dropdown-menu>
+      </li>
+      <li nz-menu-item class="nohover">
+        <a nz-dropdown [nzDropdownMenu]="pmenu"><fa-icon [icon]="videoIcon"></fa-icon>&nbsp;Playlists</a>
+        <nz-dropdown-menu #pmenu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            
+          </ul>
+        </nz-dropdown-menu>
+      </li>
+      <li nz-menu-item class="nohover">
+        <a nz-dropdown [nzDropdownMenu]="nmenu"><fa-icon [icon]="bookIcon"></fa-icon>&nbsp;Notes</a>
+        <nz-dropdown-menu #nmenu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            
+          </ul>
+        </nz-dropdown-menu>
+      </li>
+      <li nz-menu-item class="nohover">
+        <a nz-dropdown [nzDropdownMenu]="tmenu" nzTrigger="click"><fa-icon [icon]="thumbtackIcon"></fa-icon>&nbsp;Trackers</a>
+        <nz-dropdown-menu #tmenu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item *ngFor="let tracker of trackers" class="d-list">
+              <div class="d-list-item">
+                <fa-icon [icon]="thumbtackIcon" size="2x"></fa-icon>
+              </div>
+              <div class="d-list-item">
+                <h4 class="d-title">
+                  {{tracker.name}}
+                </h4>
+                <div class="d-description">
+                  {{tracker.level}}
+                </div>
+              </div>
+            </li>
+            <li nz-menu-item class="d-list">
+              <div class="d-list-item">
+                <fa-icon [icon]="plusIcon" size="3x"></fa-icon>
+              </div>
+              <div class="d-list-item">
+                <h4 class="d-title">
+                  Add A Tracker
+                </h4>
+              </div>
+            </li>
+          </ul>
+        </nz-dropdown-menu>
+      </li>
+      <li nz-menu-item class="nohover">
+        <a nz-dropdown [nzDropdownMenu]="lmenu"><fa-icon [icon]="linkIcon"></fa-icon>&nbsp;Links</a>
+        <nz-dropdown-menu #lmenu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item *ngFor="let platform of platforms" class="d-list">
+              <div class="d-list-item">
+                <img [src]="platform.icon" width="50">
+              </div>
+              <div class="d-list-item">
+                <h4 class="d-title">
+                  {{platform.name}}
+                </h4>
+              </div>
+            </li>
+            <li nz-menu-item class="d-list">
+              <div class="d-list-item">
+                <fa-icon [icon]="plusIcon" size="3x"></fa-icon>
+              </div>
+              <div class="d-list-item">
+                <h4 class="d-title">
+                  Add A Link
+                </h4>
+              </div>
+            </li>
+          </ul>
+        </nz-dropdown-menu>
+      </li>
       <li nz-menu-item *ngIf="showStartTimer && !isDashboardActive" class="nohover" style="float: right;padding-right: 0.5%;">
         <div>
           <h3 style="margin: 0%;">

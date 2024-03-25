@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CodebaseService } from './codebase.service';
 import { environment } from '../environments/environment';
 import { Title } from '@angular/platform-browser';
-import { faBars, faPause, faPlay, faStop, faStopwatch } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCalendar, faLink, faPause, faPlay, faStop, faStopwatch, faBook, faThumbTack, faVideo, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,6 +20,12 @@ export class AppComponent implements OnInit {
   playIcon: any  = faPlay;
   stopIcon: any = faStop;
   barsIcon: any = faBars;
+  linkIcon: any = faLink;
+  calendarIcon: any = faCalendar;
+  bookIcon: any = faBook;
+  thumbtackIcon:any = faThumbTack;
+  videoIcon: any = faVideo;
+  plusIcon:any = faPlus;
 
   title = 'Codebase';
   year = new Date().getFullYear();
@@ -30,6 +36,18 @@ export class AppComponent implements OnInit {
 
   close(): void {
     this.visible = false;
+  }
+
+  get reminders(){
+    return this.codebase.reminders;
+  }
+
+  get trackers() {
+    return this.codebase.trackers;
+  }
+
+  get platforms() {
+    return this.codebase.platforms;
   }
 
   isActive(slug: string): boolean {

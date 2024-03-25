@@ -237,8 +237,11 @@
   }
 
   .ant-collapse{
-    margin: 2rem 0;
-    
+    margin: 2rem 0; 
+  }
+
+  .ant-menu-dark .ant-menu-item, .ant-menu-dark .ant-menu-item-group-title, .ant-menu-dark .ant-menu-item > a, .ant-menu-dark .ant-menu-item > span > a {
+    color: var(--textPrimaryColor);
   }
 
   .ant-collapse > .ant-collapse-item > .ant-collapse-header, .ant-collapse-content-box {
@@ -550,4 +553,84 @@
 
   *:focus {
     outline: none;
+  }
+
+  .layout {
+    min-height: 100vh;
+  }
+
+  .logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 24px 16px 0;
+    float: left;
+  }
+
+  nz-header {
+    border-bottom: 1px solid var(--primaryColor);
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+  }
+
+  [nz-menu] {
+    line-height: 64px;
+  }
+
+  nz-content {
+    padding: 0 50px;
+    margin-top: 64px;
+  }
+
+  nz-breadcrumb {
+    margin: 1rem 0;
+  }
+
+  .inner-content {
+    padding: 1rem 0px;
+    min-height: 380px;
+  }
+
+  nz-footer {
+    text-align: center;
+    box-shadow: var(--boxShadow);
+  }
+
+  :host ::ng-deep .ant-back-top {
+    bottom: 100px;
+  }
+
+  :host ::ng-deep .ant-back-top-inner {
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    border-radius: 4px;
+    background-color: var(--primaryColor);
+    color: var(--textSecondaryColor);
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .d-list {
+    display: flex;
+    justify-content: space-between;
+    .ant-menu-title-content {
+      display: flex;
+      .d-list-item {
+        display: block;
+        padding: 0.6rem;
+        align-content: center;
+        .d-title {
+          font-weight: bold;
+          h4 {
+            padding: 0%;
+          }
+        }
+        .d-description {
+          font-size: small;
+          font-style: italic;
+        }
+      }
+    }
   }

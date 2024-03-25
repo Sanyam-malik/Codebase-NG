@@ -170,7 +170,6 @@ export class CodebaseService {
   }
 
   clearData() {
-    this.runningTheme = "dark";
     this.navMenus = [];
     this.runningNav = [];
     this.trackers = [];
