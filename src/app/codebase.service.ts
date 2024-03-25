@@ -14,6 +14,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { Remark } from './remark';
 import { Level } from './level';
 import { Status } from './status';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,7 @@ export class CodebaseService {
   timeline: any = {};
   triggeredUpdate: boolean = false;
   prevUpdate: any;
+  isUpdated$: Subject<Boolean> = new Subject();
 
   isTabSwitched: boolean = false;
   showStartTimer: boolean = false;
@@ -63,6 +65,7 @@ export class CodebaseService {
           } else {
             if(this.prevUpdate) {
               this.message.success('Database update was successful.....');
+              this.isUpdated$.next(true);
               this.prevUpdate = false;
               this.clearData();
               this.getData();

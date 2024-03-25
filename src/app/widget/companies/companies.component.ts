@@ -34,7 +34,17 @@ export class CompaniesComponent {
   showMinified: boolean = true;
   options:string[] = ['Top 15 Companies', 'All Companies'];
 
-  constructor(private codebase: CodebaseService, private router: Router) {}
+  constructor(private codebase: CodebaseService, private router: Router) {
+    this.codebase.isUpdated$.asObservable().subscribe(res=> {
+      this.interval = setTimeout(() => {
+        if(this.companies) {
+          this.loadChart();
+          this.isLoaded = true;
+          clearTimeout(this.interval);
+        }
+      }, 1000);
+    })
+  }
   
   ngOnInit(): void {
     this.interval = setTimeout(() => {

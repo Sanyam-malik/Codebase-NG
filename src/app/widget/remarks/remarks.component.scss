@@ -1,8 +1,17 @@
-/*     ::-webkit-scrollbar {
-        display: none !important;
-    }
+.list {
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: var(--primaryColor) transparent; /* For Firefox */
+}
+  
+.list::-webkit-scrollbar {
+    width: 12px; /* For Chrome */
+}
 
-    .list {
-        -ms-overflow-style: none !important;
-        scrollbar-width: none !important;
-    } */
+.list::-webkit-scrollbar-thumb {
+    background-color: var(--primaryColor);
+    border-radius: 25px; /* Rounded edges */
+}
+
+.list::-webkit-scrollbar-track {
+    background-color: transparent;
+}

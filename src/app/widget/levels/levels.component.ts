@@ -33,7 +33,17 @@ export class LevelsComponent {
   isLoaded: boolean = false;
   interval: any;
 
-  constructor(private codebase: CodebaseService, private router: Router) {}
+  constructor(private codebase: CodebaseService, private router: Router) {
+    this.codebase.isUpdated$.asObservable().subscribe(res=> {
+      this.interval = setTimeout(() => {
+        if(this.levels) {
+          this.loadChart();
+          this.isLoaded = true;
+          clearTimeout(this.interval);
+        }
+      }, 1000);
+    })
+  }
 
   ngOnInit(): void {
     this.interval = setTimeout(() => {
