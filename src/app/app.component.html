@@ -32,7 +32,7 @@
                 </div>
               </div>
             </li>
-            <li nz-menu-item class="d-list">
+            <!-- <li nz-menu-item class="d-list">
               <div class="d-list-item">
                 <fa-icon [icon]="plusIcon" size="3x"></fa-icon>
               </div>
@@ -41,7 +41,7 @@
                   Create A New Event
                 </h4>
               </div>
-            </li>
+            </li> -->
           </ul>
         </nz-dropdown-menu>
       </li>
@@ -57,7 +57,16 @@
         <a nz-dropdown [nzDropdownMenu]="nmenu"><fa-icon [icon]="bookIcon"></fa-icon>&nbsp;Notes</a>
         <nz-dropdown-menu #nmenu="nzDropdownMenu" class="d-list-container">
           <ul nz-menu nzSelectable class="d-list-container">
-            
+            <li nz-menu-item *ngFor="let note of notes" class="d-list">
+              <div class="d-list-item">
+                <fa-icon [icon]="bookIcon" size="2x"></fa-icon>
+              </div>
+              <div class="d-list-item">
+                <a class="nohover" routerLink="/notes/{{note.slug}}">
+                  <h4 class="d-title">{{note.title}}</h4>
+                </a>
+              </div>
+            </li>
           </ul>
         </nz-dropdown-menu>
       </li>
@@ -78,7 +87,7 @@
                 </div>
               </div>
             </li>
-            <li nz-menu-item class="d-list">
+            <!-- <li nz-menu-item class="d-list">
               <div class="d-list-item">
                 <fa-icon [icon]="plusIcon" size="3x"></fa-icon>
               </div>
@@ -87,7 +96,7 @@
                   Add A Tracker
                 </h4>
               </div>
-            </li>
+            </li> -->
           </ul>
         </nz-dropdown-menu>
       </li>
@@ -105,7 +114,7 @@
                 </h4>
               </div>
             </li>
-            <li nz-menu-item class="d-list">
+            <!-- <li nz-menu-item class="d-list">
               <div class="d-list-item">
                 <fa-icon [icon]="plusIcon" size="3x"></fa-icon>
               </div>
@@ -114,7 +123,7 @@
                   Add A Link
                 </h4>
               </div>
-            </li>
+            </li> -->
           </ul>
         </nz-dropdown-menu>
       </li>

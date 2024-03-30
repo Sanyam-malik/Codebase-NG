@@ -632,6 +632,7 @@
     scrollbar-color: var(--primaryColor) transparent; /* For Firefox */
     min-height: fit-content;
     max-height: 380px;
+    min-width: 300px;
     overflow-y: auto;
 }
   

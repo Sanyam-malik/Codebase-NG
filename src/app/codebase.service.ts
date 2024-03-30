@@ -15,6 +15,7 @@ import { Remark } from './remark';
 import { Level } from './level';
 import { Status } from './status';
 import { Subject } from 'rxjs';
+import { Note } from './note';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,7 @@ export class CodebaseService {
   platforms: Platform[] = [];
   companies: Company[] = [];
   settings: Setting[] = [];
+  notes: Note[] = [];
   analytics: Analytics | undefined;
   timeline: any = {};
   triggeredUpdate: boolean = false;
@@ -316,6 +318,16 @@ export class CodebaseService {
     if(codebase.remarks.length == 0) {
       http.get(environment.baseURL+"/remarks").subscribe((response: any) => {
         codebase.remarks = response['remarks']
+      },err => {
+        
+      },() => {
+  
+      })
+    }
+
+    if(codebase.notes.length == 0) {
+      http.get(environment.baseURL+"/notes").subscribe((response: any) => {
+        codebase.notes = response['notes']
       },err => {
         
       },() => {

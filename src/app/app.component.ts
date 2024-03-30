@@ -50,6 +50,10 @@ export class AppComponent implements OnInit {
     return this.codebase.platforms;
   }
 
+  get notes() {
+    return this.codebase.notes;
+  }
+
   isActive(slug: string): boolean {
     return this.router.isActive(`/problem/type/${slug}`, true);
   }
