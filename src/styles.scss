@@ -172,6 +172,20 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    background: var(--headerColor);
+    border-color: var(--headerColor);
+    color: var(--textPrimaryColor);
+  }
+
+  .ant-btn:active, .ant-btn:focus, .ant-btn:hover {
+    text-decoration: none;
+    color: var(--textSecondaryColor);
+    background: var(--headerColor);
+    border-color: var(--headerColor);
+  }
+  .ant-btn:focus, .ant-btn:hover {
+    color: var(--textSecondaryColor);
+    border-color: var(--headerColor);
   }
 
   .ant-btn-primary {
@@ -655,9 +669,26 @@
   }
   pre {
     padding: 2rem;
+    box-shadow: var(--boxShadow);
     background-color: var(--boxColor);
+    outline: 1px dashed var(--primaryColor);
     code {
       color: var(--textSecondaryColor);
     }
+  }
+}
+
+.ant-modal-content {
+  background-color: var(--backgroundColor);
+  .ant-modal-header {
+    .ant-modal-title > div {
+      color: var(--primaryColor);  
+    }
+    border: none;
+    color: var(--primaryColor);
+    background: var(--backgroundColor);
+  }
+  .ant-modal-footer {
+    border: none;
   }
 }

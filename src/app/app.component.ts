@@ -3,8 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { CodebaseService } from './codebase.service';
 import { environment } from '../environments/environment';
 import { Title } from '@angular/platform-browser';
-import { faBars, faCalendar, faLink, faPause, faPlay, faStop, faStopwatch, faBook, faThumbTack, faVideo, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCalendar, faLink, faPause, faPlay, faStop, faStopwatch, faBook, faThumbTack, faVideo, faPlus, faTrash, faFileAlt } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
+import { FormControl, FormGroup } from '@angular/forms';
+import { FileUploadValidators } from '@iplab/ngx-file-upload';
 
 @Component({
   selector: 'app-root',
@@ -26,9 +29,17 @@ export class AppComponent implements OnInit {
   thumbtackIcon:any = faThumbTack;
   videoIcon: any = faVideo;
   plusIcon:any = faPlus;
+  trashIcon:any = faTrash;
+  fileIcon: any = faFileAlt;
 
   title = 'Codebase';
   year = new Date().getFullYear();
+
+  public filesForm = new FormGroup({
+    files: new FormControl<File[]>([]),
+  });
+  
+  isModalVisible: boolean = false;
 
   open(): void {
     this.visible = true;
@@ -101,6 +112,14 @@ export class AppComponent implements OnInit {
   
   ngOnInit(): void {
     this.codebase.getData();
+  }
+
+  handleCancel() {
+    this.isModalVisible = false;
+  }
+
+  handleConfirm() {
+    throw new Error('Method not implemented.');
   }
 
 }

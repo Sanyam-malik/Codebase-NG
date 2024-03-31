@@ -49,7 +49,16 @@
         <a nz-dropdown [nzDropdownMenu]="pmenu"><fa-icon [icon]="videoIcon"></fa-icon>&nbsp;Playlists</a>
         <nz-dropdown-menu #pmenu="nzDropdownMenu">
           <ul nz-menu nzSelectable class="d-list-container">
-            
+            <li nz-menu-item class="d-list" (click)="isModalVisible = true">
+              <div class="d-list-item">
+                <fa-icon [icon]="plusIcon" size="3x"></fa-icon>
+              </div>
+              <div class="d-list-item">
+                <h4 class="d-title">
+                  Add A Playlist
+                </h4>
+              </div>
+            </li>
           </ul>
         </nz-dropdown-menu>
       </li>
@@ -170,3 +179,36 @@
   </nz-content>
   <nz-footer><h3>Designed by © Sanyam Malik</h3></nz-footer>
 </nz-layout>
+
+<nz-modal
+      [(nzVisible)]="isModalVisible"
+      nzTitle="Add A Playlist"
+      nzCentered
+      (nzOnCancel)="handleCancel()"
+      (nzOnOk)="handleConfirm()"
+    >
+    <ng-container *nzModalContent>
+      <p>Upload playlist.json files to continue</p>
+      <form [formGroup]="filesForm">
+        <file-upload formControlName="files" [multiple]="true" [animation]="true" style="background: var(--headerColor);outline:1px dashed var(--primaryColor)" accept="application/json">
+          <ng-template let-isFileDragDropAvailable="isFileDragDropAvailable" #placeholder>
+            <file-upload-drop-zone>
+                @if (isFileDragDropAvailable) {
+                    <b>Drag and drop</b> files<br> or click here
+                } @else {
+                    <b>Click here</b> to<br> upload the files
+                }
+            </file-upload-drop-zone>
+          </ng-template>
+
+          <ng-template let-i="index" let-file="file" let-control="control" #item>
+            <div class="file-info" style="display: flex;padding: 1% 0%;flex-direction: column;">
+              <div class="file-name" style="display: inline-flex;align-items: center;">
+                <fa-icon [icon]="fileIcon" [size]="'2x'"></fa-icon>&nbsp;&nbsp;{{ file.name }} &nbsp;&nbsp; <fa-icon [icon]="trashIcon" (click)="control.removeFile(file)" style="cursor: pointer;"></fa-icon>
+              </div>
+            </div>
+          </ng-template>
+        </file-upload>
+      </form>
+    </ng-container>
+</nz-modal>

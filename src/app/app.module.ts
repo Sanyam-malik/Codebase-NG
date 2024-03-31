@@ -30,6 +30,8 @@ import { CompanyComponent } from './problems/company/company.component';
 import { RemarkComponent } from './problems/remark/remark.component';
 import { NoteViewComponent } from './note-view/note-view.component';
 import { MarkdownModule } from 'ngx-markdown';
+import { PlaylistViewComponent } from './playlist-view/playlist-view.component';
+import { FileUploadModule } from '@iplab/ngx-file-upload';
 
 registerLocaleData(en);
 
@@ -47,7 +49,8 @@ registerLocaleData(en);
     StatusComponent,
     CompanyComponent,
     RemarkComponent,
-    NoteViewComponent
+    NoteViewComponent,
+    PlaylistViewComponent
   ],
   imports: [
     SafePipe,
@@ -64,6 +67,7 @@ registerLocaleData(en);
     WidgetModule,
     HighchartsChartModule,
     NgxNavDrawerModule,
+    FileUploadModule,
     MarkdownModule.forRoot({ loader: HttpClient })
   ],
   providers: [

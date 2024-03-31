@@ -12,6 +12,7 @@ import { StatusComponent } from './problems/status/status.component';
 import { RemarkComponent } from './problems/remark/remark.component';
 import { TypeComponent } from './problems/type/type.component';
 import { NoteViewComponent } from './note-view/note-view.component';
+import { PlaylistViewComponent } from './playlist-view/playlist-view.component';
 
 const routes: Routes = [
   {
@@ -113,6 +114,17 @@ const routes: Routes = [
     },
     data: {
       url: '/notes',
+      options: {}
+    }
+  },
+  {
+    path: 'playlist/:id',
+    component: PlaylistViewComponent,
+    resolve: {
+      apiResponse: getResolver
+    },
+    data: {
+      url: '/playlist',
       options: {}
     }
   },
