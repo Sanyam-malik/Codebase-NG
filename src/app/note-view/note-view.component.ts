@@ -3,7 +3,7 @@ import { Note } from '../note';
 import { CodebaseService } from '../codebase.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { MarkdownService } from 'ngx-markdown';
 
 @Component({
