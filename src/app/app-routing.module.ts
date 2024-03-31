@@ -11,6 +11,7 @@ import { LevelComponent } from './problems/level/level.component';
 import { StatusComponent } from './problems/status/status.component';
 import { RemarkComponent } from './problems/remark/remark.component';
 import { TypeComponent } from './problems/type/type.component';
+import { NoteViewComponent } from './note-view/note-view.component';
 
 const routes: Routes = [
   {
@@ -101,6 +102,17 @@ const routes: Routes = [
     },
     data: {
       url: '/problems',
+      options: {}
+    }
+  },
+  {
+    path: 'notes/:id',
+    component: NoteViewComponent,
+    resolve: {
+      apiResponse: getResolver
+    },
+    data: {
+      url: '/notes',
       options: {}
     }
   },

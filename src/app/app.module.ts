@@ -8,7 +8,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ZorroModule } from './zorro/zorro.module';
@@ -28,6 +28,8 @@ import { TypeComponent } from './problems/type/type.component';
 import { StatusComponent } from './problems/status/status.component';
 import { CompanyComponent } from './problems/company/company.component';
 import { RemarkComponent } from './problems/remark/remark.component';
+import { NoteViewComponent } from './note-view/note-view.component';
+import { MarkdownModule } from 'ngx-markdown';
 
 registerLocaleData(en);
 
@@ -44,7 +46,8 @@ registerLocaleData(en);
     TypeComponent,
     StatusComponent,
     CompanyComponent,
-    RemarkComponent
+    RemarkComponent,
+    NoteViewComponent
   ],
   imports: [
     SafePipe,
@@ -60,7 +63,8 @@ registerLocaleData(en);
     FontAwesomeModule,
     WidgetModule,
     HighchartsChartModule,
-    NgxNavDrawerModule
+    NgxNavDrawerModule,
+    MarkdownModule.forRoot({ loader: HttpClient })
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
