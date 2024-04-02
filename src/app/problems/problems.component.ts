@@ -211,8 +211,8 @@ export class ProblemsComponent implements OnInit{
     this.codebase.setTableState(this.stateName, pageNo);
   }
 
-  tagClick(slug: string) {
-    this.router.navigate(['/problem/company', slug]);
+  tagClick(title: string) {
+    this.router.navigate(['/problem/company', this.codebase.createSlug(title)]);
   }
   
 }

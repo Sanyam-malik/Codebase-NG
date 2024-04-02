@@ -1,3 +1,8 @@
 <ng-container *ngIf="item">
+    <div *ngIf="item.urls.length > 1" style="display: flex;align-content: center;float: right;">
+        <fa-icon [icon]="ArrowLIcon" [size]="'2x'" style="cursor: pointer;" (click)="prevPage()"></fa-icon>
+        <h3 style="margin: 0rem 1rem;">Page {{page+1}} of {{item.urls.length}}</h3>
+        <fa-icon [icon]="ArrowRIcon" [size]="'2x'" style="cursor: pointer;" (click)="nextPage()"></fa-icon>
+    </div>
     <markdown [src]="note" class="markup"></markdown>
 </ng-container>

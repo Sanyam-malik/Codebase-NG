@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { MarkdownService } from 'ngx-markdown';
+import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-note-view',
@@ -13,11 +14,33 @@ import { MarkdownService } from 'ngx-markdown';
 })
 export class NoteViewComponent implements OnInit {
   item: Note | undefined;
-  note: string = '';
+  page:number = 0;
+  ArrowLIcon: any = faArrowAltCircleLeft;
+  ArrowRIcon: any = faArrowAltCircleRight;
 
   constructor(private route: ActivatedRoute, private codebase: CodebaseService, private router: Router, private http: HttpClient, private mdService:MarkdownService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.codebase.runningNav = [];
+  }
+
+  get note(): string {
+    if(this.item) {
+      return `${environment.baseURL.replace("/api", "/file")}/${this.item.urls[this.page]}`;
+    } else {
+      return "";
+    }
+  }
+
+  prevPage() {
+    if(this.item) {
+      this.page = this.page > 0 ? this.page-1 : this.page;
+    }
+  }
+
+  nextPage() {
+    if(this.item) {
+      this.page = this.page < this.item.urls.length-1 ? this.page+1 : this.page;
+    }
   }
 
   ngOnInit() {
@@ -25,7 +48,6 @@ export class NoteViewComponent implements OnInit {
     if(slug) {
       var data: Note[] = this.route.snapshot.data['apiResponse']['notes'];
       this.item = data.filter(item => item.slug === slug)[0];
-      this.note = `${environment.baseURL.replace("/api", "/file")}/${this.item.url}`;
     }
   }
 }
