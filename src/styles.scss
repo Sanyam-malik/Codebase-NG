@@ -676,6 +676,9 @@
       color: var(--textSecondaryColor);
     }
   }
+  li {
+    margin-bottom: 1em;
+  }
 }
 
 .ant-modal-content {
