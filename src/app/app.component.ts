@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FileUploadValidators } from '@iplab/ngx-file-upload';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-root',
@@ -70,7 +71,7 @@ export class AppComponent implements OnInit {
   }
 
 
-  constructor(private titleService: Title, public codebase: CodebaseService, private router: Router) {
+  constructor(private titleService: Title, public codebase: CodebaseService, private router: Router, private message: NzMessageService) {
     this.titleService.setTitle(this.title);
   }
 
@@ -119,7 +120,10 @@ export class AppComponent implements OnInit {
   }
 
   handleConfirm() {
-    throw new Error('Method not implemented.');
+    var length: number | undefined = this.filesForm.get('files')?.value?.length;
+    if(!length || length == 0) {
+      this.message.error('No files are selected.....');
+    }
   }
 
 }

@@ -623,15 +623,15 @@
     justify-content: space-between;
     .ant-menu-title-content {
       display: flex;
+      align-items: center;
       .d-list-item {
         display: block;
         padding: 0.6rem;
         align-content: center;
         .d-title {
           font-weight: bold;
-          h4 {
-            padding: 0%;
-          }
+          padding: 0%;
+          margin: 0%;
         }
         .d-description {
           font-size: small;
