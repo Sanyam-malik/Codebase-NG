@@ -335,6 +335,9 @@
   .nohover:hover {
     .ant-menu-title-content {
       color: var(--textPrimaryColor) !important;
+      .ant-dropdown-link, .ant-dropdown-link:hover {
+        color: var(--textPrimaryColor) !important;
+      }
     }
     .ant-menu-item-selected {
       color: var(--textPrimaryColor) !important;
@@ -694,4 +697,8 @@
   .ant-modal-footer {
     border: none;
   }
+}
+
+.ant-menu-dark .ant-menu-item-active > a, .ant-menu-dark .ant-menu-item-active > span > a, .ant-menu-dark .ant-menu-item:hover > a, .ant-menu-dark .ant-menu-item:hover > span > a, .ant-menu-dark .ant-menu-submenu-active > a, .ant-menu-dark .ant-menu-submenu-active > span > a, .ant-menu-dark .ant-menu-submenu-open > a, .ant-menu-dark .ant-menu-submenu-open > span > a, .ant-menu-dark .ant-menu-submenu-selected > a, .ant-menu-dark .ant-menu-submenu-selected > span > a, .ant-menu-dark .ant-menu-submenu-title:hover > a, .ant-menu-dark .ant-menu-submenu-title:hover > span > a {
+  color: var(--primaryColor);
 }

@@ -228,9 +228,9 @@ export class CodebaseService {
   }
 
   getRandomLightColor() {
-    var red = Math.floor(Math.random() * 128) + 128; // Random value between 128 and 255
-    var green = Math.floor(Math.random() * 128) + 128; // Random value between 128 and 255
-    var blue = Math.floor(Math.random() * 128) + 128; // Random value between 128 and 255
+    var red = Math.floor(Math.random() * 128) + 98; // Random value between 128 and 255
+    var green = Math.floor(Math.random() * 128) + 98; // Random value between 128 and 255
+    var blue = Math.floor(Math.random() * 128) + 98; // Random value between 128 and 255
 
     // Construct the color string in hexadecimal format
     var color = '#' +
