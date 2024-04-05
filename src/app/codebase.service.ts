@@ -102,6 +102,7 @@ export class CodebaseService {
   switchTheme() {
     this.runningTheme = this.runningTheme === 'dark' ? "light" : "dark";
     this.initTheme();
+    this.isUpdated$.next(true);
   }
 
   getConfig(key: string) {
