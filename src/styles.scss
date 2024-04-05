@@ -702,3 +702,8 @@
 .ant-menu-dark .ant-menu-item-active > a, .ant-menu-dark .ant-menu-item-active > span > a, .ant-menu-dark .ant-menu-item:hover > a, .ant-menu-dark .ant-menu-item:hover > span > a, .ant-menu-dark .ant-menu-submenu-active > a, .ant-menu-dark .ant-menu-submenu-active > span > a, .ant-menu-dark .ant-menu-submenu-open > a, .ant-menu-dark .ant-menu-submenu-open > span > a, .ant-menu-dark .ant-menu-submenu-selected > a, .ant-menu-dark .ant-menu-submenu-selected > span > a, .ant-menu-dark .ant-menu-submenu-title:hover > a, .ant-menu-dark .ant-menu-submenu-title:hover > span > a {
   color: var(--primaryColor);
 }
+
+pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
