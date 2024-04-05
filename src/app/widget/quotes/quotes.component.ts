@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-quotes',
@@ -16,7 +17,7 @@ export class QuotesComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.http.get('https://api.quotable.io/random').subscribe((response: any) => {
+    this.http.get(`${environment.baseURL}/quote`).subscribe((response: any) => {
       this.quote = response["content"]
       this.author = response["author"]
     });

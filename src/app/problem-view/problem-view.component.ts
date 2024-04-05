@@ -19,7 +19,9 @@ export class ProblemViewComponent {
     codeIcon = faCode;
     companies: Company[] = [];
 
-    constructor(private route: ActivatedRoute, private codebase: CodebaseService, private router: Router) {}
+    constructor(private route: ActivatedRoute, private codebase: CodebaseService, private router: Router) {
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    }
 
     ngOnInit() {
         this.id = Number(this.route.snapshot.paramMap.get('id'));

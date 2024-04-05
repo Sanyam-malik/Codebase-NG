@@ -52,7 +52,7 @@ export class ProblemsComponent implements OnInit{
   companies: any[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router, private codebase: CodebaseService) {
-    
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
