@@ -2,7 +2,10 @@
     <div style="display: flex;justify-content: space-between;">
         <div>
             <h1 style="margin: 0%;">Problem {{item.id}}: <span class="color-primary">{{ item.name }}</span></h1>
-            <h2 style="margin: 0%;"> <span class="color-primary">{{item.type}}</span></h2>
+            <h2 style="margin: 0%;"> 
+                <span class="color-primary">{{item.type}}</span>
+                <span *ngIf="item.subdirectory">&nbsp;({{item.subdirectory.replaceAll(":", " -> ")}})</span>
+            </h2>
             <h3>{{ item.level }}</h3>
         </div>
         <div style="text-align: right;">

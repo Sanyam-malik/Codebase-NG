@@ -12,5 +12,6 @@ export interface Problem {
     code: string,
     companies: string,
     remarks: string,
-    slug: string
+    slug: string,
+    subdirectory: string
 }
