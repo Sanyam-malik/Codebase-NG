@@ -34,6 +34,7 @@ import { PlaylistViewComponent } from './playlist-view/playlist-view.component';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { ModalComponent } from './modal/modal.component';
 
 registerLocaleData(en);
 
@@ -54,7 +55,8 @@ registerLocaleData(en);
     NoteViewComponent,
     PlaylistViewComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ModalComponent
   ],
   imports: [
     SafePipe,

@@ -13,6 +13,7 @@ import { CodebaseService } from '../codebase.service';
 })
 export class HeaderComponent {
   visible = false;
+  selectedUploadOption: number = 0;
 
   startTimerIcon: any = faStopwatch;
   pauseIcon: any = faPause;
@@ -39,8 +40,19 @@ export class HeaderComponent {
     'event': false,
     'link': false,
     'tracker': false,
-    'notes': false
+    'note': false
   };
+
+  get modalType() {
+    var type: string = '';
+    for(const [key, value] of Object.entries(this.isModalVisible)) {
+      if(value == true) {
+        type = key;
+        break;
+      }
+    }
+    return type;
+  }
 
   open(): void {
     this.visible = true;
@@ -111,8 +123,13 @@ export class HeaderComponent {
     this.codebase.stopTimer();
   }
 
+  handleIndexChange(index: number) {
+    this.selectedUploadOption = index;
+  }
+
   handleCancel(type: string) {
     this.isModalVisible[type] = false;
+    this.selectedUploadOption = 0;
   }
 
   handleConfirm(type: string) {

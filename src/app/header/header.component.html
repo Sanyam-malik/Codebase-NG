@@ -25,7 +25,7 @@
                 </div>
               </div>
             </li>
-            <li nz-menu-item class="d-list">
+            <li nz-menu-item class="d-list" (click)="isModalVisible['event'] = true">
               <div class="d-list-item">
                 <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
               </div>
@@ -69,7 +69,7 @@
                 </a>
               </div>
             </li>
-            <li nz-menu-item class="d-list">
+            <li nz-menu-item class="d-list" (click)="isModalVisible['note'] = true">
               <div class="d-list-item">
                 <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
               </div>
@@ -99,7 +99,7 @@
                 </div>
               </div>
             </li>
-            <li nz-menu-item class="d-list">
+            <li nz-menu-item class="d-list" (click)="isModalVisible['tracker'] = true">
               <div class="d-list-item">
                 <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
               </div>
@@ -126,7 +126,7 @@
                 </h4>
               </div>
             </li>
-            <li nz-menu-item class="d-list">
+            <li nz-menu-item class="d-list" (click)="isModalVisible['link'] = true">
               <div class="d-list-item">
                 <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
               </div>
@@ -173,35 +173,33 @@
     </ngx-nav-drawer>
 </nz-header>
 
-<nz-modal
-      [(nzVisible)]="isModalVisible['playlist']"
-      nzTitle="Add A Playlist"
-      nzCentered
-      (nzOnCancel)="handleCancel('playlist')"
-      (nzOnOk)="handleConfirm('playlist')"
-    >
-    <ng-container *nzModalContent>
-      <p>Upload playlist.json files to continue</p>
-      <form [formGroup]="filesForm">
-        <file-upload formControlName="files" [multiple]="true" [animation]="true" style="background: var(--headerColor);outline:1px dashed var(--primaryColor)" accept="application/json">
-          <ng-template let-isFileDragDropAvailable="isFileDragDropAvailable" #placeholder>
-            <file-upload-drop-zone>
-                @if (isFileDragDropAvailable) {
-                    <b>Drag and drop</b> files<br> or click here
-                } @else {
-                    <b>Click here</b> to<br> upload the files
-                }
-            </file-upload-drop-zone>
-          </ng-template>
+<app-modal [(visible)]="isModalVisible[modalType]" title="Add {{modalType | titlecase}}" [content]="addNewModal" (onCancel)="handleCancel(modalType)" (onConfirm)="handleConfirm(modalType)"></app-modal>
 
-          <ng-template let-i="index" let-file="file" let-control="control" #item>
-            <div class="file-info" style="display: flex;padding: 1% 0%;flex-direction: column;">
-              <div class="file-name" style="display: inline-flex;align-items: center;">
-                <fa-icon [icon]="fileIcon" [size]="'2x'"></fa-icon>&nbsp;&nbsp;{{ file.name }} &nbsp;&nbsp; <fa-icon [icon]="trashIcon" (click)="control.removeFile(file)" style="cursor: pointer;"></fa-icon>
-              </div>
+<ng-template #addNewModal>
+  <nz-segmented style="margin-bottom: 1rem;" [nzOptions]="['Add Manually', 'Add Using File']" (nzValueChange)="handleIndexChange($event)"></nz-segmented>
+
+  <ng-container *ngIf="selectedUploadOption == 1">
+    <p>Upload {{modalType}}.json files to continue</p>
+    <form [formGroup]="filesForm">
+      <file-upload formControlName="files" [multiple]="true" [animation]="true" style="background: var(--headerColor);outline:1px dashed var(--primaryColor)" accept="application/json">
+        <ng-template let-isFileDragDropAvailable="isFileDragDropAvailable" #placeholder>
+          <file-upload-drop-zone>
+              @if (isFileDragDropAvailable) {
+                  <b>Drag and drop</b> files<br> or click here
+              } @else {
+                  <b>Click here</b> to<br> upload the files
+              }
+          </file-upload-drop-zone>
+        </ng-template>
+
+        <ng-template let-i="index" let-file="file" let-control="control" #item>
+          <div class="file-info" style="display: flex;padding: 1% 0%;flex-direction: column;">
+            <div class="file-name" style="display: inline-flex;align-items: center;">
+              <fa-icon [icon]="fileIcon" [size]="'2x'"></fa-icon>&nbsp;&nbsp;{{ file.name }} &nbsp;&nbsp; <fa-icon [icon]="trashIcon" (click)="control.removeFile(file)" style="cursor: pointer;"></fa-icon>
             </div>
-          </ng-template>
-        </file-upload>
-      </form>
-    </ng-container>
-</nz-modal>
+          </div>
+        </ng-template>
+      </file-upload>
+    </form>
+  </ng-container>
+</ng-template>

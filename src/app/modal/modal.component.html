@@ -1,0 +1,13 @@
+<nz-modal
+      [(nzVisible)]="visible"
+      [nzTitle]="title"
+      nzCentered
+      (nzOnCancel)="handleCancel()"
+      (nzOnOk)="handleConfirm()"
+    >
+    <ng-container *nzModalContent>
+        <ng-container *ngIf="content">
+            <ng-container *ngTemplateOutlet="content"></ng-container>
+        </ng-container>
+    </ng-container>
+</nz-modal>

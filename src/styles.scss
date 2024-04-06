@@ -707,3 +707,14 @@ pre {
   margin-top: 0;
   margin-bottom: 0;
 }
+
+.capitalize {
+  text-transform: lowercase;
+}
+.capitalize::first-letter {
+  text-transform: uppercase;
+}
+
+.ant-modal-body {
+  padding: 0px 24px;
+}
