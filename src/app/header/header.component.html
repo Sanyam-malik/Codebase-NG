@@ -25,16 +25,16 @@
                 </div>
               </div>
             </li>
-            <!-- <li nz-menu-item class="d-list">
+            <li nz-menu-item class="d-list">
               <div class="d-list-item">
-                <fa-icon [icon]="plusIcon" size="3x"></fa-icon>
+                <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
               </div>
               <div class="d-list-item">
                 <h4 class="d-title">
                   Create A New Event
                 </h4>
               </div>
-            </li> -->
+            </li>
           </ul>
         </nz-dropdown-menu>
       </li>
@@ -42,9 +42,9 @@
         <a nz-dropdown [nzDropdownMenu]="pmenu" nzTrigger="click"><fa-icon [icon]="videoIcon"></fa-icon>&nbsp;Playlists</a>
         <nz-dropdown-menu #pmenu="nzDropdownMenu">
           <ul nz-menu nzSelectable class="d-list-container">
-            <li nz-menu-item class="d-list" (click)="isModalVisible = true">
+            <li nz-menu-item class="d-list" (click)="isModalVisible['playlist'] = true">
               <div class="d-list-item">
-                <fa-icon [icon]="plusIcon" size="3x"></fa-icon>
+                <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
               </div>
               <div class="d-list-item">
                 <h4 class="d-title">
@@ -69,6 +69,16 @@
                 </a>
               </div>
             </li>
+            <li nz-menu-item class="d-list">
+              <div class="d-list-item">
+                <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
+              </div>
+              <div class="d-list-item">
+                <h4 class="d-title">
+                  Add A Note
+                </h4>
+              </div>
+            </li>
           </ul>
         </nz-dropdown-menu>
       </li>
@@ -89,16 +99,16 @@
                 </div>
               </div>
             </li>
-            <!-- <li nz-menu-item class="d-list">
+            <li nz-menu-item class="d-list">
               <div class="d-list-item">
-                <fa-icon [icon]="plusIcon" size="3x"></fa-icon>
+                <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
               </div>
               <div class="d-list-item">
                 <h4 class="d-title">
                   Add A Tracker
                 </h4>
               </div>
-            </li> -->
+            </li>
           </ul>
         </nz-dropdown-menu>
       </li>
@@ -108,7 +118,7 @@
           <ul nz-menu nzSelectable class="d-list-container">
             <li nz-menu-item *ngFor="let platform of platforms" class="d-list">
               <div class="d-list-item">
-                <img [src]="platform.icon" width="50">
+                <img [src]="platform.icon" width="35">
               </div>
               <div class="d-list-item">
                 <h4 class="d-title">
@@ -116,16 +126,16 @@
                 </h4>
               </div>
             </li>
-            <!-- <li nz-menu-item class="d-list">
+            <li nz-menu-item class="d-list">
               <div class="d-list-item">
-                <fa-icon [icon]="plusIcon" size="3x"></fa-icon>
+                <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
               </div>
               <div class="d-list-item">
                 <h4 class="d-title">
                   Add A Link
                 </h4>
               </div>
-            </li> -->
+            </li>
           </ul>
         </nz-dropdown-menu>
       </li>
@@ -164,11 +174,11 @@
 </nz-header>
 
 <nz-modal
-      [(nzVisible)]="isModalVisible"
+      [(nzVisible)]="isModalVisible['playlist']"
       nzTitle="Add A Playlist"
       nzCentered
-      (nzOnCancel)="handleCancel()"
-      (nzOnOk)="handleConfirm()"
+      (nzOnCancel)="handleCancel('playlist')"
+      (nzOnOk)="handleConfirm('playlist')"
     >
     <ng-container *nzModalContent>
       <p>Upload playlist.json files to continue</p>

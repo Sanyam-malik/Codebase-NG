@@ -34,7 +34,13 @@ export class HeaderComponent {
     files: new FormControl<File[]>([]),
   });
   
-  isModalVisible: boolean = false;
+  isModalVisible: any = {
+    'playlist': false,
+    'event': false,
+    'link': false,
+    'tracker': false,
+    'notes': false
+  };
 
   open(): void {
     this.visible = true;
@@ -105,14 +111,16 @@ export class HeaderComponent {
     this.codebase.stopTimer();
   }
 
-  handleCancel() {
-    this.isModalVisible = false;
+  handleCancel(type: string) {
+    this.isModalVisible[type] = false;
   }
 
-  handleConfirm() {
-    var length: number | undefined = this.filesForm.get('files')?.value?.length;
-    if(!length || length == 0) {
-      this.message.error('No files are selected.....');
+  handleConfirm(type: string) {
+    if(type == 'playlist') {
+      var length: number | undefined = this.filesForm.get('files')?.value?.length;
+      if(!length || length == 0) {
+        this.message.error('No files are selected.....');
+      }
     }
   }
 }
