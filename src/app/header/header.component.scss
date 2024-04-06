@@ -1,0 +1,10 @@
+nz-header {
+    border-bottom: 1px solid var(--primaryColor);
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+}
+
+[nz-menu] {
+    line-height: 64px;
+}

@@ -32,6 +32,8 @@ import { NoteViewComponent } from './note-view/note-view.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { PlaylistViewComponent } from './playlist-view/playlist-view.component';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 registerLocaleData(en);
 
@@ -50,7 +52,9 @@ registerLocaleData(en);
     CompanyComponent,
     RemarkComponent,
     NoteViewComponent,
-    PlaylistViewComponent
+    PlaylistViewComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     SafePipe,
