@@ -176,7 +176,7 @@
 <app-modal [(visible)]="isModalVisible[modalType]" title="Add {{modalType | titlecase}}" [content]="addNewModal" (onCancel)="handleCancel(modalType)" (onConfirm)="handleConfirm(modalType)"></app-modal>
 
 <ng-template #addNewModal>
-  <nz-segmented style="margin-bottom: 1rem;" [nzOptions]="['Add Manually', 'Add Using File']" (nzValueChange)="handleIndexChange($event)"></nz-segmented>
+  <nz-segmented style="margin-bottom: 1rem;" [nzOptions]="['Add Manually', 'Add Using File']" [(ngModel)]="selectedUploadOption" (ngModelChange)="handleIndexChange($event)"></nz-segmented>
 
   <ng-container *ngIf="selectedUploadOption == 1">
     <p>Upload {{modalType}}.json files to continue</p>

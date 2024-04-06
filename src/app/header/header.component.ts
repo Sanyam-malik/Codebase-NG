@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { faStopwatch, faPause, faPlay, faStop, faBars, faLink, faCalendar, faBook, faThumbTack, faVideo, faPlus, faTrash, faFileAlt } from '@fortawesome/free-solid-svg-icons';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CodebaseService } from '../codebase.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +15,7 @@ import { CodebaseService } from '../codebase.service';
 })
 export class HeaderComponent {
   visible = false;
-  selectedUploadOption: number = 0;
+  selectedUploadOption: number = 1;
 
   startTimerIcon: any = faStopwatch;
   pauseIcon: any = faPause;
@@ -83,7 +85,7 @@ export class HeaderComponent {
   }
 
 
-  constructor(public codebase: CodebaseService, private router: Router, private message: NzMessageService) {
+  constructor(public codebase: CodebaseService, private router: Router, private message: NzMessageService, private http: HttpClient) {
     
   }
 
@@ -129,15 +131,39 @@ export class HeaderComponent {
 
   handleCancel(type: string) {
     this.isModalVisible[type] = false;
-    this.selectedUploadOption = 0;
+    this.selectedUploadOption = 1;
   }
 
   handleConfirm(type: string) {
-    if(type == 'playlist') {
+    if(this.selectedUploadOption==1) {
       var length: number | undefined = this.filesForm.get('files')?.value?.length;
       if(!length || length == 0) {
         this.message.error('No files are selected.....');
       }
+      
+      const uploadData = new FormData();
+      uploadData.append('type', type);
+      uploadData.append('parse', "true");
+      const selectedFiles = this.filesForm.get('files')?.value;
+      if(selectedFiles) {
+        selectedFiles.forEach(file => {
+          uploadData.append('files[]', file, file.name);
+        });
+      }
+
+    this.http.post(`${environment.baseURL}/upload`, uploadData)
+      .subscribe(
+        (response: any )=> {
+          if(response['files']) {
+            this.message.warning("Some Files Are Not Parsed See Upload Log For More Info....");
+          } else {
+            this.message.success("Data Added Successfully....");
+          }
+        },
+        error => {
+          this.message.warning("System is unable to upload the files....");
+        }
+      );
     }
   }
 }

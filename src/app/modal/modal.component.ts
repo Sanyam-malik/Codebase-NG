@@ -28,7 +28,6 @@ export class ModalComponent {
   }
 
   handleConfirm() {
-    this.visible = false;
     this.onConfirm.emit('submit');
   }
 }
