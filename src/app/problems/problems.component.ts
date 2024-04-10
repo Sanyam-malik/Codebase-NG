@@ -120,6 +120,11 @@ export class ProblemsComponent implements OnInit{
       });
     }
 
+    this.companies = [{
+      text: 'None',
+      value: 'none'
+    }].concat(this.companies.sort((a, b) => a.text.localeCompare(b.text)))
+
     this.listOfColumns = [
       {
         name: 'Name',
@@ -183,8 +188,15 @@ export class ProblemsComponent implements OnInit{
         sortFn: null,
         sortDirections: [],
         filterMultiple: true,
-        listOfFilter: this.companies.sort((a, b) => a.text.localeCompare(b.text)),
-        filterFn: (list: string[], item: Problem) => list.some(company => item.companies && item.companies.toLowerCase().indexOf(company.toLowerCase()) !== -1)
+        listOfFilter: this.companies,
+        filterFn: (list: string[], item: Problem) => list.some(company => {
+          if(company.toLowerCase() != 'none' && item.companies) {
+            return item.companies.toLowerCase().indexOf(company.toLowerCase()) !== -1;
+          }
+          else {
+            return item.companies == null;
+          }
+        })
       }
     ];
   }

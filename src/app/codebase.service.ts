@@ -182,6 +182,7 @@ export class CodebaseService {
     this.settings = [];
     this.remarks = [];
     this.analytics = undefined;
+    this.timeline = undefined;
     localStorage.removeItem('codestate');
   }
 
