@@ -35,6 +35,7 @@ import { FileUploadModule } from '@iplab/ngx-file-upload';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ModalComponent } from './modal/modal.component';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 registerLocaleData(en);
 
@@ -74,7 +75,8 @@ registerLocaleData(en);
     HighchartsChartModule,
     NgxNavDrawerModule,
     FileUploadModule,
-    MarkdownModule.forRoot({ loader: HttpClient })
+    MarkdownModule.forRoot({ loader: HttpClient }),
+    NgxExtendedPdfViewerModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

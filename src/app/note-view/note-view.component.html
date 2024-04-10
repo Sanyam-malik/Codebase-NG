@@ -1,8 +1,29 @@
 <ng-container *ngIf="item">
-    <div *ngIf="item.urls.length > 1" style="display: flex;align-content: center;float: right;">
-        <fa-icon [icon]="ArrowLIcon" [size]="'2x'" style="cursor: pointer;" (click)="prevPage()"></fa-icon>
-        <h3 style="margin: 0rem 1rem;">Page {{page+1}} of {{item.urls.length}}</h3>
-        <fa-icon [icon]="ArrowRIcon" [size]="'2x'" style="cursor: pointer;" (click)="nextPage()"></fa-icon>
+    <div *ngIf="item.urls.length > 1" style="display: flex;justify-content: space-between;margin-bottom: 1rem;">
+        <div *ngIf="extension == '.pdf'">
+            <h3>{{filename}}</h3>
+        </div>
+
+        <div *ngIf="extension == '.pdf'">
+            <h3><a href="{{note}}"><fa-icon [icon]="FullScreenIcon" ></fa-icon>&nbsp;&nbsp;View in Fullscreen</a></h3>
+        </div>
+
+        <div style="display: inline-flex;">
+            <fa-icon [icon]="ArrowLIcon" [size]="'2x'" style="cursor: pointer;" (click)="prevPage()"></fa-icon>
+            <h3 style="margin: 0rem 1rem;">Page {{page+1}} of {{item.urls.length}}</h3>
+            <fa-icon [icon]="ArrowRIcon" [size]="'2x'" style="cursor: pointer;" (click)="nextPage()"></fa-icon>
+        </div>
     </div>
-    <markdown [src]="note" class="markup"></markdown>
+    <div>
+        <markdown *ngIf="extension == '.md'" [src]="note" class="markup"></markdown>
+        <ngx-extended-pdf-viewer *ngIf="extension == '.pdf'"
+        [src]=note
+        [height]="'auto'"
+        [zoom]="'page-fit'"
+        [textLayer]="true"
+        [theme]="'dark'"
+        [backgroundColor]="'var(--headerColor)'"
+        [showHandToolButton]="true">
+        </ngx-extended-pdf-viewer>
+    </div>
 </ng-container>

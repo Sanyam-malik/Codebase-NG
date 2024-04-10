@@ -413,6 +413,28 @@
       padding: 1rem 0px;
       overflow-x: auto;
     }
+
+    .timelinecard {
+      border: 4px solid var(--backgroundColor);
+      flex-direction: column;
+      box-shadow: var(--boxShadow);
+      border-radius: 5px;
+      background-color: var(--headerColor);
+      padding: 1rem 0px;
+      overflow-x: auto;
+
+      .menu {
+        display: flex;
+        justify-content: center; /* Centers horizontally */
+        align-items: center; /* Centers vertically */
+        flex-direction: column;
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+      }
+    }
   }
 
   .noborder {

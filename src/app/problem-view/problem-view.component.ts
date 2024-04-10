@@ -12,7 +12,7 @@ import { Company } from '../company';
   styleUrl: './problem-view.component.scss'
 })
 export class ProblemViewComponent {
-    
+    showMore: boolean = false;
     id: number | undefined;
     item: Problem | undefined;
     button: Platform | undefined;

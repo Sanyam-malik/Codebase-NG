@@ -1,8 +1,10 @@
-<div class="dashcard">
-    <h2 style="font-size:1.5rem;">Problems Timeline</h2>
-    <nz-segmented [nzOptions]="options" (nzValueChange)="handleIndexChange($event)"></nz-segmented>
+<div class="timelinecard">
+    <div class="menu">
+        <h2 style="font-size:1.5rem;">Problems Timeline</h2>
+        <nz-segmented [nzOptions]="options" (nzValueChange)="handleIndexChange($event)"></nz-segmented>
+    </div>
     
-    <nz-timeline *ngIf="isLoaded" style="padding: 3rem 3rem 1rem 3rem;">
+    <nz-timeline *ngIf="isLoaded" class="content" style="padding: 3rem 3rem 1rem 3rem;">
         <ng-container *ngFor="let key of objectEntries(timeline)">
             <nz-timeline-item>
                 <p>{{key}}&nbsp;<span style="color: var(--secondaryColor);">({{timeline[key].length}} Problems)</span></p>
@@ -15,7 +17,7 @@
     </nz-timeline>
     
 
-    <div *ngIf="!isLoaded" class="center-div" style="width: 85%; height: 20rem;">
+    <div *ngIf="!isLoaded" class="menu" style="width: 85%; height: 20rem;">
         <h2 style="margin: 0%;font-size:1.5rem;">Loading....</h2>
     </div>
 </div>

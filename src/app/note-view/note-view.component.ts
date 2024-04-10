@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { MarkdownService } from 'ngx-markdown';
-import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowAltCircleLeft, faArrowAltCircleRight, faExpand } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-note-view',
@@ -17,6 +17,7 @@ export class NoteViewComponent implements OnInit {
   page:number = 0;
   ArrowLIcon: any = faArrowAltCircleLeft;
   ArrowRIcon: any = faArrowAltCircleRight;
+  FullScreenIcon: any = faExpand;
 
   constructor(private route: ActivatedRoute, private codebase: CodebaseService, private router: Router, private http: HttpClient, private mdService:MarkdownService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -26,6 +27,23 @@ export class NoteViewComponent implements OnInit {
   get note(): string {
     if(this.item) {
       return `${environment.baseURL.replace("/api", "/file")}/${this.item.urls[this.page]}`;
+    } else {
+      return "";
+    }
+  }
+
+  get filename(): string {
+    if(this.item) {
+      const page: string[] = this.item.urls[this.page].split("/");
+      return page[page.length-1];
+    } else {
+      return "";
+    }
+  }
+
+  get extension(): string {
+    if(this.item) {
+      return this.item.extensions[this.page];
     } else {
       return "";
     }

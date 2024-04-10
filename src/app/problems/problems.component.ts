@@ -47,6 +47,7 @@ export class ProblemsComponent implements OnInit{
   visibleMap: any = {
     name: false
   };
+  showMore: boolean[] = [];
 
   companiesColor:any = {};
   companies: any[] = [];
@@ -98,6 +99,7 @@ export class ProblemsComponent implements OnInit{
     }
 
     this.listOfData = this.fullListOfData;
+    this.showMore.fill(false, 0, this.listOfData.length);
     this.loadState(this.stateName);
     
     var companies: string[] = [];
@@ -190,8 +192,12 @@ export class ProblemsComponent implements OnInit{
   search(): void {
     if(this.searchValue.trim().length > 0) {
       this.listOfData = this.fullListOfData.filter((item: Problem) => item.name.toLowerCase().indexOf(this.searchValue.toLowerCase()) !== -1);
+      this.showMore = [];
+      this.showMore.fill(false, 0, this.listOfData.length);
     } else {
       this.listOfData = this.fullListOfData;
+      this.showMore = [];
+      this.showMore.fill(false, 0, this.listOfData.length);
     }
   }
 

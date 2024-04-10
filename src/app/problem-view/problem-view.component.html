@@ -15,7 +15,14 @@
         </div>
     </div>
     <div *ngIf="companies.length > 0" style="width: 60%;">
-        <nz-tag *ngFor="let company of companies" [nzColor]="company['color']" (click)="tagClick(company.name)">{{company['name']}}</nz-tag>
+        <nz-tag *ngFor="let company of companies.slice(0, 5)" [nzColor]="company['color']" (click)="tagClick(company.name)">{{company['name']}}</nz-tag>
+        <ng-container *ngIf="showMore">
+            <nz-tag *ngFor="let company of companies.slice(5)" [nzColor]="company['color']" (click)="tagClick(company.name)">{{company['name']}}</nz-tag>
+        </ng-container>
+        <ng-container *ngIf="companies.length > 5">
+            <nz-tag *ngIf="!showMore" (click)="showMore = true;" [nzColor]="'transparent'">+ More</nz-tag>
+            <nz-tag *ngIf="showMore" (click)="showMore = false;" [nzColor]="'transparent'">- Less</nz-tag>
+        </ng-container>
     </div>
     
 
