@@ -40,6 +40,9 @@
   .ant-menu-dark .ant-menu-sub, .ant-menu.ant-menu-dark, .ant-menu.ant-menu-dark .ant-menu-sub {
     background-color: transparent;
     font-size: 1rem;
+  }
+
+  .horizontal-menu {
     display: flex;
     align-items: center;
     justify-content: space-between;
