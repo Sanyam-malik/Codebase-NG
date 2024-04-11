@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { MarkdownService } from 'ngx-markdown';
 import { faArrowAltCircleLeft, faArrowAltCircleRight, faExpand } from '@fortawesome/free-solid-svg-icons';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { faClipboard } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-note-view',
@@ -13,13 +15,15 @@ import { faArrowAltCircleLeft, faArrowAltCircleRight, faExpand } from '@fortawes
   styleUrl: './note-view.component.scss'
 })
 export class NoteViewComponent implements OnInit {
+
   item: Note | undefined;
   page:number = 0;
   ArrowLIcon: any = faArrowAltCircleLeft;
   ArrowRIcon: any = faArrowAltCircleRight;
   FullScreenIcon: any = faExpand;
+  Clipboard: any = faClipboard;
 
-  constructor(private route: ActivatedRoute, private codebase: CodebaseService, private router: Router, private http: HttpClient, private mdService:MarkdownService) {
+  constructor(private route: ActivatedRoute, private message: NzMessageService, private codebase: CodebaseService, private router: Router, private http: HttpClient, private mdService:MarkdownService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.codebase.runningNav = [];
   }
@@ -59,6 +63,10 @@ export class NoteViewComponent implements OnInit {
     if(this.item) {
       this.page = this.page < this.item.urls.length-1 ? this.page+1 : this.page;
     }
+  }
+
+  onCopyToClipboard() {
+    this.message.success("Code Copied to Clipboard...");
   }
 
   ngOnInit() {

@@ -40,6 +40,21 @@
   .ant-menu-dark .ant-menu-sub, .ant-menu.ant-menu-dark, .ant-menu.ant-menu-dark .ant-menu-sub {
     background-color: transparent;
     font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .sub-menu-div {
+      width: 50%;
+      display: inline-flex;
+    }
+
+    .sub-menu-div:first-child {
+      justify-content: start;
+    }
+    .sub-menu-div:last-child {
+      justify-content: end;
+    }
   }
 
   .ant-table-footer, .ant-table-thead > tr > th {
@@ -350,7 +365,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-auto-columns: 1fr;
     margin: 1rem 0rem;
-    border-radius: 5px;
+    border-radius: 20px;
     padding: 5px;
 
     .dashcard {
@@ -361,7 +376,7 @@
       border: 4px solid var(--backgroundColor);
       flex-direction: column;
       box-shadow: var(--boxShadow);
-      border-radius: 5px;
+      border-radius: 20px;
       background-color: var(--headerColor);
       padding: 1rem 0px;
     }
@@ -373,7 +388,7 @@
     grid-template-columns: 1fr 1fr;
     grid-auto-columns: 1fr;
     margin: 1rem 0rem;
-    border-radius: 5px;
+    border-radius: 20px;
     padding: 5px;
 
     .dashcard {
@@ -384,7 +399,7 @@
       border: 4px solid var(--backgroundColor);
       flex-direction: column;
       box-shadow: var(--boxShadow);
-      border-radius: 5px;
+      border-radius: 20px;
       background-color: var(--headerColor);
       padding: 1rem 0px;
     }
@@ -397,7 +412,7 @@
     grid-template-columns: 1fr;
     grid-auto-columns: 1fr;
     margin: 1rem 0rem;
-    border-radius: 5px;
+    border-radius: 20px;
     padding: 5px;
 
     .dashcard {
@@ -408,7 +423,7 @@
       border: 4px solid var(--backgroundColor);
       flex-direction: column;
       box-shadow: var(--boxShadow);
-      border-radius: 5px;
+      border-radius: 20px;
       background-color: var(--headerColor);
       padding: 1rem 0px;
       overflow-x: auto;
@@ -418,7 +433,7 @@
       border: 4px solid var(--backgroundColor);
       flex-direction: column;
       box-shadow: var(--boxShadow);
-      border-radius: 5px;
+      border-radius: 20px;
       background-color: var(--headerColor);
       padding: 1rem 0px;
       overflow-x: auto;
@@ -739,4 +754,31 @@ pre {
 
 .ant-modal-body {
   padding: 0px 24px;
+}
+
+.btn-clipboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--headerColor);
+  border: 0.5px solid var(--secondaryColor);
+  border-radius: 4px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all .2s ease-out;
+  box-shadow: var(--boxShadow);
+}
+
+.btn-theme-switch {
+  background-color: var(--headerColor);
+  border: 0.5px solid var(--secondaryColor);
+  border-radius: 4px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all .2s ease-out;
+  box-shadow: var(--boxShadow);
+}
+
+code[class*="language-"] {
+  font-size: 1rem !important;
 }

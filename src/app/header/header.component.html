@@ -1,160 +1,171 @@
 <nz-header>
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
-      <li nz-menu-item class="nohover" style="padding-left: 0.5%;">
-        <span (click)="open()" style="color: var(--secondaryColor);display: inline-block;margin: 0px 10px 0px 0px;">
-          <fa-icon [icon]="barsIcon"></fa-icon>
-        </span>
-        <span routerLink="/dashboard" style="display: inline-block;">
-          <img src="../assets/logo.png" height="40" style="filter: grayscale(100%);-webkit-filter: grayscale(100%);">&nbsp;&nbsp;Codebase
-        </span>
-      </li>
-      <li nz-menu-item class="nohover">
-        <a nz-dropdown [nzDropdownMenu]="emenu" nzTrigger="click"><fa-icon [icon]="calendarIcon"></fa-icon>&nbsp;Events</a>
-        <nz-dropdown-menu #emenu="nzDropdownMenu">
-          <ul nz-menu nzSelectable class="d-list-container">
-            <li nz-menu-item *ngFor="let reminder of reminders" class="d-list">
-              <div class="d-list-item">
-                <fa-icon [icon]="calendarIcon" size="3x"></fa-icon>
-              </div>
-              <div class="d-list-item">
-                <h4 class="d-title">
-                  {{reminder.name}}
-                </h4>
-                <div class="d-description">
-                  {{reminder.description}}
+      <div class="sub-menu-div">
+        <li nz-menu-item class="nohover" style="padding-left: 0.5%;">
+          <span (click)="open()" style="color: var(--secondaryColor);display: inline-block;margin: 0px 10px 0px 0px;">
+            <fa-icon [icon]="barsIcon"></fa-icon>
+          </span>
+          <span routerLink="/dashboard" style="display: inline-block;">
+            <img src="../assets/logo.png" height="40" style="filter: grayscale(100%);-webkit-filter: grayscale(100%);">&nbsp;&nbsp;Codebase
+          </span>
+        </li>
+        <li nz-menu-item class="nohover">
+          <a nz-dropdown [nzDropdownMenu]="emenu" nzTrigger="click"><fa-icon [icon]="calendarIcon"></fa-icon>&nbsp;Events</a>
+          <nz-dropdown-menu #emenu="nzDropdownMenu">
+            <ul nz-menu nzSelectable class="d-list-container">
+              <li nz-menu-item *ngFor="let reminder of reminders" class="d-list">
+                <div class="d-list-item">
+                  <fa-icon [icon]="calendarIcon" size="3x"></fa-icon>
                 </div>
-              </div>
-            </li>
-            <li nz-menu-item class="d-list" (click)="isModalVisible['event'] = true">
-              <div class="d-list-item">
-                <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
-              </div>
-              <div class="d-list-item">
-                <h4 class="d-title">
-                  Create A New Event
-                </h4>
-              </div>
-            </li>
-          </ul>
-        </nz-dropdown-menu>
-      </li>
-      <li nz-menu-item class="nohover">
-        <a nz-dropdown [nzDropdownMenu]="pmenu" nzTrigger="click"><fa-icon [icon]="videoIcon"></fa-icon>&nbsp;Playlists</a>
-        <nz-dropdown-menu #pmenu="nzDropdownMenu">
-          <ul nz-menu nzSelectable class="d-list-container">
-            <li nz-menu-item class="d-list" (click)="isModalVisible['playlist'] = true">
-              <div class="d-list-item">
-                <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
-              </div>
-              <div class="d-list-item">
-                <h4 class="d-title">
-                  Add A Playlist
-                </h4>
-              </div>
-            </li>
-          </ul>
-        </nz-dropdown-menu>
-      </li>
-      <li nz-menu-item class="nohover">
-        <a nz-dropdown [nzDropdownMenu]="nmenu" nzTrigger="click"><fa-icon [icon]="bookIcon"></fa-icon>&nbsp;Notes</a>
-        <nz-dropdown-menu #nmenu="nzDropdownMenu" class="d-list-container">
-          <ul nz-menu nzSelectable class="d-list-container">
-            <li nz-menu-item *ngFor="let note of notes" class="d-list">
-              <div class="d-list-item">
-                <fa-icon [icon]="bookIcon" size="2x"></fa-icon>
-              </div>
-              <div class="d-list-item">
-                <a class="nohover" routerLink="/notes/{{note.slug}}">
-                  <h4 class="d-title">{{note.title}}</h4>
-                </a>
-              </div>
-            </li>
-            <li nz-menu-item class="d-list" (click)="isModalVisible['note'] = true">
-              <div class="d-list-item">
-                <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
-              </div>
-              <div class="d-list-item">
-                <h4 class="d-title">
-                  Add A Note
-                </h4>
-              </div>
-            </li>
-          </ul>
-        </nz-dropdown-menu>
-      </li>
-      <li nz-menu-item class="nohover">
-        <a nz-dropdown [nzDropdownMenu]="tmenu" nzTrigger="click"><fa-icon [icon]="thumbtackIcon"></fa-icon>&nbsp;Trackers</a>
-        <nz-dropdown-menu #tmenu="nzDropdownMenu">
-          <ul nz-menu nzSelectable class="d-list-container">
-            <li nz-menu-item *ngFor="let tracker of trackers" class="d-list">
-              <div class="d-list-item">
-                <fa-icon [icon]="thumbtackIcon" size="2x"></fa-icon>
-              </div>
-              <div class="d-list-item">
-                <h4 class="d-title">
-                  {{tracker.name}}
-                </h4>
-                <div class="d-description">
-                  {{tracker.level}}
+                <div class="d-list-item">
+                  <h4 class="d-title">
+                    {{reminder.name}}
+                  </h4>
+                  <div class="d-description">
+                    {{reminder.description}}
+                  </div>
                 </div>
-              </div>
-            </li>
-            <li nz-menu-item class="d-list" (click)="isModalVisible['tracker'] = true">
-              <div class="d-list-item">
-                <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
-              </div>
-              <div class="d-list-item">
-                <h4 class="d-title">
-                  Add A Tracker
-                </h4>
-              </div>
-            </li>
-          </ul>
-        </nz-dropdown-menu>
-      </li>
-      <li nz-menu-item class="nohover">
-        <a nz-dropdown [nzDropdownMenu]="lmenu" nzTrigger="click"><fa-icon [icon]="linkIcon"></fa-icon>&nbsp;Links</a>
-        <nz-dropdown-menu #lmenu="nzDropdownMenu">
-          <ul nz-menu nzSelectable class="d-list-container">
-            <li nz-menu-item *ngFor="let platform of platforms" class="d-list">
-              <div class="d-list-item">
-                <img [src]="platform.icon" width="35">
-              </div>
-              <div class="d-list-item">
-                <h4 class="d-title">
-                  {{platform.name}}
-                </h4>
-              </div>
-            </li>
-            <li nz-menu-item class="d-list" (click)="isModalVisible['link'] = true">
-              <div class="d-list-item">
-                <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
-              </div>
-              <div class="d-list-item">
-                <h4 class="d-title">
-                  Add A Link
-                </h4>
-              </div>
-            </li>
-          </ul>
-        </nz-dropdown-menu>
-      </li>
-      <li nz-menu-item *ngIf="showStartTimer && !isDashboardActive" class="nohover" style="float: right;padding-right: 0.5%;">
-        <div>
-          <h3 style="margin: 0%;">
-            <ng-container *ngIf="!isPaused">
-              <fa-icon (click)="pauseTimer()" [icon]="pauseIcon" ></fa-icon>&nbsp;
-            </ng-container>
+              </li>
+              <li nz-menu-item class="d-list" (click)="isModalVisible['event'] = true">
+                <div class="d-list-item">
+                  <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
+                </div>
+                <div class="d-list-item">
+                  <h4 class="d-title">
+                    Create A New Event
+                  </h4>
+                </div>
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </li>
+        <li nz-menu-item class="nohover">
+          <a nz-dropdown [nzDropdownMenu]="pmenu" nzTrigger="click"><fa-icon [icon]="videoIcon"></fa-icon>&nbsp;Playlists</a>
+          <nz-dropdown-menu #pmenu="nzDropdownMenu">
+            <ul nz-menu nzSelectable class="d-list-container">
+              <li nz-menu-item class="d-list" (click)="isModalVisible['playlist'] = true">
+                <div class="d-list-item">
+                  <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
+                </div>
+                <div class="d-list-item">
+                  <h4 class="d-title">
+                    Add A Playlist
+                  </h4>
+                </div>
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </li>
+        <li nz-menu-item class="nohover">
+          <a nz-dropdown [nzDropdownMenu]="nmenu" nzTrigger="click"><fa-icon [icon]="bookIcon"></fa-icon>&nbsp;Notes</a>
+          <nz-dropdown-menu #nmenu="nzDropdownMenu" class="d-list-container">
+            <ul nz-menu nzSelectable class="d-list-container">
+              <li nz-menu-item *ngFor="let note of notes" class="d-list">
+                <div class="d-list-item">
+                  <fa-icon [icon]="bookIcon" size="2x"></fa-icon>
+                </div>
+                <div class="d-list-item">
+                  <a class="nohover" routerLink="/notes/{{note.slug}}">
+                    <h4 class="d-title">{{note.title}}</h4>
+                  </a>
+                </div>
+              </li>
+              <li nz-menu-item class="d-list" (click)="isModalVisible['note'] = true">
+                <div class="d-list-item">
+                  <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
+                </div>
+                <div class="d-list-item">
+                  <h4 class="d-title">
+                    Add A Note
+                  </h4>
+                </div>
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </li>
+        <li nz-menu-item class="nohover">
+          <a nz-dropdown [nzDropdownMenu]="tmenu" nzTrigger="click"><fa-icon [icon]="thumbtackIcon"></fa-icon>&nbsp;Trackers</a>
+          <nz-dropdown-menu #tmenu="nzDropdownMenu">
+            <ul nz-menu nzSelectable class="d-list-container">
+              <li nz-menu-item *ngFor="let tracker of trackers" class="d-list">
+                <div class="d-list-item">
+                  <fa-icon [icon]="thumbtackIcon" size="2x"></fa-icon>
+                </div>
+                <div class="d-list-item">
+                  <h4 class="d-title">
+                    {{tracker.name}}
+                  </h4>
+                  <div class="d-description">
+                    {{tracker.level}}
+                  </div>
+                </div>
+              </li>
+              <li nz-menu-item class="d-list" (click)="isModalVisible['tracker'] = true">
+                <div class="d-list-item">
+                  <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
+                </div>
+                <div class="d-list-item">
+                  <h4 class="d-title">
+                    Add A Tracker
+                  </h4>
+                </div>
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </li>
+        <li nz-menu-item class="nohover">
+          <a nz-dropdown [nzDropdownMenu]="lmenu" nzTrigger="click"><fa-icon [icon]="linkIcon"></fa-icon>&nbsp;Links</a>
+          <nz-dropdown-menu #lmenu="nzDropdownMenu">
+            <ul nz-menu nzSelectable class="d-list-container">
+              <li nz-menu-item *ngFor="let platform of platforms" class="d-list">
+                <div class="d-list-item">
+                  <img [src]="platform.icon" width="35">
+                </div>
+                <div class="d-list-item">
+                  <h4 class="d-title">
+                    {{platform.name}}
+                  </h4>
+                </div>
+              </li>
+              <li nz-menu-item class="d-list" (click)="isModalVisible['link'] = true">
+                <div class="d-list-item">
+                  <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
+                </div>
+                <div class="d-list-item">
+                  <h4 class="d-title">
+                    Add A Link
+                  </h4>
+                </div>
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </li>
+      </div>
 
-            <ng-container *ngIf="isPaused">
-              <fa-icon (click)="resumeTimer()" [icon]="playIcon" ></fa-icon>&nbsp;
-            </ng-container>
-
-            <fa-icon (click)="stopTimer()" [icon]="stopIcon" ></fa-icon>&nbsp;
-            <b>{{ minutes | number :'2.0' }}:{{ seconds | number: '2.0'}}</b>
-          </h3>
-        </div>
-      </li>
+      <div class="sub-menu-div">
+        <li *ngIf="showStartTimer && !isDashboardActive" nz-menu-item class="nohover" style="padding-right: 0.5%;">
+          <span>
+            <h3 style="margin: 0%;">
+              <ng-container *ngIf="!isPaused">
+                <fa-icon (click)="pauseTimer()" [icon]="pauseIcon" ></fa-icon>&nbsp;
+              </ng-container>
+  
+              <ng-container *ngIf="isPaused">
+                <fa-icon (click)="resumeTimer()" [icon]="playIcon" ></fa-icon>&nbsp;
+              </ng-container>
+  
+              <fa-icon (click)="stopTimer()" [icon]="stopIcon" ></fa-icon>&nbsp;
+              <b>{{ minutes | number :'2.0' }}:{{ seconds | number: '2.0'}}</b>
+            </h3>
+          </span>
+        </li>
+        
+        <li nz-menu-item class="nohover" style="padding-right: 0.5%;">
+          <a class="btn-theme-switch" (click)="codebase.switchTheme()">
+            <fa-icon [icon]="switchTheme" style="display: contents;"></fa-icon>
+          </a>
+        </li>
+      </div>
     </ul>
 
     <ngx-nav-drawer [(open)]="visible">

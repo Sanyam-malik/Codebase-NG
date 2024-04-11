@@ -15,7 +15,14 @@
         </div>
     </div>
     <div>
-        <markdown *ngIf="extension == '.md'" [src]="note" class="markup"></markdown>
+        <markdown *ngIf="extension == '.md'" clipboard [clipboardButtonTemplate]="buttonTemplate" [src]="note" class="markup"></markdown>
+
+        <ng-template #buttonTemplate>
+            <button class="btn-clipboard" (click)="onCopyToClipboard()">
+                <fa-icon [icon]="Clipboard"></fa-icon>&nbsp;&nbsp;Copy
+            </button>
+        </ng-template>
+
         <ngx-extended-pdf-viewer *ngIf="extension == '.pdf'"
         [src]=note
         [height]="'auto'"

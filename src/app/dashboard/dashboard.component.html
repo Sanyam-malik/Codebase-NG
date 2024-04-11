@@ -1,8 +1,8 @@
-<div style="display: flex;justify-content: space-between;">
-    <div>
+<div style="display: flex;justify-content: space-between;padding: 5px;">
+    <div style="padding: 5px;">
         <h1 style="margin: 0%;">Welcome to your dashboard</h1>
     </div>
-    <div>
+    <div style="padding: 5px;">
         <h1 style="margin: 0%;">
             <ng-container *ngIf="showStartTimer">
                 <a class="btn-primary" (click)="stopTimer()">
@@ -32,11 +32,6 @@
                     {{'Start Timer'}}
                 </a>&nbsp;
             </ng-container>
-            
-            <a class="btn-primary" (click)="codebase.switchTheme()">
-                <fa-icon [icon]="switchTheme" ></fa-icon>
-                Switch Theme
-            </a>&nbsp;
             
             <a class="btn-primary" (click)="codebase.refreshDatabase()">
                 <fa-icon [icon]="arrowRotate"></fa-icon>

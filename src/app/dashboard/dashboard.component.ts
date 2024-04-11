@@ -18,7 +18,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   stopIcon: any = faStop;
   arrowRight: any = faArrowCircleRight;
   arrowRotate: any = faArrowsRotate;
-  switchTheme: any = faCircleHalfStroke;
   sessionIcon: any = faCodepen;
   urlValue: string = '';
   showPopOver: boolean = false;
