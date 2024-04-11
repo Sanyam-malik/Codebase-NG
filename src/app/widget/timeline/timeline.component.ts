@@ -17,7 +17,7 @@ export class TimelineComponent {
   shownTimeline: number = 0;
   
   get timeline():any {
-    if(Object.keys(this.codebase.timeline).length > 0) {
+    if(this.codebase.timeline && Object.keys(this.codebase.timeline).length > 0) {
       if(this.shownTimeline == 1) {
         return this.codebase.timeline['previous_timeline'];
       }

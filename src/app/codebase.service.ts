@@ -358,7 +358,7 @@ export class CodebaseService {
       })
     }
 
-    if(Object.keys(codebase.timeline).length == 0) {
+    if(!codebase.timeline || Object.keys(codebase.timeline).length == 0) {
       http.get(environment.baseURL+"/timeline").subscribe((response: any) => {
         codebase.timeline['full_timeline'] = response['full_timeline'];
         codebase.timeline['current_timeline'] = response['current_timeline'];
