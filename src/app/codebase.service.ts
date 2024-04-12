@@ -16,6 +16,7 @@ import { Level } from './level';
 import { Status } from './status';
 import { Subject } from 'rxjs';
 import { Note } from './note';
+import { Title } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +51,7 @@ export class CodebaseService {
   timer: any;
   isPaused: boolean = false;
 
-  constructor(private http: HttpClient, private message: NzMessageService) {
+  constructor(private http: HttpClient, private message: NzMessageService, private title: Title) {
     const codestate: Codestate = this.getState('codestate');
     if(codestate?.themePref) {
       this.runningTheme = codestate.themePref;
@@ -116,6 +117,7 @@ export class CodebaseService {
         appIcon: this.appIcon,
       }
     }
+    this.title.setTitle(this.appName);
     this.saveState("codestate", codeState);
   }
 
