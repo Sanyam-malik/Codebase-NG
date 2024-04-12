@@ -53,6 +53,14 @@ export class HeaderComponent {
     return this.codebase.runningTheme == 'dark' ? 'Light' : 'Dark';
   }
 
+  get name(): string {
+    return this.codebase.appName;
+  }
+
+  get icon(): string {
+    return this.codebase.appIcon;
+  }
+
   get modalType() {
     var type: string = '';
     for(const [key, value] of Object.entries(this.isModalVisible)) {
@@ -140,6 +148,7 @@ export class HeaderComponent {
   handleCancel(type: string) {
     this.isModalVisible[type] = false;
     this.selectedUploadOption = 1;
+    this.filesForm?.get('files')?.setValue([]);
   }
 
   handleConfirm(type: string) {

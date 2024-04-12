@@ -22,6 +22,8 @@ import { Note } from './note';
 })
 export class CodebaseService {
 
+  appName = "Codebase";
+  appIcon = "../assets/logo.png";
   runningTheme: string = "dark";
   navMenus: Menu[] = [];
   statuses: Status[] = [];
@@ -83,17 +85,35 @@ export class CodebaseService {
   }
 
   initTheme() {
-    const theme = JSON.parse(this.getConfig(this.runningTheme+"Theme").config);
-    for (const key of Object.keys(theme)) {
-      document.documentElement.style.setProperty(`--${key}`, theme[key]);
+    const theme_data = this.getConfig(this.runningTheme+"Theme");
+    const name_data = this.getConfig("appName");
+    const icon_data = this.getConfig("appIcon");
+    
+    if(Object.keys(theme_data).length > 0) {
+      const theme = JSON.parse(theme_data.config);
+      for (const key of Object.keys(theme)) {
+        document.documentElement.style.setProperty(`--${key}`, theme[key]);
+      }
+    }
+
+    if(Object.keys(name_data).length > 0) {
+      this.appName = name_data.config;
+    }
+
+    if(Object.keys(icon_data).length > 0) {
+      this.appIcon = icon_data.config;
     }
 
     var codeState: Codestate = this.getState("codestate");
     if(codeState) {
       codeState.themePref = this.runningTheme;
+      codeState.appName = this.appName;
+      codeState.appIcon = this.appIcon;
     } else {
       codeState = {
         themePref: this.runningTheme,
+        appName: this.appName,
+        appIcon: this.appIcon,
       }
     }
     this.saveState("codestate", codeState);
@@ -106,7 +126,8 @@ export class CodebaseService {
   }
 
   getConfig(key: string) {
-    return this.settings.filter(e => e.name.includes(key))[0];
+    const data: any[] = this.settings.filter(e => e.name.includes(key))
+    return data.length > 0 ? data[0] : {};
   }
 
   getPlatform(url: string | undefined) {
@@ -431,6 +452,8 @@ export class CodebaseService {
 
       var codeState: Codestate = {
         "themePref": this.runningTheme,
+        "appIcon": this.appIcon,
+        "appName": this.appName,
         "tables": tables
       }
       this.saveState("codestate", codeState);

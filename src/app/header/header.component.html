@@ -6,7 +6,7 @@
             <fa-icon [icon]="barsIcon"></fa-icon>
           </span>
           <span routerLink="/dashboard" style="display: inline-block;">
-            <img src="../assets/logo.png" height="40" style="filter: grayscale(100%);-webkit-filter: grayscale(100%);">&nbsp;&nbsp;Codebase
+            <img src="{{icon}}" height="40" style="filter: grayscale(100%);-webkit-filter: grayscale(100%);">&nbsp;&nbsp;{{name}}
           </span>
         </li>
         <li nz-menu-item class="nohover">
@@ -173,7 +173,7 @@
         <ul nz-menu nzTheme="dark" nzMode="vertical">
           <li nz-menu-item class="nohover" style="padding: 2rem;display: flex;align-items: center;">
             <span routerLink="/dashboard" style="display: inline-block;">
-              <img src="../assets/logo.png" height="40" style="filter: grayscale(100%);-webkit-filter: grayscale(100%);">&nbsp;&nbsp;Codebase
+              <img src="{{icon}}" height="40" style="filter: grayscale(100%);-webkit-filter: grayscale(100%);">&nbsp;&nbsp;{{name}}
             </span>
           </li>
           <li *ngFor="let menu of codebase.navMenus" nz-menu-item routerLink="/problem/type/{{menu.slug}}" [nzSelected]="isActive(menu.slug)" style="padding: 1.5rem;
