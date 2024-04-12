@@ -23,6 +23,7 @@ export class SessionComponent implements OnInit, OnDestroy {
     this.url = this.route.snapshot.queryParamMap.get('url');
     this.message.success('Session Started Successfully....');
     this.codebase.startTimer();
+    window.scrollTo(0, 0);
   }
 
 }

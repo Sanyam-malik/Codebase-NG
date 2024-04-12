@@ -57,6 +57,8 @@ export class ProblemsComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
+    
     if(this.filter) {
       var key = this.filter.key;
       var value = this.filter.value;

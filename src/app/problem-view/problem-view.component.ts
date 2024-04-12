@@ -13,7 +13,7 @@ import { Company } from '../company';
 })
 export class ProblemViewComponent {
     showMore: boolean = false;
-    id: number | undefined;
+    id: string | undefined | null = null;
     item: Problem | undefined;
     button: Platform | undefined;
     codeIcon = faCode;
@@ -24,10 +24,11 @@ export class ProblemViewComponent {
     }
 
     ngOnInit() {
-        this.id = Number(this.route.snapshot.paramMap.get('id'));
-        if(this.id && this.id > 0) {
-            const data = this.route.snapshot.data['apiResponse']['problems'];
-            this.item = data[this.id - 1];
+        window.scrollTo(0, 0);
+        this.id = this.route.snapshot.paramMap.get('id');
+        if(this.id && this.id.length > 0) {
+            const data: Problem[] = this.route.snapshot.data['apiResponse']['problems'];
+            this.item = data.filter(x=> x.slug == this.id)[0];
             this.button = this.codebase.getPlatform(this.item?.url);
             this.codebase.runningNav = [
                 {
@@ -40,7 +41,7 @@ export class ProblemViewComponent {
                 },
                 {
                     name: this.item ? this.item.name : "",
-                    url: `/problem/view/`+this.item?.name
+                    url: `/problem/statement/`+this.item?.slug
                 }
             ];
 

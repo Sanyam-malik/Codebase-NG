@@ -63,7 +63,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of filterTable.data;let i = index">
-        <td><a routerLink="/problem/statement/{{data.id}}">{{ data.name }}</a></td>
+        <td><a routerLink="/problem/statement/{{data.slug}}">{{ data.name }}</a></td>
         <td>{{ data.type }}<div *ngIf="data.subdirectory">({{data.subdirectory.replaceAll(":", " -> ")}})</div></td>
         <td>{{ data.level }}</td>
         <td>{{ data.status }}</td>

@@ -75,5 +75,6 @@ export class NoteViewComponent implements OnInit {
       var data: Note[] = this.route.snapshot.data['apiResponse']['notes'];
       this.item = data.filter(item => item.slug === slug)[0];
     }
+    window.scrollTo(0, 0);
   }
 }
