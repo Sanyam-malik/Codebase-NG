@@ -114,7 +114,7 @@
           </nz-dropdown-menu>
         </li>
         <li nz-menu-item class="nohover">
-          <a nz-dropdown [nzDropdownMenu]="lmenu" nzTrigger="click"><fa-icon [icon]="linkIcon"></fa-icon>&nbsp;Links</a>
+          <a nz-dropdown [nzDropdownMenu]="lmenu" nzTrigger="click"><fa-icon [icon]="linkIcon"></fa-icon>&nbsp;Platforms</a>
           <nz-dropdown-menu #lmenu="nzDropdownMenu">
             <ul nz-menu nzSelectable class="d-list-container">
               <li nz-menu-item *ngFor="let platform of platforms" class="d-list">
@@ -133,7 +133,7 @@
                 </div>
                 <div class="d-list-item">
                   <h4 class="d-title">
-                    Add A Link
+                    Add A Platform
                   </h4>
                 </div>
               </li>
@@ -163,6 +163,7 @@
         <li nz-menu-item class="nohover" style="padding-right: 0.5%;">
           <a class="btn-theme-switch" (click)="codebase.switchTheme()">
             <fa-icon [icon]="switchTheme" style="display: contents;"></fa-icon>
+            {{themeType}}
           </a>
         </li>
       </div>

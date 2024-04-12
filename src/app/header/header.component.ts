@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { faStopwatch, faPause, faPlay, faStop, faBars, faLink, faCalendar, faBook, faThumbTack, faVideo, faPlus, faTrash, faFileAlt, faCircleHalfStroke, faMoon } from '@fortawesome/free-solid-svg-icons';
+import { faStopwatch, faPause, faPlay, faStop, faBars, faLink, faCalendar, faBook, faThumbTack, faVideo, faPlus, faTrash, faFileAlt, faCircleHalfStroke, faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CodebaseService } from '../codebase.service';
 import { HttpClient } from '@angular/common/http';
@@ -46,7 +46,11 @@ export class HeaderComponent {
   };
 
   get switchTheme(): any {
-    return this.codebase.runningTheme == 'dark' ? faCircleHalfStroke : faMoon;
+    return this.codebase.runningTheme == 'dark' ? faSun : faMoon;
+  }
+
+  get themeType(): string {
+    return this.codebase.runningTheme == 'dark' ? 'Light' : 'Dark';
   }
 
   get modalType() {
