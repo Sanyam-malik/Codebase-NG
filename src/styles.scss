@@ -716,6 +716,7 @@
     background-color: var(--boxColor);
     outline: 1px dashed var(--primaryColor);
     code {
+      font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace !important;
       color: var(--textSecondaryColor);
     }
   }
