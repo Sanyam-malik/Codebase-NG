@@ -68,17 +68,17 @@
         <td>{{ data.level }}</td>
         <td>{{ data.status }}</td>
         <td style="text-align: center;">
-          <div *ngIf="data.companies && data.companies.split(',').length > 0" style="justify-content: center;">
-            <nz-tag *ngFor="let company of data.companies.split(',').splice(0, 5)" [nzColor]="companiesColor[company]" (click)="tagClick(company)">{{company}}</nz-tag>
+          <div *ngIf="data.companies.length > 0" style="justify-content: center;">
+            <nz-tag *ngFor="let company of data.companies.splice(0, 5)" [nzColor]="getCompanyColor(company)" (click)="tagClick(company.name)">{{company.name}}</nz-tag>
             <ng-container *ngIf="showMore[i]">
-              <nz-tag *ngFor="let company of data.companies.split(',').splice(5)" [nzColor]="companiesColor[company]" (click)="tagClick(company)">{{company}}</nz-tag>
+              <nz-tag *ngFor="let company of data.companies.splice(5)" [nzColor]="getCompanyColor(company)" (click)="tagClick(company.name)">{{company.name}}</nz-tag>
             </ng-container>
-            <ng-container *ngIf="data.companies.split(',').length > 5">
+            <ng-container *ngIf="data.companies.length > 5">
               <nz-tag *ngIf="!showMore[i]" (click)="showMore[i] = true;" [nzColor]="'transparent'">+ More</nz-tag>
               <nz-tag *ngIf="showMore[i]" (click)="showMore[i] = false;" [nzColor]="'transparent'">- Less</nz-tag>
             </ng-container>
           </div>
-          <ng-container *ngIf="!data.companies || data.companies.split(',').length == 0">
+          <ng-container *ngIf="data.companies.length == 0">
             <div> No Company Information </div>
           </ng-container>
         </td>

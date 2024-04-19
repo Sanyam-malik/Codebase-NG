@@ -1,3 +1,5 @@
+import { Company } from "./company";
+
 export interface Problem {
     id: number,
     date: string,
@@ -10,7 +12,7 @@ export interface Problem {
     type: string,
     url: string,
     code: string,
-    companies: string,
+    companies: Company[],
     remarks: string,
     slug: string,
     subdirectory: string

@@ -17,7 +17,6 @@ export class ProblemViewComponent {
     item: Problem | undefined;
     button: Platform | undefined;
     codeIcon = faCode;
-    companies: Company[] = [];
 
     constructor(private route: ActivatedRoute, private codebase: CodebaseService, private router: Router) {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -44,19 +43,16 @@ export class ProblemViewComponent {
                     url: `/problem/statement/`+this.item?.slug
                 }
             ];
-
-            const list = this.item?.companies?.split(",")
-            if (list) {
-                for(var item of list) {
-                   this.companies.push({
-                    "name": item,
-                    "slug": this.codebase.createSlug(item),
-                    "color": this.codebase.getColor()
-                   }) 
-                }
-            }
         }
         
+    }
+
+    getColor(company: Company) {
+        if(this.codebase.runningTheme == 'dark') {
+            return company.color_dark;
+        } else {
+            return company.color_light;
+        }
     }
 
     tagClick(name: string) {

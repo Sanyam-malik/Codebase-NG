@@ -14,12 +14,12 @@
             <a *ngIf="!button" class="btn-code-action" [href]="item.url"><fa-icon class="color-primary" [icon]="codeIcon" ></fa-icon>&nbsp;View Problem Statement</a>
         </div>
     </div>
-    <div *ngIf="companies.length > 0" style="width: 60%;">
-        <nz-tag *ngFor="let company of companies.slice(0, 5)" [nzColor]="company['color']" (click)="tagClick(company.name)">{{company['name']}}</nz-tag>
+    <div *ngIf="item.companies" style="width: 60%;">
+        <nz-tag *ngFor="let company of item.companies.slice(0, 5)" [nzColor]="getColor(company)" (click)="tagClick(company.name)">{{company['name']}}</nz-tag>
         <ng-container *ngIf="showMore">
-            <nz-tag *ngFor="let company of companies.slice(5)" [nzColor]="company['color']" (click)="tagClick(company.name)">{{company['name']}}</nz-tag>
+            <nz-tag *ngFor="let company of item.companies.slice(5)" [nzColor]="getColor(company)" (click)="tagClick(company.name)">{{company['name']}}</nz-tag>
         </ng-container>
-        <ng-container *ngIf="companies.length > 5">
+        <ng-container *ngIf="item.companies.length > 5">
             <nz-tag *ngIf="!showMore" (click)="showMore = true;" [nzColor]="'transparent'">+ More</nz-tag>
             <nz-tag *ngIf="showMore" (click)="showMore = false;" [nzColor]="'transparent'">- Less</nz-tag>
         </ng-container>

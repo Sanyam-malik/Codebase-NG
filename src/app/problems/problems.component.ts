@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NzTableSortOrder, NzTableSortFn, NzTableFilterList, NzTableFilterFn } from 'ng-zorro-antd/table';
 import { Problem } from '../problem';
 import { CodebaseService } from '../codebase.service';
+import { Company } from '../company';
 
 interface ColumnItem {
   name: string;
@@ -20,8 +21,10 @@ interface ColumnItem {
 
 interface Filter {
   key: string,
+  subkey?: string,
   value: string,
   type?: string,
+  datatype?: string,
   substringSearch?: boolean
 }
 
@@ -48,8 +51,6 @@ export class ProblemsComponent implements OnInit{
     name: false
   };
   showMore: boolean[] = [];
-
-  companiesColor:any = {};
   companies: any[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router, private codebase: CodebaseService) {
@@ -63,25 +64,50 @@ export class ProblemsComponent implements OnInit{
       var key = this.filter.key;
       var value = this.filter.value;
       var subStringSearch = this.filter?.substringSearch ? this.filter.substringSearch : false;
+      var dataType = this.filter?.datatype ? this.filter.datatype : "string";
+      var subKey = this.filter?.subkey ? this.filter.subkey : '';
       var data : any[] = this.fullListOfData as any[];
       if(this.filter?.type == 'reverse') {
-        data = data.filter(e=> {
-          if (subStringSearch) {
-            return !String(e[key]).toLowerCase().includes(value.toLowerCase());
+        data = data.filter(e => {
+          if(dataType === "array" && subKey) {
+            const SubCondition: any[] = e[key].filter((item:any) => !String(item[subKey]).toLowerCase().includes(value.toLowerCase()));
+            const BaseCondition: any[] = e[key].filter((item:any) => String(item[subKey]).toLowerCase() !== value.toLowerCase());
+            if (subStringSearch) {
+              return SubCondition.length > 0
+            } else {
+              return BaseCondition.length > 0
+            }
           } else {
-            return String(e[key]).toLowerCase() !== value.toLowerCase();
+            if (subStringSearch) {
+              return !String(e[key]).toLowerCase().includes(value.toLowerCase());
+            } else {
+              return String(e[key]).toLowerCase() !== value.toLowerCase();
+            }
           }
           
         });
       } else {
         data = data.filter(e=> {
-          if (subStringSearch) {
-            return String(e[key]).toLowerCase().includes(value.toLowerCase());
+          console.log(dataType, subKey);
+          if(dataType === "array" && subKey) {
+            const SubCondition: any[] = e[key].filter((item:any) => String(item[subKey]).toLowerCase().includes(value.toLowerCase()));
+            const BaseCondition: any[] = e[key].filter((item:any) => String(item[subKey]).toLowerCase() === value.toLowerCase());
+            if (subStringSearch) {
+              return SubCondition.length > 0
+            } else {
+              return BaseCondition.length > 0
+            }
           } else {
-            return String(e[key]).toLowerCase() === value.toLowerCase();
+            if (subStringSearch) {
+              return String(e[key]).toLowerCase().includes(value.toLowerCase());
+            } else {
+              return String(e[key]).toLowerCase() === value.toLowerCase();
+            }
           }
         });
       }
+
+      console.log(data);
       this.fullListOfData = data.sort((a, b) => a.name.localeCompare(b.name));
     }
 
@@ -106,11 +132,10 @@ export class ProblemsComponent implements OnInit{
     
     var companies: string[] = [];
     for (var item of this.listOfData) {
-      const list = item.companies?.split(",")
+      const list = item.companies
       if (list) {
         for(var listItem of list) {
-          companies.push(listItem);
-          this.companiesColor[String(listItem)] =this.codebase.getColor(); 
+          companies.push(listItem.name); 
         }
       }
     }
@@ -193,7 +218,7 @@ export class ProblemsComponent implements OnInit{
         listOfFilter: this.companies,
         filterFn: (list: string[], item: Problem) => list.some(company => {
           if(company.toLowerCase() != 'none' && item.companies) {
-            return item.companies.toLowerCase().indexOf(company.toLowerCase()) !== -1;
+            return item.companies.filter(item => item.name.indexOf(company.toLowerCase()) !== -1).length > 0;
           }
           else {
             return item.companies == null;
@@ -230,6 +255,14 @@ export class ProblemsComponent implements OnInit{
   pageChange(pageNo: number) {
     this.codebase.setTableState(this.stateName, pageNo);
   }
+
+  getCompanyColor(company: Company) {
+    if(this.codebase.runningTheme == 'dark') {
+        return company.color_dark;
+    } else {
+        return company.color_light;
+    }
+}
 
   tagClick(title: string) {
     this.router.navigate(['/problem/company', this.codebase.createSlug(title)]);

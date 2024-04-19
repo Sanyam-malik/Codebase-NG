@@ -44,6 +44,8 @@ export class CompanyComponent implements OnInit {
     this.filter = {
       key: 'companies',
       value: this.company?.name,
+      subkey: "name",
+      datatype: "array",
       substringSearch: true
     }
   }
