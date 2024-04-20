@@ -8,7 +8,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ZorroModule } from './zorro/zorro.module';
@@ -37,6 +37,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ModalComponent } from './modal/modal.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { CacheInterceptor } from './cache.interceptor';
 
 registerLocaleData(en);
 
@@ -82,6 +83,7 @@ registerLocaleData(en);
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
+    { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true },
     {
       provide: HIGHLIGHT_OPTIONS,
       useValue: {
