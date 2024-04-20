@@ -8,9 +8,14 @@ import {
 } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Base64 } from 'js-base64';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class CacheInterceptor implements HttpInterceptor {
+
+  private cacheKey = 'api_cache';
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (!this.isCacheable(req)) {
       return next.handle(req);
@@ -22,7 +27,7 @@ export class CacheInterceptor implements HttpInterceptor {
       // Manually create a deep copy of the response
       var url = cachedResponse?.response?.url != null ? cachedResponse.response.url : undefined;
       const clonedResponse = new HttpResponse({
-        body: JSON.parse(JSON.stringify(cachedResponse.response.body)), // Deep copy the body
+        body: JSON.parse(Base64.decode(cachedResponse.response.body)),
         status: cachedResponse.response.status,
         statusText: cachedResponse.response.statusText,
         headers: cachedResponse.response.headers,
@@ -48,13 +53,29 @@ export class CacheInterceptor implements HttpInterceptor {
   }
 
   private writeToCache(key: string, response: HttpResponse<any>): void {
-    localStorage.setItem(key, JSON.stringify({ response, timestamp: Date.now() }));
+    // Encoding the response body before storing in localStorage under 'api_cache' key
+    key = key.replace(environment.baseURL, "");
+    const cacheData: any = this.readFromCache(this.cacheKey) || {};
+    cacheData[key] = {
+      response: {
+        ...response,
+        body: Base64.encode(JSON.stringify(response.body)) // Encoding the body
+      },
+      timestamp: Date.now()
+    };
+    localStorage.setItem(this.cacheKey, JSON.stringify(cacheData));
   }
 
   private readFromCache(key: string): { response: HttpResponse<any>, timestamp: number } | null {
-    const cachedData = localStorage.getItem(key);
-    return cachedData ? JSON.parse(cachedData) : null;
+    key = key.replace(environment.baseURL, "");
+    const cacheData = localStorage.getItem(this.cacheKey);
+    if (cacheData) {
+      const cachedResponse = JSON.parse(cacheData)[key];
+      return cachedResponse ? cachedResponse : null;
+    }
+    return null;
   }
+
 
   private isCacheValid(timestamp: number): boolean {
     const cacheExpiration = 2 * 60 * 1000; // 2 minutes
