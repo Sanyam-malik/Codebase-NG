@@ -29,7 +29,7 @@ export class ProblemViewComponent {
             const data: Problem[] = this.route.snapshot.data['apiResponse']['problems'];
             this.item = data.filter(x=> x.slug == this.id)[0];
             this.button = this.codebase.getPlatform(this.item?.url);
-            this.codebase.runningNav = [
+            this.codebase.runningNav$.next([
                 {
                     name: 'Home',
                     url: '/dashboard'
@@ -42,7 +42,7 @@ export class ProblemViewComponent {
                     name: this.item ? this.item.name : "",
                     url: `/problem/statement/`+this.item?.slug
                 }
-            ];
+            ]);
         }
         
     }

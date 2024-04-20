@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzTableSortOrder, NzTableSortFn, NzTableFilterList, NzTableFilterFn } from 'ng-zorro-antd/table';
 import { Problem } from '../problem';
@@ -34,7 +34,8 @@ interface Filter {
   templateUrl: './problems.component.html',
   styleUrl: './problems.component.scss'
 })
-export class ProblemsComponent implements OnInit{
+
+export class ProblemsComponent implements AfterViewInit {
 
   @Input('data') fullListOfData: Problem[] = [];
   @Input('title') title: string = '';
@@ -55,63 +56,11 @@ export class ProblemsComponent implements OnInit{
 
   constructor(private route: ActivatedRoute, private router: Router, private codebase: CodebaseService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    window.scrollTo(0, 0);
   }
 
-  ngOnInit(): void {
-    window.scrollTo(0, 0);
-    
-    if(this.filter) {
-      var key = this.filter.key;
-      var value = this.filter.value;
-      var subStringSearch = this.filter?.substringSearch ? this.filter.substringSearch : false;
-      var dataType = this.filter?.datatype ? this.filter.datatype : "string";
-      var subKey = this.filter?.subkey ? this.filter.subkey : '';
-      var data : any[] = this.fullListOfData as any[];
-      if(this.filter?.type == 'reverse') {
-        data = data.filter(e => {
-          if(dataType === "array" && subKey) {
-            const SubCondition: any[] = e[key].filter((item:any) => !String(item[subKey]).toLowerCase().includes(value.toLowerCase()));
-            const BaseCondition: any[] = e[key].filter((item:any) => String(item[subKey]).toLowerCase() !== value.toLowerCase());
-            if (subStringSearch) {
-              return SubCondition.length > 0
-            } else {
-              return BaseCondition.length > 0
-            }
-          } else {
-            if (subStringSearch) {
-              return !String(e[key]).toLowerCase().includes(value.toLowerCase());
-            } else {
-              return String(e[key]).toLowerCase() !== value.toLowerCase();
-            }
-          }
-          
-        });
-      } else {
-        data = data.filter(e=> {
-          console.log(dataType, subKey);
-          if(dataType === "array" && subKey) {
-            const SubCondition: any[] = e[key].filter((item:any) => String(item[subKey]).toLowerCase().includes(value.toLowerCase()));
-            const BaseCondition: any[] = e[key].filter((item:any) => String(item[subKey]).toLowerCase() === value.toLowerCase());
-            if (subStringSearch) {
-              return SubCondition.length > 0
-            } else {
-              return BaseCondition.length > 0
-            }
-          } else {
-            if (subStringSearch) {
-              return String(e[key]).toLowerCase().includes(value.toLowerCase());
-            } else {
-              return String(e[key]).toLowerCase() === value.toLowerCase();
-            }
-          }
-        });
-      }
-
-      console.log(data);
-      this.fullListOfData = data.sort((a, b) => a.name.localeCompare(b.name));
-    }
-
-    this.codebase.runningNav = [
+  ngAfterViewInit(): void {
+    var temp: any[] = [
       {
         name: 'Home',
         url: '/dashboard'
@@ -120,38 +69,21 @@ export class ProblemsComponent implements OnInit{
         name: 'Problems',
         url: '/problems'
       },
-    ]
-    
+    ];
+
     for(var bread of this.breadcrumb) {
-      this.codebase.runningNav.push(bread);
+      temp.push(bread);
     }
 
-    this.listOfData = this.fullListOfData;
+    this.codebase.runningNav$.next(temp);
+    this.setColumns();
+    this.listOfData = this.filterData();
     this.showMore.fill(false, 0, this.listOfData.length);
     this.loadState(this.stateName);
-    
-    var companies: string[] = [];
-    for (var item of this.listOfData) {
-      const list = item.companies
-      if (list) {
-        for(var listItem of list) {
-          companies.push(listItem.name); 
-        }
-      }
-    }
+    this.generateCompanies(this.listOfData);
+  }
 
-    for(var comp of new Set(companies)) {
-      this.companies.push({
-        text: comp,
-        value: comp
-      });
-    }
-
-    this.companies = [{
-      text: 'None',
-      value: 'none'
-    }].concat(this.companies.sort((a, b) => a.text.localeCompare(b.text)))
-
+  setColumns() {
     this.listOfColumns = [
       {
         name: 'Name',
@@ -217,24 +149,104 @@ export class ProblemsComponent implements OnInit{
         filterMultiple: true,
         listOfFilter: this.companies,
         filterFn: (list: string[], item: Problem) => list.some(company => {
-          if(company.toLowerCase() != 'none' && item.companies) {
-            return item.companies.filter(item => item.name.indexOf(company.toLowerCase()) !== -1).length > 0;
+          if (company.toLowerCase() != 'none' && item.companies.length > 0) {
+            const result = item.companies.filter(item => item.name.toLowerCase().indexOf(company.toLowerCase()) !== -1);
+            return result.length > 0;
           }
           else {
-            return item.companies == null;
+            const result = item.companies;
+            return result.length == 0;
           }
         })
       }
     ];
   }
 
+  private generateCompanies(listOfData: Problem[]) {
+    var companies: any[] = [];
+    for (var item of listOfData) {
+      const list = item.companies;
+      if (list) {
+        for (var listItem of list) {
+          companies.push(listItem.name);
+        }
+      }
+    }
+
+    companies = [];
+    for (var comp of new Set(companies)) {
+      companies.push({
+        text: comp,
+        value: comp
+      });
+    }
+
+    companies = [{
+      text: 'None',
+      value: 'none'
+    }].concat(companies.sort((a, b) => a.text.localeCompare(b.text)));
+    this.companies = companies;
+  }
+
+  filterData() {
+    var data: any[] = JSON.parse(JSON.stringify(this.fullListOfData));
+    if (this.filter) {
+      var key = this.filter.key;
+      var value = this.filter.value;
+      var subStringSearch = this.filter?.substringSearch ? this.filter.substringSearch : false;
+      var dataType = this.filter?.datatype ? this.filter.datatype : "string";
+      var subKey = this.filter?.subkey ? this.filter.subkey : '';
+      if (this.filter?.type == 'reverse') {
+        data = data.filter(e => {
+          if (dataType === "array" && subKey) {
+            const SubCondition: any[] = e[key].filter((item: any) => !String(item[subKey]).toLowerCase().includes(value.toLowerCase()));
+            const BaseCondition: any[] = e[key].filter((item: any) => String(item[subKey]).toLowerCase() !== value.toLowerCase());
+            if (subStringSearch) {
+              return SubCondition.length > 0;
+            } else {
+              return BaseCondition.length > 0;
+            }
+          } else {
+            if (subStringSearch) {
+              return !String(e[key]).toLowerCase().includes(value.toLowerCase());
+            } else {
+              return String(e[key]).toLowerCase() !== value.toLowerCase();
+            }
+          }
+
+        });
+      } else {
+        data = data.filter(e => {
+          if (dataType === "array" && subKey) {
+            const SubCondition: any[] = e[key].filter((item: any) => String(item[subKey]).toLowerCase().includes(value.toLowerCase()));
+            const BaseCondition: any[] = e[key].filter((item: any) => String(item[subKey]).toLowerCase() === value.toLowerCase());
+            if (subStringSearch) {
+              return SubCondition.length > 0;
+            } else {
+              return BaseCondition.length > 0;
+            }
+          } else {
+            if (subStringSearch) {
+              return String(e[key]).toLowerCase().includes(value.toLowerCase());
+            } else {
+              return String(e[key]).toLowerCase() === value.toLowerCase();
+            }
+          }
+        });
+      }
+    }
+    return data.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+
+
   search(): void {
     if(this.searchValue.trim().length > 0) {
-      this.listOfData = this.fullListOfData.filter((item: Problem) => item.name.toLowerCase().indexOf(this.searchValue.toLowerCase()) !== -1);
+      this.listOfData = JSON.parse(JSON.stringify(this.fullListOfData.filter((item: Problem) => item.name.toLowerCase().indexOf(this.searchValue.toLowerCase()) !== -1).sort((a, b) => a.name.localeCompare(b.name))));
       this.showMore = [];
       this.showMore.fill(false, 0, this.listOfData.length);
     } else {
-      this.listOfData = this.fullListOfData;
+      this.listOfData = JSON.parse(JSON.stringify(this.fullListOfData.sort((a, b) => a.name.localeCompare(b.name))));
       this.showMore = [];
       this.showMore.fill(false, 0, this.listOfData.length);
     }

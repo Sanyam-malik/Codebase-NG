@@ -14,7 +14,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { Remark } from './remark';
 import { Level } from './level';
 import { Status } from './status';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Note } from './note';
 import { Title } from '@angular/platform-browser';
 
@@ -30,7 +30,6 @@ export class CodebaseService {
   statuses: Status[] = [];
   levels: Level[] = [];
   remarks: Remark[] = [];
-  runningNav: BreadcrumbItem[] = [];
   trackers: Tracker[] = [];
   reminders: Reminder[] = [];
   platforms: Platform[] = [];
@@ -41,7 +40,9 @@ export class CodebaseService {
   timeline: any = {};
   triggeredUpdate: boolean = false;
   prevUpdate: any;
+
   isUpdated$: Subject<Boolean> = new Subject();
+  runningNav$: BehaviorSubject<BreadcrumbItem[]> = new BehaviorSubject<BreadcrumbItem[]>([]);
 
   isTabSwitched: boolean = false;
   showStartTimer: boolean = false;
@@ -197,7 +198,7 @@ export class CodebaseService {
 
   clearData() {
     this.navMenus = [];
-    this.runningNav = [];
+    this.runningNav$.next([]);
     this.trackers = [];
     this.reminders = [];
     this.platforms = [];

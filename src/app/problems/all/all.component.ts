@@ -10,10 +10,10 @@ import { Problem } from '../../problem';
 })
 export class AllComponent {
 
-  data : Problem[] = [];
+  data = this.route.snapshot.data['apiResponse']['problems'];
 
   constructor(private codebase: CodebaseService, private router: Router, private route: ActivatedRoute) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.data = this.route.snapshot.data['apiResponse']['problems'];
   }
+  
 }

@@ -36,6 +36,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ModalComponent } from './modal/modal.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 registerLocaleData(en);
 
@@ -57,7 +58,8 @@ registerLocaleData(en);
     PlaylistViewComponent,
     HeaderComponent,
     FooterComponent,
-    ModalComponent
+    ModalComponent,
+    BreadcrumbComponent
   ],
   imports: [
     SafePipe,

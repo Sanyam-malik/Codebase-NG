@@ -63,24 +63,35 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of filterTable.data;let i = index">
-        <td><a routerLink="/problem/statement/{{data.slug}}">{{ data.name }}</a></td>
-        <td>{{ data.type }}<div *ngIf="data.subdirectory">({{data.subdirectory.replaceAll(":", " -> ")}})</div></td>
+        <td>
+          <a routerLink="/problem/statement/{{data.slug}}">{{ data.name }}</a>
+        </td>
+        
+        <td>
+          {{ data.type }}<div *ngIf="data.subdirectory">({{data.subdirectory.replaceAll(":", " -> ")}})</div>
+        </td>
+        
         <td>{{ data.level }}</td>
+        
         <td>{{ data.status }}</td>
+        
         <td style="text-align: center;">
-          <div *ngIf="data.companies.length > 0" style="justify-content: center;">
-            <nz-tag *ngFor="let company of data.companies.splice(0, 5)" [nzColor]="getCompanyColor(company)" (click)="tagClick(company.name)">{{company.name}}</nz-tag>
-            <ng-container *ngIf="showMore[i]">
-              <nz-tag *ngFor="let company of data.companies.splice(5)" [nzColor]="getCompanyColor(company)" (click)="tagClick(company.name)">{{company.name}}</nz-tag>
-            </ng-container>
-            <ng-container *ngIf="data.companies.length > 5">
-              <nz-tag *ngIf="!showMore[i]" (click)="showMore[i] = true;" [nzColor]="'transparent'">+ More</nz-tag>
-              <nz-tag *ngIf="showMore[i]" (click)="showMore[i] = false;" [nzColor]="'transparent'">- Less</nz-tag>
-            </ng-container>
-          </div>
-          <ng-container *ngIf="data.companies.length == 0">
+          <span *ngIf="data.companies && data.companies.length > 0">
+            <div style="justify-content: center;">
+              <nz-tag *ngFor="let company of data.companies.splice(0, 5)" [nzColor]="getCompanyColor(company)" (click)="tagClick(company.name)">{{company.name}}</nz-tag>
+              <ng-container *ngIf="showMore[i]">
+                <nz-tag *ngFor="let company of data.companies.splice(5)" [nzColor]="getCompanyColor(company)" (click)="tagClick(company.name)">{{company.name}}</nz-tag>
+              </ng-container>
+              <ng-container *ngIf="data.companies.length > 5">
+                <nz-tag *ngIf="!showMore[i]" (click)="showMore[i] = true;" [nzColor]="'transparent'">+ More</nz-tag>
+                <nz-tag *ngIf="showMore[i]" (click)="showMore[i] = false;" [nzColor]="'transparent'">- Less</nz-tag>
+              </ng-container>
+            </div>
+          </span>
+
+          <span *ngIf="data.companies && data.companies.length == 0">
             <div> No Company Information </div>
-          </ng-container>
+          </span>
         </td>
       </tr>
     </tbody>

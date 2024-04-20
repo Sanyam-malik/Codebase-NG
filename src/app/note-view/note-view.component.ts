@@ -25,7 +25,7 @@ export class NoteViewComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private message: NzMessageService, private codebase: CodebaseService, private router: Router, private http: HttpClient, private mdService:MarkdownService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.codebase.runningNav = [];
+    this.codebase.runningNav$.next([]);
   }
 
   get note(): string {
