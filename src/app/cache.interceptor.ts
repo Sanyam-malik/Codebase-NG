@@ -44,7 +44,7 @@ export class CacheInterceptor implements HttpInterceptor {
 
   private isCacheable(req: HttpRequest<any>): boolean {
     // Customize this logic based on your requirements (e.g., allow only GET requests)
-    return req.method === 'GET';
+    return req.method === 'GET' && !req.url.includes('/status');
   }
 
   private writeToCache(key: string, response: HttpResponse<any>): void {
