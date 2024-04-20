@@ -176,7 +176,7 @@
               <img src="{{icon}}" height="40" style="filter: grayscale(100%);-webkit-filter: grayscale(100%);">&nbsp;&nbsp;{{name}}
             </span>
           </li>
-          <li *ngFor="let menu of codebase.navMenus" nz-menu-item routerLink="/problem/type/{{menu.slug}}" [nzSelected]="isActive(menu.slug)" style="padding: 1.5rem;
+          <li *ngFor="let menu of codebase.types" nz-menu-item routerLink="/problem/type/{{menu.slug}}" [nzSelected]="isActive(menu.slug)" style="padding: 1.5rem;
           align-items: center;
           display: flex;">
             {{menu.name}}

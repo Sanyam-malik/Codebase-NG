@@ -17,6 +17,8 @@ import { Status } from './status';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Note } from './note';
 import { Title } from '@angular/platform-browser';
+import { Problem } from './problem';
+import { Timeline } from './timeline';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +28,8 @@ export class CodebaseService {
   appName = "Codebase";
   appIcon = "../assets/logo.png";
   runningTheme: string = "dark";
-  navMenus: Menu[] = [];
+  
+  types: Menu[] = [];
   statuses: Status[] = [];
   levels: Level[] = [];
   remarks: Remark[] = [];
@@ -35,12 +38,13 @@ export class CodebaseService {
   platforms: Platform[] = [];
   companies: Company[] = [];
   settings: Setting[] = [];
+  problems: Problem[] = [];
   notes: Note[] = [];
   analytics: Analytics | undefined;
-  timeline: any = {};
+  timeline: Timeline | undefined;
+  
   triggeredUpdate: boolean = false;
   prevUpdate: any;
-
   isUpdated$: Subject<Boolean> = new Subject();
   runningNav$: BehaviorSubject<BreadcrumbItem[]> = new BehaviorSubject<BreadcrumbItem[]>([]);
 
@@ -144,7 +148,7 @@ export class CodebaseService {
 
   getType(slug: string | undefined) {
     if(slug) {
-      const list = this.navMenus.filter(item => item.slug == slug);
+      const list = this.types.filter(item => item.slug == slug);
       return list[0];
     } else {
       return undefined;
@@ -197,7 +201,7 @@ export class CodebaseService {
   }
 
   clearData() {
-    this.navMenus = [];
+    this.types = [];
     this.runningNav$.next([]);
     this.trackers = [];
     this.reminders = [];
@@ -268,134 +272,37 @@ export class CodebaseService {
   }
 
   getData() {
-    const http = this.http;
-    const codebase = this;
+    // Define an array of endpoints to fetch data
+    const endpoints = [
+      { property: 'types', url: '/problem/types' },
+      { property: 'levels', url: '/problem/levels' },
+      { property: 'statuses', url: '/problem/statuses' },
+      { property: 'platforms', url: '/platforms' },
+      { property: 'trackers', url: '/trackers' },
+      { property: 'reminders', url: '/reminders' },
+      { property: 'companies', url: '/companies' },
+      { property: 'remarks', url: '/remarks' },
+      { property: 'notes', url: '/notes' },
+      { property: 'settings', url: '/settings' },
+      { property: 'analytics', url: '/analytics' },
+      { property: 'timeline', url: '/timeline' },
+      { property: 'problems', url: '/problems' }
+    ];
+    
+    // Fetch data for each endpoint
+    endpoints.forEach(endpoint => {
+      if (!this.hasOwnProperty(endpoint.property) || (this as any)[endpoint.property].length === 0) {
+        this.http.get(environment.baseURL + endpoint.url).subscribe((response: any) => {
+          (this as any)[endpoint.property] = response[endpoint.property];
+          if (endpoint.property === 'settings') {
+            this.initTheme();
+          }
+        }, err => {
+          console.error("Failed to get response from "+endpoint.url+ " endpoint");
+        });
+      }
+    });
 
-    if(codebase.navMenus.length == 0) {
-      http.get(environment.baseURL+"/problem/types").subscribe((response: any) => {
-        codebase.navMenus = response['problem_types'].sort((a: any, b: any) => (a['name'] < b['name'] ? -1 : 1));
-      },err => {
-        
-      },() => {
-  
-      })
-    }
-
-    if(codebase.navMenus.length == 0) {
-      http.get(environment.baseURL+"/problem/levels").subscribe((response: any) => {
-        codebase.levels = response['problem_levels'];
-      },err => {
-        
-      },() => {
-  
-      })
-    }
-
-    if(codebase.navMenus.length == 0) {
-      http.get(environment.baseURL+"/problem/statuses").subscribe((response: any) => {
-        codebase.statuses = response['problem_statuses'];
-      },err => {
-        
-      },() => {
-  
-      })
-    }
-  
-    if(codebase.platforms.length == 0) {
-      http.get(environment.baseURL+"/platforms").subscribe((response: any) => {
-        codebase.platforms = response['platforms'];
-      },err => {
-        
-      },() => {
-  
-      })
-    }
-  
-    if(codebase.trackers.length == 0) {
-      http.get(environment.baseURL+"/trackers").subscribe((response: any) => {
-        codebase.trackers = response['trackers']
-      },err => {
-        
-      },() => {
-  
-      })
-    }
-  
-    if(codebase.reminders.length == 0) {
-      http.get(environment.baseURL+"/reminders").subscribe((response: any) => {
-        codebase.reminders = response['reminders']
-      },err => {
-        
-      },() => {
-  
-      })
-    }
-  
-    if(codebase.companies.length == 0) {
-      http.get(environment.baseURL+"/companies").subscribe((response: any) => {
-        codebase.companies = response['companies']
-      },err => {
-        
-      },() => {
-  
-      })
-    }
-
-    if(codebase.remarks.length == 0) {
-      http.get(environment.baseURL+"/remarks").subscribe((response: any) => {
-        codebase.remarks = response['remarks']
-      },err => {
-        
-      },() => {
-  
-      })
-    }
-
-    if(codebase.notes.length == 0) {
-      http.get(environment.baseURL+"/notes").subscribe((response: any) => {
-        codebase.notes = response['notes']
-      },err => {
-        
-      },() => {
-  
-      })
-    }
-  
-    if(codebase.settings.length == 0) {
-      http.get(environment.baseURL+"/settings").subscribe((response: any) => {
-        codebase.settings = response['settings']
-        this.initTheme();
-      },err => {
-        
-      },() => {
-  
-      })
-    }
-  
-    if(!codebase.analytics || Object.keys(codebase.analytics).length == 0) {
-      http.get(environment.baseURL+"/analytics").subscribe((response: any) => {
-        codebase.analytics = response['analytics'];
-      },err => {
-        
-      },() => {
-  
-      })
-    }
-
-    if(!codebase.timeline || Object.keys(codebase.timeline).length == 0) {
-      http.get(environment.baseURL+"/timeline").subscribe((response: any) => {
-        if(!codebase.timeline) {
-          codebase.timeline = {};
-        }
-        codebase.timeline['full_timeline'] = response['full_timeline'];
-        codebase.timeline['current_timeline'] = response['current_timeline'];
-        codebase.timeline['previous_timeline'] = response['previous_timeline'];
-      },err => {
-        
-      },() => {
-  
-      })
-    }
   }
 
   startTimer() {

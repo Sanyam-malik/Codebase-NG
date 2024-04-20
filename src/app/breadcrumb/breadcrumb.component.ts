@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { BreadcrumbItem } from '../breadcrumb-item';
 import { CodebaseService } from '../codebase.service';
 import { Subscription } from 'rxjs';
@@ -13,12 +13,14 @@ export class BreadcrumbComponent {
   runningNav: BreadcrumbItem[] = [];
   runningNavSubscription: Subscription | undefined;
 
-  constructor(private codebase: CodebaseService) {}
+  constructor(private codebase: CodebaseService, private cdr: ChangeDetectorRef) {
+  }
 
   ngOnInit(): void {
     this.codebase.getData();
     this.runningNavSubscription = this.codebase.runningNav$.subscribe((runningNavData: BreadcrumbItem[]) => {
       this.runningNav = runningNavData;
+      this.cdr.detectChanges();
     });
   }
 
