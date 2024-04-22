@@ -274,7 +274,7 @@ export class ProblemsComponent implements AfterViewInit {
     } else {
         return company.color_light;
     }
-}
+  }
 
   tagClick(title: string) {
     this.router.navigate(['/problem/company', this.codebase.createSlug(title)]);

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CodebaseService } from '../../codebase.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Problem } from '../../problem';
@@ -8,12 +8,16 @@ import { Problem } from '../../problem';
   templateUrl: './all.component.html',
   styleUrl: './all.component.scss'
 })
-export class AllComponent {
+export class AllComponent implements OnInit {
 
-  data = this.route.snapshot.data['apiResponse']['problems'];
+  data = [];
 
   constructor(private codebase: CodebaseService, private router: Router, private route: ActivatedRoute) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
+  
+  ngOnInit(): void {
+    this.data = this.route.snapshot.data['apiResponse']['problems'];
   }
   
 }

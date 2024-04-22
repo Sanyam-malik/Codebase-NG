@@ -78,9 +78,9 @@
         <td style="text-align: center;">
           <span *ngIf="data.companies && data.companies.length > 0">
             <div style="justify-content: center;">
-              <nz-tag *ngFor="let company of data.companies.splice(0, 5)" [nzColor]="getCompanyColor(company)" (click)="tagClick(company.name)">{{company.name}}</nz-tag>
+              <nz-tag *ngFor="let company of data.companies.slice(0, 5)" [nzColor]="getCompanyColor(company)" (click)="tagClick(company.name)">{{company.name}}</nz-tag>
               <ng-container *ngIf="showMore[i]">
-                <nz-tag *ngFor="let company of data.companies.splice(5)" [nzColor]="getCompanyColor(company)" (click)="tagClick(company.name)">{{company.name}}</nz-tag>
+                <nz-tag *ngFor="let company of data.companies.slice(5)" [nzColor]="getCompanyColor(company)" (click)="tagClick(company.name)">{{company.name}}</nz-tag>
               </ng-container>
               <ng-container *ngIf="data.companies.length > 5">
                 <nz-tag *ngIf="!showMore[i]" (click)="showMore[i] = true;" [nzColor]="'transparent'">+ More</nz-tag>
