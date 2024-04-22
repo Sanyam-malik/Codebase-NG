@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzTableSortOrder, NzTableSortFn, NzTableFilterList, NzTableFilterFn } from 'ng-zorro-antd/table';
 import { Problem } from '../problem';
@@ -35,7 +35,7 @@ interface Filter {
   styleUrl: './problems.component.scss'
 })
 
-export class ProblemsComponent implements AfterViewInit {
+export class ProblemsComponent implements OnInit {
 
   @Input('data') fullListOfData: Problem[] = [];
   @Input('title') title: string = '';
@@ -52,14 +52,17 @@ export class ProblemsComponent implements AfterViewInit {
     name: false
   };
   showMore: boolean[] = [];
+
+  statuses:any[] = [];
+  levels:any[] = [];
+  types:any[] = [];
   companies: any[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router, private codebase: CodebaseService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    window.scrollTo(0, 0);
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     var temp: any[] = [
       {
         name: 'Home',
@@ -76,11 +79,15 @@ export class ProblemsComponent implements AfterViewInit {
     }
 
     this.codebase.runningNav$.next(temp);
-    this.setColumns();
     this.listOfData = this.filterData();
     this.showMore.fill(false, 0, this.listOfData.length);
     this.loadState(this.stateName);
-    this.generateCompanies(this.listOfData);
+    
+    this.statuses = [...new Set(this.listOfData.map(problem => problem.status))].map(status => ({ text: status, value: status }));
+    this.levels = [...new Set(this.listOfData.map(problem => problem.level))].map(level => ({ text: level, value: level }))
+    this.types = [...new Set(this.listOfData.map(problem => problem.type))].map(type => ({ text: type, value: type }));
+    this.companies = [{ text: 'None', value: 'none' }, ...[...new Set(this.listOfData.flatMap(item => item.companies?.map(company => company.name) || []))].map(comp => ({ text: comp, value: comp })).slice(1).sort((a, b) => a.text.localeCompare(b.text))];
+    this.setColumns();
   }
 
   setColumns() {
@@ -108,7 +115,7 @@ export class ProblemsComponent implements AfterViewInit {
         sortFn: (a: Problem, b: Problem) => a.type.localeCompare(b.type),
         sortDirections: ['ascend', 'descend', null],
         filterMultiple: true,
-        listOfFilter: [...new Set(this.listOfData.map(problem => problem.type))].map(type => ({ text: type, value: type })) as NzTableFilterList,
+        listOfFilter: this.types as NzTableFilterList,
         filterFn: (list: string[], item: Problem) => list.some(type => item.type.toLowerCase().indexOf(type.toLowerCase()) !== -1)
       },
       {
@@ -121,7 +128,7 @@ export class ProblemsComponent implements AfterViewInit {
         sortFn: (a: Problem, b: Problem) => a.level.localeCompare(b.level),
         sortDirections: ['ascend', 'descend', null],
         filterMultiple: true,
-        listOfFilter: [...new Set(this.listOfData.map(problem => problem.level))].map(level => ({ text: level, value: level })) as NzTableFilterList,
+        listOfFilter: this.levels as NzTableFilterList,
         filterFn: (list: string[], item: Problem) => list.some(level => item.level.toLowerCase().indexOf(level.toLowerCase()) !== -1)
       },
       {
@@ -134,7 +141,7 @@ export class ProblemsComponent implements AfterViewInit {
         sortFn: (a: Problem, b: Problem) => a.status.localeCompare(b.status),
         sortDirections: ['ascend', 'descend', null],
         filterMultiple: true,
-        listOfFilter: [...new Set(this.listOfData.map(problem => problem.status))].map(status => ({ text: status, value: status })) as NzTableFilterList,
+        listOfFilter: this.statuses as NzTableFilterList,
         filterFn: (list: string[], item: Problem) => list.some(status => item.status.toLowerCase().indexOf(status.toLowerCase()) !== -1)
       },
       {
@@ -148,44 +155,9 @@ export class ProblemsComponent implements AfterViewInit {
         sortDirections: [],
         filterMultiple: true,
         listOfFilter: this.companies,
-        filterFn: (list: string[], item: Problem) => list.some(company => {
-          if (company.toLowerCase() != 'none' && item.companies.length > 0) {
-            const result = item.companies.filter(item => item.name.toLowerCase().indexOf(company.toLowerCase()) !== -1);
-            return result.length > 0;
-          }
-          else {
-            const result = item.companies;
-            return result.length == 0;
-          }
-        })
+        filterFn: (list: string[], item: Problem) => list.some(status => item.status.toLowerCase().indexOf(status.toLowerCase()) !== -1)
       }
     ];
-  }
-
-  private generateCompanies(listOfData: Problem[]) {
-    var companies: any[] = [];
-    for (var item of listOfData) {
-      const list = item.companies;
-      if (list) {
-        for (var listItem of list) {
-          companies.push(listItem.name);
-        }
-      }
-    }
-
-    companies = [];
-    for (var comp of new Set(companies)) {
-      companies.push({
-        text: comp,
-        value: comp
-      });
-    }
-
-    companies = [{
-      text: 'None',
-      value: 'none'
-    }].concat(companies.sort((a, b) => a.text.localeCompare(b.text)));
-    this.companies = companies;
   }
 
   filterData() {
