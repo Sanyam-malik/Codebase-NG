@@ -23,7 +23,7 @@ export class ProblemViewComponent {
     }
 
     ngOnInit() {
-        window.scrollTo(0, 0);
+        
         this.id = this.route.snapshot.paramMap.get('id');
         if(this.id && this.id.length > 0) {
             const data: Problem[] = this.route.snapshot.data['apiResponse']['problems'];
