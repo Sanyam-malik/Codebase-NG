@@ -1,27 +1,63 @@
-# CodebaseNg
+# CodebaseNG
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.2.
+Welcome to CodebaseNG! This Angular project is designed to track your dsa progress.
 
-## Development server
+## Table of Contents
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Contributing](#contributing)
+- [License](#license)
+- [Screenshots](#screenshots)
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+To get started with CodebaseNG, follow these steps:
 
-## Build
+1. Clone this repository to your local machine using `git clone https://github.com/yourusername/codebase-ng.git`
+2. Navigate into the project directory: `cd codebase-ng`
+3. Install dependencies using npm: `npm install --force`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Usage
 
-## Running unit tests
+Once you've installed the dependencies, you can start the development server using Angular CLI:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+ng serve --open
+```
+## Features
+1. DSA Progress Tracking
+2. Real Time-Analytics Based on Metadata
+3. Reminders (Coming Soon)
+4. Trackers (Coming Soon)
+5. Playlist (Coming Soon)
 
-## Running end-to-end tests
+## Contributing
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+If you'd like to contribute to Codebase, feel free to submit a pull request. Please follow these guidelines:
 
-## Further help
+    Fork the repository
+    Create a new branch (git checkout -b feature/your-feature)
+    Make your changes
+    Commit your changes (git commit -am 'Add some feature')
+    Push to the branch (git push origin feature/your-feature)
+    Create a new Pull Request
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## License
+
+This project is licensed under the MIT License.
+
+## Screenshots
+
+### Dashboard
+![Dashboard](./pics/1.png)
+
+### Notes
+![Notes](./pics/2.png)
+
+### All Problems
+![Problems](./pics/3.png)
+
+### Problem-View
+![Problem-View](./pics/4.png)
