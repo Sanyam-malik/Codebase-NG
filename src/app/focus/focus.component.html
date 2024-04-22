@@ -1,0 +1,8 @@
+<div style="display: flex;flex-direction:column;align-items: center;justify-content: center;padding: 5px;height: calc(100vh - 20vh);">
+    <div>
+        <h1 style="font-size: 10rem;">{{ minutes | number :'2.0' }}:{{ seconds | number: '2.0'}}</h1>
+    </div>
+    <div>
+        <h2 *ngIf="audioElement" style="font-style: italic;font-size: 2rem;">Currently Playing: {{ audioFiles[this.currentAudioIndex]['name'] }}</h2>
+    </div>
+</div>

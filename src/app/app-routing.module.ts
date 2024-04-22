@@ -13,6 +13,7 @@ import { RemarkComponent } from './problems/remark/remark.component';
 import { TypeComponent } from './problems/type/type.component';
 import { NoteViewComponent } from './note-view/note-view.component';
 import { PlaylistViewComponent } from './playlist-view/playlist-view.component';
+import { FocusComponent } from './focus/focus.component';
 
 const routes: Routes = [
   {
@@ -131,6 +132,10 @@ const routes: Routes = [
   {
     path: 'session',
     component: SessionComponent,
+  },
+  {
+    path: 'timer',
+    component: FocusComponent,
   }
 ];
 

@@ -110,7 +110,7 @@ export class HeaderComponent {
   }
 
   get showStartTimer() {
-    return this.codebase.showStartTimer;
+    return this.codebase.timerRunning;
   }
 
   get isPaused() {

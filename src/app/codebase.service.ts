@@ -49,7 +49,7 @@ export class CodebaseService {
   runningNav$: BehaviorSubject<BreadcrumbItem[]> = new BehaviorSubject<BreadcrumbItem[]>([]);
 
   isTabSwitched: boolean = false;
-  showStartTimer: boolean = false;
+  timerRunning: boolean = false;
   isDashboardRunning = false;
   minutes: number = 0;
   seconds: number = 0;
@@ -307,7 +307,7 @@ export class CodebaseService {
   }
 
   startTimer() {
-    this.showStartTimer = true;
+    this.timerRunning = true;
     this.minutes = 0;
     this.seconds = 0;
     this.timer = setInterval(() => {
@@ -330,7 +330,7 @@ export class CodebaseService {
   }
 
   stopTimer() {
-    this.showStartTimer = false;
+    this.timerRunning = false;
     this.isPaused = false;
     clearInterval(this.timer);
   }

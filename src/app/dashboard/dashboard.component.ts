@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   get showStartTimer() {
-    return this.codebase.showStartTimer;
+    return this.codebase.timerRunning;
   }
 
   get isPaused() {
