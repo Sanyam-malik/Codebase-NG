@@ -155,7 +155,18 @@ export class ProblemsComponent implements OnInit {
         sortDirections: [],
         filterMultiple: true,
         listOfFilter: this.companies,
-        filterFn: (list: string[], item: Problem) => list.some(status => item.status.toLowerCase().indexOf(status.toLowerCase()) !== -1)
+        filterFn: (list: string[], item: Problem) => list.some(company => {
+          if(company.toLowerCase().trim() !== 'none') {
+            if(item.companies.length > 0) {
+              return item.companies.some(c => c.name.includes(company));
+            } else {
+              return false;
+            }
+          } else {
+            return item.companies.length === 0;
+          }
+          
+        })
       }
     ];
   }
