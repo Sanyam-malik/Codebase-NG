@@ -13,6 +13,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { QuotesComponent } from './quotes/quotes.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { RouterModule } from '@angular/router';
+import { RelevanceComponent } from './relevance/relevance.component';
 
 
 
@@ -26,7 +27,8 @@ import { RouterModule } from '@angular/router';
     ProblemCountComponent,
     RemarksComponent,
     QuotesComponent,
-    TimelineComponent
+    TimelineComponent,
+    RelevanceComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,8 @@ import { RouterModule } from '@angular/router';
     ProblemFocusComponent,
     ProblemCountComponent,
     QuotesComponent,
-    TimelineComponent
+    TimelineComponent,
+    RelevanceComponent
   ]
 })
 export class WidgetModule { }

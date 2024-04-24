@@ -22,6 +22,12 @@ export interface TypeAnalytic {
     count: number
 }
 
+export interface ProblemAnalytic {
+    name: string,
+    slug: string,
+    count: number
+}
+
 export interface Analytics {
     "today_count": number,
     "total_count": number,
@@ -33,4 +39,5 @@ export interface Analytics {
     "levels": LevelAnalytic[],
     "statuses": StatusAnalytic[],
     "types": TypeAnalytic[]
+    "relevance": ProblemAnalytic[]
 }

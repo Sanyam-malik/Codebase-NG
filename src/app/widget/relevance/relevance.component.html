@@ -1,0 +1,19 @@
+<div class="dashcard">
+    <h2 style="font-size:1.5rem;">Problems by Relevance</h2>
+    <div *ngIf="relevance && relevance.length > 0" style="width:90%;height: 600px;margin: 2rem;overflow-y: auto;" class="list">
+        <nz-list nzItemLayout="horizontal">
+            <nz-list-item *ngFor="let problem of relevance" style="cursor: pointer;" >
+                <h3 style="margin: 0%;" routerLink="/problem/statement/{{problem.slug}}">
+                    <fa-icon [icon]="listIcon" style="color: var(--secondaryColor)"></fa-icon>
+                    {{problem.name}} <span style="color: var(--secondaryColor)">({{problem.count}} Companies)</span>
+                </h3>
+            </nz-list-item>
+        </nz-list>
+    </div>
+
+    <div *ngIf="!relevance || relevance.length == 0" class="center-div" style="width: 85%; height: 400px;margin: 2rem;">
+        <nz-list nzItemLayout="horizontal">
+            <nz-list-empty></nz-list-empty>
+        </nz-list>
+    </div>
+</div>

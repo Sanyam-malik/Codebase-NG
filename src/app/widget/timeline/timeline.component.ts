@@ -36,7 +36,8 @@ export class TimelineComponent {
   }
 
   objectEntries(obj: any): any {
-    return Object.keys(obj);
+    const newObj = Object.fromEntries((Object.entries(obj)).reverse());
+    return Object.keys(newObj);
   }
   
 }
