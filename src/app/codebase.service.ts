@@ -50,6 +50,8 @@ export class CodebaseService {
 
   isTabSwitched: boolean = false;
   timerRunning: boolean = false;
+  timerEvents$: Subject<String> = new Subject();
+  
   isDashboardRunning = false;
   minutes: number = 0;
   seconds: number = 0;
@@ -292,7 +294,7 @@ export class CodebaseService {
     
     // Fetch data for each endpoint
     endpoints.forEach(endpoint => {
-      if (!this.hasOwnProperty(endpoint.property) || (this as any)[endpoint.property].length === 0) {
+      if (!this.hasOwnProperty(endpoint.property) || !(this as any)[endpoint.property] || (this as any)[endpoint.property].length === 0) {
         this.http.get(environment.baseURL + endpoint.url).subscribe((response: any) => {
           (this as any)[endpoint.property] = response[endpoint.property];
           if (endpoint.property === 'settings') {
@@ -308,6 +310,7 @@ export class CodebaseService {
 
   startTimer() {
     this.timerRunning = true;
+    this.timerEvents$.next('started');
     this.minutes = 0;
     this.seconds = 0;
     this.timer = setInterval(() => {
@@ -323,16 +326,19 @@ export class CodebaseService {
 
   resumeTimer() {
     this.isPaused = false;
+    this.timerEvents$.next('resumed');
   }
 
   pauseTimer() {
     this.isPaused = true;
+    this.timerEvents$.next('paused');
   }
 
   stopTimer() {
     this.timerRunning = false;
     this.isPaused = false;
     clearInterval(this.timer);
+    this.timerEvents$.next('stopped');
   }
 
   getTableState(tableName: string | undefined | null) {

@@ -15,6 +15,7 @@ export class FocusComponent implements OnInit, OnDestroy {
   audioFiles: any[] = [];
   currentAudioIndex = 0;
   audioElement: HTMLAudioElement | undefined;
+  interval: any;
 
   constructor(private codebase: CodebaseService, private router: Router, private http: HttpClient, private message: NzMessageService) {
     if(!this.codebase.timerRunning) {
@@ -22,6 +23,15 @@ export class FocusComponent implements OnInit, OnDestroy {
     } else {
       document.documentElement.requestFullscreen();
     }
+
+    this.codebase.timerEvents$.asObservable().subscribe(res=> {
+      this.interval = setTimeout(() => {
+        if(res === 'stopped' && !this.codebase.timerRunning) {
+          clearTimeout(this.interval);
+          this.router.navigate(["/dashboard"]);
+        }
+      }, 10);
+    })
   }
 
   playNext() {
@@ -51,6 +61,7 @@ export class FocusComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.message.success('Focus Mode Terminated Successfully....');
     this.audioElement?.pause();
   }
 
