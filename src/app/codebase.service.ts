@@ -39,6 +39,7 @@ export class CodebaseService {
   companies: Company[] = [];
   settings: Setting[] = [];
   problems: Problem[] = [];
+  sheets: any[] = [];
   notes: Note[] = [];
   analytics: Analytics | undefined;
   timeline: Timeline | undefined;

@@ -140,6 +140,33 @@
             </ul>
           </nz-dropdown-menu>
         </li>
+        <li nz-menu-item class="nohover">
+          <a nz-dropdown [nzDropdownMenu]="dmenu" nzTrigger="click"><fa-icon [icon]="sheetIcon"></fa-icon>&nbsp;Sheets</a>
+          <nz-dropdown-menu #dmenu="nzDropdownMenu">
+            <ul nz-menu nzSelectable class="d-list-container">
+              <li nz-menu-item *ngFor="let sheet of sheets" class="d-list">
+                <div class="d-list-item">
+                  <fa-icon [icon]="sheetIcon" size="2x"></fa-icon>
+                </div>
+                <div class="d-list-item">
+                  <h4 class="d-title">
+                    {{sheet.name}}
+                  </h4>
+                </div>
+              </li>
+              <li nz-menu-item class="d-list" (click)="isModalVisible['sheet'] = true">
+                <div class="d-list-item">
+                  <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
+                </div>
+                <div class="d-list-item">
+                  <h4 class="d-title">
+                    Add A Sheet
+                  </h4>
+                </div>
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </li>
       </div>
 
       <div class="sub-menu-div">

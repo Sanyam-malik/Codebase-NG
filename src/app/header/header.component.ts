@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { faStopwatch, faPause, faPlay, faStop, faBars, faLink, faCalendar, faBook, faThumbTack, faVideo, faPlus, faTrash, faFileAlt, faCircleHalfStroke, faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
+import { faStopwatch, faPause, faPlay, faStop, faBars, faLink, faCalendar, faBook, faThumbTack, faVideo, faPlus, faTrash, faFileAlt, faCircleHalfStroke, faMoon, faSun, faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CodebaseService } from '../codebase.service';
 import { HttpClient } from '@angular/common/http';
@@ -30,6 +30,7 @@ export class HeaderComponent {
   plusIcon:any = faPlus;
   trashIcon:any = faTrash;
   fileIcon: any = faFileAlt;
+  sheetIcon: any = faBookOpen;
 
   year = new Date().getFullYear();
 
@@ -42,7 +43,8 @@ export class HeaderComponent {
     'event': false,
     'link': false,
     'tracker': false,
-    'note': false
+    'note': false,
+    'sheet': false
   };
 
   get switchTheme(): any {
@@ -90,6 +92,10 @@ export class HeaderComponent {
 
   get platforms() {
     return this.codebase.platforms;
+  }
+
+  get sheets() {
+    return this.codebase.sheets;
   }
 
   get notes() {
