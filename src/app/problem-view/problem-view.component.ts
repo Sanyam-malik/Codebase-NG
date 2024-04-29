@@ -5,6 +5,8 @@ import { CodebaseService } from '../codebase.service';
 import { Platform } from '../platform';
 import { faCode } from '@fortawesome/free-solid-svg-icons';
 import { Company } from '../company';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-problem-view',
@@ -17,8 +19,9 @@ export class ProblemViewComponent {
     item: Problem | undefined;
     button: Platform | undefined;
     codeIcon = faCode;
+    code: string = '';
 
-    constructor(private route: ActivatedRoute, private codebase: CodebaseService, private router: Router) {
+    constructor(private route: ActivatedRoute, private codebase: CodebaseService, private router: Router, private http: HttpClient) {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
 
@@ -43,6 +46,9 @@ export class ProblemViewComponent {
                     url: `/problem/statement/`+this.item?.slug
                 }
             ]);
+            this.http.get(`${environment.baseURL.replace("/api", "/code")}/${this.item?.filename}`).subscribe((response: any) => {
+                this.code = response['content'];
+            });
         }
         
     }
