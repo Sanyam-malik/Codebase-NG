@@ -13,7 +13,7 @@
           <a nz-dropdown [nzDropdownMenu]="emenu" nzTrigger="click"><fa-icon [icon]="calendarIcon"></fa-icon>&nbsp;Events</a>
           <nz-dropdown-menu #emenu="nzDropdownMenu">
             <ul nz-menu nzSelectable class="d-list-container">
-              <li nz-menu-item *ngFor="let reminder of reminders" class="d-list">
+              <li nz-menu-item *ngFor="let reminder of reminders" class="d-list" (click)="openShowModal('event', reminder)">
                 <div class="d-list-item">
                   <fa-icon [icon]="calendarIcon" size="3x"></fa-icon>
                 </div>
@@ -87,7 +87,7 @@
           <a nz-dropdown [nzDropdownMenu]="tmenu" nzTrigger="click"><fa-icon [icon]="thumbtackIcon"></fa-icon>&nbsp;Trackers</a>
           <nz-dropdown-menu #tmenu="nzDropdownMenu">
             <ul nz-menu nzSelectable class="d-list-container">
-              <li nz-menu-item *ngFor="let tracker of trackers" class="d-list">
+              <li nz-menu-item *ngFor="let tracker of trackers" class="d-list" (click)="openShowModal('tracker', tracker)">
                 <div class="d-list-item">
                   <fa-icon [icon]="thumbtackIcon" size="2x"></fa-icon>
                 </div>
@@ -117,7 +117,7 @@
           <a nz-dropdown [nzDropdownMenu]="lmenu" nzTrigger="click"><fa-icon [icon]="linkIcon"></fa-icon>&nbsp;Platforms</a>
           <nz-dropdown-menu #lmenu="nzDropdownMenu">
             <ul nz-menu nzSelectable class="d-list-container">
-              <li nz-menu-item *ngFor="let platform of platforms" class="d-list">
+              <li nz-menu-item *ngFor="let platform of platforms" class="d-list" (click)="openShowModal('link', platform)">
                 <div class="d-list-item">
                   <img [src]="platform.icon" width="35">
                 </div>
@@ -215,7 +215,7 @@
 <app-modal [(visible)]="isModalVisible[modalType]" title="Add {{modalType | titlecase}}" [content]="addNewModal" (onCancel)="handleCancel(modalType)" (onConfirm)="handleConfirm(modalType)"></app-modal>
 
 <ng-template #addNewModal>
-  <nz-segmented style="margin-bottom: 1rem;" [nzOptions]="['Add Manually', 'Add Using File']" [(ngModel)]="selectedUploadOption" (ngModelChange)="handleIndexChange($event)"></nz-segmented>
+  <!-- <nz-segmented style="margin-bottom: 1rem;" [nzOptions]="['Add Manually', 'Add Using File']" [(ngModel)]="selectedUploadOption" (ngModelChange)="handleIndexChange($event)"></nz-segmented> -->
 
   <ng-container *ngIf="selectedUploadOption == 1">
     <p>Upload {{modalType}}.json files to continue</p>
@@ -242,3 +242,50 @@
     </form>
   </ng-container>
 </ng-template>
+
+<nz-modal [(nzVisible)]="showModal" nzCentered nzTitle="{{showModalType | titlecase}}" (nzOnCancel)="hideShowModal()">
+  <div *nzModalContent>
+    <div *ngIf="showModalType == 'event'" class="d-list" style="padding: 0.5%;align-items: center;">
+      <div>
+        <p>Name: {{showModalItem.name}}</p>
+        <p *ngIf="showModalItem.desc">Description: {{showModalItem.desc}}</p>
+        <p *ngIf="showModalItem.recurrence">Recurrence: {{showModalItem.recurrence | titlecase}}</p>
+        <p *ngIf="showModalItem.date">Date: {{showModalItem.date}}</p>
+        <p *ngIf="showModalItem.start_time">Start Time: {{showModalItem.start_time}}</p>
+        <p *ngIf="showModalItem.end_time">End Time: {{showModalItem.end_time}}</p>
+      </div>
+      <div>
+        <fa-icon [icon]="calendarIcon" size="3x"></fa-icon>
+      </div>
+    </div>
+
+    <div *ngIf="showModalType == 'tracker'" class="d-list" style="padding: 0.5%;align-items: center;">
+      <div>
+        <p>Name: {{showModalItem.name}}</p>
+        <p>Levels: {{showModalItem.level}}</p> 
+      </div>
+      <div>
+        <fa-icon [icon]="thumbtackIcon" size="2x"></fa-icon>
+      </div>
+    </div>
+
+    <div *ngIf="showModalType == 'link'" class="d-list" style="padding: 0.5%;align-items: center;justify-content: space-between;">
+      <div style="max-width: 80%;">
+        <p>Name: {{showModalItem.name}}</p>
+        <p>URL: <a [href]="showModalItem.url">{{showModalItem.url}}</a></p>
+        <p>Icon: <a [href]="showModalItem.icon">{{showModalItem.icon}}</a></p>
+      </div>
+      <div>
+        <img [src]="showModalItem.icon" width="60">
+      </div>
+    </div>
+  </div>
+  <div *nzModalFooter>
+    <button nz-button nzType="primary">
+      Edit {{showModalType | titlecase}}
+    </button>
+    <button nz-button nzType="default">
+      Remove {{showModalType | titlecase}}
+    </button>
+  </div>
+</nz-modal>

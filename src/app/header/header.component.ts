@@ -47,6 +47,10 @@ export class HeaderComponent {
     'sheet': false
   };
 
+  showModal = false;
+  showModalType = "";
+  showModalItem: any;
+
   get switchTheme(): any {
     return this.codebase.runningTheme == 'dark' ? faSun : faMoon;
   }
@@ -145,6 +149,16 @@ export class HeaderComponent {
 
   stopTimer() {
     this.codebase.stopTimer();
+  }
+
+  openShowModal(type: string, item: any) {
+    this.showModal = true;
+    this.showModalType = type;
+    this.showModalItem = item;
+  }
+
+  hideShowModal() {
+    this.showModal = false;
   }
 
   handleIndexChange(index: number) {
