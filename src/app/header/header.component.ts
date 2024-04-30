@@ -106,6 +106,10 @@ export class HeaderComponent {
     return this.codebase.notes;
   }
 
+  get playlists() {
+    return this.codebase.playlists;
+  }
+
   isActive(slug: string): boolean {
     return this.router.isActive(`/problem/type/${slug}`, true);
   }

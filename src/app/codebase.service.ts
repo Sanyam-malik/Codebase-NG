@@ -19,6 +19,7 @@ import { Note } from './note';
 import { Title } from '@angular/platform-browser';
 import { Problem } from './problem';
 import { Timeline } from './timeline';
+import { Playlist } from './playlist';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,7 @@ export class CodebaseService {
   companies: Company[] = [];
   settings: Setting[] = [];
   problems: Problem[] = [];
+  playlists: Playlist[] = [];
   sheets: any[] = [];
   notes: Note[] = [];
   analytics: Analytics | undefined;
@@ -290,7 +292,8 @@ export class CodebaseService {
       { property: 'settings', url: '/settings' },
       { property: 'analytics', url: '/analytics' },
       { property: 'timeline', url: '/timeline' },
-      { property: 'problems', url: '/problems' }
+      { property: 'problems', url: '/problems' },
+      { property: 'playlists', url: '/playlists' }
     ];
     
     // Fetch data for each endpoint

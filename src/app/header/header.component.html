@@ -43,6 +43,16 @@
           <a nz-dropdown [nzDropdownMenu]="pmenu" nzTrigger="click"><fa-icon [icon]="videoIcon"></fa-icon>&nbsp;Playlists</a>
           <nz-dropdown-menu #pmenu="nzDropdownMenu">
             <ul nz-menu nzSelectable class="d-list-container">
+              <li nz-menu-item *ngFor="let playlist of playlists" class="d-list">
+                <div class="d-list-item">
+                  <fa-icon [icon]="videoIcon" size="2x"></fa-icon>
+                </div>
+                <div class="d-list-item">
+                  <h4 class="d-title">
+                    {{playlist.title}}
+                  </h4>
+                </div>
+              </li>
               <li nz-menu-item class="d-list" (click)="isModalVisible['playlist'] = true">
                 <div class="d-list-item">
                   <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
