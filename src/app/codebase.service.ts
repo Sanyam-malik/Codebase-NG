@@ -29,6 +29,7 @@ export class CodebaseService {
   appName = "Codebase";
   appIcon = "../assets/logo.png";
   runningTheme: string = "dark";
+  isAdditionAllowed: boolean = false;
   
   types: Menu[] = [];
   statuses: Status[] = [];
@@ -99,12 +100,17 @@ export class CodebaseService {
     const theme_data = this.getConfig(this.runningTheme+"Theme");
     const name_data = this.getConfig("appName");
     const icon_data = this.getConfig("appIcon");
+    const allow_addition = this.getConfig("appAddItems");
     
     if(Object.keys(theme_data).length > 0) {
       const theme = JSON.parse(theme_data.config);
       for (const key of Object.keys(theme)) {
         document.documentElement.style.setProperty(`--${key}`, theme[key]);
       }
+    }
+
+    if(Object.keys(allow_addition).length > 0) {
+      this.isAdditionAllowed = Boolean(allow_addition.config);
     }
 
     if(Object.keys(name_data).length > 0) {

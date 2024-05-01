@@ -67,6 +67,10 @@ export class HeaderComponent {
     return this.codebase.appIcon;
   }
 
+  get addItem(): boolean {
+    return this.codebase.isAdditionAllowed;
+  }
+
   get modalType() {
     var type: string = '';
     for(const [key, value] of Object.entries(this.isModalVisible)) {

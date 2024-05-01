@@ -26,7 +26,7 @@
                   </div>
                 </div>
               </li>
-              <li nz-menu-item class="d-list" (click)="isModalVisible['event'] = true">
+              <li *ngIf="addItem" nz-menu-item class="d-list" (click)="isModalVisible['event'] = true">
                 <div class="d-list-item">
                   <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
                 </div>
@@ -53,7 +53,7 @@
                   </h4>
                 </div>
               </li>
-              <li nz-menu-item class="d-list" (click)="isModalVisible['playlist'] = true">
+              <li *ngIf="addItem" nz-menu-item class="d-list" (click)="isModalVisible['playlist'] = true">
                 <div class="d-list-item">
                   <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
                 </div>
@@ -80,7 +80,7 @@
                   </a>
                 </div>
               </li>
-              <li nz-menu-item class="d-list" (click)="isModalVisible['note'] = true">
+              <li *ngIf="addItem" nz-menu-item class="d-list" (click)="isModalVisible['note'] = true">
                 <div class="d-list-item">
                   <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
                 </div>
@@ -110,7 +110,7 @@
                   </div>
                 </div>
               </li>
-              <li nz-menu-item class="d-list" (click)="isModalVisible['tracker'] = true">
+              <li *ngIf="addItem" nz-menu-item class="d-list" (click)="isModalVisible['tracker'] = true">
                 <div class="d-list-item">
                   <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
                 </div>
@@ -137,7 +137,7 @@
                   </h4>
                 </div>
               </li>
-              <li nz-menu-item class="d-list" (click)="isModalVisible['link'] = true">
+              <li *ngIf="addItem" nz-menu-item class="d-list" (click)="isModalVisible['link'] = true">
                 <div class="d-list-item">
                   <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
                 </div>
@@ -164,7 +164,7 @@
                   </h4>
                 </div>
               </li>
-              <li nz-menu-item class="d-list" (click)="isModalVisible['sheet'] = true">
+              <li *ngIf="addItem" nz-menu-item class="d-list" (click)="isModalVisible['sheet'] = true">
                 <div class="d-list-item">
                   <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
                 </div>
