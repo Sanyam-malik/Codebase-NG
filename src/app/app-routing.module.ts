@@ -125,7 +125,7 @@ const routes: Routes = [
       apiResponse: getResolver
     },
     data: {
-      url: '/playlist',
+      url: '/playlists',
       options: {}
     }
   },
