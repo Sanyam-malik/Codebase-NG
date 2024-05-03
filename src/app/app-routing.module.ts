@@ -14,6 +14,7 @@ import { TypeComponent } from './problems/type/type.component';
 import { NoteViewComponent } from './note-view/note-view.component';
 import { PlaylistViewComponent } from './playlist-view/playlist-view.component';
 import { FocusComponent } from './focus/focus.component';
+import { ContentRendererComponent } from './content-renderer/content-renderer.component';
 
 const routes: Routes = [
   {
@@ -128,6 +129,10 @@ const routes: Routes = [
       url: '/playlists',
       options: {}
     }
+  },
+  {
+    path: 'playlist/item/:id',
+    component: ContentRendererComponent 
   },
   {
     path: 'session',

@@ -8,13 +8,13 @@
         </div>
         <div style="text-align: right;">
             <h2>Status: 
-                <span *ngIf="overallStatus === 'TODO'" style="color: goldenrod;">
+                <span *ngIf="playlist.status === 'TODO'" style="color: red;">
                     Not Started
                 </span>
-                <span *ngIf="overallStatus === 'INPROGRESS'" style="color: darkred;">
+                <span *ngIf="playlist.status === 'INPROGRESS'" style="color: goldenrod;">
                     In Progress
                 </span>
-                <span *ngIf="overallStatus === 'COMPLETED'" style="color: darkgreen;">
+                <span *ngIf="playlist.status === 'COMPLETED'" style="color: darkgreen;">
                     Completed
                 </span> 
             </h2>
@@ -28,7 +28,7 @@
                 <tbody>
                   <tr *ngFor="let item of itemTable.data">
                     <td style="padding: 1%;" [width]="90">
-                        <a [href]="item.url">
+                        <a [href]="item.url" (click)="changeItemStatus('INPROGRESS', item.id)" target="_blank">
                             <img *ngIf="item.image" [src]="item.image" width="120" style="padding: 0.5%;">
                             <h3>{{item.title}}</h3>
                         </a>
@@ -36,19 +36,19 @@
                             {{item.description}}
                         </div>
                     </td>
-                    <td style="padding: 1%;" [width]="5">
+                    <td style="padding: 1%;" [width]="5" [colSpan]="section.status == 'INPROGRESS' ? 2 : 1">
                         <ng-container *ngIf="item.status === 'TODO'">
-                            <h3>To Do</h3>
+                            <h3 style="color: red;">To Do</h3>
                         </ng-container>
                         <ng-container *ngIf="item.status === 'INPROGRESS'">
-                            <h3>In Progress</h3>
+                            <h3 style="color: goldenrod;">In Progress</h3>
                         </ng-container>
                         <ng-container *ngIf="item.status === 'COMPLETED'">
-                            <h3><fa-icon [icon]="checkIcon" style="color: darkgreen;"></fa-icon>Completed</h3>
+                            <h3 style="color: darkgreen;">Completed</h3>
                         </ng-container>
                     </td>
                     <td style="padding: 1%;text-align: center;" *ngIf="item.status === 'TODO' || item.status === 'INPROGRESS'" [width]="5">
-                        <a>
+                        <a (click)="changeItemStatus('COMPLETED', item.id)">
                             <h3>
                                 <fa-icon [icon]="checkIcon" style="color: green;"></fa-icon>
                                 Mark as Complete

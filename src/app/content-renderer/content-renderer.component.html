@@ -1,0 +1,41 @@
+<ng-container *ngIf="content">
+    <div *ngIf="title" style="display: flex;justify-content: space-between;margin-bottom: 1rem;">
+        <div>
+            <h3>{{title}}</h3>
+        </div>
+
+        <div *ngIf="extension == '.pdf'">
+            <h3><a href="{{content}}"><fa-icon [icon]="FullScreenIcon" ></fa-icon>&nbsp;&nbsp;View in Fullscreen</a></h3>
+        </div>
+
+        <div style="display: inline-flex;">
+            <ng-container *ngIf="!buttons">
+                <fa-icon [icon]="ArrowLIcon" [size]="'2x'" style="cursor: pointer;" (click)="prevPage()"></fa-icon>
+                <h3 style="margin: 0rem 1rem;">{{'Go Back'}}</h3>
+            </ng-container>
+        </div>
+    </div>
+    <div *ngIf="extension != '.html'">
+        <markdown *ngIf="extension == '.md'" clipboard [clipboardButtonTemplate]="buttonTemplate" [src]="content" class="markup"></markdown>
+
+        <ng-template #buttonTemplate>
+            <button class="btn-clipboard" (click)="onCopyToClipboard()">
+                <fa-icon [icon]="Clipboard"></fa-icon>&nbsp;&nbsp;Copy
+            </button>
+        </ng-template>
+
+        <ngx-extended-pdf-viewer *ngIf="extension == '.pdf'"
+        [src]=content
+        [height]="'auto'"
+        [zoom]="'page-fit'"
+        [textLayer]="true"
+        [theme]="'dark'"
+        [backgroundColor]="'var(--headerColor)'"
+        [showHandToolButton]="true">
+        </ngx-extended-pdf-viewer>
+
+        <ng-container *ngIf="content"></ng-container>
+    </div>
+
+    <div *ngIf="extension == '.html'" [innerHTML]="content | safe:'html'"></div>
+</ng-container>

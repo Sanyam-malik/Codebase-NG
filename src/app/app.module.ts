@@ -39,6 +39,8 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { CacheInterceptor } from './cache.interceptor';
 import { FocusComponent } from './focus/focus.component';
+import { TrackersComponent } from './trackers/trackers.component';
+import { ContentRendererComponent } from './content-renderer/content-renderer.component';
 
 registerLocaleData(en);
 
@@ -62,7 +64,9 @@ registerLocaleData(en);
     FooterComponent,
     ModalComponent,
     BreadcrumbComponent,
-    FocusComponent
+    FocusComponent,
+    TrackersComponent,
+    ContentRendererComponent
   ],
   imports: [
     SafePipe,

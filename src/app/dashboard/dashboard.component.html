@@ -32,6 +32,11 @@
                     {{'Start Timer'}}
                 </a>&nbsp;
             </ng-container>
+
+            <a class="btn-primary" (click)="showTracking = !showTracking">
+                <fa-icon [icon]="chartSimple" ></fa-icon>
+                {{showTracking ? 'Hide Tracking' : 'Show Tracking'}}
+            </a>&nbsp;
             
             <a class="btn-primary" (click)="codebase.refreshDatabase()">
                 <fa-icon [icon]="arrowRotate"></fa-icon>
@@ -62,6 +67,9 @@
     <app-problem-focus [text]="'Focus of Previous Month'" [focus]="this.prevMonthFocus"></app-problem-focus>
 </div>
 
+<div *ngIf="showTracking" class="grid1">
+    <app-trackers></app-trackers>
+</div>
 
 <div class="grid2">
     <app-widget-status></app-widget-status>

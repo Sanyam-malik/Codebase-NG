@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CodebaseService } from '../codebase.service';
-import { faArrowCircleRight, faArrowsRotate, faCircleHalfStroke, faStopwatch, faPause, faPlay, faStop } from '@fortawesome/free-solid-svg-icons'; 
+import { faArrowCircleRight, faArrowsRotate, faCircleHalfStroke, faStopwatch, faPause, faPlay, faStop, faChartSimple } from '@fortawesome/free-solid-svg-icons'; 
 import { faCodepen } from '@fortawesome/free-brands-svg-icons';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -19,8 +19,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   arrowRight: any = faArrowCircleRight;
   arrowRotate: any = faArrowsRotate;
   sessionIcon: any = faCodepen;
+  chartSimple: any = faChartSimple;
   urlValue: string = '';
   showPopOver: boolean = false;
+  showTracking: boolean = false;
   
   
   constructor(public codebase: CodebaseService, private router: Router, private message: NzMessageService) {
