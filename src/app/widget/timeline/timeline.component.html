@@ -17,7 +17,13 @@
     </nz-timeline>
     
 
-    <div *ngIf="!isLoaded" class="menu" style="width: 85%; height: 20rem;">
+    <div *ngIf="!isLoaded" class="menu" style="height: 20rem;">
         <h2 style="margin: 0%;font-size:1.5rem;">Loading....</h2>
+    </div>
+
+    <div *ngIf="objectEntries(timeline).length == 0" class="menu" style="height: 20rem;">
+        <nz-list nzItemLayout="horizontal">
+            <nz-list-empty></nz-list-empty>
+        </nz-list>
     </div>
 </div>

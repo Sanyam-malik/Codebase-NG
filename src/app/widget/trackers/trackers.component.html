@@ -1,0 +1,16 @@
+<div class="dashcard">
+    <h2 style="font-size:1.5rem;">Progress Tracking</h2>
+    <ng-container *ngFor="let tracker of trackers">
+        <div style="width: 85%;">
+            <h2>{{tracker.name}}</h2>
+        </div>
+        
+        <highcharts-chart *ngIf="dataPresent[tracker.name]"
+        [Highcharts]="Highcharts"
+        [options]="chartOptions[tracker.name]"
+        style="width:85%;height: auto; display: block; margin: 1rem; overflow: hidden;"
+        ></highcharts-chart>
+
+        <nz-list-empty *ngIf="!dataPresent[tracker.name]"></nz-list-empty>
+    </ng-container>
+</div>

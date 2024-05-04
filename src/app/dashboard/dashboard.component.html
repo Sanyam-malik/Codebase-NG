@@ -33,10 +33,12 @@
                 </a>&nbsp;
             </ng-container>
 
-            <a class="btn-primary" (click)="showTracking = !showTracking">
-                <fa-icon [icon]="chartSimple" ></fa-icon>
-                {{showTracking ? 'Hide Tracking' : 'Show Tracking'}}
-            </a>&nbsp;
+            <ng-container *ngIf="trackers">
+                <a class="btn-primary" (click)="showTracking = !showTracking">
+                    <fa-icon [icon]="chartSimple" ></fa-icon>
+                    {{showTracking ? 'Hide Tracking' : 'Show Tracking'}}
+                </a>&nbsp;
+            </ng-container>
             
             <a class="btn-primary" (click)="codebase.refreshDatabase()">
                 <fa-icon [icon]="arrowRotate"></fa-icon>
@@ -68,7 +70,7 @@
 </div>
 
 <div *ngIf="showTracking" class="grid1">
-    <app-trackers></app-trackers>
+    <app-widget-trackers></app-widget-trackers>
 </div>
 
 <div class="grid2">

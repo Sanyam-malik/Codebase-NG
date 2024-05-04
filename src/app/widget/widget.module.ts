@@ -14,6 +14,8 @@ import { QuotesComponent } from './quotes/quotes.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { RouterModule } from '@angular/router';
 import { RelevanceComponent } from './relevance/relevance.component';
+import { TrackersComponent } from './trackers/trackers.component';
+import { RemindersComponent } from './reminders/reminders.component';
 
 
 
@@ -28,7 +30,9 @@ import { RelevanceComponent } from './relevance/relevance.component';
     RemarksComponent,
     QuotesComponent,
     TimelineComponent,
-    RelevanceComponent
+    RelevanceComponent,
+    TrackersComponent,
+    RemindersComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +51,8 @@ import { RelevanceComponent } from './relevance/relevance.component';
     ProblemCountComponent,
     QuotesComponent,
     TimelineComponent,
-    RelevanceComponent
+    RelevanceComponent,
+    TrackersComponent
   ]
 })
 export class WidgetModule { }

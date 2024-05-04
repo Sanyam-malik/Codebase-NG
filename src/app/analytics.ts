@@ -28,6 +28,11 @@ export interface ProblemAnalytic {
     count: number
 }
 
+export interface TrackerAnalytic {
+    name: string,
+    counts: any
+}
+
 export interface Analytics {
     "today_count": number,
     "total_count": number,
@@ -40,4 +45,5 @@ export interface Analytics {
     "statuses": StatusAnalytic[],
     "types": TypeAnalytic[]
     "relevance": ProblemAnalytic[]
+    "trackers": TrackerAnalytic[]
 }

@@ -9,10 +9,10 @@
         </div>
 
         <div style="display: inline-flex;">
-            <ng-container *ngIf="!buttons">
-                <fa-icon [icon]="ArrowLIcon" [size]="'2x'" style="cursor: pointer;" (click)="prevPage()"></fa-icon>
-                <h3 style="margin: 0rem 1rem;">{{'Go Back'}}</h3>
-            </ng-container>
+            <a *ngIf="buttons.length == 0" (click)="prevPage()" style="display: inherit;">
+                <fa-icon [icon]="ArrowLIcon" [size]="'2x'" style="cursor: pointer;"></fa-icon>
+                <h3 style="margin: 0rem 0.3rem;">{{'Go Back'}}</h3>
+            </a>
         </div>
     </div>
     <div *ngIf="extension != '.html'">

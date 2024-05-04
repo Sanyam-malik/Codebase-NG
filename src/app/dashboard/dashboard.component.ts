@@ -78,6 +78,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return this.codebase.analytics ? this.codebase.analytics.today_count : 0;
   }
 
+  get trackers() {
+    return this.codebase.analytics ? this.codebase.analytics.trackers.length : 0;
+  }
+
   startTimer() {
     this.codebase.startTimer();
   }

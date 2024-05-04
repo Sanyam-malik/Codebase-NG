@@ -7,6 +7,7 @@ import { CodebaseService } from '../codebase.service';
 import { Playlist } from '../playlist';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { environment } from '../../environments/environment';
+import { ContentRenderingService } from '../content-rendering.service';
 
 @Component({
   selector: 'app-playlist-view',
@@ -19,7 +20,7 @@ export class PlaylistViewComponent implements OnInit {
   playlist: Playlist | undefined;
   checkIcon = faCircleCheck;
 
-  constructor(private route: ActivatedRoute, private message: NzMessageService, private codebase: CodebaseService, private router: Router, private http: HttpClient, private mdService:MarkdownService) {
+  constructor(private route: ActivatedRoute, private message: NzMessageService, private codebase: CodebaseService, private router: Router, private http: HttpClient, private mdService:MarkdownService, private renderService: ContentRenderingService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.codebase.runningNav$.next([]);
   }
@@ -58,5 +59,15 @@ export class PlaylistViewComponent implements OnInit {
     });
   }
 
+  addContent(item: any) {
+    this.renderService.rendering.push({
+      title: item.title,
+      content: item.content,
+      type: 'playlist',
+      element: item
+    });
+    this.changeItemStatus('INPROGRESS', item.id);
+    this.router.navigateByUrl(`/playlist/item/${item.id}`);
+  }
 
 }
