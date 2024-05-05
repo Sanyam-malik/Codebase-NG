@@ -67,7 +67,7 @@ export class ProblemViewComponent {
     }
 
     onCopyToClipboard(text: string) {
-        navigator.clipboard.writeText(text);
+        window.navigator.clipboard.writeText(text);
         this.message.success("Code Copied to Clipboard...");
     }
 }
