@@ -40,7 +40,7 @@ export class PlaylistViewComponent implements OnInit {
       status: status,
       item: itemid
     }
-    this.http.post(`${environment.baseURL}/playlists/item/status`, {}, {params: params}).subscribe((response: any) => {
+    this.http.post(`${environment.baseURL}/playlist/item/status`, {}, {params: params}).subscribe((response: any) => {
       this.getData();
     },err => {
       
