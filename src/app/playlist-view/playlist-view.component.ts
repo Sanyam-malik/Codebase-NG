@@ -8,6 +8,7 @@ import { Playlist } from '../playlist';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { environment } from '../../environments/environment';
 import { ContentRenderingService } from '../content-rendering.service';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-playlist-view',
@@ -19,6 +20,7 @@ export class PlaylistViewComponent implements OnInit {
   uid: string | null = null;
   playlist: Playlist | undefined;
   checkIcon = faCircleCheck;
+  deleteIcon:any = faTrash;
 
   constructor(private route: ActivatedRoute, private message: NzMessageService, private codebase: CodebaseService, private router: Router, private http: HttpClient, private mdService:MarkdownService, private renderService: ContentRenderingService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;

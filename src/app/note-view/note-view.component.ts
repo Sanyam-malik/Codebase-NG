@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { MarkdownService } from 'ngx-markdown';
-import { faArrowAltCircleLeft, faArrowAltCircleRight, faExpand } from '@fortawesome/free-solid-svg-icons';
+import { faArrowAltCircleLeft, faArrowAltCircleRight, faEdit, faExpand, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { faClipboard } from '@fortawesome/free-regular-svg-icons';
 
@@ -22,6 +22,8 @@ export class NoteViewComponent implements OnInit {
   ArrowRIcon: any = faArrowAltCircleRight;
   FullScreenIcon: any = faExpand;
   Clipboard: any = faClipboard;
+  editIcon: any = faEdit;
+  deleteIcon: any = faTrash;
 
   constructor(private route: ActivatedRoute, private message: NzMessageService, private codebase: CodebaseService, private router: Router, private http: HttpClient, private mdService:MarkdownService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;

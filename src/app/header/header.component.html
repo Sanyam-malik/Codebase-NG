@@ -292,10 +292,10 @@
   </div>
   <div *nzModalFooter>
     <button nz-button nzType="primary">
-      Edit {{showModalType | titlecase}}
+      <fa-icon [icon]="editIcon"></fa-icon>&nbsp;Edit {{showModalType | titlecase}}
     </button>
     <button nz-button nzType="default">
-      Remove {{showModalType | titlecase}}
+      <fa-icon [icon]="trashIcon"></fa-icon>&nbsp;Remove {{showModalType | titlecase}}
     </button>
   </div>
 </nz-modal>
