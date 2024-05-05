@@ -258,6 +258,20 @@
     max-height: 60vh;
     overflow: auto;
     box-shadow: var(--boxShadow);
+    position: relative;
+    .copybutton {
+      position: absolute; 
+      top: 0.5em; 
+      right: 0.5em; 
+      opacity: 0; 
+      transition: opacity 250ms ease-out;
+    }
+  }
+
+  .codeblock:hover {
+    .copybutton { 
+      opacity: 1; 
+    }
   }
 
   .description, .notes {
@@ -768,7 +782,7 @@ pre {
   background-color: var(--headerColor);
   border: 0.5px solid var(--secondaryColor);
   border-radius: 4px;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
   transition: all .2s ease-out;
   box-shadow: var(--boxShadow);

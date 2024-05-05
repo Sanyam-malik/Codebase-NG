@@ -3,10 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Problem } from '../problem';
 import { CodebaseService } from '../codebase.service';
 import { Platform } from '../platform';
-import { faCode } from '@fortawesome/free-solid-svg-icons';
+import { faClipboard, faCode } from '@fortawesome/free-solid-svg-icons';
 import { Company } from '../company';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-problem-view',
@@ -19,14 +20,14 @@ export class ProblemViewComponent {
     item: Problem | undefined;
     button: Platform | undefined;
     codeIcon = faCode;
+    Clipboard: any = faClipboard;
     code: string = '';
 
-    constructor(private route: ActivatedRoute, private codebase: CodebaseService, private router: Router, private http: HttpClient) {
+    constructor(private route: ActivatedRoute, private codebase: CodebaseService, private router: Router, private http: HttpClient, private message: NzMessageService) {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
 
     ngOnInit() {
-        
         this.id = this.route.snapshot.paramMap.get('id');
         if(this.id && this.id.length > 0) {
             const data: Problem[] = this.route.snapshot.data['apiResponse']['problems'];
@@ -63,5 +64,10 @@ export class ProblemViewComponent {
 
     tagClick(name: string) {
         this.router.navigate(['/problem/company', encodeURIComponent(String(name).toLowerCase())]);
+    }
+
+    onCopyToClipboard(text: string) {
+        navigator.clipboard.writeText(text);
+        this.message.success("Code Copied to Clipboard...");
     }
 }

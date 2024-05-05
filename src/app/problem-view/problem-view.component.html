@@ -34,6 +34,11 @@
         <nz-collapse-panel *ngIf="code" [nzHeader]="'Code'" [nzActive]="!item.description ? true : false">
             <div class="codeblock">
                 <pre><code [highlight]="code"></code></pre>
+                <div class="copybutton">
+                    <button class="btn-clipboard" (click)="onCopyToClipboard(code)">
+                        <fa-icon [icon]="Clipboard"></fa-icon>&nbsp;&nbsp;Copy
+                    </button>
+                </div>
             </div>
         </nz-collapse-panel>
 
