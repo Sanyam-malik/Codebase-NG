@@ -2,7 +2,7 @@
     <h2 style="font-size:1.5rem;">Progress Tracking</h2>
     <ng-container *ngFor="let tracker of trackers">
         <div style="width: 85%;">
-            <h2>{{tracker.name}}</h2>
+            <h2>{{tracker.name}} <span class="color-primary">({{totalCounts[tracker.name]}} Problems)</span></h2>
         </div>
         
         <highcharts-chart *ngIf="dataPresent[tracker.name]"

@@ -36,7 +36,7 @@
             <ng-container *ngIf="trackers">
                 <a class="btn-primary" (click)="showTracking = !showTracking">
                     <fa-icon [icon]="chartSimple" ></fa-icon>
-                    {{showTracking ? 'Hide Tracking' : 'Show Tracking'}}
+                    {{showTracking ? 'Hide Tracking Data' : 'Show Tracking Data'}}
                 </a>&nbsp;
             </ng-container>
             
@@ -56,6 +56,10 @@
     <div>
         <h1 routerLink="/timer" style="font-size: 5rem;">{{ minutes | number :'2.0' }}:{{ seconds | number: '2.0'}}</h1>
     </div>
+</div>
+
+<div class="grid1">
+    <app-widget-reminders></app-widget-reminders>
 </div>
 
 <app-quotes></app-quotes>

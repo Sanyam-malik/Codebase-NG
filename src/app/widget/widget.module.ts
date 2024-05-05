@@ -17,23 +17,23 @@ import { RelevanceComponent } from './relevance/relevance.component';
 import { TrackersComponent } from './trackers/trackers.component';
 import { RemindersComponent } from './reminders/reminders.component';
 
-
+var components = [
+  CompaniesComponent,
+  LevelsComponent,
+  StatusComponent,
+  TypesComponent,
+  ProblemFocusComponent,
+  ProblemCountComponent,
+  RemarksComponent,
+  QuotesComponent,
+  TimelineComponent,
+  RelevanceComponent,
+  TrackersComponent,
+  RemindersComponent
+]
 
 @NgModule({
-  declarations: [
-    CompaniesComponent,
-    LevelsComponent,
-    StatusComponent,
-    TypesComponent,
-    ProblemFocusComponent,
-    ProblemCountComponent,
-    RemarksComponent,
-    QuotesComponent,
-    TimelineComponent,
-    RelevanceComponent,
-    TrackersComponent,
-    RemindersComponent
-  ],
+  declarations: components,
   imports: [
     CommonModule,
     ZorroModule,
@@ -41,18 +41,6 @@ import { RemindersComponent } from './reminders/reminders.component';
     RouterModule,
     HighchartsChartModule,
   ], 
-  exports: [
-    CompaniesComponent,
-    LevelsComponent,
-    RemarksComponent,
-    StatusComponent,
-    TypesComponent,
-    ProblemFocusComponent,
-    ProblemCountComponent,
-    QuotesComponent,
-    TimelineComponent,
-    RelevanceComponent,
-    TrackersComponent
-  ]
+  exports: components
 })
 export class WidgetModule { }

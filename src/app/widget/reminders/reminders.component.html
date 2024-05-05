@@ -1,1 +1,20 @@
-<p>reminders works!</p>
+<div class="dashcard">
+    <h2 style="font-size:1.5rem;">Upcoming Events</h2>
+    <div style="width: 50%;">
+        <ul class="d-list-container" style="justify-content: center;">
+            <li *ngFor="let reminder of reminders" class="d-list" style="margin: 1rem;justify-content: flex-start;align-items: center;">
+              <div class="d-list-item" style="padding: 0rem 1rem;">
+                <fa-icon [icon]="calendarIcon" size="4x"></fa-icon>
+              </div>
+              <div class="d-list-item" style="padding: 0rem 1rem;">
+                <h2 class="d-title">
+                  {{reminder.name}}
+                </h2>
+                <div class="d-description">
+                  {{reminder.description}}
+                </div>
+              </div>
+            </li>
+          </ul>
+    </div>
+</div>

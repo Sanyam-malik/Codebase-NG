@@ -13,6 +13,7 @@ export class TrackersComponent {
   Highcharts: typeof Highcharts = Highcharts; // required
   chartOptions: any = {};
   dataPresent: any = {};
+  totalCounts: any = {};
 
   constructor(private codebase: CodebaseService, private router: Router) {
 
@@ -22,6 +23,7 @@ export class TrackersComponent {
     var chartCategories: any[] = [];
     var chartData: any[] = [];
     var obj = data.counts;
+
     Object.keys(obj).forEach(item => {
       if(item != 'Total') {
         chartCategories.push(item);
@@ -32,6 +34,7 @@ export class TrackersComponent {
       } else {
         const value = obj[item];
         this.dataPresent[data.name] = value > 0 ? true : false;
+        this.totalCounts[data.name] = value;
       }
     })
 
