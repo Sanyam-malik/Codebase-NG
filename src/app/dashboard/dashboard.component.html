@@ -7,20 +7,20 @@
             <ng-container *ngIf="showStartTimer">
                 <a class="btn-primary" (click)="stopTimer()">
                     <fa-icon [icon]="stopIcon" ></fa-icon>
-                    Stop Timer
+                    &nbsp;Stop Timer
                 </a>&nbsp;
 
                 <ng-container *ngIf="!isPaused">
                     <a class="btn-primary" (click)="pauseTimer()">
                         <fa-icon [icon]="pauseIcon" ></fa-icon>
-                        Pause Timer
+                        &nbsp;Pause Timer
                     </a>&nbsp;
                 </ng-container>
 
                 <ng-container *ngIf="isPaused">
                     <a class="btn-primary" (click)="resumeTimer()">
                         <fa-icon [icon]="playIcon" ></fa-icon>
-                        Resume Timer
+                        &nbsp;Resume Timer
                     </a>&nbsp;
                 </ng-container>
 
@@ -29,7 +29,7 @@
             <ng-container *ngIf="!showStartTimer">
                 <a class="btn-primary" (click)="startTimer()">
                     <fa-icon [icon]="startTimerIcon" ></fa-icon>
-                    {{'Start Timer'}}
+                    &nbsp;Start Timer
                 </a>&nbsp;
             </ng-container>
 
@@ -42,10 +42,10 @@
             
             <a class="btn-primary" (click)="codebase.refreshDatabase()">
                 <fa-icon [icon]="arrowRotate"></fa-icon>
-                Refresh Database
+                &nbsp;Refresh Database
             </a>&nbsp;
             
-            <a class="btn-primary" routerLink="/problems">View All Problems
+            <a class="btn-primary" routerLink="/problems">View All Problems&nbsp;
                 <fa-icon [icon]="arrowRight"></fa-icon>
             </a>
         </h1>

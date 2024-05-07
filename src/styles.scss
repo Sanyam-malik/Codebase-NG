@@ -1,3 +1,6 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:slnt@-10..0&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Reddit+Sans:ital,wght@0,200..900;1,200..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
   :root {
     --primaryColor: #90ac07;
     --secondaryColor: #76c405;
@@ -17,6 +20,13 @@
   
   h1, h2, h3, h4, h5, h6, p, span, div {
     color: var(--textPrimaryColor);
+    font-family: "Lato"
+  }
+
+  th {
+    font-family: "Lato" !important;
+    font-size: medium !important;
+    font-weight: bold !important;
   }
 
   ::selection {
@@ -190,6 +200,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    border-radius: 5px;
+    padding: 1.0em;
     background: var(--headerColor);
     border-color: var(--headerColor);
     color: var(--textPrimaryColor);
@@ -252,6 +264,7 @@
   }
 
   .codeblock {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     scrollbar-width: thin; /* For Firefox */
     scrollbar-color: var(--primaryColor) transparent; /* For Firefox */
     height: fit-content;
@@ -259,6 +272,9 @@
     overflow: auto;
     box-shadow: var(--boxShadow);
     position: relative;
+    div, span{
+      font-family: inherit;
+    }
     .copybutton {
       position: absolute; 
       top: 0.5em; 
@@ -516,7 +532,7 @@
 
   .ant-segmented-item-label {
     color: var(--textPrimaryColor);
-    font-size: 1rem;
+    font-weight: bold;
   }
 
   .ant-segmented-item-selected, .ant-segmented-thumb {
@@ -726,10 +742,14 @@
     color: var(--primaryColor);
   }
   pre {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
     padding: 2rem;
     box-shadow: var(--boxShadow);
     background-color: var(--boxColor);
     outline: 1px dashed var(--primaryColor);
+    span, div {
+      font-family: inherit;
+    }
     code {
       font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace !important;
       color: var(--textSecondaryColor);
@@ -800,4 +820,11 @@ pre {
 
 code[class*="language-"] {
   font-size: 1rem !important;
+}
+
+.quote {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  span, div {
+    font-family: inherit;
+  }
 }

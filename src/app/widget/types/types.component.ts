@@ -133,6 +133,8 @@ export class TypesComponent {
           dataLabels: {
             style: {
               color: 'var(--textPrimaryColor)',
+              fontFamily: 'Inter',
+              fontWeight: 'normal',
               textOutline: 'none',
             }
           }            

@@ -16,7 +16,7 @@
         </div>
         <div style="text-align: right;">
             <h2>Status: 
-                <span *ngIf="playlist.status === 'TODO'" style="color: red;">
+                <span *ngIf="playlist.status === 'TODO'" style="color: rgb(214, 21, 21);">
                     Not Started
                 </span>
                 <span *ngIf="playlist.status === 'INPROGRESS'" style="color: goldenrod;">
@@ -31,7 +31,7 @@
     
 
     <nz-collapse *ngIf="playlist.sections" [nzBordered]="false">
-        <nz-collapse-panel *ngFor="let section of playlist.sections;let i = index" [nzHeader]="section.title" [nzActive]="section.status == 'TODO' || section.status == 'INPROGRESS'">
+        <nz-collapse-panel *ngFor="let section of playlist.sections;let i = index" [nzHeader]="section.title" style="font-weight: bold;" [nzActive]="section.status == 'TODO' || section.status == 'INPROGRESS'">
             <nz-table #itemTable [nzData]="section.items">
                 <tbody>
                   <tr *ngFor="let item of itemTable.data">
@@ -48,9 +48,9 @@
                             {{item.description}}
                         </div>
                     </td>
-                    <td style="padding: 1%;" [width]="5" [colSpan]="section.status == 'INPROGRESS' ? 2 : 1">
+                    <td style="padding: 1%;" [width]="5" [colSpan]="item.status == 'COMPLETED' ? 2 : 1">
                         <ng-container *ngIf="item.status === 'TODO'">
-                            <h3 style="color: red;">To Do</h3>
+                            <h3 style="color: rgb(214, 21, 21);">To Do</h3>
                         </ng-container>
                         <ng-container *ngIf="item.status === 'INPROGRESS'">
                             <h3 style="color: goldenrod;">In Progress</h3>
@@ -62,7 +62,7 @@
                     <td style="padding: 1%;text-align: center;" *ngIf="item.status === 'TODO' || item.status === 'INPROGRESS'" [width]="5">
                         <a (click)="changeItemStatus('COMPLETED', item.id)">
                             <h3>
-                                <fa-icon [icon]="checkIcon" style="color: green;"></fa-icon>
+                                <fa-icon [icon]="checkIcon" style="color: green;"></fa-icon>&nbsp;
                                 Mark as Complete
                             </h3>
                         </a>

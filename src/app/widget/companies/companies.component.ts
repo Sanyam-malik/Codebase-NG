@@ -115,8 +115,9 @@ export class CompaniesComponent {
         categories: fullMap['categories'],
         labels: {
           style: {
-            fontWeight: 'bold',
+            fontWeight: 'normal',
             color: 'var(--textPrimaryColor)',
+            fontFamily: 'Inter',
             textOutline: "0px",
           }
         },
@@ -137,8 +138,9 @@ export class CompaniesComponent {
         },
         labels: {
           style: {
-            fontWeight: 'bold',
+            fontWeight: 'normal',
             color: 'var(--textPrimaryColor)',
+            fontFamily: 'Inter',
             textOutline: "0px",
           }
         },
@@ -151,6 +153,7 @@ export class CompaniesComponent {
           dataLabels: {
             style: {
               color: 'var(--textPrimaryColor)',
+              fontFamily: 'Inter',
               textOutline: 'none',
             }
           }, 

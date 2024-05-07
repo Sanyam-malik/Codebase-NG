@@ -99,8 +99,8 @@ export class StatusComponent implements OnInit {
         categories: map['categories'],
         labels: {
           style: {
-            fontWeight: 'bold',
-            color: 'var(--textPrimaryColor)'
+            color: 'var(--textPrimaryColor)',
+            fontFamily: 'Inter'
           }
         },
         title: {
@@ -117,8 +117,8 @@ export class StatusComponent implements OnInit {
         },
         labels: {
           style: {
-            fontWeight: 'bold',
-            color: 'var(--textPrimaryColor)'
+            color: 'var(--textPrimaryColor)',
+            fontFamily: 'Inter'
           }
         },
         gridLineWidth: 0
@@ -129,6 +129,7 @@ export class StatusComponent implements OnInit {
           dataLabels: {
             style: {
               color: 'var(--textPrimaryColor)',
+              fontFamily: 'Inter',
               textOutline: 'none',
             }
           }, 
