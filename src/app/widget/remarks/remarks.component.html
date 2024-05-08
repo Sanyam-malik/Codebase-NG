@@ -3,10 +3,10 @@
     <div *ngIf="remarks.length > 0" style="width:80%;height: 400px;margin: 2rem;overflow-y: auto;" class="list">
         <nz-list nzItemLayout="horizontal">
             <nz-list-item *ngFor="let remark of remarks" style="cursor: pointer;" (click)="redirectToRemarks(remark.slug)">
-                <h4 style="margin: 0%;"> 
-                    <fa-icon [icon]="listIcon" style="color: var(--secondaryColor)"></fa-icon>
+                <h3 style="margin: 0%;"> 
+                    <fa-icon [icon]="listIcon" style="color: var(--secondaryColor)"></fa-icon>&nbsp;
                     {{remark.remark}}
-                </h4>
+                </h3>
             </nz-list-item>
         </nz-list>
     </div>

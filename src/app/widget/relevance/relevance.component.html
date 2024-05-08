@@ -3,10 +3,10 @@
     <div *ngIf="relevance && relevance.length > 0" style="width:90%;height: 600px;margin: 2rem;overflow-y: auto;" class="list">
         <nz-list nzItemLayout="horizontal">
             <nz-list-item *ngFor="let problem of relevance" style="cursor: pointer;" >
-                <h4 style="margin: 0%;" routerLink="/problem/statement/{{problem.slug}}">
+                <h3 style="margin: 0%;" routerLink="/problem/statement/{{problem.slug}}">
                     <fa-icon [icon]="listIcon" style="color: var(--secondaryColor)"></fa-icon>
                     {{problem.name}} <span style="color: var(--secondaryColor)">({{problem.count}} Companies)</span>
-                </h4>
+                </h3>
             </nz-list-item>
         </nz-list>
     </div>

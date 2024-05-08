@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CodebaseService } from '../../codebase.service';
 import Highcharts from 'highcharts';
+import { TrackerAnalytic, TrackerItemAnalytic } from '../../analytics';
 
 @Component({
   selector: 'app-widget-trackers',
@@ -19,25 +20,24 @@ export class TrackersComponent {
 
   }
 
-  getChartOptions(data: any) {
+  getChartOptions(data: TrackerAnalytic) {
     var chartCategories: any[] = [];
     var chartData: any[] = [];
-    var obj = data.counts;
+    var items: TrackerItemAnalytic[] = data.counts;
 
-    Object.keys(obj).forEach(item => {
-      if(item != 'Total') {
-        chartCategories.push(item);
+    for(var item of items) {
+      if(item.name === 'Total') {
+        this.totalCounts[data.name] = item.count;
+      } else {
+        chartCategories.push(item.name);
         chartData.push({
-          y: obj[item],
+          y: item.count,
           color: "var(--primaryColor)"
         });
-      } else {
-        const value = obj[item];
-        this.dataPresent[data.name] = value > 0 ? true : false;
-        this.totalCounts[data.name] = value;
       }
-    })
+    }
 
+    this.dataPresent[data.name] = data.counts.length > 0 ? true : false;
     var chartOptions: Highcharts.Options = {
       chart: {
         type: 'bar',

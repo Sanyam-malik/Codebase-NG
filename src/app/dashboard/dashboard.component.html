@@ -35,7 +35,7 @@
 
             <ng-container *ngIf="trackers">
                 <a class="btn-primary" (click)="showTracking = !showTracking">
-                    <fa-icon [icon]="chartSimple" ></fa-icon>
+                    <fa-icon [icon]="chartSimple" ></fa-icon>&nbsp;
                     {{showTracking ? 'Hide Tracking Data' : 'Show Tracking Data'}}
                 </a>&nbsp;
             </ng-container>
@@ -58,9 +58,9 @@
     </div>
 </div>
 
-<div class="grid1">
+<!-- <div class="grid1">
     <app-widget-reminders></app-widget-reminders>
-</div>
+</div> -->
 
 <app-quotes></app-quotes>
 

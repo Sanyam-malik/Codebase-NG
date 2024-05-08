@@ -28,9 +28,14 @@ export interface ProblemAnalytic {
     count: number
 }
 
+export interface TrackerItemAnalytic {
+    name: string,
+    count: number
+}
+
 export interface TrackerAnalytic {
     name: string,
-    counts: any
+    counts: TrackerItemAnalytic[]
 }
 
 export interface Analytics {
