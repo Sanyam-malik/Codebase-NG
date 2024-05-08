@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration production",
+    "build": "ng build --configuration production && node response-save.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -25,6 +25,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@iplab/ngx-file-upload": "^17.1.0",
     "@ngx-lite/nav-drawer": "^14.0.0",
+    "axios": "^1.6.8",
     "clipboard": "^2.0.11",
     "highcharts": "^11.3.0",
     "highcharts-angular": "^4.0.0",
