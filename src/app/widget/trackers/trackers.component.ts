@@ -54,7 +54,8 @@ export class TrackersComponent {
         categories: chartCategories,
         labels: {
           style: {
-            fontWeight: 'bold',
+            fontWeight: 'normal',
+            fontFamily: 'Lato',
             color: 'var(--textPrimaryColor)',
             textOutline: "0px",
           }
@@ -76,7 +77,8 @@ export class TrackersComponent {
         },
         labels: {
           style: {
-            fontWeight: 'bold',
+            fontWeight: 'normal',
+            fontFamily: 'Lato',
             color: 'var(--textPrimaryColor)',
             textOutline: "0px",
           }
@@ -89,6 +91,7 @@ export class TrackersComponent {
           borderRadius: '20%',
           dataLabels: {
             style: {
+              fontFamily: 'Lato',
               color: 'var(--textPrimaryColor)',
               textOutline: 'none',
             }

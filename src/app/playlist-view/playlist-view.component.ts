@@ -35,12 +35,22 @@ export class PlaylistViewComponent implements OnInit {
     }
   }
 
+  allowChange(item: any) {
+    if(item.status == "TODO") {
+      this.changeItemStatus('INPROGRESS', item.id);
+    }
+  }
+
   changeItemStatus(status: string, itemid: string) {
     var params = {
       status: status,
       item: itemid
     }
     this.http.post(`${environment.baseURL}/playlist/item/status`, {}, {params: params}).subscribe((response: any) => {
+      if(status == "COMPLETED") {
+        this.message.success("Changes made successfully");
+      }
+      
       this.getData();
     },err => {
       
@@ -54,7 +64,6 @@ export class PlaylistViewComponent implements OnInit {
       if(this.uid) {
         var data: Playlist[] = response['playlists'];
         this.playlist = data.filter(item => item.id === this.uid)[0];
-        console.log(this.playlist);
       }
     }, err => {
 
