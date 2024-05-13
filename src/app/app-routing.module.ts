@@ -15,6 +15,7 @@ import { NoteViewComponent } from './note-view/note-view.component';
 import { PlaylistViewComponent } from './playlist-view/playlist-view.component';
 import { FocusComponent } from './focus/focus.component';
 import { ContentRendererComponent } from './content-renderer/content-renderer.component';
+import { SheetViewComponent } from './sheet-view/sheet-view.component';
 
 const routes: Routes = [
   {
@@ -127,6 +128,17 @@ const routes: Routes = [
     },
     data: {
       url: '/playlists',
+      options: {}
+    }
+  },
+  {
+    path: 'sheet/:id',
+    component: SheetViewComponent,
+    resolve: {
+      apiResponse: getResolver
+    },
+    data: {
+      url: '/sheets',
       options: {}
     }
   },

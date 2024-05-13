@@ -40,6 +40,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { CacheInterceptor } from './cache.interceptor';
 import { FocusComponent } from './focus/focus.component';
 import { ContentRendererComponent } from './content-renderer/content-renderer.component';
+import { SheetViewComponent } from './sheet-view/sheet-view.component';
 
 registerLocaleData(en);
 
@@ -64,7 +65,8 @@ registerLocaleData(en);
     ModalComponent,
     BreadcrumbComponent,
     FocusComponent,
-    ContentRendererComponent
+    ContentRendererComponent,
+    SheetViewComponent
   ],
   imports: [
     SafePipe,

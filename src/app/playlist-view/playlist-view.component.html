@@ -16,13 +16,13 @@
         </div>
         <div style="text-align: right;">
             <h2>Status: 
-                <span *ngIf="playlist.status === 'TODO'" style="color: rgb(214, 21, 21);">
+                <span *ngIf="playlist.status === 'TODO'" style="color: #f72323;font-style: italic;">
                     Not Started
                 </span>
-                <span *ngIf="playlist.status === 'INPROGRESS'" style="color: goldenrod;">
+                <span *ngIf="playlist.status === 'INPROGRESS'" style="color: #c1c10d;font-style: italic;">
                     In Progress
                 </span>
-                <span *ngIf="playlist.status === 'COMPLETED'" style="color: darkgreen;">
+                <span *ngIf="playlist.status === 'COMPLETED'" style="color: #10bd10;font-style: italic;">
                     Completed
                 </span> 
             </h2>
@@ -32,7 +32,7 @@
 
     <nz-collapse *ngIf="playlist.sections" [nzBordered]="false">
         <nz-collapse-panel *ngFor="let section of playlist.sections;let i = index" [nzHeader]="section.title" style="font-weight: bold;" [nzActive]="section.status == 'TODO' || section.status == 'INPROGRESS'">
-            <nz-table #itemTable [nzData]="section.items">
+            <nz-table #itemTable [nzData]="section.items" class="nostrips">
                 <tbody>
                   <tr *ngFor="let item of itemTable.data">
                     <td style="padding: 1%;" [width]="90">
@@ -50,24 +50,24 @@
                     </td>
                     <td *ngIf="section.status !== 'COMPLETED'" style="padding: 1%;" [width]="5" [colSpan]="item.status == 'COMPLETED' ? 2 : 1">
                         <ng-container *ngIf="item.status === 'TODO'">
-                            <h3 style="color: rgb(214, 21, 21);">To Do</h3>
+                            <h3 style="color: #f72323;font-style: italic;">To Do</h3>
                         </ng-container>
                         <ng-container *ngIf="item.status === 'INPROGRESS'">
-                            <h3 style="color: goldenrod;">In Progress</h3>
+                            <h3 style="color: #c1c10d;font-style: italic;">In Progress</h3>
                         </ng-container>
                         <ng-container *ngIf="item.status === 'COMPLETED'">
-                            <h3 style="color: darkgreen;">Completed</h3>
+                            <h3 style="color: #10bd10;font-style: italic;">Completed</h3>
                         </ng-container>
                     </td>
                     <td *ngIf="section.status === 'COMPLETED'" style="padding: 1%;" [width]="5" [colSpan]="1">
                         <ng-container *ngIf="item.status === 'TODO'">
-                            <h3 style="color: rgb(214, 21, 21);">To Do</h3>
+                            <h3 style="color: #f72323;font-style: italic;">To Do</h3>
                         </ng-container>
                         <ng-container *ngIf="item.status === 'INPROGRESS'">
-                            <h3 style="color: goldenrod;">In Progress</h3>
+                            <h3 style="color: #c1c10d;font-style: italic;">In Progress</h3>
                         </ng-container>
                         <ng-container *ngIf="item.status === 'COMPLETED'">
-                            <h3 style="color: darkgreen;">Completed</h3>
+                            <h3 style="color: #10bd10;font-style: italic;">Completed</h3>
                         </ng-container>
                     </td>
                     <td style="padding: 1%;text-align: center;" *ngIf="item.status === 'TODO' || item.status === 'INPROGRESS'" [width]="5">

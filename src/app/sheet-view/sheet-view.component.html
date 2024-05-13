@@ -1,0 +1,73 @@
+<ng-container *ngIf="sheet">
+    <div style="display: flex;justify-content: space-between;">
+        <div>
+            <h1 style="margin: 0%;"><span class="color-primary">{{ sheet.title }}</span></h1>
+            <h2 [innerHTML]="sheet.description | safe:'html'"></h2>
+            <div>
+                <button nz-button nzType="primary" style="margin-right: 1rem;">
+                    <fa-icon [icon]="checkIcon"></fa-icon>&nbsp;Mark As Complete
+                  </button>
+                <button nz-button nzType="default">
+                    <fa-icon [icon]="deleteIcon"></fa-icon>&nbsp;Remove Sheet
+                </button>
+            </div>
+        </div>
+        <!-- <div style="text-align: right;">
+            <h2>Status: 
+                <span *ngIf="sheet.status === 'TODO'" style="color: rgb(214, 21, 21);">
+                    Not Started
+                </span>
+                <span *ngIf="sheet.status === 'INPROGRESS'" style="color: goldenrod;">
+                    In Progress
+                </span>
+                <span *ngIf="sheet.status === 'COMPLETED'" style="color: #10bd10;font-style: italic;">
+                    Completed
+                </span> 
+            </h2>
+        </div> -->
+    </div>
+    
+
+    <nz-collapse *ngIf="sheet.sections" [nzBordered]="false">
+        <nz-collapse-panel *ngFor="let section of sheet.sections;let i = index" [nzHeader]="section.title" style="font-weight: bold;" [nzActive]="section.status == 'TODO' || section.status == 'INPROGRESS'">
+            <nz-table #itemTable [nzData]="section.items" class="nostrips">
+                <tbody>
+                  <tr *ngFor="let item of itemTable.data">
+                    <td style="padding: 1%;" [width]="96">
+                        <a style="display:flex;align-items: center;" (click)="addContent(item)">
+                            <h3>{{item.title}}</h3>
+                        </a>
+                        <div *ngIf="item.description" style="margin-top: 0.5%;">
+                            {{item.description}}
+                        </div>
+                    </td>
+                    <td style="padding: 1%;text-align: center;" [width]="2">
+                        <ng-container *ngIf="item.level === 'Hard'">
+                            <h3 style="color: #f72323;font-style: italic;">Hard</h3>
+                        </ng-container>
+                        <ng-container *ngIf="item.level === 'Medium'">
+                            <h3 style="color: #c1c10d;font-style: italic;">Medium</h3>
+                        </ng-container>
+                        <ng-container *ngIf="item.level === 'Easy'">
+                            <h3 style="color: #10bd10;font-style: italic;">Easy</h3>
+                        </ng-container>
+                        <ng-container *ngIf="item.level !== 'Easy' && item.level !== 'Medium' && item.level !== 'Hard'">
+                            <h3 class="color-primary" style="font-style: italic;">{{item.level}}</h3>
+                        </ng-container>
+                    </td>
+                    <td style="padding: 1%;text-align: center;" *ngIf="item.status === 'TODO' || item.status === 'INPROGRESS'" [width]="2">
+                        <a (click)="changeItemStatus('COMPLETED', item.id)">
+                            <h3>
+                                <fa-icon [icon]="checkIcon" style="color: green;"></fa-icon>&nbsp;
+                                Mark as Complete
+                            </h3>
+                        </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </nz-table>
+        </nz-collapse-panel>
+    </nz-collapse>
+
+
+</ng-container>

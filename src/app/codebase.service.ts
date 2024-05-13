@@ -20,6 +20,7 @@ import { Title } from '@angular/platform-browser';
 import { Problem } from './problem';
 import { Timeline } from './timeline';
 import { Playlist } from './playlist';
+import { Sheet } from './sheet';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +43,7 @@ export class CodebaseService {
   settings: Setting[] = [];
   problems: Problem[] = [];
   playlists: Playlist[] = [];
-  sheets: any[] = [];
+  sheets: Sheet[] = [];
   notes: Note[] = [];
   analytics: Analytics | undefined;
   timeline: Timeline | undefined;
@@ -299,7 +300,8 @@ export class CodebaseService {
       { property: 'analytics', url: '/analytics' },
       { property: 'timeline', url: '/timeline' },
       { property: 'problems', url: '/problems' },
-      { property: 'playlists', url: '/playlists' }
+      { property: 'playlists', url: '/playlists' },
+      { property: 'sheets', url: '/sheets' }
     ];
     
     // Fetch data for each endpoint
