@@ -24,5 +24,8 @@ export interface Sheet {
     description: string,
     url: string,
     image: string,
+    total_items: number,
+    completed_items: number,
+    complete_percent: number,
     sections: Section[]
 }

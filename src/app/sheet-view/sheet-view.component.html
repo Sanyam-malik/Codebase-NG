@@ -1,9 +1,11 @@
 <ng-container *ngIf="sheet">
-    <div style="display: flex;justify-content: space-between;">
+    <div style="display: flex;justify-content: space-between;align-items: center;">
         <div style="width: 80%;">
             <h1 style="margin: 0%;"><span class="color-primary">{{ sheet.title }}</span></h1>
             <h3 class="no-margin-elements" [innerHTML]="sheet.description | safe:'html'"></h3>
-            <h3 *ngIf="sheet.url" style="font-style: italic;">Source: <a class="color-primary" [href]="sheet.url">{{sheet.url}}</a></h3>
+            <h3 *ngIf="sheet.url" style="font-style: italic;">Source: <a [href]="sheet.url">{{sheet.url}}</a></h3>
+            <h3 *ngIf="sheet.completed_items" style="font-style: italic;">Completed Problems: <span class="color-primary">{{sheet.completed_items}}</span></h3>
+            <h3 *ngIf="sheet.total_items" style="font-style: italic;">Total Problems: <span class="color-primary">{{sheet.total_items}}</span></h3>
             <div>
                 <button nz-button nzType="primary" style="margin-right: 1rem;">
                     <fa-icon [icon]="checkIcon"></fa-icon>&nbsp;Mark As Complete
@@ -13,12 +15,13 @@
                 </button>
             </div>
         </div>
-        <div style="text-align: right;">
-            <h2>Status: 
-                <span style="color: #f72323;font-style: italic;">
-                    Not Started
-                </span>
-            </h2>
+        <div style="width: 20%;text-align: right;">
+            <div style="display: inline-flex;flex-direction: row;
+            justify-content: center;
+            align-items: center;">
+                <nz-progress [nzPercent]="sheet.complete_percent" [nzWidth]="80" nzType="circle"></nz-progress> 
+                <h2 style="margin-left: 4%;margin-bottom: 0%;">Completed</h2>
+            </div>
         </div>
     </div>
     
@@ -29,7 +32,7 @@
                 <tbody>
                   <tr *ngFor="let item of itemTable.data">
                     <td style="padding: 1%;" [width]="96">
-                        <a style="display:flex;align-items: center;" (click)="addContent(item)">
+                        <a style="display:flex;align-items: center;" [href]="item.url" target="_blank">
                             <h3>{{item.title}}</h3>
                         </a>
                         <div *ngIf="item.description" style="margin-top: 0.5%;">

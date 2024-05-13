@@ -71,7 +71,12 @@
           {{ data.type }}<div *ngIf="data.subdirectory">({{data.subdirectory.replaceAll(":", " -> ")}})</div>
         </td>
         
-        <td>{{ data.level }}</td>
+        <td>
+          <span *ngIf="data.level === 'Hard'" style="color: #f72323;">Hard</span>
+          <span *ngIf="data.level === 'Medium'" style="color: #c1c10d;">Medium</span>
+          <span *ngIf="data.level === 'Easy'" style="color: #10bd10;">Easy</span>
+          <span *ngIf="data.level !== 'Easy' && data.level !== 'Medium' && data.level !== 'Hard'" class="color-primary">{{ data.level }}</span>
+        </td>
         
         <td>{{ data.status }}</td>
         
