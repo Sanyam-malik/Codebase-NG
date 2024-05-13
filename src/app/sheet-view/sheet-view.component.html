@@ -1,8 +1,9 @@
 <ng-container *ngIf="sheet">
     <div style="display: flex;justify-content: space-between;">
-        <div>
+        <div style="width: 80%;">
             <h1 style="margin: 0%;"><span class="color-primary">{{ sheet.title }}</span></h1>
-            <h2 [innerHTML]="sheet.description | safe:'html'"></h2>
+            <h3 class="no-margin-elements" [innerHTML]="sheet.description | safe:'html'"></h3>
+            <h3 *ngIf="sheet.url" style="font-style: italic;">Source: <a class="color-primary" [href]="sheet.url">{{sheet.url}}</a></h3>
             <div>
                 <button nz-button nzType="primary" style="margin-right: 1rem;">
                     <fa-icon [icon]="checkIcon"></fa-icon>&nbsp;Mark As Complete
@@ -12,19 +13,13 @@
                 </button>
             </div>
         </div>
-        <!-- <div style="text-align: right;">
+        <div style="text-align: right;">
             <h2>Status: 
-                <span *ngIf="sheet.status === 'TODO'" style="color: rgb(214, 21, 21);">
+                <span style="color: #f72323;font-style: italic;">
                     Not Started
                 </span>
-                <span *ngIf="sheet.status === 'INPROGRESS'" style="color: goldenrod;">
-                    In Progress
-                </span>
-                <span *ngIf="sheet.status === 'COMPLETED'" style="color: #10bd10;font-style: italic;">
-                    Completed
-                </span> 
             </h2>
-        </div> -->
+        </div>
     </div>
     
 

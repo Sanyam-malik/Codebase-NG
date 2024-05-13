@@ -41,6 +41,7 @@ import { CacheInterceptor } from './cache.interceptor';
 import { FocusComponent } from './focus/focus.component';
 import { ContentRendererComponent } from './content-renderer/content-renderer.component';
 import { SheetViewComponent } from './sheet-view/sheet-view.component';
+import { NgxUiLoaderConfig, NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule, SPINNER } from 'ngx-ui-loader';
 
 registerLocaleData(en);
 
@@ -85,7 +86,15 @@ registerLocaleData(en);
     NgxNavDrawerModule,
     FileUploadModule,
     MarkdownModule.forRoot({ loader: HttpClient }),
-    NgxExtendedPdfViewerModule
+    NgxExtendedPdfViewerModule,
+    NgxUiLoaderModule,
+    NgxUiLoaderRouterModule,
+    NgxUiLoaderHttpModule.forRoot({ 
+      showForeground: true,
+      excludeRegexp: [
+        "/api/status"
+      ]
+    })
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

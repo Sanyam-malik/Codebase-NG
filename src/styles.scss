@@ -834,3 +834,9 @@ code[class*="language-"] {
     font-family: inherit;
   }
 }
+
+.no-margin-elements {
+  p, span, div {
+    margin: 0%;
+  }
+}

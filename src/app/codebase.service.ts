@@ -21,6 +21,7 @@ import { Problem } from './problem';
 import { Timeline } from './timeline';
 import { Playlist } from './playlist';
 import { Sheet } from './sheet';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Injectable({
   providedIn: 'root'
@@ -63,7 +64,7 @@ export class CodebaseService {
   timer: any;
   isPaused: boolean = false;
 
-  constructor(private http: HttpClient, private message: NzMessageService, private title: Title) {
+  constructor(private http: HttpClient, private message: NzMessageService, private ngxService: NgxUiLoaderService, private title: Title) {
     const codestate: Codestate = this.getState('codestate');
     if(codestate?.themePref) {
       this.runningTheme = codestate.themePref;
@@ -351,6 +352,14 @@ export class CodebaseService {
     this.isPaused = false;
     clearInterval(this.timer);
     this.timerEvents$.next('stopped');
+  }
+
+  showLoader() {
+    this.ngxService.start();
+  }
+
+  hideLoader() {
+    this.ngxService.stop();
   }
 
   getTableState(tableName: string | undefined | null) {
