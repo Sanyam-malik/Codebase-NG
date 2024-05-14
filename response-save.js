@@ -17,13 +17,14 @@ const apiEndpoints = [
     { property: 'analytics', url: '/analytics' },
     { property: 'timeline', url: '/timeline' },
     { property: 'problems', url: '/problems' },
-    { property: 'playlists', url: '/playlists' }
+    { property: 'playlists', url: '/playlists' },
+    { property: 'sheets', url: '/sheets' }
 ];
 
 // Function to call API and save response to file
 async function callAndSave(endpoint) {
     try {
-        const response = await axios.get(`http://lordmaximus.duckdns.org:4500/api${endpoint.url}`);
+        const response = await axios.get(`http://localhost:5000/api${endpoint.url}`);
         const pathComponents = endpoint.url.split('/').filter(Boolean); // remove empty elements
         const fileName = `${pathComponents.pop()}.json`;
         const folderPath = path.join(__dirname, 'dist/api', ...pathComponents);
