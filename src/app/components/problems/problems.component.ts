@@ -112,11 +112,11 @@ export class ProblemsComponent implements OnInit {
         allowFilter: true,
         allowSort: true,
         allowSearch: false,
-        sortFn: (a: Problem, b: Problem) => a.type.localeCompare(b.type),
+        sortFn: (a: Problem, b: Problem) => a.type.name.localeCompare(b.type.name),
         sortDirections: ['ascend', 'descend', null],
         filterMultiple: true,
         listOfFilter: this.types as NzTableFilterList,
-        filterFn: (list: string[], item: Problem) => list.some(type => item.type.toLowerCase().indexOf(type.toLowerCase()) !== -1)
+        filterFn: (list: string[], item: Problem) => list.some(type => item.type.name.toLowerCase().indexOf(type.toLowerCase()) !== -1)
       },
       {
         name: 'Level',
@@ -125,7 +125,10 @@ export class ProblemsComponent implements OnInit {
         allowFilter: true,
         allowSort: true,
         allowSearch: false,
-        sortFn: (a: Problem, b: Problem) => a.level.localeCompare(b.level),
+        sortFn: (a: Problem, b: Problem) => {
+          const levelOrder = ['easy', 'medium', 'hard'];
+          return levelOrder.indexOf(a.level.toLowerCase()) - levelOrder.indexOf(b.level.toLowerCase());
+        },
         sortDirections: ['ascend', 'descend', null],
         filterMultiple: true,
         listOfFilter: this.levels as NzTableFilterList,

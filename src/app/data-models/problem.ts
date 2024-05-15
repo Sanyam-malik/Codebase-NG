@@ -9,7 +9,7 @@ export interface Problem {
     name: string,
     notes: string,
     status: string,
-    type: string,
+    type: ProblemType,
     url: string,
     code: string,
     companies: Company[],
@@ -17,3 +17,10 @@ export interface Problem {
     slug: string,
     subdirectory: string
 }
+
+export interface ProblemType {
+    name: string,
+    description: string,
+    slug: string
+}
+
