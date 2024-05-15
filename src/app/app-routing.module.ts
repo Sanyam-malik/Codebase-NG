@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProblemsComponent } from './problems/problems.component';
-import { ProblemViewComponent } from './problem-view/problem-view.component';
-import { getResolver } from './get.resolver';
-import { SessionComponent } from './session/session.component';
-import { AllComponent } from './problems/all/all.component';
-import { CompanyComponent } from './problems/company/company.component';
-import { LevelComponent } from './problems/level/level.component';
-import { StatusComponent } from './problems/status/status.component';
-import { RemarkComponent } from './problems/remark/remark.component';
-import { TypeComponent } from './problems/type/type.component';
-import { NoteViewComponent } from './note-view/note-view.component';
-import { PlaylistViewComponent } from './playlist-view/playlist-view.component';
-import { FocusComponent } from './focus/focus.component';
-import { ContentRendererComponent } from './content-renderer/content-renderer.component';
-import { SheetViewComponent } from './sheet-view/sheet-view.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ProblemsComponent } from './components/problems/problems.component';
+import { ProblemViewComponent } from './components/problem-view/problem-view.component';
+import { getResolver } from './interceptors/get.resolver';
+import { SessionComponent } from './components/session/session.component';
+import { AllComponent } from './components/problems/all/all.component';
+import { CompanyComponent } from './components/problems/company/company.component';
+import { LevelComponent } from './components/problems/level/level.component';
+import { StatusComponent } from './components/problems/status/status.component';
+import { RemarkComponent } from './components/problems/remark/remark.component';
+import { TypeComponent } from './components/problems/type/type.component';
+import { NoteViewComponent } from './components/note-view/note-view.component';
+import { PlaylistViewComponent } from './components/playlist-view/playlist-view.component';
+import { FocusComponent } from './components/focus/focus.component';
+import { ContentRendererComponent } from './components/content-renderer/content-renderer.component';
+import { SheetViewComponent } from './components/sheet-view/sheet-view.component';
 
 const routes: Routes = [
   {

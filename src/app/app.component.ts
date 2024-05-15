@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CodebaseService } from './codebase.service';
+import { CodebaseService } from './services/codebase.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { SPINNER } from 'ngx-ui-loader';
-import { ThemeService } from './theme.service';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
