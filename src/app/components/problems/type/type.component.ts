@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Problem } from '../../../data-models/problem';
+import { Problem, ProblemType } from '../../../data-models/problem';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CodebaseService } from '../../../services/codebase.service';
 
@@ -9,6 +9,7 @@ import { CodebaseService } from '../../../services/codebase.service';
   styleUrl: './type.component.scss'
 })
 export class TypeComponent implements OnInit {
+  type: ProblemType | undefined = undefined;
   filter: any | undefined = undefined;
   breadcrumb: any[] = [
     {
@@ -19,18 +20,13 @@ export class TypeComponent implements OnInit {
 
   data : Problem[] = [];
 
-  get type(){
-    const slug = this.route.snapshot.paramMap.get('type');
-    if(slug) {
-      return this.codebase.getType(slug);
-    } else {
-      return undefined;
-    }
-  }
-
 
   constructor(private codebase: CodebaseService, private router: Router, private route: ActivatedRoute) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    const slug = this.route.snapshot.paramMap.get('type');
+    if(slug) {
+      this.type = this.codebase.getType(slug);
+    }
   }
 
   ngOnInit(): void {
@@ -43,7 +39,10 @@ export class TypeComponent implements OnInit {
     )
     this.filter = {
       key: 'type',
-      value: this.type?.name
+      value: this.type?.name,
+      subkey: "name",
+      datatype: "object",
+      substringSearch: false
     }
   }
 }

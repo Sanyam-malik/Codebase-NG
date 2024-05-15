@@ -85,7 +85,7 @@ export class ProblemsComponent implements OnInit {
     
     this.statuses = [...new Set(this.listOfData.map(problem => problem.status))].map(status => ({ text: status, value: status }));
     this.levels = [...new Set(this.listOfData.map(problem => problem.level))].map(level => ({ text: level, value: level }))
-    this.types = [...new Set(this.listOfData.map(problem => problem.type))].map(type => ({ text: type, value: type }));
+    this.types = [...new Set(this.listOfData.map(problem => problem.type.name))].map(type => ({ text: type, value: type }));
     this.companies = [{ text: 'None', value: 'none' }, ...[...new Set(this.listOfData.flatMap(item => item.companies?.map(company => company.name) || []))].map(comp => ({ text: comp, value: comp })).slice(1).sort((a, b) => a.text.localeCompare(b.text))];
     this.setColumns();
   }
@@ -192,6 +192,12 @@ export class ProblemsComponent implements OnInit {
             } else {
               return BaseCondition.length > 0;
             }
+          } else if(dataType === "object" && subKey){
+            if (subStringSearch) {
+              return !String(e[key][subKey]).toLowerCase().includes(value.toLowerCase());
+            } else {
+              return String(e[key][subKey]).toLowerCase() !== value.toLowerCase();
+            }
           } else {
             if (subStringSearch) {
               return !String(e[key]).toLowerCase().includes(value.toLowerCase());
@@ -210,6 +216,12 @@ export class ProblemsComponent implements OnInit {
               return SubCondition.length > 0;
             } else {
               return BaseCondition.length > 0;
+            }
+          } else if(dataType === "object" && subKey){
+            if (subStringSearch) {
+              return String(e[key][subKey]).toLowerCase().includes(value.toLowerCase());
+            } else {
+              return String(e[key][subKey]).toLowerCase() === value.toLowerCase();
             }
           } else {
             if (subStringSearch) {
