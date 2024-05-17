@@ -226,6 +226,12 @@ export class CodebaseService {
     this.timeline = undefined;
     localStorage.removeItem('codestate');
     localStorage.removeItem('api_cache');
+    this.http.get(environment.baseURL + "/clear").subscribe((response: any) => {
+      
+    }, err => {
+      
+    });
+    
   }
 
   refreshDatabase() {
