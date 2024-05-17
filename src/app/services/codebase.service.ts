@@ -216,12 +216,15 @@ export class CodebaseService {
   clearData() {
     this.types = [];
     this.runningNav$.next([]);
+    this.notes = [];
+    this.sheets = [];
     this.trackers = [];
     this.reminders = [];
     this.platforms = [];
     this.companies = [];
     this.settings = [];
     this.remarks = [];
+    this.playlists = [];
     this.analytics = undefined;
     this.timeline = undefined;
     localStorage.removeItem('codestate');
