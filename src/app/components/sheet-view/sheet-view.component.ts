@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
 import { CodebaseService } from '../../services/codebase.service';
 import { ContentRenderingService } from '../../services/content-rendering.service';
 import { Sheet } from '../../data-models/sheet';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faRotateRight, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sheet-view',
@@ -20,6 +20,7 @@ export class SheetViewComponent implements OnInit {
   uid: string | null = null;
   sheet: Sheet | undefined;
   checkIcon = faCircleCheck;
+  redoIcon = faRotateRight;
   deleteIcon:any = faTrash;
 
   constructor(private route: ActivatedRoute, private message: NzMessageService, private codebase: CodebaseService, private router: Router, private http: HttpClient, private mdService:MarkdownService, private renderService: ContentRenderingService) {
@@ -79,6 +80,26 @@ export class SheetViewComponent implements OnInit {
     });
     this.changeItemStatus('INPROGRESS', item.id);
     this.router.navigateByUrl(`/sheet/item/${item.id}`);
+  }
+
+  performOperation(type: string, item: any) {
+    var api = `${environment.baseURL}/sheet/operations`;
+    var options: any = {
+      'headers': null,
+      'params': {
+        'type': type,
+        'sheet': item['id']
+      }
+    }
+    this.http.post(api, null, options).subscribe((response: any) => {
+      if(type === 'delete') {
+        this.router.navigate(['/dashboard']);
+      } else {
+        this.getData();
+      }
+    }, err => {
+
+    });
   }
 
 }

@@ -6,10 +6,13 @@
                 <span *ngIf="playlist.description">{{playlist.description}}</span>
             </h2>
             <div>
-                <button nz-button nzType="primary" style="margin-right: 1rem;">
+                <button *ngIf="playlist.complete_percent !== 100" nz-button nzType="primary" style="margin-right: 1rem;" (click)="performOperation('status-complete', playlist)">
                     <fa-icon [icon]="checkIcon"></fa-icon>&nbsp;Mark As Complete
-                  </button>
-                <button nz-button nzType="default">
+                </button>
+                <button *ngIf="playlist.complete_percent === 100" nz-button nzType="primary" style="margin-right: 1rem;" (click)="performOperation('status-todo', playlist)">
+                    <fa-icon [icon]="redoIcon"></fa-icon>&nbsp;Revise Again
+                </button>
+                <button nz-button nzType="default" (click)="performOperation('delete', playlist)">
                     <fa-icon [icon]="deleteIcon"></fa-icon>&nbsp;Remove Playlist
                 </button>
             </div>

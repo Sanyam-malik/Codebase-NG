@@ -8,7 +8,7 @@ import { Playlist } from '../../data-models/playlist';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { environment } from '../../../environments/environment';
 import { ContentRenderingService } from '../../services/content-rendering.service';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faRotateRight, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-playlist-view',
@@ -21,6 +21,7 @@ export class PlaylistViewComponent implements OnInit {
   playlist: Playlist | undefined;
   checkIcon = faCircleCheck;
   deleteIcon:any = faTrash;
+  redoIcon = faRotateRight;
   pageIndexes: any = {};
 
   constructor(private route: ActivatedRoute, private message: NzMessageService, private codebase: CodebaseService, private router: Router, private http: HttpClient, private mdService:MarkdownService, private renderService: ContentRenderingService) {
@@ -106,6 +107,27 @@ export class PlaylistViewComponent implements OnInit {
     });
     this.changeItemStatus('INPROGRESS', item.id);
     this.router.navigateByUrl(`/playlist/item/${item.id}`);
+  }
+
+
+  performOperation(type: string, item: any) {
+    var api = `${environment.baseURL}/playlist/operations`;
+    var options: any = {
+      'headers': null,
+      'params': {
+        'type': type,
+        'playlist': item['id']
+      }
+    }
+    this.http.post(api, null, options).subscribe((response: any) => {
+      if(type === 'delete') {
+        this.router.navigate(['/dashboard']);
+      } else {
+        this.getData();
+      }
+    }, err => {
+
+    });
   }
 
 }

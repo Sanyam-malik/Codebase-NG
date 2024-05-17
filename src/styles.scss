@@ -218,6 +218,9 @@
     color: var(--textSecondaryColor);
     background: var(--headerColor);
     border-color: var(--headerColor);
+    span, div {
+      color: var(--textSecondaryColor);
+    }
   }
   .ant-btn:focus, .ant-btn:hover {
     color: var(--textSecondaryColor);
@@ -846,5 +849,8 @@ code[class*="language-"] {
 }
 
 .ant-progress-circle .ant-progress-text {
+  .anticon {
+    color: inherit;
+  }
   color: var(--textPrimaryColor);
 }

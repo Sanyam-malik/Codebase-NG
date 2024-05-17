@@ -7,10 +7,13 @@
             <h3 *ngIf="sheet.completed_items" style="font-style: italic;">Completed Problems: <span class="color-primary">{{sheet.completed_items}}</span></h3>
             <h3 *ngIf="sheet.total_items" style="font-style: italic;">Total Problems: <span class="color-primary">{{sheet.total_items}}</span></h3>
             <div>
-                <button nz-button nzType="primary" style="margin-right: 1rem;">
+                <button *ngIf="sheet.complete_percent !== 100" nz-button nzType="primary" style="margin-right: 1rem;" (click)="performOperation('status-complete', sheet)">
                     <fa-icon [icon]="checkIcon"></fa-icon>&nbsp;Mark As Complete
-                  </button>
-                <button nz-button nzType="default">
+                </button>
+                <button *ngIf="sheet.complete_percent === 100" nz-button nzType="primary" style="margin-right: 1rem;" (click)="performOperation('status-todo', sheet)">
+                    <fa-icon [icon]="redoIcon"></fa-icon>&nbsp;Complete Again
+                </button>
+                <button nz-button nzType="default" (click)="performOperation('delete', sheet)">
                     <fa-icon [icon]="deleteIcon"></fa-icon>&nbsp;Remove Sheet
                 </button>
             </div>
@@ -53,13 +56,14 @@
                             <h3 class="color-primary" style="font-style: italic;">{{item.level}}</h3>
                         </ng-container>
                     </td>
-                    <td style="padding: 1%;text-align: center;" *ngIf="item.status === 'TODO' || item.status === 'INPROGRESS'" [width]="2">
-                        <a (click)="changeItemStatus('COMPLETED', item.id)">
+                    <td style="padding: 1%;text-align: center;" [width]="2">
+                        <a *ngIf="item.status === 'TODO' || item.status === 'INPROGRESS'" (click)="changeItemStatus('COMPLETED', item.id)">
                             <h3>
                                 <fa-icon [icon]="checkIcon" style="color: green;"></fa-icon>&nbsp;
                                 Mark as Complete
                             </h3>
                         </a>
+                        <h3 *ngIf="item.status === 'COMPLETED'"  style="font-style: italic;">Completed</h3>
                     </td>
                   </tr>
                 </tbody>
