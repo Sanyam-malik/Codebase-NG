@@ -90,7 +90,7 @@ registerLocaleData(en);
     NgxUiLoaderModule,
     NgxUiLoaderRouterModule,
     NgxUiLoaderHttpModule.forRoot({ 
-      showForeground: true,
+      showForeground: false,
       excludeRegexp: [
         "/api/status"
       ]
