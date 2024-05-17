@@ -241,8 +241,9 @@ export class HeaderComponent {
     this.http.post(api, null, options).subscribe((response: any) => {
       this.codebase.clearData();
       this.codebase.getData();
+      this.hideShowModal();
     }, err => {
-
+      this.hideShowModal();
     });
   }
 }
