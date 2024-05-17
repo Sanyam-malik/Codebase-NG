@@ -22,6 +22,8 @@ export interface Playlist {
     id: string;
     title: string;
     description: string;
-    status: string;
+    total_items: string,
+    completed_items: string,
+    complete_percent: string;
     sections: Section[];
 }

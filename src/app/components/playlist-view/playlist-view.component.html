@@ -14,25 +14,20 @@
                 </button>
             </div>
         </div>
-        <div style="text-align: right;">
-            <h2>Status: 
-                <span *ngIf="playlist.status === 'TODO'" style="color: #f72323;font-style: italic;">
-                    Not Started
-                </span>
-                <span *ngIf="playlist.status === 'INPROGRESS'" style="color: #c1c10d;font-style: italic;">
-                    In Progress
-                </span>
-                <span *ngIf="playlist.status === 'COMPLETED'" style="color: #10bd10;font-style: italic;">
-                    Completed
-                </span> 
-            </h2>
+        <div style="width: 20%;text-align: right;">
+            <div style="display: inline-flex;flex-direction: row;
+            justify-content: center;
+            align-items: center;">
+                <nz-progress [nzPercent]="playlist.complete_percent" [nzWidth]="80" nzType="circle"></nz-progress> 
+                <h2 style="margin-left: 4%;margin-bottom: 0%;">Completed</h2>
+            </div>
         </div>
     </div>
     
 
     <nz-collapse *ngIf="playlist.sections" [nzBordered]="false">
         <nz-collapse-panel *ngFor="let section of playlist.sections;let i = index" [nzHeader]="section.title" style="font-weight: bold;" [nzActive]="section.status == 'TODO' || section.status == 'INPROGRESS'">
-            <nz-table #itemTable [nzData]="section.items" class="nostrips">
+            <nz-table #itemTable [nzData]="section.items" class="nostrips" [nzPageIndex]="pageIndexes[section.id]" (nzPageIndexChange)="pageChange(section, $event)">
                 <tbody>
                   <tr *ngFor="let item of itemTable.data">
                     <td style="padding: 1%;" [width]="90">
@@ -48,18 +43,7 @@
                             {{item.description}}
                         </div>
                     </td>
-                    <td *ngIf="section.status !== 'COMPLETED'" style="padding: 1%;" [width]="5" [colSpan]="item.status == 'COMPLETED' ? 2 : 1">
-                        <ng-container *ngIf="item.status === 'TODO'">
-                            <h3 style="color: #f72323;font-style: italic;">To Do</h3>
-                        </ng-container>
-                        <ng-container *ngIf="item.status === 'INPROGRESS'">
-                            <h3 style="color: #c1c10d;font-style: italic;">In Progress</h3>
-                        </ng-container>
-                        <ng-container *ngIf="item.status === 'COMPLETED'">
-                            <h3 style="color: #10bd10;font-style: italic;">Completed</h3>
-                        </ng-container>
-                    </td>
-                    <td *ngIf="section.status === 'COMPLETED'" style="padding: 1%;" [width]="5" [colSpan]="1">
+                    <td style="padding: 1%;" [width]="5" [colSpan]="calculateColspan(section, item)">
                         <ng-container *ngIf="item.status === 'TODO'">
                             <h3 style="color: #f72323;font-style: italic;">To Do</h3>
                         </ng-container>

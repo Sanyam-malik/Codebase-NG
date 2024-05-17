@@ -46,7 +46,7 @@ export class SheetViewComponent implements OnInit {
       status: status,
       item: itemid
     }
-    this.http.post(`${environment.baseURL}/playlist/item/status`, {}, {params: params}).subscribe((response: any) => {
+    this.http.post(`${environment.baseURL}/sheet/item/status`, {}, {params: params}).subscribe((response: any) => {
       if(status == "COMPLETED") {
         this.message.success("Changes made successfully");
       }

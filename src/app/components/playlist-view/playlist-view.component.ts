@@ -21,6 +21,7 @@ export class PlaylistViewComponent implements OnInit {
   playlist: Playlist | undefined;
   checkIcon = faCircleCheck;
   deleteIcon:any = faTrash;
+  pageIndexes: any = {};
 
   constructor(private route: ActivatedRoute, private message: NzMessageService, private codebase: CodebaseService, private router: Router, private http: HttpClient, private mdService:MarkdownService, private renderService: ContentRenderingService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -32,6 +33,9 @@ export class PlaylistViewComponent implements OnInit {
     if(this.uid) {
       var data: Playlist[] = this.route.snapshot.data['apiResponse']['playlists'];
       this.playlist = data.filter(item => item.id === this.uid)[0];
+      for (var section of this.playlist.sections) {
+        this.pageIndexes[section.id] = 1;
+      }
     }
   }
 
@@ -39,6 +43,29 @@ export class PlaylistViewComponent implements OnInit {
     if(item.status == "TODO") {
       this.changeItemStatus('INPROGRESS', item.id);
     }
+  }
+
+  calculateColspan(section:any, item: any): number {
+    const is_section_completed = section['status'] === 'COMPLETED';
+    const is_item_completed = item['status'] === 'COMPLETED'; 
+    
+    if(is_section_completed) {
+      return 1;
+    } else {
+      const startIndex = (this.pageIndexes[section['id']] - 1) * 10;
+      const endIndex = startIndex + 10;
+      const records: any[] = section['items'].slice(startIndex, endIndex);
+      const completed: any[] = records.filter(record => record.status === 'COMPLETED');
+
+      if(records.length === completed.length) {
+        return 1;
+      }
+      return is_item_completed ? 2 : 1;
+    }
+  }
+
+  pageChange(section: any, event: number) {
+    this.pageIndexes[section.id]=event;
   }
 
   changeItemStatus(status: string, itemid: string) {
