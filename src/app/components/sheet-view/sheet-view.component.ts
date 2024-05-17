@@ -22,6 +22,7 @@ export class SheetViewComponent implements OnInit {
   checkIcon = faCircleCheck;
   redoIcon = faRotateRight;
   deleteIcon:any = faTrash;
+  showDetails: any = {};
 
   constructor(private route: ActivatedRoute, private message: NzMessageService, private codebase: CodebaseService, private router: Router, private http: HttpClient, private mdService:MarkdownService, private renderService: ContentRenderingService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -33,6 +34,11 @@ export class SheetViewComponent implements OnInit {
     if(this.uid) {
       var data: Sheet[] = this.route.snapshot.data['apiResponse']['sheets'];
       this.sheet = data.filter(item => item.id === this.uid)[0];
+      for(var section of this.sheet.sections) {
+        for(var item of section.items) {
+          this.showDetails[item.id] = false;
+        }
+      }
     }
   }
 
