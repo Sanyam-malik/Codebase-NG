@@ -1,4 +1,5 @@
 export interface Reminder {
+    uid: string,
     date: string,
     description: string,
     end_time: string,

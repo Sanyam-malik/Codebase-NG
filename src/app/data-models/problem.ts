@@ -1,7 +1,7 @@
 import { Company } from "./company";
 
 export interface Problem {
-    id: number,
+    id: string,
     date: string,
     description: string,
     filename: string,
@@ -19,6 +19,7 @@ export interface Problem {
 }
 
 export interface ProblemType {
+    id: string,
     name: string,
     description: string,
     slug: string

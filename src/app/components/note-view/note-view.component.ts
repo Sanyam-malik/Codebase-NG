@@ -79,4 +79,22 @@ export class NoteViewComponent implements OnInit {
     }
     
   }
+
+  performOperation(type: string, item: any) {
+    var api = `${environment.baseURL}/note/operations`;
+    var options: any = {
+      'headers': null,
+      'params': {
+        'type': type,
+        'note': JSON.stringify(item)
+      }
+    }
+    this.http.post(api, null, options).subscribe((response: any) => {
+      this.codebase.clearData();
+      this.codebase.getData();
+      this.router.navigate(['/dashboard']);
+    }, err => {
+
+    });
+  }
 }

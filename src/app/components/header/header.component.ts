@@ -212,4 +212,37 @@ export class HeaderComponent {
       );
     }
   }
+
+  performOperation(operation_type: string) {
+    var api = "";
+    var object = "";
+    
+    if (this.showModalType == "event") {
+      api = `${environment.baseURL}/reminder/operations`;
+      object = "reminder";
+    }
+    if (this.showModalType == "tracker") {
+      api = `${environment.baseURL}/tracker/operations`;
+      object = "tracker";
+    }
+    if (this.showModalType == "link") {
+      api = `${environment.baseURL}/platform/operations`;
+      object = "platform";
+    }
+
+    var params: any = {
+      type: operation_type,
+    }
+    params[object] = JSON.stringify(this.showModalItem);
+    var options: any = {
+      'headers': null,
+      'params': params
+    }
+    this.http.post(api, null, options).subscribe((response: any) => {
+      this.codebase.clearData();
+      this.codebase.getData();
+    }, err => {
+
+    });
+  }
 }
