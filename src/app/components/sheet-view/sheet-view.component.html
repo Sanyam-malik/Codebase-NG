@@ -36,7 +36,14 @@
                   <tr *ngFor="let item of itemTable.data">
                     <td style="padding: 1%;" [width]="96">
                         <a style="display:flex;align-items: center;" [href]="item.url" target="_blank">
-                            <h3>{{item.title}}</h3>
+                            <div>
+                                <h3 style="margin: 0%;">{{item.title}}</h3>
+                            </div>&nbsp;&nbsp;
+                            <div *ngIf="item.problem">
+                                <nz-tag class="codetag">
+                                    <fa-icon [icon]="codeIcon" routerLink="/problem/statement/{{item.problem.slug}}"></fa-icon>&nbsp;View Solution
+                                </nz-tag>
+                            </div>
                         </a>
                         <a class="color-primary" (click)="showDetails[item.id] = !showDetails[item.id]">
                             <ng-container *ngIf="!showDetails[item.id]">

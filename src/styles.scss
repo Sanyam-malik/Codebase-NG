@@ -854,3 +854,12 @@ code[class*="language-"] {
   }
   color: var(--textPrimaryColor);
 }
+
+.codetag {
+  background: var(--headerColor);
+  color: var(--textPrimaryColor);
+  padding: 4px 8px;
+  margin: 0%;
+  border: none;
+  border-radius: 10px;
+}

@@ -1,3 +1,5 @@
+import { Problem } from "./problem"
+
 export interface Item {
     id: string,
     title: string,
@@ -6,7 +8,8 @@ export interface Item {
     url: string,
     level: string,
     companies: string[],
-    concepts: string[];
+    concepts: string[],
+    problem: Problem
 }
   
 export interface Section {
