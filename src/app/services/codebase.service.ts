@@ -214,8 +214,8 @@ export class CodebaseService {
   }
 
   clearData() {
-    this.types = [];
     this.runningNav$.next([]);
+    this.types = [];
     this.notes = [];
     this.sheets = [];
     this.trackers = [];

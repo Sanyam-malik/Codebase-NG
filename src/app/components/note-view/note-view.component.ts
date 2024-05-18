@@ -63,7 +63,8 @@ export class NoteViewComponent implements OnInit {
 
   nextPage() {
     if(this.note_head) {
-      this.page = this.page < this.note_head.items.length ? this.page+1 : this.page;
+      const size = this.note_head.items.length - 1;
+      this.page = this.page < size ? this.page+1 : this.page;
     }
   }
 
