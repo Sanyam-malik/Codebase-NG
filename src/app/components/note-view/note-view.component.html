@@ -15,8 +15,11 @@
         </div>
 
         <div style="display: inline-flex;">
-            <button nz-button nzType="default" (click)="performOperation('delete', note_head)">
-                <fa-icon [icon]="deleteIcon"></fa-icon>&nbsp;Remove This Note
+            <button nz-button nzType="default" nz-popconfirm
+                nzPopconfirmTitle="Are you sure delete this note?"
+                (nzOnConfirm)="performOperation('delete', note_head)"
+                nzPopconfirmPlacement="bottom">
+                <fa-icon [icon]="deleteIcon"></fa-icon>&nbsp;Remove Note
             </button>
         </div>
     </div>
