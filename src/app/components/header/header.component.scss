@@ -8,3 +8,16 @@ nz-header {
 [nz-menu] {
     line-height: 64px;
 }
+
+.editable {
+    width: 80%;
+    max-width: 80%;
+    p {
+        margin-top: 1rem;
+        margin-bottom: 0%;
+    }
+
+    p:first-child {
+        margin-top: 0%;
+    }
+}

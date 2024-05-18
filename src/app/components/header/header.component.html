@@ -256,7 +256,7 @@
 <nz-modal [(nzVisible)]="showModal" nzCentered nzTitle="{{showModalType | titlecase}}" (nzOnCancel)="hideShowModal()">
   <div *nzModalContent>
     <div *ngIf="showModalType == 'event'" class="d-list" style="padding: 0.5%;align-items: center;">
-      <div>
+      <div *ngIf="!isOnEditMode">
         <p>Name: {{showModalItem.name}}</p>
         <p *ngIf="showModalItem.desc">Description: {{showModalItem.desc}}</p>
         <p *ngIf="showModalItem.recurrence">Recurrence: {{showModalItem.recurrence | titlecase}}</p>
@@ -264,42 +264,92 @@
         <p *ngIf="showModalItem.start_time">Start Time: {{showModalItem.start_time}}</p>
         <p *ngIf="showModalItem.end_time">End Time: {{showModalItem.end_time}}</p>
       </div>
+      
+      <div *ngIf="isOnEditMode" class="editable">
+        <p>Name:</p>
+        <input nz-input placeholder="Basic usage" type="text" />
+        <p>Description:</p>
+        <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+        <p>Recurrence:</p>
+        <nz-select>
+          <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+          <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+          <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+        </nz-select>
+        <p>Date:</p>
+        <nz-date-picker></nz-date-picker>
+        <p>Start Time:</p>
+        <nz-time-picker></nz-time-picker>
+        <p>End Time:</p>
+        <nz-time-picker></nz-time-picker>
+      </div>
+      
       <div>
-        <fa-icon [icon]="calendarIcon" size="3x"></fa-icon>
+        <fa-icon [icon]="calendarIcon" size="5x"></fa-icon>
       </div>
     </div>
 
     <div *ngIf="showModalType == 'tracker'" class="d-list" style="padding: 0.5%;align-items: center;">
-      <div>
+      <div *ngIf="!isOnEditMode">
         <p>Name: {{showModalItem.name}}</p>
         <p>Levels: {{showModalItem.level}}</p> 
       </div>
+
+      <div *ngIf="isOnEditMode" class="editable">
+        <p>Name:</p>
+        <input nz-input placeholder="Basic usage" type="text" />
+        <p>Levels:</p>
+        <nz-checkbox-group></nz-checkbox-group>
+      </div>
+
       <div>
-        <fa-icon [icon]="thumbtackIcon" size="2x"></fa-icon>
+        <fa-icon [icon]="thumbtackIcon" size="3x"></fa-icon>
       </div>
     </div>
 
     <div *ngIf="showModalType == 'link'" class="d-list" style="padding: 0.5%;align-items: center;justify-content: space-between;">
-      <div style="max-width: 80%;">
+      <div *ngIf="!isOnEditMode" style="max-width: 80%;">
         <p>Name: {{showModalItem.name}}</p>
         <p>URL: <a [href]="showModalItem.url">{{showModalItem.url}}</a></p>
         <p>Icon: <a [href]="showModalItem.icon">{{showModalItem.icon}}</a></p>
       </div>
+      
+      <div *ngIf="isOnEditMode" class="editable">
+        <p>Name:</p>
+        <input nz-input placeholder="Basic usage" type="text" />
+        <p>URL:</p>
+        <input nz-input placeholder="Basic usage" type="text" />
+        <p>Icon:</p>
+        <input nz-input placeholder="Basic usage" type="text" />
+      </div>
+
       <div>
         <img [src]="showModalItem.icon" width="60">
       </div>
     </div>
   </div>
   <div *nzModalFooter>
-    <button nz-button nzType="primary">
-      <fa-icon [icon]="editIcon"></fa-icon>&nbsp;Edit {{showModalType | titlecase}}
-    </button>
-    <button nz-button nzType="default"
-    nz-popconfirm
-    nzPopconfirmTitle="Are you sure delete this {{showModalType | lowercase}}?"
-    (nzOnConfirm)="performOperation('delete')"
-    nzPopconfirmPlacement="bottom">
-      <fa-icon [icon]="trashIcon"></fa-icon>&nbsp;Remove {{showModalType | titlecase}}
-    </button>
+    <ng-container *ngIf="!isOnEditMode">
+      <button nz-button nzType="primary" (click)="isOnEditMode = true">
+        <fa-icon [icon]="editIcon"></fa-icon>&nbsp;Edit {{showModalType | titlecase}}
+      </button>
+      <button nz-button nzType="default"
+      nz-popconfirm
+      nzPopconfirmTitle="Are you sure delete this {{showModalType | lowercase}}?"
+      (nzOnConfirm)="performOperation('delete')"
+      nzPopconfirmPlacement="bottom">
+        <fa-icon [icon]="trashIcon"></fa-icon>&nbsp;Remove {{showModalType | titlecase}}
+      </button>
+    </ng-container>
+
+    <ng-container *ngIf="isOnEditMode">
+      <button nz-button nzType="primary">
+        Save Changes
+      </button>
+
+      <button nz-button nzType="default" (click)="isOnEditMode = false">
+        Cancel
+      </button>
+    </ng-container>
   </div>
 </nz-modal>

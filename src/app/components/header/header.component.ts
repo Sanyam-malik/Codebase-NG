@@ -51,6 +51,7 @@ export class HeaderComponent {
   showModal = false;
   showModalType = "";
   showModalItem: any;
+  isOnEditMode = false;
 
   get switchTheme(): any {
     return this.codebase.runningTheme == 'dark' ? faSun : faMoon;
@@ -168,6 +169,7 @@ export class HeaderComponent {
 
   hideShowModal() {
     this.showModal = false;
+    this.isOnEditMode = false;
   }
 
   handleIndexChange(index: number) {
