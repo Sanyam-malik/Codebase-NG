@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Problem, ProblemType } from '../../../data-models/problem';
+import { Problem, ProblemBrief, ProblemType } from '../../../data-models/problem';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CodebaseService } from '../../../services/codebase.service';
 
@@ -18,7 +18,7 @@ export class TypeComponent implements OnInit {
     }
   ];
 
-  data : Problem[] = [];
+  data : ProblemBrief[] = [];
 
 
   constructor(private codebase: CodebaseService, private router: Router, private route: ActivatedRoute) {

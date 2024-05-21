@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CodebaseService } from '../../../services/codebase.service';
-import { Problem } from '../../../data-models/problem';
+import { Problem, ProblemBrief } from '../../../data-models/problem';
 
 @Component({
   selector: 'app-status',
@@ -18,7 +18,7 @@ export class StatusComponent implements OnInit {
     }
   ];
 
-  data : Problem[] = [];
+  data : ProblemBrief[] = [];
 
   get status(){
     const slug = this.route.snapshot.paramMap.get('status');

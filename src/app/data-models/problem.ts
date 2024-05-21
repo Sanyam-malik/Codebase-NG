@@ -18,10 +18,27 @@ export interface Problem {
     subdirectory: string
 }
 
+export interface ProblemBrief {
+    id: string,
+    level: string,
+    name: string,
+    status: string,
+    type: ProblemTypeBrief,
+    companies: Company[],
+    slug: string,
+    remarks: string,
+    subdirectory: string
+}
+
 export interface ProblemType {
     id: string,
     name: string,
     description: string,
+    slug: string
+}
+
+export interface ProblemTypeBrief {
+    name: string,
     slug: string
 }
 

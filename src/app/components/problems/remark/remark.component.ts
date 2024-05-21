@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Problem } from '../../../data-models/problem';
+import { Problem, ProblemBrief } from '../../../data-models/problem';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CodebaseService } from '../../../services/codebase.service';
 
@@ -17,7 +17,7 @@ export class RemarkComponent implements OnInit {
     }
   ];
 
-  data : Problem[] = [];
+  data : ProblemBrief[] = [];
 
   get remark(){
     const slug = this.route.snapshot.paramMap.get('remark');

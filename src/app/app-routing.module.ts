@@ -52,7 +52,9 @@ const routes: Routes = [
     data: {
       url: '/problems',
       options: {
-        "type": "<<type>>"
+        params: {
+          "type": "<<type>>"
+        }
       }
     }
   },
@@ -65,7 +67,9 @@ const routes: Routes = [
     data: {
       url: '/problems',
       options: {
-        'company': '<<company>>'
+        params: {
+          'company': '<<company>>'
+        }
       }
     }
   },
@@ -122,6 +126,9 @@ const routes: Routes = [
     },
     data: {
       url: '/problems',
+      paths: [
+        "<<id>>"
+      ],
       options: {}
     }
   },

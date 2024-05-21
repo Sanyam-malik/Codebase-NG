@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzTableSortOrder, NzTableSortFn, NzTableFilterList, NzTableFilterFn } from 'ng-zorro-antd/table';
-import { Problem } from '../../data-models/problem';
+import { Problem, ProblemBrief } from '../../data-models/problem';
 import { CodebaseService } from '../../services/codebase.service';
 import { Company } from '../../data-models/company';
 
@@ -37,7 +37,7 @@ interface Filter {
 
 export class ProblemsComponent implements OnInit {
 
-  @Input('data') fullListOfData: Problem[] = [];
+  @Input('data') fullListOfData: ProblemBrief[] = [];
   @Input('title') title: string = '';
   @Input('subtitle') subtitle: string = '';
   @Input('state') stateName: string = '';
@@ -45,7 +45,7 @@ export class ProblemsComponent implements OnInit {
   @Input('breadcrumb') breadcrumb: any[] = [];
   
   listOfColumns: ColumnItem[] = [];
-  listOfData: Problem[] = [];
+  listOfData: ProblemBrief[] = [];
   pageIndex: number = 1;
   searchValue: string = '';
   visibleMap: any = {
@@ -240,7 +240,7 @@ export class ProblemsComponent implements OnInit {
 
   search(): void {
     if(this.searchValue.trim().length > 0) {
-      this.listOfData = JSON.parse(JSON.stringify(this.fullListOfData.filter((item: Problem) => item.name.toLowerCase().indexOf(this.searchValue.toLowerCase()) !== -1).sort((a, b) => a.name.localeCompare(b.name))));
+      this.listOfData = JSON.parse(JSON.stringify(this.fullListOfData.filter((item: ProblemBrief) => item.name.toLowerCase().indexOf(this.searchValue.toLowerCase()) !== -1).sort((a, b) => a.name.localeCompare(b.name))));
       this.showMore = [];
       this.showMore.fill(false, 0, this.listOfData.length);
     } else {

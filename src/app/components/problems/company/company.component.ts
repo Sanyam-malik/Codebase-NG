@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CodebaseService } from '../../../services/codebase.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Problem } from '../../../data-models/problem';
+import { Problem, ProblemBrief } from '../../../data-models/problem';
 
 @Component({
   selector: 'app-company',
@@ -17,7 +17,7 @@ export class CompanyComponent implements OnInit {
     }
   ];
 
-  data : Problem[] = [];
+  data : ProblemBrief[] = [];
 
   get company(){
     const slug = this.route.snapshot.paramMap.get('company');

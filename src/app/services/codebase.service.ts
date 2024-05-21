@@ -17,7 +17,7 @@ import { Status } from '../data-models/status';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Note, NoteBrief } from '../data-models/note';
 import { Title } from '@angular/platform-browser';
-import { Problem } from '../data-models/problem';
+import { Problem, ProblemBrief } from '../data-models/problem';
 import { Timeline } from '../data-models/timeline';
 import { Playlist, PlaylistBrief } from '../data-models/playlist';
 import { Sheet, SheetBrief } from '../data-models/sheet';
@@ -42,7 +42,7 @@ export class CodebaseService {
   platforms: Platform[] = [];
   companies: Company[] = [];
   settings: Setting[] = [];
-  problems: Problem[] = [];
+  problems: ProblemBrief[] = [];
   playlists: PlaylistBrief[] = [];
   sheets: SheetBrief[] = [];
   notes: NoteBrief[] = [];

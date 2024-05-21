@@ -30,8 +30,7 @@ export class ProblemViewComponent {
     ngOnInit() {
         this.id = this.route.snapshot.paramMap.get('id');
         if(this.id && this.id.length > 0) {
-            const data: Problem[] = this.route.snapshot.data['apiResponse']['problems'];
-            this.item = data.filter(x=> x.slug == this.id)[0];
+            this.item = this.route.snapshot.data['apiResponse']['problem'];
             this.button = this.codebase.getPlatform(this.item?.url);
             this.codebase.runningNav$.next([
                 {
