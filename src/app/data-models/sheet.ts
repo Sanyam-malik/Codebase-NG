@@ -20,6 +20,11 @@ export interface Section {
     items: Item[]
 }
 
+export interface SheetBrief {
+    id: string,
+    title: string
+}
+
 
 export interface Sheet {
     id: string,

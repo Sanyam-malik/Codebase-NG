@@ -38,6 +38,28 @@ export interface TrackerAnalytic {
     counts: TrackerItemAnalytic[]
 }
 
+export interface PlaylistDetail {
+    'name': string,
+    'id': string,
+    'percent': number
+}
+
+export interface SheetDetail {
+    'name': string,
+    'id': string,
+    'percent': number
+}
+
+export interface PlaylistAnalytic {
+    'in-progress': PlaylistDetail[]
+    'completed': PlaylistDetail[]
+}
+
+export interface SheetAnalytic {
+    'in-progress': SheetDetail[]
+    'completed': SheetDetail[]
+}
+
 export interface Analytics {
     "today_count": number,
     "total_count": number,
@@ -51,4 +73,6 @@ export interface Analytics {
     "types": TypeAnalytic[]
     "relevance": ProblemAnalytic[]
     "trackers": TrackerAnalytic[]
+    "playlists": PlaylistAnalytic
+    "sheets": SheetAnalytic
 }

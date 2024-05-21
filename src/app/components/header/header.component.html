@@ -70,7 +70,7 @@
           <a nz-dropdown [nzDropdownMenu]="nmenu" nzTrigger="click"><fa-icon [icon]="bookIcon"></fa-icon>&nbsp;Notes</a>
           <nz-dropdown-menu #nmenu="nzDropdownMenu" class="d-list-container">
             <ul nz-menu nzSelectable class="d-list-container">
-              <li nz-menu-item *ngFor="let note of notes" class="d-list" routerLink="/notes/{{note.slug}}">
+              <li nz-menu-item *ngFor="let note of notes" class="d-list" routerLink="/notes/{{note.id}}">
                 <div class="d-list-item">
                   <fa-icon [icon]="bookIcon" size="2x"></fa-icon>
                 </div>

@@ -17,6 +17,11 @@ export interface Section {
     items: Item[];
 }
 
+export interface PlaylistBrief {
+    id: string,
+    title: string
+}
+
 
 export interface Playlist {
     id: string;

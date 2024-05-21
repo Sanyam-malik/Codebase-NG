@@ -15,12 +15,12 @@ import { Remark } from '../data-models/remark';
 import { Level } from '../data-models/level';
 import { Status } from '../data-models/status';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { Note } from '../data-models/note';
+import { Note, NoteBrief } from '../data-models/note';
 import { Title } from '@angular/platform-browser';
 import { Problem } from '../data-models/problem';
 import { Timeline } from '../data-models/timeline';
-import { Playlist } from '../data-models/playlist';
-import { Sheet } from '../data-models/sheet';
+import { Playlist, PlaylistBrief } from '../data-models/playlist';
+import { Sheet, SheetBrief } from '../data-models/sheet';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Injectable({
@@ -43,9 +43,9 @@ export class CodebaseService {
   companies: Company[] = [];
   settings: Setting[] = [];
   problems: Problem[] = [];
-  playlists: Playlist[] = [];
-  sheets: Sheet[] = [];
-  notes: Note[] = [];
+  playlists: PlaylistBrief[] = [];
+  sheets: SheetBrief[] = [];
+  notes: NoteBrief[] = [];
   analytics: Analytics | undefined;
   timeline: Timeline | undefined;
   
