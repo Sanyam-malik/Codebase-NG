@@ -9,13 +9,16 @@ export const getResolver: ResolveFn<any> = (route:ActivatedRouteSnapshot, state:
   const apiPaths = route.data['paths'];
   const apiOptions = route.data['options'];
   var paths = [];
-  for(var path of apiPaths) {
-    if(path.includes('<<') && path.includes('>>')) {
-      var refKey = path.replace("<<", "").replace('>>', "").trim();
-      paths.push(String(route.paramMap.get(refKey)));
-    } else {
-      paths.push(path.trim());
-    } 
+  
+  if(apiPaths) {
+    for(var path of apiPaths) {
+      if(path.includes('<<') && path.includes('>>')) {
+        var refKey = path.replace("<<", "").replace('>>', "").trim();
+        paths.push(String(route.paramMap.get(refKey)));
+      } else {
+        paths.push(path.trim());
+      } 
+    }
   }
 
   Object.keys(apiOptions).forEach(key => {
