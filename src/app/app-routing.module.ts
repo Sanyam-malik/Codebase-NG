@@ -116,7 +116,10 @@ const routes: Routes = [
       apiResponse: getResolver
     },
     data: {
-      url: '/notes',
+      url: '/note',
+      paths: [
+        "<<id>>"
+      ],
       options: {}
     }
   },
@@ -127,7 +130,10 @@ const routes: Routes = [
       apiResponse: getResolver
     },
     data: {
-      url: '/playlists',
+      url: '/playlist',
+      paths: [
+        "<<id>>"
+      ],
       options: {}
     }
   },
@@ -138,7 +144,10 @@ const routes: Routes = [
       apiResponse: getResolver
     },
     data: {
-      url: '/sheets',
+      url: '/sheet',
+      paths: [
+        "<<id>>"
+      ],
       options: {}
     }
   },

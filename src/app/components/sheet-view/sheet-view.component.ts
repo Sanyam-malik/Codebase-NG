@@ -33,11 +33,12 @@ export class SheetViewComponent implements OnInit {
   ngOnInit(): void {
     this.uid = this.route.snapshot.paramMap.get('id');
     if(this.uid) {
-      var data: Sheet[] = this.route.snapshot.data['apiResponse']['sheets'];
-      this.sheet = data.filter(item => item.id === this.uid)[0];
-      for(var section of this.sheet.sections) {
-        for(var item of section.items) {
-          this.showDetails[item.id] = false;
+      this.sheet = this.route.snapshot.data['apiResponse']['sheet'];
+      if(this.sheet) {
+        for(var section of this.sheet.sections) {
+          for(var item of section.items) {
+            this.showDetails[item.id] = false;
+          }
         }
       }
     }

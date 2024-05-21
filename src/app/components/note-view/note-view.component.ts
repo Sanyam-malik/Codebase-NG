@@ -73,10 +73,9 @@ export class NoteViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    var slug = this.route.snapshot.paramMap.get('id');
-    if(slug) {
-      var data: Note[] = this.route.snapshot.data['apiResponse']['notes'];
-      this.note_head = data.filter(item => item.slug === slug)[0];
+    var uid = this.route.snapshot.paramMap.get('id');
+    if(uid) {
+      this.note_head  = this.route.snapshot.data['apiResponse']['note'];
     }
     
   }

@@ -32,10 +32,11 @@ export class PlaylistViewComponent implements OnInit {
   ngOnInit(): void {
     this.uid = this.route.snapshot.paramMap.get('id');
     if(this.uid) {
-      var data: Playlist[] = this.route.snapshot.data['apiResponse']['playlists'];
-      this.playlist = data.filter(item => item.id === this.uid)[0];
-      for (var section of this.playlist.sections) {
-        this.pageIndexes[section.id] = 1;
+      this.playlist = this.route.snapshot.data['apiResponse']['playlist'];
+      if(this.playlist) {
+        for (var section of this.playlist.sections) {
+          this.pageIndexes[section.id] = 1;
+        }
       }
     }
   }
