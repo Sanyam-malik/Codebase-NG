@@ -51,7 +51,9 @@ const routes: Routes = [
     },
     data: {
       url: '/problems',
-      options: {}
+      options: {
+        "type": "<<type>>"
+      }
     }
   },
   {
@@ -62,7 +64,9 @@ const routes: Routes = [
     },
     data: {
       url: '/problems',
-      options: {}
+      options: {
+        'company': '<<company>>'
+      }
     }
   },
   {
@@ -73,7 +77,11 @@ const routes: Routes = [
     },
     data: {
       url: '/problems',
-      options: {}
+      options: {
+        params: {
+          'level': "<<level>>"
+        }
+      }
     }
   },
   {
@@ -84,7 +92,11 @@ const routes: Routes = [
     },
     data: {
       url: '/problems',
-      options: {}
+      options: {
+        params: {
+          'status': '<<status>>'
+        }
+      }
     }
   },
   {
@@ -95,7 +107,11 @@ const routes: Routes = [
     },
     data: {
       url: '/problems',
-      options: {}
+      options: {
+        params: {
+          'remark': '<<remark>>'
+        }
+      }
     }
   },
   {
