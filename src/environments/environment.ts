@@ -1,3 +1,3 @@
 export const environment = {
-    "baseURL": window.location.origin+"/codebase/api"
+    "baseURL": window.location.origin+"/cb/api"
 };
