@@ -27,7 +27,7 @@
             "allowedCommonJsDependencies": [
               "highlight.js"
             ],
-            "baseHref": "/codebase/",
+            "baseHref": "/cb/",
             "outputPath": {
               "base": "dist",
               "browser": ""
