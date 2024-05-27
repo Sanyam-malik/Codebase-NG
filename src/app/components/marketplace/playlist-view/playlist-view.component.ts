@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faTrash, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faDownload, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { MarkdownService } from 'ngx-markdown';
 import { Playlist } from '../../../data-models/playlist';
 import { CodebaseService } from '../../../services/codebase.service';
 import { ContentRenderingService } from '../../../services/content-rendering.service';
+import { PlaylistView } from '../../../data-models/playlist-marketplace';
 
 @Component({
   selector: 'app-playlist-view',
@@ -16,9 +17,9 @@ import { ContentRenderingService } from '../../../services/content-rendering.ser
 })
 export class PlaylistViewComponent {
   uid: string | null = null;
-  playlist: Playlist | undefined;
-  importIcon = faDownload;
-  deleteIcon:any = faTrash;
+  playlist: PlaylistView | undefined;
+  importIcon = faUpload;
+  downloadIcon = faDownload;
   pageIndexes: any = {};
 
   constructor(private route: ActivatedRoute, private message: NzMessageService, private codebase: CodebaseService, private router: Router, private http: HttpClient, private mdService:MarkdownService, private renderService: ContentRenderingService) {

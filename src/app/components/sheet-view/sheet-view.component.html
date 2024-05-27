@@ -3,7 +3,7 @@
         <div style="width: 80%;">
             <h1 style="margin: 0%;"><span class="color-primary">{{ sheet.title }}</span></h1>
             <h3 class="no-margin-elements" [innerHTML]="sheet.description | safe:'html'"></h3>
-            <h3 *ngIf="sheet.url" style="font-style: italic;">Source: <a [href]="sheet.url">{{sheet.url}}</a></h3>
+            <h3 *ngIf="sheet.url" style="font-style: italic;">Source: <a [href]="sheet.url | safe:'url'">{{sheet.url}}</a></h3>
             <h3 *ngIf="sheet.completed_items" style="font-style: italic;">Completed Problems: <span class="color-primary">{{sheet.completed_items}}</span></h3>
             <h3 *ngIf="sheet.total_items" style="font-style: italic;">Total Problems: <span class="color-primary">{{sheet.total_items}}</span></h3>
             <div>
@@ -38,7 +38,7 @@
                 <tbody>
                   <tr *ngFor="let item of itemTable.data">
                     <td style="padding: 1%;" [width]="96">
-                        <a style="display:flex;align-items: center;" [href]="item.url" target="_blank">
+                        <a style="display:flex;align-items: center;" [href]="item.url | safe:'url'" target="_blank">
                             <div>
                                 <h3 style="margin: 0%;">{{item.title}}</h3>
                             </div>&nbsp;&nbsp;
