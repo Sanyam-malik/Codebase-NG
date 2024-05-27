@@ -1,1 +1,51 @@
-<p>playlist-view works!</p>
+<ng-container *ngIf="playlist">
+    <div style="display: flex;justify-content: space-between;">
+        <div>
+            <h1 style="margin: 0%;"><span class="color-primary">{{ playlist.title }}</span></h1>
+            <h2> 
+                <span *ngIf="playlist.description">{{playlist.description}}</span>
+            </h2>
+            <div>
+                <button *ngIf="playlist.complete_percent !== 100" nz-button nzType="primary" style="margin-right: 1rem;" (click)="performOperation('status-complete', playlist)">
+                    <fa-icon [icon]="importIcon"></fa-icon>&nbsp;Import Sheet
+                </button>
+            </div>
+        </div>
+    </div>
+    
+
+    <nz-collapse *ngIf="playlist.sections" [nzBordered]="false">
+        <nz-collapse-panel *ngFor="let section of playlist.sections;let i = index" [nzHeader]="section.title" style="font-weight: bold;" [nzActive]="section.status == 'TODO' || section.status == 'INPROGRESS'">
+            <nz-table #itemTable [nzData]="section.items" class="nostrips" [nzPageIndex]="pageIndexes[section.id]" (nzPageIndexChange)="pageChange(section, $event)">
+                <tbody>
+                  <tr *ngFor="let item of itemTable.data">
+                    <td style="padding: 1%;" [width]="90">
+                        <a style="display:flex;align-items: center;" *ngIf="item.type == 'URL'" [href]="item.url" target="_blank">
+                            <img *ngIf="item.image" [src]="item.image" width="120" style="padding: 0.5%;">&nbsp;
+                            <h3>{{item.title}}</h3>
+                        </a>
+                        <a style="display:flex;align-items: center;" *ngIf="item.type != 'URL'">
+                            <img *ngIf="item.image" [src]="item.image" width="120" style="padding: 0.5%;">&nbsp;
+                            <h3>{{item.title}}</h3>
+                        </a>
+                        <div *ngIf="item.description" style="margin-top: 0.5%;">
+                            {{item.description}}
+                        </div>
+                    </td>
+                    <td style="padding: 1%;" [width]="5">
+                        <ng-container *ngIf="item.status === 'TODO'">
+                            <h3 style="color: #f72323;font-style: italic;">To Do</h3>
+                        </ng-container>
+                        <ng-container *ngIf="item.status === 'INPROGRESS'">
+                            <h3 style="color: #c1c10d;font-style: italic;">In Progress</h3>
+                        </ng-container>
+                        <ng-container *ngIf="item.status === 'COMPLETED'">
+                            <h3 style="color: #10bd10;font-style: italic;">Completed</h3>
+                        </ng-container>
+                    </td>
+                  </tr>
+                </tbody>
+              </nz-table>
+        </nz-collapse-panel>
+    </nz-collapse>
+</ng-container>

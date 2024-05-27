@@ -7,19 +7,24 @@ import { SheetViewComponent } from './sheet-view/sheet-view.component';
 
 const routes: Routes = [
   {
-    path: '/playlists',
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'sheets'
+  },
+  {
+    path: 'playlists',
     component: PlaylistHomeComponent
   },
   {
-    path: '/playlist/:id',
+    path: 'playlist/:id',
     component: PlaylistViewComponent
   },
   {
-    path: '/sheets',
+    path: 'sheets',
     component: SheetHomeComponent
   },
   {
-    path: '/sheet/:id',
+    path: 'sheet/:id',
     component: SheetViewComponent
   }
 ];
