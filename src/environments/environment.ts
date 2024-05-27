@@ -1,3 +1,4 @@
 export const environment = {
-    "baseURL": window.location.origin+"/cb/api"
+    "cbURL": window.location.origin+"/cb/api",
+    "mktURL": window.location.origin+"/marketplace/api"
 };

@@ -43,7 +43,7 @@ export class PlaylistViewComponent {
   }
 
   getData() {
-    this.http.get(`${environment.baseURL}/playlists`).subscribe((response: any) => {
+    this.http.get(`${environment.cbURL}/playlists`).subscribe((response: any) => {
       if(this.uid) {
         var data: Playlist[] = response['playlists'];
         this.playlist = data.filter(item => item.id === this.uid)[0];
@@ -55,7 +55,7 @@ export class PlaylistViewComponent {
 
 
   performOperation(type: string, item: any) {
-    var api = `${environment.baseURL}/playlist/operations`;
+    var api = `${environment.cbURL}/playlist/operations`;
     var options: any = {
       'headers': null,
       'params': {

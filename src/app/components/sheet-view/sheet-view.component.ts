@@ -55,7 +55,7 @@ export class SheetViewComponent implements OnInit {
       status: status,
       item: itemid
     }
-    this.http.post(`${environment.baseURL}/sheet/item/status`, {}, {params: params}).subscribe((response: any) => {
+    this.http.post(`${environment.cbURL}/sheet/item/status`, {}, {params: params}).subscribe((response: any) => {
       if(status == "COMPLETED") {
         this.message.success("Changes made successfully");
       }
@@ -69,7 +69,7 @@ export class SheetViewComponent implements OnInit {
   }
 
   getData() {
-    this.http.get(`${environment.baseURL}/sheets`).subscribe((response: any) => {
+    this.http.get(`${environment.cbURL}/sheets`).subscribe((response: any) => {
       if(this.uid) {
         var data: Sheet[] = response['sheets'];
         this.sheet = data.filter(item => item.id === this.uid)[0];
@@ -91,7 +91,7 @@ export class SheetViewComponent implements OnInit {
   }
 
   performOperation(type: string, item: any) {
-    var api = `${environment.baseURL}/sheet/operations`;
+    var api = `${environment.cbURL}/sheet/operations`;
     var options: any = {
       'headers': null,
       'params': {

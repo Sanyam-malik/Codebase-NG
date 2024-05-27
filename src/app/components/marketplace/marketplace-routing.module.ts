@@ -4,28 +4,59 @@ import { PlaylistViewComponent } from './playlist-view/playlist-view.component';
 import { PlaylistHomeComponent } from './playlist-home/playlist-home.component';
 import { SheetHomeComponent } from './sheet-home/sheet-home.component';
 import { SheetViewComponent } from './sheet-view/sheet-view.component';
+import { getResolver } from '../../interceptors/get.resolver';
+import { environment } from '../../../environments/environment';
 
 const routes: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'sheets'
-  },
-  {
     path: 'playlists',
-    component: PlaylistHomeComponent
+    component: PlaylistHomeComponent,
+    resolve: {
+      apiResponse: getResolver
+    },
+    data: {
+      url: `${environment.mktURL}/playlists`,
+      options: {}
+    }
   },
   {
     path: 'playlist/:id',
-    component: PlaylistViewComponent
+    component: PlaylistViewComponent,
+    resolve: {
+      apiResponse: getResolver
+    },
+    data: {
+      url: `${environment.mktURL}/playlist`,
+      paths: [
+        "<<id>>"
+      ],
+      options: {}
+    }
   },
   {
     path: 'sheets',
-    component: SheetHomeComponent
+    component: SheetHomeComponent,
+    resolve: {
+      apiResponse: getResolver
+    },
+    data: {
+      url: `${environment.mktURL}/sheets`,
+      options: {}
+    }
   },
   {
     path: 'sheet/:id',
-    component: SheetViewComponent
+    component: SheetViewComponent,
+    resolve: {
+      apiResponse: getResolver
+    },
+    data: {
+      url: `${environment.mktURL}/sheet`,
+      paths: [
+        "<<id>>"
+      ],
+      options: {}
+    }
   }
 ];
 

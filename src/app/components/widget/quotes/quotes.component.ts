@@ -17,7 +17,7 @@ export class QuotesComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.http.get(`${environment.baseURL}/quote`).subscribe((response: any) => {
+    this.http.get(`${environment.cbURL}/quote`).subscribe((response: any) => {
       this.quote = response["content"]
       this.author = response["author"]
     });

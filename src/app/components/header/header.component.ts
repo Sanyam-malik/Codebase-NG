@@ -199,7 +199,7 @@ export class HeaderComponent {
         });
       }
 
-    this.http.post(`${environment.baseURL}/upload`, uploadData)
+    this.http.post(`${environment.cbURL}/upload`, uploadData)
       .subscribe(
         (response: any )=> {
           if(response['files']) {
@@ -220,15 +220,15 @@ export class HeaderComponent {
     var object = "";
     
     if (this.showModalType == "event") {
-      api = `${environment.baseURL}/reminder/operations`;
+      api = `${environment.cbURL}/reminder/operations`;
       object = "reminder";
     }
     if (this.showModalType == "tracker") {
-      api = `${environment.baseURL}/tracker/operations`;
+      api = `${environment.cbURL}/tracker/operations`;
       object = "tracker";
     }
     if (this.showModalType == "link") {
-      api = `${environment.baseURL}/platform/operations`;
+      api = `${environment.cbURL}/platform/operations`;
       object = "platform";
     }
 

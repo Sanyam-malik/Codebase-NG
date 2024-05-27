@@ -16,6 +16,7 @@ import { PlaylistViewComponent } from './components/playlist-view/playlist-view.
 import { FocusComponent } from './components/focus/focus.component';
 import { ContentRendererComponent } from './components/content-renderer/content-renderer.component';
 import { SheetViewComponent } from './components/sheet-view/sheet-view.component';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   {
@@ -39,7 +40,7 @@ const routes: Routes = [
       apiResponse: getResolver
     },
     data: {
-      url: '/problems',
+      url: `${environment.cbURL}/problems`,
       options: {}
     }
   },
@@ -50,7 +51,7 @@ const routes: Routes = [
       apiResponse: getResolver
     },
     data: {
-      url: '/problems',
+      url: `${environment.cbURL}/problems`,
       options: {
         params: {
           "type": "<<type>>"
@@ -65,7 +66,7 @@ const routes: Routes = [
       apiResponse: getResolver
     },
     data: {
-      url: '/problems',
+      url: `${environment.cbURL}/problems`,
       options: {
         params: {
           'company': '<<company>>'
@@ -80,7 +81,7 @@ const routes: Routes = [
       apiResponse: getResolver
     },
     data: {
-      url: '/problems',
+      url: `${environment.cbURL}/problems`,
       options: {
         params: {
           'level': "<<level>>"
@@ -95,7 +96,7 @@ const routes: Routes = [
       apiResponse: getResolver
     },
     data: {
-      url: '/problems',
+      url: `${environment.cbURL}/problems`,
       options: {
         params: {
           'status': '<<status>>'
@@ -110,7 +111,7 @@ const routes: Routes = [
       apiResponse: getResolver
     },
     data: {
-      url: '/problems',
+      url: `${environment.cbURL}/problems`,
       options: {
         params: {
           'remark': '<<remark>>'
@@ -125,7 +126,7 @@ const routes: Routes = [
       apiResponse: getResolver
     },
     data: {
-      url: '/problems',
+      url: `${environment.cbURL}/problems`,
       paths: [
         "<<id>>"
       ],
@@ -139,7 +140,7 @@ const routes: Routes = [
       apiResponse: getResolver
     },
     data: {
-      url: '/note',
+      url: `${environment.cbURL}/note`,
       paths: [
         "<<id>>"
       ],
@@ -153,7 +154,7 @@ const routes: Routes = [
       apiResponse: getResolver
     },
     data: {
-      url: '/playlist',
+      url: `${environment.cbURL}/playlist`,
       paths: [
         "<<id>>"
       ],
@@ -167,7 +168,7 @@ const routes: Routes = [
       apiResponse: getResolver
     },
     data: {
-      url: '/sheet',
+      url: `${environment.cbURL}/sheet`,
       paths: [
         "<<id>>"
       ],

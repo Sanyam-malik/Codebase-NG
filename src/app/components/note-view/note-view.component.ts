@@ -32,7 +32,7 @@ export class NoteViewComponent implements OnInit {
 
   get note(): string {
     if(this.note_head && this.note_head.items.length > 0) {
-      return `${environment.baseURL.replace("/api", "/file")}/${this.note_head.items[this.page].url}`;
+      return `${environment.cbURL.replace("/api", "/file")}/${this.note_head.items[this.page].url}`;
     } else {
       return "";
     }
@@ -81,7 +81,7 @@ export class NoteViewComponent implements OnInit {
   }
 
   performOperation(type: string, item: any) {
-    var api = `${environment.baseURL}/note/operations`;
+    var api = `${environment.cbURL}/note/operations`;
     var options: any = {
       'headers': null,
       'params': {

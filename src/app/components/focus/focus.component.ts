@@ -50,7 +50,7 @@ export class FocusComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.http.get(`${environment.baseURL}/songs`).subscribe((response: any) => {
+    this.http.get(`${environment.cbURL}/songs`).subscribe((response: any) => {
       this.audioFiles = response["songs"];
       if(this.audioFiles.length > 0) {
         this.audioElement = new Audio();

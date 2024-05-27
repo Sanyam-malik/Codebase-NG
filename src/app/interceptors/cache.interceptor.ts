@@ -54,7 +54,7 @@ export class CacheInterceptor implements HttpInterceptor {
 
   private writeToCache(key: string, response: HttpResponse<any>): void {
     // Encoding the response body before storing in localStorage under 'api_cache' key
-    key = key.replace(environment.baseURL, "");
+    key = key.replace(environment.cbURL, "");
     const cacheData: any = this.readFromCache(this.cacheKey) || {};
     cacheData[key] = {
       response: {
@@ -67,7 +67,7 @@ export class CacheInterceptor implements HttpInterceptor {
   }
 
   private readFromCache(key: string): { response: HttpResponse<any>, timestamp: number } | null {
-    key = key.replace(environment.baseURL, "");
+    key = key.replace(environment.cbURL, "");
     const cacheData = localStorage.getItem(this.cacheKey);
     if (cacheData) {
       const cachedResponse = JSON.parse(cacheData)[key];

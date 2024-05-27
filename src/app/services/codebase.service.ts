@@ -76,7 +76,7 @@ export class CodebaseService {
     
     setInterval(() => {
       if(!this.triggeredUpdate) {
-        this.http.get(environment.baseURL+"/status").subscribe((response: any) => {
+        this.http.get(environment.cbURL+"/status").subscribe((response: any) => {
           if(response['message'] == 'sys-update') {
             this.message.loading('System is undergoing database update.....');
             this.prevUpdate = true;
@@ -229,7 +229,7 @@ export class CodebaseService {
     this.timeline = undefined;
     localStorage.removeItem('codestate');
     localStorage.removeItem('api_cache');
-    this.http.get(environment.baseURL + "/clear").subscribe((response: any) => {
+    this.http.get(environment.cbURL + "/clear").subscribe((response: any) => {
       
     }, err => {
       
@@ -241,7 +241,7 @@ export class CodebaseService {
     if(!this.triggeredUpdate) {
       this.triggeredUpdate = true;
       this.message.loading('Sending the datebase update request....')
-      this.http.post(environment.baseURL+"/update", null).subscribe((response: any) => {
+      this.http.post(environment.cbURL+"/update", null).subscribe((response: any) => {
         if(response['message'] == 'sys-update') {
           this.message.warning('System is already under database update....');
         } else {
@@ -317,7 +317,7 @@ export class CodebaseService {
     // Fetch data for each endpoint
     endpoints.forEach(endpoint => {
       if (!this.hasOwnProperty(endpoint.property) || !(this as any)[endpoint.property] || (this as any)[endpoint.property].length === 0) {
-        this.http.get(environment.baseURL + endpoint.url).subscribe((response: any) => {
+        this.http.get(environment.cbURL + endpoint.url).subscribe((response: any) => {
           (this as any)[endpoint.property] = response[endpoint.property];
           if (endpoint.property === 'settings') {
             this.initTheme();

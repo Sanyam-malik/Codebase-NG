@@ -56,5 +56,5 @@ export const getResolver: ResolveFn<any> = (route:ActivatedRouteSnapshot, state:
   if(paths.length > 0) {
     apiUrl = apiUrl + "/" +paths.join("/");
   }
-  return http.get(environment.baseURL+apiUrl, apiOptions);
+  return http.get(apiUrl, apiOptions);
 };

@@ -46,7 +46,7 @@ export class ProblemViewComponent {
                     url: `/problem/statement/`+this.item?.slug
                 }
             ]);
-            this.http.get(`${environment.baseURL.replace("/api", "/code")}/${this.item?.filename}`).subscribe((response: any) => {
+            this.http.get(`${environment.cbURL.replace("/api", "/code")}/${this.item?.filename}`).subscribe((response: any) => {
                 this.code = response['content'];
             });
         }

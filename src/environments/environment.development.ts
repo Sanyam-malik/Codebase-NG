@@ -1,3 +1,4 @@
 export const environment = {
-    "baseURL": "http://localhost:5050/api"
+    "cbURL": "http://localhost:5050/api",
+    "mktURL": "http://localhost:5100"
 };
