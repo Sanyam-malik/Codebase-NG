@@ -53,6 +53,16 @@
                   </h4>
                 </div>
               </li>
+              <li nz-menu-item routerLink="/marketplace/playlists" class="d-list">
+                <div class="d-list-item">
+                  <fa-icon [icon]="webIcon" size="2x"></fa-icon>
+                </div>
+                <div class="d-list-item">
+                  <h4 class="d-title">
+                    Browse Playlists
+                  </h4>
+                </div>
+              </li>
               <li *ngIf="addItem" nz-menu-item class="d-list" (click)="isModalVisible['playlist'] = true">
                 <div class="d-list-item">
                   <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
@@ -161,6 +171,16 @@
                 <div class="d-list-item">
                   <h4 class="d-title">
                     {{sheet.title}}
+                  </h4>
+                </div>
+              </li>
+              <li nz-menu-item routerLink="/marketplace/sheets" class="d-list">
+                <div class="d-list-item">
+                  <fa-icon [icon]="webIcon" size="2x"></fa-icon>
+                </div>
+                <div class="d-list-item">
+                  <h4 class="d-title">
+                    Browse Sheets
                   </h4>
                 </div>
               </li>
