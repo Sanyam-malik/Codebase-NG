@@ -104,7 +104,7 @@ registerLocaleData(en);
         fullLibraryLoader: () => import('highlight.js')
       }
     }
-],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

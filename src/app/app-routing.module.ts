@@ -185,6 +185,10 @@ const routes: Routes = [
   {
     path: 'timer',
     component: FocusComponent,
+  },
+  {
+    path: 'marketplace',
+    loadChildren: () => import('./components/marketplace/marketplace.module').then(m => m.MarketplaceModule)
   }
 ];
 
