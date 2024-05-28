@@ -123,6 +123,8 @@ export class PlaylistViewComponent implements OnInit {
     this.http.post(api, null, options).subscribe((response: any) => {
       if(type === 'delete') {
         this.router.navigate(['/dashboard']);
+        this.codebase.clearData();
+        this.codebase.getData();
       } else {
         this.getData();
       }

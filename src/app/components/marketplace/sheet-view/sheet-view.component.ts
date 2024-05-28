@@ -57,13 +57,15 @@ export class SheetViewComponent implements OnInit {
   importOperation() {
     var api = `${environment.mktURL}/sheet/import/${this.uid}`;
     this.http.get(api).subscribe((response: any) => {
-        console.log(response);
+      this.message.success("Sheet Import Successful...")
+      this.codebase.clearData();
+      this.codebase.getData();
     }, err => {
       
     });
   }
 
-  deleteOperation() {
+  downloadOperation() {
     const headers = new HttpHeaders();
     headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     var title = this.sheet ? this.sheet.title : 'output'; 
