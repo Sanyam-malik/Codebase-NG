@@ -6,11 +6,11 @@
             <h3 *ngIf="sheet.url" style="font-style: italic;">Source: <a [href]="sheet.url | safe:'url'">{{sheet.url}}</a></h3>
             <h3 *ngIf="sheet.total_items" style="font-style: italic;">Total Problems: <span class="color-primary">{{sheet.total_items}}</span></h3>
             <div>
-                <button nz-button nzType="primary" style="margin-right: 1rem;" (click)="performOperation('status-todo', sheet)">
+                <button nz-button nzType="primary" style="margin-right: 1rem;">
                     <fa-icon [icon]="importIcon"></fa-icon>&nbsp;Import Sheet
                 </button>
-                <button nz-button nzType="default" (click)="performOperation('delete', sheet)">
-                    <fa-icon [icon]="downloadIcon"></fa-icon>&nbsp;Download as CSV
+                <button nz-button nzType="default" (click)="deleteOperation()">
+                    <fa-icon [icon]="downloadIcon"></fa-icon>&nbsp;Download as Excel
                 </button>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
@@ -44,7 +44,7 @@ export class SheetViewComponent implements OnInit {
   }
 
   getData() {
-    this.http.get(`${environment.cbURL}/sheets`).subscribe((response: any) => {
+    this.http.get(`${environment.mktURL}/sheets`).subscribe((response: any) => {
       if(this.uid) {
         var data: Sheet[] = response['sheets'];
         this.sheet = data.filter(item => item.id === this.uid)[0];
@@ -54,23 +54,26 @@ export class SheetViewComponent implements OnInit {
     });
   }
 
-  performOperation(type: string, item: any) {
-    var api = `${environment.cbURL}/sheet/operations`;
-    var options: any = {
-      'headers': null,
-      'params': {
-        'type': type,
-        'sheet': item['id']
-      }
-    }
-    this.http.post(api, null, options).subscribe((response: any) => {
-      if(type === 'delete') {
-        this.router.navigate(['/dashboard']);
-      } else {
-        this.getData();
-      }
+  deleteOperation() {
+    const headers = new HttpHeaders();
+    headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    var title = this.sheet ? this.sheet.title : 'output'; 
+    var api = `${environment.mktURL}/sheet/download/${this.uid}`;
+    this.http.get(api, {
+      headers: headers,
+      responseType: 'blob',
+    }).subscribe((response: any) => {
+        const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${title}.xlsx`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
     }, err => {
-
+      
     });
   }
 
