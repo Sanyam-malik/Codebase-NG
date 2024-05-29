@@ -57,7 +57,10 @@
                             <h3 style="color: #c1c10d;font-style: italic;">In Progress</h3>
                         </ng-container>
                         <ng-container *ngIf="item.status === 'COMPLETED'">
-                            <h3 style="color: #10bd10;font-style: italic;">Completed</h3>
+                            <h3 style="color: #10bd10;font-style: italic;">
+                                <fa-icon [icon]="tickIcon" style="color: green;"></fa-icon>&nbsp;
+                                Completed
+                            </h3>
                         </ng-container>
                     </td>
                     <td style="padding: 1%;text-align: center;" *ngIf="item.status === 'TODO' || item.status === 'INPROGRESS'" [width]="5">

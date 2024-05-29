@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
 import { CodebaseService } from '../../services/codebase.service';
 import { ContentRenderingService } from '../../services/content-rendering.service';
 import { Sheet } from '../../data-models/sheet';
-import { faCode, faRotateRight, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faCode, faRotateRight, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sheet-view',
@@ -20,6 +20,7 @@ export class SheetViewComponent implements OnInit {
   uid: string | null = null;
   sheet: Sheet | undefined;
   checkIcon = faCircleCheck;
+  tickIcon = faCheck;
   redoIcon = faRotateRight;
   codeIcon = faCode;
   deleteIcon:any = faTrash;

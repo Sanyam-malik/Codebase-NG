@@ -99,7 +99,10 @@
                                 Mark as Complete
                             </h3>
                         </a>
-                        <h3 *ngIf="item.status === 'COMPLETED'"  style="font-style: italic;">Completed</h3>
+                        <h3 *ngIf="item.status === 'COMPLETED'"  style="font-style: italic;">
+                            <fa-icon [icon]="tickIcon" style="color: green;"></fa-icon>&nbsp;
+                            Completed
+                        </h3>
                     </td>
                   </tr>
                 </tbody>

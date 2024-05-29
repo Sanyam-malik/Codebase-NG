@@ -8,7 +8,7 @@ import { Playlist } from '../../data-models/playlist';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { environment } from '../../../environments/environment';
 import { ContentRenderingService } from '../../services/content-rendering.service';
-import { faRotateRight, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faRotateRight, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-playlist-view',
@@ -20,6 +20,7 @@ export class PlaylistViewComponent implements OnInit {
   uid: string | null = null;
   playlist: Playlist | undefined;
   checkIcon = faCircleCheck;
+  tickIcon = faCheck;
   deleteIcon:any = faTrash;
   redoIcon = faRotateRight;
   pageIndexes: any = {};

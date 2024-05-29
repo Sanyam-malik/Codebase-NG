@@ -60,6 +60,7 @@ export class ProblemsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private codebase: CodebaseService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.codebase.setTitle("Problems");
   }
 
   ngOnInit(): void {
