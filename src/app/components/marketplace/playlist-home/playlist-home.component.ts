@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { PlaylistHome } from '../../../data-models/playlist-marketplace';
 import { CodebaseService } from '../../../services/codebase.service';
+import { faVideo } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-playlist-home',
@@ -18,6 +19,7 @@ export class PlaylistHomeComponent implements OnInit {
   pageSize = 16;
   pageTotal = 0;
   paginatedRecords: PlaylistHome[][] = [];
+  videoIcon: any = faVideo;
   
   constructor(private http: HttpClient, private codebase: CodebaseService, private route: ActivatedRoute) {
     this.codebase.setTitle("Playlist MarketPlace");

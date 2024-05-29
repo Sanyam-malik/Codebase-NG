@@ -19,10 +19,11 @@
 <div *ngFor="let grid of paginatedRecords" class="grid4">
     <div *ngFor="let sheet of grid" class="dashcard">
         <img *ngIf="sheet.image" [src]="sheet.image" alt="{{ sheet.name }}">
-         <h2 style="margin: 1rem;">
+        <fa-icon *ngIf="!sheet.image" [icon]="bookIcon" style="color: var(--primaryColor)" [size]="'4x'"></fa-icon>
+        <h2 style="margin: 1rem;">
             <a routerLink="/marketplace/sheet/{{sheet.uid}}">{{ sheet.name }}</a>
         </h2>
-        <h3>Total Count: <span class="color-primary">{{ sheet.total_count }}</span></h3>
+        <h3>Total Problems: <span class="color-primary">{{ sheet.total_count }}</span></h3>
     </div>
 </div>
 

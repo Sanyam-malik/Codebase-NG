@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SheetHome } from '../../../data-models/sheet-marketplace';
 import { CodebaseService } from '../../../services/codebase.service';
+import { faBook, faBookOpen } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sheet-home',
@@ -13,6 +14,7 @@ export class SheetHomeComponent implements OnInit {
   
   search: string = "";
   sheets: SheetHome[] = [];
+  bookIcon: any = faBookOpen;
   pageIndex: number = 1;
   pageSize = 16;
   pageTotal = 0;
