@@ -22,6 +22,7 @@ import { Timeline } from '../data-models/timeline';
 import { Playlist, PlaylistBrief } from '../data-models/playlist';
 import { Sheet, SheetBrief } from '../data-models/sheet';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -64,7 +65,7 @@ export class CodebaseService {
   timer: any;
   isPaused: boolean = false;
 
-  constructor(private http: HttpClient, private message: NzMessageService, private ngxService: NgxUiLoaderService, private title: Title) {
+  constructor(private http: HttpClient, private router: Router, private message: NzMessageService, private ngxService: NgxUiLoaderService, private title: Title) {
     const codestate: Codestate = this.getState('codestate');
     if(codestate?.themePref) {
       this.runningTheme = codestate.themePref;
@@ -421,6 +422,10 @@ export class CodebaseService {
     slug = slug.replace(/^-+|-+$/g, '');
     
     return slug;
+  }
+
+  redirectTo404() {
+    this.router.navigate(['/not-found']);
   }
 
 }

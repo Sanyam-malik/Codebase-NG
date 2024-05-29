@@ -42,6 +42,7 @@ import { FocusComponent } from './components/focus/focus.component';
 import { ContentRendererComponent } from './components/content-renderer/content-renderer.component';
 import { SheetViewComponent } from './components/sheet-view/sheet-view.component';
 import { NgxUiLoaderConfig, NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule, SPINNER } from 'ngx-ui-loader';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 registerLocaleData(en);
 
@@ -67,7 +68,8 @@ registerLocaleData(en);
     BreadcrumbComponent,
     FocusComponent,
     ContentRendererComponent,
-    SheetViewComponent
+    SheetViewComponent,
+    NotFoundComponent
   ],
   imports: [
     SafePipe,

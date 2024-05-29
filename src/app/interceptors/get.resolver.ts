@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
-import { environment } from '../../environments/environment';
+import { ActivatedRouteSnapshot, ResolveFn, Router, RouterStateSnapshot } from '@angular/router';
+import { catchError, of } from 'rxjs';
 
 function deepClone(obj: any) {
   return JSON.parse(JSON.stringify(obj));
@@ -9,6 +9,7 @@ function deepClone(obj: any) {
 
 export const getResolver: ResolveFn<any> = (route:ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const http = inject(HttpClient);
+  const router = inject(Router);
   var apiUrl = route.data['url'];
   const apiPaths = route.data['paths'];
   const apiOptions = deepClone(route.data['options']);
@@ -56,5 +57,14 @@ export const getResolver: ResolveFn<any> = (route:ActivatedRouteSnapshot, state:
   if(paths.length > 0) {
     apiUrl = apiUrl + "/" +paths.join("/");
   }
-  return http.get(apiUrl, apiOptions);
+  return http.get(apiUrl, apiOptions).pipe(
+    catchError((error: HttpErrorResponse) => {
+      if (error.status === 404) {
+        // Redirect to the desired page
+        router.navigate(['/not-found']);
+      }
+      // Return an observable with a default value (or empty)
+      return of(null);
+    })
+  );
 };

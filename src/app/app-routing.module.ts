@@ -17,6 +17,7 @@ import { FocusComponent } from './components/focus/focus.component';
 import { ContentRendererComponent } from './components/content-renderer/content-renderer.component';
 import { SheetViewComponent } from './components/sheet-view/sheet-view.component';
 import { environment } from '../environments/environment';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -190,7 +191,15 @@ const routes: Routes = [
   {
     path: 'marketplace',
     loadChildren: () => import('./components/marketplace/marketplace.module').then(m => m.MarketplaceModule)
-  }
+  },
+  { 
+    path: 'not-found', 
+    component: NotFoundComponent
+  },
+  { 
+    path: '**', 
+    redirectTo: 'not-found'
+  },
 ];
 
 @NgModule({
