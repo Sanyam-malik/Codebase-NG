@@ -6,7 +6,7 @@
                 <span *ngIf="playlist.description">{{playlist.description}}</span>
             </h2>
             <div>
-                <button nz-button nzType="primary" style="margin-right: 1rem;" (click)="performOperation('status-complete', playlist)">
+                <button nz-button nzType="primary" style="margin-right: 1rem;" (click)="importOperation()">
                     <fa-icon [icon]="importIcon"></fa-icon>&nbsp;Import Sheet
                 </button>
             </div>
@@ -19,7 +19,7 @@
             <nz-table #itemTable [nzData]="section.items" class="nostrips" [nzPageIndex]="pageIndexes[section.id]" (nzPageIndexChange)="pageChange(section, $event)">
                 <tbody>
                   <tr *ngFor="let item of itemTable.data">
-                    <td style="padding: 1%;" [width]="90">
+                    <td style="padding: 1%;" [width]="50">
                         <a style="display:flex;align-items: center;" *ngIf="item.type == 'URL'" [href]="item.url | safe:'url'" target="_blank">
                             <img *ngIf="item.image" [src]="item.image" width="120" style="padding: 0.5%;">&nbsp;
                             <h3>{{item.title}}</h3>
@@ -32,16 +32,8 @@
                             {{item.description}}
                         </div>
                     </td>
-                    <td style="padding: 1%;" [width]="5">
-                        <ng-container *ngIf="item.status === 'TODO'">
-                            <h3 style="color: #f72323;font-style: italic;">To Do</h3>
-                        </ng-container>
-                        <ng-container *ngIf="item.status === 'INPROGRESS'">
-                            <h3 style="color: #c1c10d;font-style: italic;">In Progress</h3>
-                        </ng-container>
-                        <ng-container *ngIf="item.status === 'COMPLETED'">
-                            <h3 style="color: #10bd10;font-style: italic;">Completed</h3>
-                        </ng-container>
+                    <td style="padding: 1%;" [width]="50">
+                        {{item.description}}
                     </td>
                   </tr>
                 </tbody>

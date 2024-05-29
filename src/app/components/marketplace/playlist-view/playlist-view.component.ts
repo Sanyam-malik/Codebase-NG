@@ -55,25 +55,14 @@ export class PlaylistViewComponent {
   }
 
 
-  performOperation(type: string, item: any) {
-    var api = `${environment.cbURL}/playlist/operations`;
-    var options: any = {
-      'headers': null,
-      'params': {
-        'type': type,
-        'playlist': item['id']
-      }
-    }
-    this.http.post(api, null, options).subscribe((response: any) => {
-      if(type === 'delete') {
-        this.router.navigate(['/dashboard']);
-        this.codebase.clearData();
-        this.codebase.getData();
-      } else {
-        this.getData();
-      }
+  importOperation() {
+    var api = `${environment.mktURL}/playlist/import/${this.uid}`;
+    this.http.get(api).subscribe((response: any) => {
+      this.message.success("Playlist Import Successful...")
+      this.codebase.clearData();
+      this.codebase.getData();
     }, err => {
-
+      
     });
   }
 

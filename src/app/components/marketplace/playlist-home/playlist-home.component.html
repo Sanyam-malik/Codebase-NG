@@ -19,7 +19,7 @@
 <div *ngFor="let grid of paginatedRecords" class="grid4">
     <div *ngFor="let playlist of grid" class="dashcard">
          <h2 style="margin: 1rem;">
-            <a routerLink="/marketplace/sheet/{{playlist.uid}}">{{ playlist.name }}</a>
+            <a routerLink="/marketplace/playlist/{{playlist.uid}}">{{ playlist.name }}</a>
         </h2>
         <h3>Total Items: <span class="color-primary">{{ playlist.total_count }}</span></h3>
     </div>
