@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SheetHome } from '../../../data-models/sheet-marketplace';
+import { CodebaseService } from '../../../services/codebase.service';
 
 @Component({
   selector: 'app-sheet-home',
@@ -17,7 +18,8 @@ export class SheetHomeComponent implements OnInit {
   pageTotal = 0;
   paginatedRecords: SheetHome[][] = [];
   
-  constructor(private http: HttpClient, private route: ActivatedRoute) {
+  constructor(private http: HttpClient, private codebase: CodebaseService, private route: ActivatedRoute) {
+    this.codebase.setTitle("Sheet MarketPlace");
     this.sheets = this.route.snapshot.data['apiResponse']['sheets'];
   }
 

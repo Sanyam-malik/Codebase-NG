@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(public codebase: CodebaseService, private router: Router, private message: NzMessageService) {
     this.codebase.runningNav$.next([]);
     this.codebase.isDashboardRunning = true;
+    this.codebase.setTitle("Dashboard");
   }
 
   ngOnDestroy(): void {

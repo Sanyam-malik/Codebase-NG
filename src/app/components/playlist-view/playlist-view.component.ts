@@ -34,6 +34,7 @@ export class PlaylistViewComponent implements OnInit {
     if(this.uid) {
       this.playlist = this.route.snapshot.data['apiResponse']['playlist'];
       if(this.playlist) {
+        this.codebase.setTitle(this.playlist.title);
         for (var section of this.playlist.sections) {
           this.pageIndexes[section.id] = 1;
         }

@@ -32,6 +32,7 @@ export class PlaylistViewComponent {
     if(this.uid) {
       this.playlist = this.route.snapshot.data['apiResponse']['playlist'];
       if(this.playlist) {
+        this.codebase.setTitle(this.playlist.title);
         for (var section of this.playlist.sections) {
           this.pageIndexes[section.id] = 1;
         }
@@ -42,18 +43,6 @@ export class PlaylistViewComponent {
   pageChange(section: any, event: number) {
     this.pageIndexes[section.id]=event;
   }
-
-  getData() {
-    this.http.get(`${environment.cbURL}/playlists`).subscribe((response: any) => {
-      if(this.uid) {
-        var data: Playlist[] = response['playlists'];
-        this.playlist = data.filter(item => item.id === this.uid)[0];
-      }
-    }, err => {
-
-    });
-  }
-
 
   importOperation() {
     var api = `${environment.mktURL}/playlist/import/${this.uid}`;

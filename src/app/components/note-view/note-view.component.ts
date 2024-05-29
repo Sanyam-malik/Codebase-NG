@@ -76,6 +76,9 @@ export class NoteViewComponent implements OnInit {
     var uid = this.route.snapshot.paramMap.get('id');
     if(uid) {
       this.note_head  = this.route.snapshot.data['apiResponse']['note'];
+      if(this.note_head) {
+        this.codebase.setTitle(this.note_head.title);
+      }
     }
     
   }

@@ -31,6 +31,9 @@ export class ProblemViewComponent {
         this.id = this.route.snapshot.paramMap.get('id');
         if(this.id && this.id.length > 0) {
             this.item = this.route.snapshot.data['apiResponse']['problem'];
+            if(this.item) {
+                this.codebase.setTitle(this.item.name);
+            }
             this.button = this.codebase.getPlatform(this.item?.url);
             this.codebase.runningNav$.next([
                 {

@@ -1,13 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { MarkdownService } from 'ngx-markdown';
 import { faCode, faDownload, faRotateRight, faTrash, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { SheetView } from '../../../data-models/sheet-marketplace';
 import { environment } from '../../../../environments/environment';
-import { Sheet } from '../../../data-models/sheet';
 import { CodebaseService } from '../../../services/codebase.service';
 import { ContentRenderingService } from '../../../services/content-rendering.service';
 
@@ -34,6 +32,7 @@ export class SheetViewComponent implements OnInit {
     if(this.uid) {
       this.sheet = this.route.snapshot.data['apiResponse']['sheet'];
       if(this.sheet) {
+        this.codebase.setTitle(this.sheet.title);
         for(var section of this.sheet.sections) {
           for(var item of section.items) {
             this.showDetails[item.id] = false;
@@ -41,17 +40,6 @@ export class SheetViewComponent implements OnInit {
         }
       }
     }
-  }
-
-  getData() {
-    this.http.get(`${environment.mktURL}/sheets`).subscribe((response: any) => {
-      if(this.uid) {
-        var data: Sheet[] = response['sheets'];
-        this.sheet = data.filter(item => item.id === this.uid)[0];
-      }
-    }, err => {
-
-    });
   }
 
   importOperation() {

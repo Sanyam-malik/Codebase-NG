@@ -136,8 +136,11 @@ export class CodebaseService {
         appIcon: this.appIcon,
       }
     }
-    this.title.setTitle(this.appName);
     this.saveState("codestate", codeState);
+  }
+
+  setTitle(title: string) {
+    this.title.setTitle(title + " | " + this.appName);
   }
 
   switchTheme() {
