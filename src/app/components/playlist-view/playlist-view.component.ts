@@ -89,10 +89,9 @@ export class PlaylistViewComponent implements OnInit {
   }
 
   getData() {
-    this.http.get(`${environment.cbURL}/playlists`).subscribe((response: any) => {
+    this.http.get(`${environment.cbURL}/playlist/${this.uid}`).subscribe((response: any) => {
       if(this.uid) {
-        var data: Playlist[] = response['playlists'];
-        this.playlist = data.filter(item => item.id === this.uid)[0];
+        this.playlist = response['playlist'];
       }
     }, err => {
 

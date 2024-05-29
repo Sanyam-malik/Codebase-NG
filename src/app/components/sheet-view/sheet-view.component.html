@@ -44,7 +44,9 @@
                             </div>&nbsp;&nbsp;
                             <div *ngIf="item.problem">
                                 <nz-tag class="codetag">
-                                    <fa-icon [icon]="codeIcon" routerLink="/problem/statement/{{item.problem.slug}}"></fa-icon>&nbsp;View Solution
+                                    <a routerLink="/problem/statement/{{item.problem.slug}}">
+                                        <fa-icon [icon]="codeIcon"></fa-icon>&nbsp;View Solution
+                                    </a>
                                 </nz-tag>
                             </div>
                         </a>

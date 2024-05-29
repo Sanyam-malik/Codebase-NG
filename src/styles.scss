@@ -885,6 +885,12 @@ code[class*="language-"] {
 .codetag {
   background: var(--headerColor);
   color: var(--textPrimaryColor);
+  a {
+    color: var(--textPrimaryColor);
+  }
+  a:hover {
+    color: var(--textPrimaryColor);
+  }
   padding: 4px 8px;
   margin: 0%;
   border: none;

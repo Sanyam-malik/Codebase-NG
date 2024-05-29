@@ -69,10 +69,9 @@ export class SheetViewComponent implements OnInit {
   }
 
   getData() {
-    this.http.get(`${environment.cbURL}/sheets`).subscribe((response: any) => {
+    this.http.get(`${environment.cbURL}/sheet/${this.uid}`).subscribe((response: any) => {
       if(this.uid) {
-        var data: Sheet[] = response['sheets'];
-        this.sheet = data.filter(item => item.id === this.uid)[0];
+        this.sheet = response['sheet'];
       }
     }, err => {
 
