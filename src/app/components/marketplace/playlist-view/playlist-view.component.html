@@ -6,7 +6,10 @@
                 <span *ngIf="playlist.description">{{playlist.description}}</span>
             </h2>
             <div>
-                <button nz-button nzType="primary" style="margin-right: 1rem;" (click)="importOperation()">
+                <button nz-button nzType="primary" style="margin-right: 1rem;" nz-popconfirm
+                nzPopconfirmTitle="Are you sure import this playlist?"
+                (nzOnConfirm)="importOperation()"
+                nzPopconfirmPlacement="bottom">
                     <fa-icon [icon]="importIcon"></fa-icon>&nbsp;Import Sheet
                 </button>
             </div>
