@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { MarkdownService } from 'ngx-markdown';
 import { CodebaseService } from '../../services/codebase.service';
-import { Playlist } from '../../data-models/playlist';
+import { Item, Playlist } from '../../data-models/playlist';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { environment } from '../../../environments/environment';
 import { ContentRenderingService } from '../../services/content-rendering.service';
@@ -43,10 +43,11 @@ export class PlaylistViewComponent implements OnInit {
     }
   }
 
-  allowChange(item: any) {
+  allowChange(item: Item) {
     if(item.status == "TODO") {
       this.changeItemStatus('INPROGRESS', item.id);
     }
+    window.open(item.url, '__blank');
   }
 
   calculateColspan(section:any, item: any): number {
