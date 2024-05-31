@@ -155,6 +155,10 @@ export class HeaderComponent {
     return this.codebase.currBranch;
   }
 
+  set currentBranch(value: string) {
+    this.codebase.currBranch = value;
+  }
+
   get branchInfo(): Branch | undefined {
     return this.codebase.branch;
   }
@@ -201,14 +205,19 @@ export class HeaderComponent {
       nzTitle: 'Do you want to switch the branch?',
       nzCentered: true,
       nzContent: 'Switching the branch will result in progress reset',
-      nzOnOk: () => {this.switchBranch();}
+      nzOnOk: () => {this.switchBranch();},
+      nzOnCancel: () => {
+        if(this.branchInfo) {
+          this.currentBranch = this.branchInfo.current;
+        }
+      }
     });
   }
 
   switchBranch() {
     var options: any = {
       'params':{
-        'branch': this.branchInfo?.current
+        'branch': this.currentBranch
       }
     }
     this.message.info('Switching Branch... We will refresh the page once done...');
