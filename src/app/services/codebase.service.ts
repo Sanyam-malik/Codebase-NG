@@ -36,6 +36,7 @@ export class CodebaseService {
   isAdditionAllowed: boolean = false;
   
   branch: Branch | undefined;
+  currBranch = '';
   types: Menu[] = [];
   statuses: Status[] = [];
   levels: Level[] = [];
@@ -328,6 +329,9 @@ export class CodebaseService {
           (this as any)[endpoint.property] = response[endpoint.property];
           if (endpoint.property === 'settings') {
             this.initTheme();
+          }
+          if (endpoint.property === 'branch' && this.branch) {
+            this.currBranch = this.branch?.current;
           }
         }, err => {
           console.error("Failed to get response from "+endpoint.url+ " endpoint");

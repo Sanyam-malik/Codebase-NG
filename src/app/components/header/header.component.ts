@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { faInternetExplorer } from '@fortawesome/free-brands-svg-icons';
 import { Branch } from '../../data-models/branch';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,7 @@ import { Branch } from '../../data-models/branch';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  confirmSwitchModal?: NzModalRef;
   visible = false;
   selectedUploadOption: number = 1;
 
@@ -124,7 +126,8 @@ export class HeaderComponent {
   }
 
 
-  constructor(public codebase: CodebaseService, private router: Router, private message: NzMessageService, private http: HttpClient) {
+  constructor(public codebase: CodebaseService, private modal: NzModalService,
+    private router: Router, private message: NzMessageService, private http: HttpClient) {
     
   }
 
@@ -146,6 +149,10 @@ export class HeaderComponent {
 
   get seconds() {
     return this.codebase.seconds;
+  }
+
+  get currentBranch(): string {
+    return this.codebase.currBranch;
   }
 
   get branchInfo(): Branch | undefined {
@@ -187,6 +194,15 @@ export class HeaderComponent {
     this.isModalVisible[type] = false;
     this.selectedUploadOption = 1;
     this.filesForm?.get('files')?.setValue([]);
+  }
+
+  showConfirm() {
+    this.confirmSwitchModal = this.modal.confirm({
+      nzTitle: 'Do you want to switch the branch?',
+      nzCentered: true,
+      nzContent: 'Switching the branch will result in progress reset',
+      nzOnOk: () => {this.switchBranch();}
+    });
   }
 
   switchBranch() {
