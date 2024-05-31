@@ -8,6 +8,7 @@ import { CodebaseService } from '../../services/codebase.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { faInternetExplorer } from '@fortawesome/free-brands-svg-icons';
+import { Branch } from '../../data-models/branch';
 
 @Component({
   selector: 'app-header',
@@ -145,6 +146,10 @@ export class HeaderComponent {
 
   get seconds() {
     return this.codebase.seconds;
+  }
+
+  get branchInfo(): Branch | undefined {
+    return this.codebase.branch;
   }
 
   startTimer() {

@@ -23,6 +23,7 @@ import { Playlist, PlaylistBrief } from '../data-models/playlist';
 import { Sheet, SheetBrief } from '../data-models/sheet';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Router } from '@angular/router';
+import { Branch } from '../data-models/branch';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,7 @@ export class CodebaseService {
   runningTheme: string = "dark";
   isAdditionAllowed: boolean = false;
   
+  branch: Branch | undefined;
   types: Menu[] = [];
   statuses: Status[] = [];
   levels: Level[] = [];
@@ -315,7 +317,8 @@ export class CodebaseService {
       { property: 'timeline', url: '/timeline' },
       { property: 'problems', url: '/problems' },
       { property: 'playlists', url: '/playlists' },
-      { property: 'sheets', url: '/sheets' }
+      { property: 'sheets', url: '/sheets' },
+      { property: 'branch', url: '/branch' }
     ];
     
     // Fetch data for each endpoint
