@@ -195,8 +195,9 @@ export class HeaderComponent {
         'branch': this.branchInfo?.current
       }
     }
+    this.message.info('Switching Branch... We will refresh the page once done...');
     this.http.post(`${environment.cbURL}/switch/branch`, null, options).subscribe((response: any) => {
-      this.message.info('Switching Branch... It might take a while...');
+      window.location.reload();
     }, err => {
       
     });
