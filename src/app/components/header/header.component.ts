@@ -189,6 +189,19 @@ export class HeaderComponent {
     this.filesForm?.get('files')?.setValue([]);
   }
 
+  switchBranch() {
+    var options: any = {
+      'params':{
+        'branch': this.branchInfo?.current
+      }
+    }
+    this.http.post(`${environment.cbURL}/switch/branch`, null, options).subscribe((response: any) => {
+      this.message.info('Switching Branch... It might take a while...');
+    }, err => {
+      
+    });
+  }
+
   handleConfirm(type: string) {
     if(this.selectedUploadOption==1) {
       var length: number | undefined = this.filesForm.get('files')?.value?.length;
