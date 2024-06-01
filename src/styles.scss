@@ -942,6 +942,17 @@ code[class*="language-"] {
   .ant-select {
     color: var(--textPrimaryColor);
     font-size: 1rem;
+    .ant-select-arrow {
+      .anticon-down {
+        color: var(--textPrimaryColor);
+      }
+    }
+
+    .ant-select-selector {
+      .ant-select-single.ant-select-open, .ant-select-selection-item {
+        color: var(--textPrimaryColor);
+      }
+    }
   }
 
   .ant-select-selection-search-input {
