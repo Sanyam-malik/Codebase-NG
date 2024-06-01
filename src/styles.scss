@@ -6,9 +6,12 @@
     --secondaryColor: #76c405;
     --headerColor: rgb(17 17 17);
     --backgroundColor: rgb(26, 26, 26);
-    --alternativeTableColor: rgba(255, 255, 255, 0.12);
+    --alternativeColor: rgba(255, 255, 255, 0.12);
     --textPrimaryColor: #f5f5f5bf;
     --textSecondaryColor: white;
+    --buttonText: #f5f5f5bf;
+    --buttonTextHover: white;
+    --buttonBGColor: var(--headerColor);
     --boxText: white;
     --boxColor: #1E1E1E;
     --boxShadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
@@ -171,7 +174,7 @@
   }
 
   .ant-table-row:nth-child(2n) {
-    background-color: var(--alternativeTableColor);
+    background-color: var(--alternativeColor);
   }
 
   .nostrips {
@@ -194,12 +197,12 @@
   }
 
   .ant-dropdown-menu-item-selected, .ant-dropdown-menu-submenu-title-selected{
-    background-color: var(--alternativeTableColor);
+    background-color: var(--alternativeColor);
     border-top: none;
   }
 
   .ant-dropdown-menu-item:hover {
-    background-color: var(--alternativeTableColor);
+    background-color: var(--alternativeColor);
   }
 
   .ant-result-title, .ant-result-subtitle {
@@ -212,27 +215,25 @@
     justify-content: center;
     border-radius: 5px;
     padding: 1.0em;
-    background: var(--headerColor);
-    border-color: var(--headerColor);
-    color: var(--textPrimaryColor);
+    background: var(--buttonBGColor);
+    border-color: var(--buttonBGColor);
+    color: var(--buttonText);
+    span, div {
+      color: inherit;
+    }
   }
 
   .ant-btn:active, .ant-btn:focus, .ant-btn:hover {
     text-decoration: none;
-    color: var(--textSecondaryColor);
-    background: var(--headerColor);
-    border-color: var(--headerColor);
+    color: var(--buttonTextHover);
+    background: var(--buttonBGColor);
+    border-color: var(--buttonBGColor);
     span, div {
-      color: var(--textSecondaryColor);
+      color: inherit;
     }
-  }
-  .ant-btn:focus, .ant-btn:hover {
-    color: var(--textSecondaryColor);
-    border-color: var(--headerColor);
   }
 
   .ant-btn-primary {
-    color: var(--textPrimaryColor);
     border-color: var(--primaryColor);
     background: var(--primaryColor);
   }
@@ -244,7 +245,6 @@
   }
 
   .ant-btn-primary:focus, .ant-btn-primary:hover {
-    color: var(--textPrimaryColor);
     border-color: var(--secondaryColor);
     background: var(--secondaryColor);
   }
@@ -906,7 +906,7 @@ code[class*="language-"] {
 
   .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
     font-weight: 600;
-    background-color: var(--alternativeTableColor);
+    background-color: var(--alternativeColor);
   }
 
   .ant-select-dropdown {
@@ -929,7 +929,7 @@ code[class*="language-"] {
   }
 
   .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
-    background-color: var(--alternativeTableColor);
+    background-color: var(--alternativeColor);
   }
 
   .ant-select-item-option-content {
@@ -972,4 +972,8 @@ code[class*="language-"] {
     border-color: transparent;
     box-shadow: none;
   }
+}
+
+.ant-progress-circle-trail {
+  stroke: var(--alternativeColor);
 }
