@@ -26,6 +26,7 @@
                   </div>
                 </div>
               </li>
+              
               <li *ngIf="addItem" nz-menu-item class="d-list" (click)="isModalVisible['event'] = true">
                 <div class="d-list-item">
                   <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
@@ -36,6 +37,8 @@
                   </h4>
                 </div>
               </li>
+
+              <nz-list-empty *ngIf="!addItem && reminders.length == 0"></nz-list-empty>
             </ul>
           </nz-dropdown-menu>
         </li>
@@ -53,6 +56,7 @@
                   </h4>
                 </div>
               </li>
+              
               <li nz-menu-item routerLink="/marketplace/playlists" class="d-list">
                 <div class="d-list-item">
                   <fa-icon [icon]="webIcon" size="2x"></fa-icon>
@@ -63,6 +67,7 @@
                   </h4>
                 </div>
               </li>
+              
               <li *ngIf="addItem" nz-menu-item class="d-list" (click)="isModalVisible['playlist'] = true">
                 <div class="d-list-item">
                   <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
@@ -90,6 +95,7 @@
                   </a>
                 </div>
               </li>
+              
               <li *ngIf="addItem" nz-menu-item class="d-list" (click)="isModalVisible['note'] = true">
                 <div class="d-list-item">
                   <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
@@ -100,6 +106,8 @@
                   </h4>
                 </div>
               </li>
+
+              <nz-list-empty *ngIf="!addItem && notes.length == 0"></nz-list-empty>
             </ul>
           </nz-dropdown-menu>
         </li>
@@ -120,6 +128,7 @@
                   </div>
                 </div>
               </li>
+              
               <li *ngIf="addItem" nz-menu-item class="d-list" (click)="isModalVisible['tracker'] = true">
                 <div class="d-list-item">
                   <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
@@ -130,6 +139,8 @@
                   </h4>
                 </div>
               </li>
+
+              <nz-list-empty *ngIf="!addItem && trackers.length == 0"></nz-list-empty>
             </ul>
           </nz-dropdown-menu>
         </li>
@@ -147,6 +158,7 @@
                   </h4>
                 </div>
               </li>
+              
               <li *ngIf="addItem" nz-menu-item class="d-list" (click)="isModalVisible['link'] = true">
                 <div class="d-list-item">
                   <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
@@ -157,6 +169,8 @@
                   </h4>
                 </div>
               </li>
+
+              <nz-list-empty *ngIf="!addItem && platforms.length == 0"></nz-list-empty>
             </ul>
           </nz-dropdown-menu>
         </li>
@@ -174,6 +188,7 @@
                   </h4>
                 </div>
               </li>
+              
               <li nz-menu-item routerLink="/marketplace/sheets" class="d-list">
                 <div class="d-list-item">
                   <fa-icon [icon]="webIcon" size="2x"></fa-icon>
@@ -184,6 +199,7 @@
                   </h4>
                 </div>
               </li>
+              
               <li *ngIf="addItem" nz-menu-item class="d-list" (click)="isModalVisible['sheet'] = true">
                 <div class="d-list-item">
                   <fa-icon [icon]="plusIcon" size="2x"></fa-icon>
