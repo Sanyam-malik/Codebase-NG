@@ -218,7 +218,7 @@
         </li>
 
         <li *ngIf="branchInfo" nz-menu-item class="nohover branch-selector" style="padding-right: 0.5%;">
-          <nz-select [nzDropdownClassName]="'branch-selector-dropdown'" nzPlaceHolder="Select a branch" [(ngModel)]="currentBranch" (ngModelChange)="showConfirm()">
+          <nz-select [nzDropdownMatchSelectWidth]="false" [nzPlacement]="'bottomRight'" [nzDropdownClassName]="'branch-selector-dropdown'" nzPlaceHolder="Select a branch" [(ngModel)]="currentBranch" (ngModelChange)="showConfirm()">
             <nz-option *ngFor="let item of branchInfo.branches" [nzLabel]="item" [nzValue]="item"></nz-option>
           </nz-select>
         </li>

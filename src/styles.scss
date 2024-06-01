@@ -899,6 +899,11 @@ code[class*="language-"] {
 
 .branch-selector-dropdown {
 
+  .ant-select-item {
+    min-height: initial;
+    line-height: initial;
+  }
+
   .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
     font-weight: 600;
     background-color: var(--alternativeTableColor);
@@ -906,6 +911,20 @@ code[class*="language-"] {
 
   .ant-select-dropdown {
     background-color: var(--headerColor);
+    padding: .8rem;
+    min-height: auto;
+    max-height: 380px;
+    min-width: 250px;
+
+    .cdk-virtual-scroll-viewport {
+      height: auto !important;
+      max-height: inherit !important;
+    }
+  }
+
+  .ant-select-item-option {
+    padding: .5rem;
+    font-size: 1rem;
   }
 
   .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
