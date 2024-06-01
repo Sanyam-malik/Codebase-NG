@@ -919,6 +919,7 @@ code[class*="language-"] {
     .cdk-virtual-scroll-viewport {
       height: auto !important;
       max-height: inherit !important;
+      overflow-y: scroll;
     }
   }
 
@@ -948,7 +949,8 @@ code[class*="language-"] {
   }
 
   .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-    border-color: var(--primaryColor);
+    border-color: transparent;
+    box-shadow: none;
   }
 
   .ant-select:not(.ant-select-customize-input) .ant-select-selector {
@@ -956,6 +958,7 @@ code[class*="language-"] {
   }
   
   .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
-    border-color: var(--primaryColor);
+    border-color: transparent;
+    box-shadow: none;
   }
 }

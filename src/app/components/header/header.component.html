@@ -218,9 +218,16 @@
         </li>
 
         <li *ngIf="branchInfo" nz-menu-item class="nohover branch-selector" style="padding-right: 0.5%;">
-          <nz-select [nzDropdownMatchSelectWidth]="false" [nzPlacement]="'bottomRight'" [nzDropdownClassName]="'branch-selector-dropdown'" nzPlaceHolder="Select a branch" [(ngModel)]="currentBranch" (ngModelChange)="showConfirm()">
-            <nz-option *ngFor="let item of branchInfo.branches" [nzLabel]="item" [nzValue]="item"></nz-option>
+          <nz-select [nzSize]="'large'" [nzDropdownMatchSelectWidth]="false" [nzPlacement]="'bottomRight'" [nzCustomTemplate]="iconSelectTemplate" [nzDropdownClassName]="'branch-selector-dropdown'" nzPlaceHolder="Select a branch" [(ngModel)]="currentBranch" (ngModelChange)="showConfirm()">
+            <nz-option nzCustomContent *ngFor="let item of branchInfo.branches" [nzLabel]="item" [nzValue]="item">
+              <fa-icon [icon]="branchIcon"></fa-icon>&nbsp;&nbsp;{{item}}
+            </nz-option>
           </nz-select>
+
+          <ng-template #iconSelectTemplate let-selected>
+            <fa-icon [icon]="branchIcon"></fa-icon>&nbsp;
+            {{ selected.nzLabel }}
+          </ng-template>
         </li>
         
         <li nz-menu-item class="nohover" style="padding-right: 0.5%;">
