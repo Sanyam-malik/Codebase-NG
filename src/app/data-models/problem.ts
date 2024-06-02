@@ -13,6 +13,7 @@ export interface Problem {
     url: string,
     code: string,
     companies: Company[],
+    concepts: string,
     remarks: string,
     slug: string,
     subdirectory: string

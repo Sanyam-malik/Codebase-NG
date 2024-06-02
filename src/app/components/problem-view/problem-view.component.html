@@ -1,51 +1,119 @@
 <ng-container *ngIf="item">
-    <div style="display: flex;justify-content: space-between;">
-        <div>
-            <h1 style="margin: 0%;">Problem: <span class="color-primary">{{ item.name }}</span></h1>
-            <h2 style="margin: 0%;"> 
-                <span class="color-primary">{{item.type.name}}</span>
-                <span *ngIf="item.subdirectory">&nbsp;({{item.subdirectory.replaceAll(":", " -> ")}})</span>
-            </h2>
-            <h3>{{ item.level }}</h3>
-        </div>
-        <div style="text-align: right;">
-            <h2 style="padding: 0.5rem 0px;">Status: <span class="color-primary">{{ item.status }}</span></h2>
-            <a *ngIf="button" class="btn-code-action" [href]="item.url"><img [src]="button.icon">View on {{button.name}}</a>
-            <a *ngIf="!button" class="btn-code-action" [href]="item.url"><fa-icon class="color-primary" [icon]="codeIcon" ></fa-icon>&nbsp;View Problem Statement</a>
-        </div>
-    </div>
-    <div *ngIf="item.companies" style="width: 60%;">
-        <nz-tag *ngFor="let company of item.companies.slice(0, 5)" [nzColor]="getColor(company)" (click)="tagClick(company.slug)">{{company['name']}}</nz-tag>
-        <ng-container *ngIf="showMore">
-            <nz-tag *ngFor="let company of item.companies.slice(5)" [nzColor]="getColor(company)" (click)="tagClick(company.slug)">{{company['name']}}</nz-tag>
-        </ng-container>
-        <ng-container *ngIf="item.companies.length > 5">
-            <nz-tag *ngIf="!showMore" (click)="showMore = true;" [nzColor]="'transparent'">+ More</nz-tag>
-            <nz-tag *ngIf="showMore" (click)="showMore = false;" [nzColor]="'transparent'">- Less</nz-tag>
-        </ng-container>
-    </div>
-    
+    <ng-container *ngTemplateOutlet="newTemplate"></ng-container>
 
-    <nz-collapse [nzBordered]="false">
-        <nz-collapse-panel *ngIf="item.description" [nzHeader]="'Description'" [nzActive]="true">
-            <div class="description" [innerHTML]="item.description | safe: 'html'"></div>
-        </nz-collapse-panel>
-        
-        <nz-collapse-panel *ngIf="code" [nzHeader]="'Code'" [nzActive]="!item.description ? true : false">
-            <div class="codeblock">
-                <pre><code [highlight]="code"></code></pre>
-                <div class="copybutton">
-                    <button class="btn-clipboard" (click)="onCopyToClipboard(code)">
-                        <fa-icon [icon]="Clipboard"></fa-icon>&nbsp;&nbsp;Copy
-                    </button>
+    <ng-template #newTemplate>
+        <div class="split-pane">
+            <div class="split-pane-item">
+                <div style="display: flex;justify-content: space-between;">
+                    <div>
+                        <h2 style="margin: 0%;">Problem: <span class="color-primary">{{ item.name }}</span></h2>
+                        <h2 style="margin: 0%;"> 
+                            <span class="color-primary">{{item.type.name}}</span>
+                            <span *ngIf="item.subdirectory">&nbsp;({{item.subdirectory.replaceAll(":", " -> ")}})</span>
+                        </h2>
+                        <h3>{{ item.level }}</h3>
+                    </div>
+                    <div style="text-align: center;">
+                        <h3 style="padding: 0.5rem 0px;">Status: <span class="color-primary">{{ item.status }}</span></h3>
+                        <a *ngIf="button" class="btn-code-action-sm" [href]="item.url">
+                            <img [src]="button.icon">View on {{button.name}}
+                        </a>
+                        <a *ngIf="!button" class="btn-code-action-sm" [href]="item.url">
+                            <fa-icon class="color-primary" [icon]="codeIcon" ></fa-icon>&nbsp;View Problem Statement
+                        </a>
+                    </div>
+                </div>
+
+                <nz-tabset [nzSize]="'large'">
+                    <nz-tab nzTitle="Description">
+                        <div *ngIf="item.description" class="description" [innerHTML]="item.description | safe: 'html'"></div>
+                        <div *ngIf="!item.description">No Description Added</div>
+                    </nz-tab>
+                    
+                    <nz-tab nzTitle="Notes">
+                        <div *ngIf="item.notes" class="notes" [innerHTML]="item.notes | safe: 'html'"></div>
+                        <div *ngIf="!item.notes">No Notes Added</div>
+                    </nz-tab>
+
+                    <nz-tab *ngIf="item.remarks" nzTitle="Remarks">
+                        <nz-tag *ngFor="let remark of item.remarks.split(':')" [nzColor]="'var(--alternativeColor)'" routerLink="/problem/remark/{{createSlug(remark)}}">{{remark}}</nz-tag>
+                    </nz-tab>
+                    
+                    <nz-tab *ngIf="item.companies.length > 0" nzTitle="Companies">
+                        <nz-tag *ngFor="let company of item.companies" [nzColor]="getColor(company)" routerLink="/problem/company/{{company.slug}}">{{company['name']}}</nz-tag>
+                    </nz-tab>
+
+                    <nz-tab *ngIf="item.concepts" nzTitle="Topics">
+                        <nz-tag *ngFor="let concept of item.concepts.split(':')" [nzColor]="'var(--alternativeColor)'">{{concept}}</nz-tag>
+                    </nz-tab>
+                </nz-tabset>
+            </div>
+            <div class="split-pane-item">
+                <h3>Code:</h3>
+                <div class="codeblock">
+                    <pre><code [highlight]="code"></code></pre>
+                    <div class="copybutton">
+                        <button class="btn-clipboard" (click)="onCopyToClipboard(code)">
+                            <fa-icon [icon]="Clipboard"></fa-icon>&nbsp;&nbsp;Copy
+                        </button>
+                    </div>
                 </div>
             </div>
-        </nz-collapse-panel>
+        </div>
+    </ng-template>
 
-        <nz-collapse-panel *ngIf="item.notes" [nzHeader]="'Notes'" [nzActive]="false">
-            <div class="notes" [innerHTML]="item.notes | safe: 'html'"></div>
-        </nz-collapse-panel>
-    </nz-collapse>
 
+    <ng-template #oldTemplate>
+
+        <div style="display: flex;justify-content: space-between;">
+            <div>
+                <h1 style="margin: 0%;">Problem: <span class="color-primary">{{ item.name }}</span></h1>
+                <h2 style="margin: 0%;"> 
+                    <span class="color-primary">{{item.type.name}}</span>
+                    <span *ngIf="item.subdirectory">&nbsp;({{item.subdirectory.replaceAll(":", " -> ")}})</span>
+                </h2>
+                <h3>{{ item.level }}</h3>
+            </div>
+            <div style="text-align: right;">
+                <h2 style="padding: 0.5rem 0px;">Status: <span class="color-primary">{{ item.status }}</span></h2>
+                <a *ngIf="button" class="btn-code-action" [href]="item.url"><img [src]="button.icon">View on {{button.name}}</a>
+                <a *ngIf="!button" class="btn-code-action" [href]="item.url"><fa-icon class="color-primary" [icon]="codeIcon" ></fa-icon>&nbsp;View Problem Statement</a>
+            </div>
+        </div>
+
+        <div *ngIf="item.companies" style="width: 60%;">
+            <nz-tag *ngFor="let company of item.companies.slice(0, 5)" [nzColor]="getColor(company)" routerLink="/problem/company/{{company.slug}}">{{company['name']}}</nz-tag>
+            <ng-container *ngIf="showMore">
+                <nz-tag *ngFor="let company of item.companies.slice(5)" [nzColor]="getColor(company)" routerLink="/problem/company/{{company.slug}}">{{company['name']}}</nz-tag>
+            </ng-container>
+            <ng-container *ngIf="item.companies.length > 5">
+                <nz-tag *ngIf="!showMore" (click)="showMore = true;" [nzColor]="'transparent'">+ More</nz-tag>
+                <nz-tag *ngIf="showMore" (click)="showMore = false;" [nzColor]="'transparent'">- Less</nz-tag>
+            </ng-container>
+        </div>
+        
+    
+        <nz-collapse [nzBordered]="false">
+            <nz-collapse-panel *ngIf="item.description" [nzHeader]="'Description'" [nzActive]="true">
+                <div class="description" [innerHTML]="item.description | safe: 'html'"></div>
+            </nz-collapse-panel>
+            
+            <nz-collapse-panel *ngIf="code" [nzHeader]="'Code'" [nzActive]="!item.description ? true : false">
+                <div class="codeblock">
+                    <pre><code [highlight]="code"></code></pre>
+                    <div class="copybutton">
+                        <button class="btn-clipboard" (click)="onCopyToClipboard(code)">
+                            <fa-icon [icon]="Clipboard"></fa-icon>&nbsp;&nbsp;Copy
+                        </button>
+                    </div>
+                </div>
+            </nz-collapse-panel>
+    
+            <nz-collapse-panel *ngIf="item.notes" [nzHeader]="'Notes'" [nzActive]="false">
+                <div class="notes" [innerHTML]="item.notes | safe: 'html'"></div>
+            </nz-collapse-panel>
+        </nz-collapse>
+    </ng-template>
 
 </ng-container>
+

@@ -27,6 +27,10 @@ export class ProblemViewComponent {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
 
+    createSlug(text: string) {
+        return this.codebase.createSlug(text);
+    }
+
     ngOnInit() {
         this.id = this.route.snapshot.paramMap.get('id');
         if(this.id && this.id.length > 0) {
@@ -62,10 +66,6 @@ export class ProblemViewComponent {
         } else {
             return company.color_light;
         }
-    }
-
-    tagClick(name: string) {
-        this.router.navigate(['/problem/company', encodeURIComponent(String(name).toLowerCase())]);
     }
 
     onCopyToClipboard(text: string) {
