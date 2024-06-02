@@ -1069,3 +1069,12 @@ code[class*="language-"] {
 .ant-tabs {
   font-size: 1rem;
 }
+
+.ant-alert-warning {
+  background-color: #f5da81;
+  border: none;
+
+  .anticon {
+    color: #faad14;
+  }
+}

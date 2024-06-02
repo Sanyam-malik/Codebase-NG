@@ -8,6 +8,7 @@ import { Company } from '../../data-models/company';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { Solution } from '../../data-models/solution';
 
 @Component({
   selector: 'app-problem-view',
@@ -22,6 +23,7 @@ export class ProblemViewComponent {
     codeIcon = faCode;
     Clipboard: any = faClipboard;
     code: string = '';
+    YTSolutions: Solution[] = [];
 
     constructor(private route: ActivatedRoute, private codebase: CodebaseService, private router: Router, private http: HttpClient, private message: NzMessageService) {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -53,11 +55,18 @@ export class ProblemViewComponent {
                     url: `/problem/statement/`+this.item?.slug
                 }
             ]);
-            this.http.get(`${environment.cbURL.replace("/api", "/code")}/${this.item?.filename}`).subscribe((response: any) => {
-                this.code = response['content'];
-            });
+            
+            this.getCode();
+            this.callYouTube();
+            this.callChatGPT();
         }
         
+    }
+
+    getCode() {
+        this.http.get(`${environment.cbURL.replace("/api", "/code")}/${this.item?.filename}`).subscribe((response: any) => {
+            this.code = response['content'];
+        });
     }
 
     getColor(company: Company) {
@@ -85,5 +94,28 @@ export class ProblemViewComponent {
             window.navigator.clipboard.writeText(text);
         }
         this.message.success("Code Copied to Clipboard...");
+    }
+
+    callChatGPT() {
+        var url = `${environment.intgrnURL}/chatgpt/solution`
+        this.http.post(url, this.item).subscribe((response: any)=> {
+            console.log(response);
+        },
+        error => {
+            this.message.error('ChatGPT Service is currently down. Please try again shortly.');
+        })
+    }
+
+    callYouTube() {
+        var url = `${environment.intgrnURL}/youtube/solution`
+        this.http.post(url, this.item).subscribe((response: any)=> {
+            if(response['message'] == 'success') {
+                this.YTSolutions = response['content'];
+                console.log(this.YTSolutions);
+            }
+        },
+        error => {
+            this.message.error('Youtube Service is currently down. Please try again shortly.');
+        })
     }
 }
