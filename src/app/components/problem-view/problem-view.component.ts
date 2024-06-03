@@ -99,7 +99,6 @@ export class ProblemViewComponent {
     callChatGPT() {
         var url = `${environment.intgrnURL}/chatgpt/solution`
         this.http.post(url, this.item).subscribe((response: any)=> {
-            console.log(response);
         },
         error => {
             this.message.error('ChatGPT Service is currently down. Please try again shortly.');
@@ -111,7 +110,6 @@ export class ProblemViewComponent {
         this.http.post(url, this.item).subscribe((response: any)=> {
             if(response['message'] == 'success') {
                 this.YTSolutions = response['content'];
-                console.log(this.YTSolutions);
             }
         },
         error => {
