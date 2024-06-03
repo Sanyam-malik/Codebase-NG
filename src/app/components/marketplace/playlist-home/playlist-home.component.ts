@@ -16,7 +16,7 @@ export class PlaylistHomeComponent implements OnInit {
   search: string = "";
   playlists: PlaylistHome[] = [];
   pageIndex: number = 1;
-  pageSize = 16;
+  pageSize = 12;
   pageTotal = 0;
   paginatedRecords: PlaylistHome[][] = [];
   videoIcon: any = faVideo;
@@ -28,6 +28,22 @@ export class PlaylistHomeComponent implements OnInit {
 
   ngOnInit() {
     this.paginatedRecords = this.generateGrids(this.playlists); 
+    var temp: any[] = [
+      {
+        name: 'Home',
+        url: '/dashboard'
+      },
+      {
+        name: 'Playlist',
+        url: '/playlist'
+      },
+      {
+        name: 'Browse',
+        url: '/marketplace/playlists'
+      }
+    ];
+
+    this.codebase.runningNav$.next(temp);
   }
 
   initSearch() {

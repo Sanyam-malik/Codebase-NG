@@ -32,6 +32,28 @@ export class PlaylistViewComponent {
     if(this.uid) {
       this.playlist = this.route.snapshot.data['apiResponse']['playlist'];
       if(this.playlist) {
+
+        var temp: any[] = [
+          {
+            name: 'Home',
+            url: '/dashboard'
+          },
+          {
+            name: 'Playlist',
+            url: '/playlist'
+          },
+          {
+            name: 'Browse',
+            url: '/marketplace/playlists'
+          },
+          {
+            name: this.playlist.title,
+            url: '/marketplace/playlist/'+this.playlist.id
+          }
+        ];
+    
+        this.codebase.runningNav$.next(temp);
+
         this.codebase.setTitle(this.playlist.title);
         for (var section of this.playlist.sections) {
           this.pageIndexes[section.id] = 1;

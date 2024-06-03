@@ -16,7 +16,7 @@ export class SheetHomeComponent implements OnInit {
   sheets: SheetHome[] = [];
   bookIcon: any = faBookOpen;
   pageIndex: number = 1;
-  pageSize = 16;
+  pageSize = 12;
   pageTotal = 0;
   paginatedRecords: SheetHome[][] = [];
   
@@ -27,6 +27,22 @@ export class SheetHomeComponent implements OnInit {
 
   ngOnInit() {
     this.paginatedRecords = this.generateGrids(this.sheets); 
+    var temp: any[] = [
+      {
+        name: 'Home',
+        url: '/dashboard'
+      },
+      {
+        name: 'Sheets',
+        url: '/sheets'
+      },
+      {
+        name: 'Browse',
+        url: '/marketplace/sheets'
+      }
+    ];
+
+    this.codebase.runningNav$.next(temp);
   }
 
   initSearch() {

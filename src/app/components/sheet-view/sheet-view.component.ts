@@ -36,6 +36,24 @@ export class SheetViewComponent implements OnInit {
     if(this.uid) {
       this.sheet = this.route.snapshot.data['apiResponse']['sheet'];
       if(this.sheet) {
+
+        var temp: any[] = [
+          {
+            name: 'Home',
+            url: '/dashboard'
+          },
+          {
+            name: 'Sheet',
+            url: '/sheet'
+          },
+          {
+            name: this.sheet.title,
+            url: '/sheet/'+this.sheet.id
+          }
+        ];
+    
+        this.codebase.runningNav$.next(temp);
+
         this.codebase.setTitle(this.sheet.title);
         for(var section of this.sheet.sections) {
           for(var item of section.items) {
