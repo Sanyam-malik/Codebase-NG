@@ -22,7 +22,9 @@ export class SheetHomeComponent implements OnInit {
   
   constructor(private http: HttpClient, private codebase: CodebaseService, private route: ActivatedRoute) {
     this.codebase.setTitle("Sheet MarketPlace");
-    this.sheets = this.route.snapshot.data['apiResponse']['sheets'];
+    if(this.route.snapshot.data['apiResponse']) {
+      this.sheets = this.route.snapshot.data['apiResponse']['sheets'];
+    }
   }
 
   ngOnInit() {

@@ -23,7 +23,9 @@ export class PlaylistHomeComponent implements OnInit {
   
   constructor(private http: HttpClient, private codebase: CodebaseService, private route: ActivatedRoute) {
     this.codebase.setTitle("Playlist MarketPlace");
-    this.playlists = this.route.snapshot.data['apiResponse']['playlists'];
+    if(this.route.snapshot.data['apiResponse']) {
+      this.playlists = this.route.snapshot.data['apiResponse']['playlists'];
+    }
   }
 
   ngOnInit() {
