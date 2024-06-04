@@ -16,6 +16,8 @@ import { RouterModule } from '@angular/router';
 import { RelevanceComponent } from './relevance/relevance.component';
 import { TrackersComponent } from './trackers/trackers.component';
 import { RemindersComponent } from './reminders/reminders.component';
+import { SheetsComponent } from './sheets/sheets.component';
+import { PlaylistsComponent } from './playlists/playlists.component';
 
 var components = [
   CompaniesComponent,
@@ -29,7 +31,9 @@ var components = [
   TimelineComponent,
   RelevanceComponent,
   TrackersComponent,
-  RemindersComponent
+  RemindersComponent,
+  SheetsComponent,
+  PlaylistsComponent
 ]
 
 @NgModule({

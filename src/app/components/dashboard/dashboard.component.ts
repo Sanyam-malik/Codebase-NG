@@ -83,6 +83,38 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return this.codebase.analytics ? this.codebase.analytics.trackers.length : 0;
   }
 
+  get playlists() {
+    if(this.codebase.analytics && this.codebase.analytics.playlists) {
+      return this.codebase.analytics.playlists;
+    } else {
+      return undefined;
+    }
+  }
+
+  get sheets() {
+    if(this.codebase.analytics && this.codebase.analytics.sheets) {
+      return this.codebase.analytics.sheets;
+    } else {
+      return undefined;
+    }
+  }
+
+  get showSheetPlaylist(): boolean {
+    if(!this.playlists && !this.sheets) return false;
+    else {
+      var count = 0;
+      if(this.playlists) {
+        count+=this.playlists['in-progress'].length;
+        count+=this.playlists['completed'].length;
+      }
+      if(this.sheets) {
+        count+=this.sheets['in-progress'].length;
+        count+=this.sheets['completed'].length;
+      }
+      return count > 0; 
+    }
+  }
+
   startTimer() {
     this.codebase.startTimer();
   }
