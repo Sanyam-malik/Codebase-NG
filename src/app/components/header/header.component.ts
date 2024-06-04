@@ -287,6 +287,7 @@ export class HeaderComponent {
       'headers': null,
       'params': params
     }
+
     this.http.post(api, null, options).subscribe((response: any) => {
       this.codebase.clearData();
       this.codebase.getData();
@@ -294,5 +295,28 @@ export class HeaderComponent {
     }, err => {
       this.hideShowModal();
     });
+  }
+
+  convertTimeStringToDate(timeString: string): Date | null {
+    if (!timeString) return null;
+
+    const [hours, minutes] = timeString.split(':').map(Number);
+    if (isNaN(hours) || isNaN(minutes)) return null;
+
+    const date = new Date();
+    date.setHours(hours, minutes, 0, 0);  // hours, minutes, seconds, milliseconds
+
+    return date;
+  }
+
+  convertDateStringToDate(dateString: string): Date | null {
+    if (!dateString) return null;
+
+    // Parse the date string assuming the format is "YYYY-MM-DD"
+    const [year, month, day] = dateString.split('-').map(Number);
+    if (isNaN(year) || isNaN(month) || isNaN(day)) return null;
+
+    // Note: Months are 0-based in JavaScript's Date object (January is 0, December is 11)
+    return new Date(year, month - 1, day);
   }
 }

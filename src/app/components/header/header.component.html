@@ -309,9 +309,9 @@
         <p>Name: {{showModalItem.name}}</p>
         <p *ngIf="showModalItem.desc">Description: {{showModalItem.desc}}</p>
         <p *ngIf="showModalItem.recurrence">Recurrence: {{showModalItem.recurrence | titlecase}}</p>
-        <p *ngIf="showModalItem.date">Date: {{showModalItem.date}}</p>
-        <p *ngIf="showModalItem.start_time">Start Time: {{showModalItem.start_time}}</p>
-        <p *ngIf="showModalItem.end_time">End Time: {{showModalItem.end_time}}</p>
+        <p *ngIf="showModalItem.date">Date: {{convertDateStringToDate(showModalItem.date)}}</p>
+        <p *ngIf="showModalItem.start_time">Start Time: {{convertTimeStringToDate(showModalItem.start_time) | date: 'h:mm a'}}</p>
+        <p *ngIf="showModalItem.end_time">End Time: {{convertTimeStringToDate(showModalItem.end_time) | date: 'h:mm a'}}</p>
       </div>
       
       <div *ngIf="isOnEditMode" class="editable">
@@ -328,9 +328,9 @@
         <p>Date:</p>
         <nz-date-picker></nz-date-picker>
         <p>Start Time:</p>
-        <nz-time-picker></nz-time-picker>
+        <nz-time-picker [nzUse12Hours]="true" nzFormat="h:mm a"></nz-time-picker>
         <p>End Time:</p>
-        <nz-time-picker></nz-time-picker>
+        <nz-time-picker [nzUse12Hours]="true" nzFormat="h:mm a"></nz-time-picker>
       </div>
       
       <div>
