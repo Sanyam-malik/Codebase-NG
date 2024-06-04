@@ -9,6 +9,7 @@
             <img src="{{icon}}" height="40" style="filter: grayscale(100%);-webkit-filter: grayscale(100%);">&nbsp;&nbsp;{{name}}
           </span>
         </li>
+        <!-- Event Section -->
         <li nz-menu-item class="nohover">
           <a nz-dropdown [nzDropdownMenu]="emenu" nzTrigger="click"><fa-icon [icon]="calendarIcon"></fa-icon>&nbsp;Events</a>
           <nz-dropdown-menu #emenu="nzDropdownMenu">
@@ -42,6 +43,7 @@
             </ul>
           </nz-dropdown-menu>
         </li>
+        <!-- Playlist Section -->
         <li nz-menu-item class="nohover">
           <a nz-dropdown [nzDropdownMenu]="pmenu" nzTrigger="click"><fa-icon [icon]="videoIcon"></fa-icon>&nbsp;Playlists</a>
           <nz-dropdown-menu #pmenu="nzDropdownMenu">
@@ -81,6 +83,7 @@
             </ul>
           </nz-dropdown-menu>
         </li>
+        <!-- Note Section -->
         <li nz-menu-item class="nohover">
           <a nz-dropdown [nzDropdownMenu]="nmenu" nzTrigger="click"><fa-icon [icon]="bookIcon"></fa-icon>&nbsp;Notes</a>
           <nz-dropdown-menu #nmenu="nzDropdownMenu" class="d-list-container">
@@ -111,6 +114,7 @@
             </ul>
           </nz-dropdown-menu>
         </li>
+        <!-- Tracker Section -->
         <li nz-menu-item class="nohover">
           <a nz-dropdown [nzDropdownMenu]="tmenu" nzTrigger="click"><fa-icon [icon]="thumbtackIcon"></fa-icon>&nbsp;Trackers</a>
           <nz-dropdown-menu #tmenu="nzDropdownMenu">
@@ -144,6 +148,7 @@
             </ul>
           </nz-dropdown-menu>
         </li>
+        <!-- Platform Section -->
         <li nz-menu-item class="nohover">
           <a nz-dropdown [nzDropdownMenu]="lmenu" nzTrigger="click"><fa-icon [icon]="linkIcon"></fa-icon>&nbsp;Platforms</a>
           <nz-dropdown-menu #lmenu="nzDropdownMenu">
@@ -174,6 +179,7 @@
             </ul>
           </nz-dropdown-menu>
         </li>
+        <!-- Sheet Section -->
         <li nz-menu-item class="nohover">
           <a nz-dropdown [nzDropdownMenu]="dmenu" nzTrigger="click"><fa-icon [icon]="sheetIcon"></fa-icon>&nbsp;Sheets</a>
           <nz-dropdown-menu #dmenu="nzDropdownMenu">
