@@ -106,7 +106,7 @@ export class CodebaseService {
     const theme_data = this.getConfig(this.runningTheme+"Theme");
     const name_data = this.getConfig("appName");
     const icon_data = this.getConfig("appIcon");
-    const allow_addition = this.getConfig("appAddItems");
+    const allow_addition = this.getConfig("appAdditems");
     
     if(Object.keys(theme_data).length > 0) {
       const theme = JSON.parse(theme_data.config);
