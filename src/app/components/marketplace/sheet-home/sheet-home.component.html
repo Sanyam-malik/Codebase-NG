@@ -1,47 +1,57 @@
-<div style="display: flex;justify-content: space-between;align-items: center;">
-    <div>
-        <h1 style="margin: 0%;">Curated Problem Sheets</h1>
-    </div>
-    <div style="text-align: right;">
-        <div style="display: inline-flex;flex-direction: row;
-        justify-content: center;
-        align-items: center;">
-            <nz-input-group [nzSuffix]="suffixIconSearch">
-                <input [(ngModel)]="search" (ngModelChange)="initSearch()" type="text" nz-input placeholder="Search..." />
-            </nz-input-group>
-            <ng-template #suffixIconSearch>
-                <span nz-icon nzType="search"></span>
-            </ng-template>
+<ng-container *ngIf="!this.dataError">
+    <div style="display: flex;justify-content: space-between;align-items: center;">
+        <div>
+            <h1 style="margin: 0%;">Curated Problem Sheets</h1>
+        </div>
+        <div style="text-align: right;">
+            <div style="display: inline-flex;flex-direction: row;
+            justify-content: center;
+            align-items: center;">
+                <nz-input-group [nzSuffix]="suffixIconSearch">
+                    <input [(ngModel)]="search" (ngModelChange)="initSearch()" type="text" nz-input placeholder="Search..." />
+                </nz-input-group>
+                <ng-template #suffixIconSearch>
+                    <span nz-icon nzType="search"></span>
+                </ng-template>
+            </div>
         </div>
     </div>
-</div>
-
-<div *ngFor="let grid of paginatedRecords" class="grid4">
-    <div *ngFor="let sheet of grid" class="dashcard">
-        <img *ngIf="sheet.image" [src]="sheet.image" alt="{{ sheet.name }}">
-        <fa-icon *ngIf="!sheet.image" [icon]="bookIcon" style="color: var(--primaryColor)" [size]="'4x'"></fa-icon>
-        <h2 style="margin: 1rem;">
-            <a routerLink="/marketplace/sheet/{{sheet.uid}}">{{ sheet.name }}</a>
-        </h2>
-        <h3>Total Problems: <span class="color-primary">{{ sheet.total_count }}</span></h3>
-    </div>
-</div>
-
-<div *ngIf="paginatedRecords.length == 0" class="center-div" style="width: 100%; height: 400px;margin: 2rem;">
-    <nz-list nzItemLayout="horizontal">
-        <nz-list-empty></nz-list-empty>
-    </nz-list>
-</div>
-
-<div style="display: flex;justify-content: space-between;align-items: center;">
-    <div>
-        <h3 style="margin: 0%;">Total Sheets: <span class="color-primary">{{sheets.length}}</span></h3>
-    </div>
-    <div style="text-align: right;">
-        <div style="display: inline-flex;flex-direction: row;
-        justify-content: center;
-        align-items: center;">
-            <nz-pagination [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="pageTotal" (nzPageIndexChange)="pageChange($event)"></nz-pagination>
+    
+    <div *ngFor="let grid of paginatedRecords" class="grid4">
+        <div *ngFor="let sheet of grid" class="dashcard">
+            <img *ngIf="sheet.image" [src]="sheet.image" alt="{{ sheet.name }}">
+            <fa-icon *ngIf="!sheet.image" [icon]="bookIcon" style="color: var(--primaryColor)" [size]="'4x'"></fa-icon>
+            <h2 style="margin: 1rem;">
+                <a routerLink="/marketplace/sheet/{{sheet.uid}}">{{ sheet.name }}</a>
+            </h2>
+            <h3>Total Problems: <span class="color-primary">{{ sheet.total_count }}</span></h3>
         </div>
     </div>
-</div>
+    
+    <div *ngIf="paginatedRecords.length == 0" class="center-div" style="width: 100%; height: 400px;margin: 2rem;">
+        <nz-list nzItemLayout="horizontal">
+            <nz-list-empty></nz-list-empty>
+        </nz-list>
+    </div>
+    
+    <div style="display: flex;justify-content: space-between;align-items: center;">
+        <div>
+            <h3 style="margin: 0%;">Total Sheets: <span class="color-primary">{{sheets.length}}</span></h3>
+        </div>
+        <div style="text-align: right;">
+            <div style="display: inline-flex;flex-direction: row;
+            justify-content: center;
+            align-items: center;">
+                <nz-pagination [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="pageTotal" (nzPageIndexChange)="pageChange($event)"></nz-pagination>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="this.dataError">
+    <nz-result nzStatus="500" nzTitle="Marketplace is currently unavailable." nzSubTitle="Please try again later.">
+        <div nz-result-extra>
+          <button nz-button nzType="primary" routerLink="/dashboard">Back Home</button>
+        </div>
+    </nz-result>
+</ng-container>

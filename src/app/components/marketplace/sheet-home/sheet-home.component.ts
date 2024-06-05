@@ -12,6 +12,7 @@ import { faBook, faBookOpen } from '@fortawesome/free-solid-svg-icons';
 })
 export class SheetHomeComponent implements OnInit {
   
+  dataError: boolean = false;
   search: string = "";
   sheets: SheetHome[] = [];
   bookIcon: any = faBookOpen;
@@ -24,6 +25,8 @@ export class SheetHomeComponent implements OnInit {
     this.codebase.setTitle("Sheet MarketPlace");
     if(this.route.snapshot.data['apiResponse']) {
       this.sheets = this.route.snapshot.data['apiResponse']['sheets'];
+    } else {
+      this.dataError = true;
     }
   }
 

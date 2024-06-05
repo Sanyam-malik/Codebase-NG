@@ -13,6 +13,7 @@ import { faVideo } from '@fortawesome/free-solid-svg-icons';
 })
 export class PlaylistHomeComponent implements OnInit {
 
+  dataError: boolean = false;
   search: string = "";
   playlists: PlaylistHome[] = [];
   pageIndex: number = 1;
@@ -25,6 +26,8 @@ export class PlaylistHomeComponent implements OnInit {
     this.codebase.setTitle("Playlist MarketPlace");
     if(this.route.snapshot.data['apiResponse']) {
       this.playlists = this.route.snapshot.data['apiResponse']['playlists'];
+    } else {
+      this.dataError = true;
     }
   }
 
