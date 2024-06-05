@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { faStopwatch, faPause, faPlay, faStop, faBars, faLink, faCalendar, faBook, faThumbTack, faVideo, faPlus, faTrash, faFileAlt, faCircleHalfStroke, faMoon, faSun, faBookOpen, faEdit, faGlobe, faCodeBranch } from '@fortawesome/free-solid-svg-icons';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CodebaseService } from '../../services/codebase.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { faInternetExplorer } from '@fortawesome/free-brands-svg-icons';
 import { Branch } from '../../data-models/branch';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
@@ -17,6 +15,63 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+
+  recurrance_types = [
+    {
+      value: 'MONTHLY',
+      text: 'Monthly'
+    }, 
+    {
+      value: 'EVERY',
+      text: 'Every'
+    },
+    {
+      value: 'ONCE',
+      text: 'Once'
+    },
+    {
+      value: 'DAILY',
+      text: 'Daily'
+    }
+  ]
+
+  recurrance_subtypes = [
+    {
+      value: 'MONDAY',
+      text: 'Monday'
+    }, 
+    {
+      value: 'TUESDAY',
+      text: 'Tuesday'
+    },
+    {
+      value: 'WEDNESDAY',
+      text: 'Wednesday'
+    },
+    {
+      value: 'THURSDAY',
+      text: 'Thursday'
+    },
+    {
+      value: 'FRIDAY',
+      text: 'Friday'
+    },
+    {
+      value: 'SATURDAY',
+      text: 'Saturday'
+    },
+    {
+      value: 'SUNDAY',
+      text: 'Sunday'
+    }
+  ]
+
+  levelOptions = [
+    'Easy',
+    'Medium',
+    'Hard'
+  ];
+
   confirmSwitchModal?: NzModalRef;
   visible = false;
   selectedUploadOption: number = 1;
@@ -46,12 +101,9 @@ export class HeaderComponent {
   });
   
   isModalVisible: any = {
-    'playlist': false,
     'event': false,
     'link': false,
-    'tracker': false,
-    'note': false,
-    'sheet': false
+    'tracker': false
   };
 
   showModal = false;

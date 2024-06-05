@@ -304,21 +304,22 @@
       
       <div *ngIf="isOnEditMode" class="editable">
         <p>Name:</p>
-        <input nz-input placeholder="Basic usage" type="text" />
+        <input nz-input placeholder="Name" type="text" />
         <p>Description:</p>
-        <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+        <textarea nz-input placeholder="Description" nzAutosize></textarea>
         <p>Recurrence:</p>
-        <nz-select>
-          <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-          <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-          <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+        <nz-select nzPlaceHolder="Recurrence">
+          <nz-option *ngFor="let item of recurrance_types" nzValue="{{item.value}}" nzLabel="{{item.text}}"></nz-option>
+        </nz-select>
+        <nz-select nzPlaceHolder="Days">
+          <nz-option *ngFor="let item of recurrance_subtypes" nzValue="{{item.value}}" nzLabel="{{item.text}}"></nz-option>
         </nz-select>
         <p>Date:</p>
-        <nz-date-picker></nz-date-picker>
+        <nz-date-picker nzPlaceHolder="Date"></nz-date-picker>
         <p>Start Time:</p>
-        <nz-time-picker [nzUse12Hours]="true" nzFormat="h:mm a"></nz-time-picker>
+        <nz-time-picker nzPlaceHolder="Start Time" [nzUse12Hours]="true" nzFormat="h:mm a"></nz-time-picker>
         <p>End Time:</p>
-        <nz-time-picker [nzUse12Hours]="true" nzFormat="h:mm a"></nz-time-picker>
+        <nz-time-picker nzPlaceHolder="End Time" [nzUse12Hours]="true" nzFormat="h:mm a"></nz-time-picker>
       </div>
       
       <div>
@@ -334,9 +335,9 @@
 
       <div *ngIf="isOnEditMode" class="editable">
         <p>Name:</p>
-        <input nz-input placeholder="Basic usage" type="text" />
+        <input nz-input placeholder="Name" type="text" />
         <p>Levels:</p>
-        <nz-checkbox-group></nz-checkbox-group>
+        <label *ngFor="let item of levelOptions" nz-checkbox>{{item}}</label>
       </div>
 
       <div>
@@ -353,11 +354,11 @@
       
       <div *ngIf="isOnEditMode" class="editable">
         <p>Name:</p>
-        <input nz-input placeholder="Basic usage" type="text" />
+        <input nz-input placeholder="Name" type="text" />
         <p>URL:</p>
-        <input nz-input placeholder="Basic usage" type="text" />
+        <input nz-input placeholder="URL" type="text" />
         <p>Icon:</p>
-        <input nz-input placeholder="Basic usage" type="text" />
+        <input nz-input placeholder="Icon" type="text" />
       </div>
 
       <div>
