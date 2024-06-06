@@ -296,7 +296,7 @@
       <div *ngIf="showModalType == 'event'" class="d-list" style="padding: 0.5%;align-items: center;">
         <div *ngIf="!isOnEditMode">
           <p>Name: {{showModalItem.name}}</p>
-          <p *ngIf="showModalItem.desc">Description: {{showModalItem.desc}}</p>
+          <p *ngIf="showModalItem.description">Description: {{showModalItem.description}}</p>
           <p *ngIf="showModalItem.recurrence">Recurrence: {{showModalItem.recurrence | titlecase}}</p>
           <p *ngIf="showModalItem.date">Date: {{convertDateStringToDate(showModalItem.date)}}</p>
           <p *ngIf="showModalItem.start_time">Start Time: {{convertTimeStringToDate(showModalItem.start_time) | date: 'h:mm a'}}</p>
@@ -312,11 +312,11 @@
           <nz-select nzPlaceHolder="Recurrence" formControlName="recurrence">
             <nz-option *ngFor="let item of recurrance_types" nzValue="{{item.value}}" nzLabel="{{item.text}}"></nz-option>
           </nz-select>
-          <nz-select nzPlaceHolder="Days" formControlName="days">
+          <nz-select nzPlaceHolder="Days" formControlName="days" [style]="editableForm.get('recurrence')?.value == 'EVERY' ? '' : 'display:none'">
             <nz-option *ngFor="let item of recurrance_subtypes" nzValue="{{item.value}}" nzLabel="{{item.text}}"></nz-option>
           </nz-select>
-          <p>Date:</p>
-          <nz-date-picker nzPlaceHolder="Date" formControlName="date"></nz-date-picker>
+          <p [style]="editableForm.get('recurrence')?.value == 'ONCE' ? '' : 'display:none'">Date:</p>
+          <nz-date-picker nzPlaceHolder="Date" formControlName="date" [style]="editableForm.get('recurrence')?.value == 'ONCE' ? '' : 'display:none'"></nz-date-picker>
           <p>Start Time:</p>
           <nz-time-picker nzPlaceHolder="Start Time" [nzUse12Hours]="true" nzFormat="h:mm a" formControlName="startTime"></nz-time-picker>
           <p>End Time:</p>

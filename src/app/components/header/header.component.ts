@@ -20,6 +20,10 @@ export class HeaderComponent implements OnInit {
     {
       value: 'MONTHLY',
       text: 'Monthly'
+    },
+    {
+      value: 'WEEKLY',
+      text: 'Weekly'
     }, 
     {
       value: 'EVERY',
@@ -246,14 +250,17 @@ export class HeaderComponent implements OnInit {
 
   initForm() {
     if(this.showModalType == 'event') {
+
+      const recurrenceArray = this.showModalItem.recurrence.split(' ');
+
       this.editableForm = this.fb.group({
         name: [this.showModalItem.name, Validators.required],
         description: [this.showModalItem.description],
-        recurrence: ['', Validators.required],
-        days: ['', Validators.required],
-        date: [null, Validators.required],
-        startTime: [null, Validators.required],
-        endTime: [null, Validators.required]
+        recurrence: [recurrenceArray[0], Validators.required],
+        days: [recurrenceArray.length > 1 ? recurrenceArray[1] : ''],
+        date: [this.convertDateStringToDate(this.showModalItem.date)],
+        startTime: [this.convertTimeStringToDate(this.showModalItem.start_time)],
+        endTime: [this.convertTimeStringToDate(this.showModalItem.end_time)]
       });
     }
 
