@@ -338,7 +338,11 @@
           <p>Name:</p>
           <input nz-input placeholder="Name" type="text" formControlName="name"/>
           <p>Levels:</p>
-          <label *ngFor="let item of levelOptions" nz-checkbox>{{item}}</label>
+          <div formArrayName="levels">
+            <label *ngFor="let item of levelOptions; let i = index" nz-checkbox [nzChecked]="levelFormArray.at(i).value" (change)="onCheckboxChange($event, i)">
+              {{item}}
+            </label>
+          </div>
         </div>
   
         <div>

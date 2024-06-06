@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faStopwatch, faPause, faPlay, faStop, faBars, faLink, faCalendar, faBook, faThumbTack, faVideo, faPlus, faTrash, faFileAlt, faCircleHalfStroke, faMoon, faSun, faBookOpen, faEdit, faGlobe, faCodeBranch } from '@fortawesome/free-solid-svg-icons';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -265,9 +265,24 @@ export class HeaderComponent implements OnInit {
     }
 
     if(this.showModalType == 'tracker') {
+
+      var levels = this.levelOptions.map(() => false);
+      const levelArray = this.showModalItem.level.split(", ");
+      for(var level of levelArray) {
+        if(level == 'Easy') {
+          levels[0] = true;
+        }
+        else if(level == 'Medium') {
+          levels[1] = true;
+        }
+        else if(level == 'Hard') {
+          levels[2] = true;
+        }
+      }
+
       this.editableForm = this.fb.group({
         name: [this.showModalItem.name],
-        levels: this.fb.array(this.levelOptions.map(() => false))
+        levels: this.fb.array(levels)
       });
     }
 
@@ -278,6 +293,14 @@ export class HeaderComponent implements OnInit {
         icon: [this.showModalItem.icon, Validators.required]
       });
     }
+  }
+
+  get levelFormArray(): FormArray<any> {
+    return this.editableForm.get('levels') as FormArray;
+  }
+
+  onCheckboxChange(e: any, index: number): void {
+    this.levelFormArray.at(index).setValue(e.target.checked);
   }
 
   hideShowModal() {
