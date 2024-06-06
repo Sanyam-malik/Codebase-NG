@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faStopwatch, faPause, faPlay, faStop, faBars, faLink, faCalendar, faBook, faThumbTack, faVideo, faPlus, faTrash, faFileAlt, faCircleHalfStroke, faMoon, faSun, faBookOpen, faEdit, faGlobe, faCodeBranch } from '@fortawesome/free-solid-svg-icons';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -14,7 +14,7 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
   recurrance_types = [
     {
@@ -110,6 +110,7 @@ export class HeaderComponent {
   showModalType = "";
   showModalItem: any;
   isOnEditMode = false;
+  editableForm!: FormGroup;
 
   get switchTheme(): any {
     return this.codebase.runningTheme == 'dark' ? faSun : faMoon;
@@ -179,8 +180,12 @@ export class HeaderComponent {
   }
 
 
-  constructor(public codebase: CodebaseService, private modal: NzModalService,
+  constructor(public codebase: CodebaseService, private modal: NzModalService, private fb: FormBuilder,
     private router: Router, private message: NzMessageService, private http: HttpClient) {
+    
+  }
+  
+  ngOnInit(): void {
     
   }
 
@@ -236,6 +241,36 @@ export class HeaderComponent {
     this.showModal = true;
     this.showModalType = type;
     this.showModalItem = item;
+    this.initForm();
+  }
+
+  initForm() {
+    if(this.showModalType == 'event') {
+      this.editableForm = this.fb.group({
+        name: [this.showModalItem.name, Validators.required],
+        description: [this.showModalItem.description],
+        recurrence: ['', Validators.required],
+        days: ['', Validators.required],
+        date: [null, Validators.required],
+        startTime: [null, Validators.required],
+        endTime: [null, Validators.required]
+      });
+    }
+
+    if(this.showModalType == 'tracker') {
+      this.editableForm = this.fb.group({
+        name: [this.showModalItem.name],
+        levels: this.fb.array(this.levelOptions.map(() => false))
+      });
+    }
+
+    if(this.showModalType == 'link') {
+      this.editableForm = this.fb.group({
+        name: [this.showModalItem.name, Validators.required],
+        url: [this.showModalItem.url, Validators.required],
+        icon: [this.showModalItem.icon, Validators.required]
+      });
+    }
   }
 
   hideShowModal() {

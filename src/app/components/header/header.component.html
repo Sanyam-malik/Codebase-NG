@@ -292,79 +292,81 @@
 
 <nz-modal [(nzVisible)]="showModal" nzCentered nzTitle="{{showModalType | titlecase}}" (nzOnCancel)="hideShowModal()">
   <div *nzModalContent>
-    <div *ngIf="showModalType == 'event'" class="d-list" style="padding: 0.5%;align-items: center;">
-      <div *ngIf="!isOnEditMode">
-        <p>Name: {{showModalItem.name}}</p>
-        <p *ngIf="showModalItem.desc">Description: {{showModalItem.desc}}</p>
-        <p *ngIf="showModalItem.recurrence">Recurrence: {{showModalItem.recurrence | titlecase}}</p>
-        <p *ngIf="showModalItem.date">Date: {{convertDateStringToDate(showModalItem.date)}}</p>
-        <p *ngIf="showModalItem.start_time">Start Time: {{convertTimeStringToDate(showModalItem.start_time) | date: 'h:mm a'}}</p>
-        <p *ngIf="showModalItem.end_time">End Time: {{convertTimeStringToDate(showModalItem.end_time) | date: 'h:mm a'}}</p>
+    <form [formGroup]="editableForm">
+      <div *ngIf="showModalType == 'event'" class="d-list" style="padding: 0.5%;align-items: center;">
+        <div *ngIf="!isOnEditMode">
+          <p>Name: {{showModalItem.name}}</p>
+          <p *ngIf="showModalItem.desc">Description: {{showModalItem.desc}}</p>
+          <p *ngIf="showModalItem.recurrence">Recurrence: {{showModalItem.recurrence | titlecase}}</p>
+          <p *ngIf="showModalItem.date">Date: {{convertDateStringToDate(showModalItem.date)}}</p>
+          <p *ngIf="showModalItem.start_time">Start Time: {{convertTimeStringToDate(showModalItem.start_time) | date: 'h:mm a'}}</p>
+          <p *ngIf="showModalItem.end_time">End Time: {{convertTimeStringToDate(showModalItem.end_time) | date: 'h:mm a'}}</p>
+        </div>
+        
+        <div *ngIf="isOnEditMode" class="editable">
+          <p>Name:</p>
+          <input nz-input placeholder="Name" type="text" formControlName="name"/>
+          <p>Description:</p>
+          <textarea nz-input placeholder="Description" nzAutosize formControlName="description"></textarea>
+          <p>Recurrence:</p>
+          <nz-select nzPlaceHolder="Recurrence" formControlName="recurrence">
+            <nz-option *ngFor="let item of recurrance_types" nzValue="{{item.value}}" nzLabel="{{item.text}}"></nz-option>
+          </nz-select>
+          <nz-select nzPlaceHolder="Days" formControlName="days">
+            <nz-option *ngFor="let item of recurrance_subtypes" nzValue="{{item.value}}" nzLabel="{{item.text}}"></nz-option>
+          </nz-select>
+          <p>Date:</p>
+          <nz-date-picker nzPlaceHolder="Date" formControlName="date"></nz-date-picker>
+          <p>Start Time:</p>
+          <nz-time-picker nzPlaceHolder="Start Time" [nzUse12Hours]="true" nzFormat="h:mm a" formControlName="startTime"></nz-time-picker>
+          <p>End Time:</p>
+          <nz-time-picker nzPlaceHolder="End Time" [nzUse12Hours]="true" nzFormat="h:mm a" formControlName="endTime"></nz-time-picker>
+        </div>
+        
+        <div>
+          <fa-icon [icon]="calendarIcon" size="5x"></fa-icon>
+        </div>
       </div>
-      
-      <div *ngIf="isOnEditMode" class="editable">
-        <p>Name:</p>
-        <input nz-input placeholder="Name" type="text" />
-        <p>Description:</p>
-        <textarea nz-input placeholder="Description" nzAutosize></textarea>
-        <p>Recurrence:</p>
-        <nz-select nzPlaceHolder="Recurrence">
-          <nz-option *ngFor="let item of recurrance_types" nzValue="{{item.value}}" nzLabel="{{item.text}}"></nz-option>
-        </nz-select>
-        <nz-select nzPlaceHolder="Days">
-          <nz-option *ngFor="let item of recurrance_subtypes" nzValue="{{item.value}}" nzLabel="{{item.text}}"></nz-option>
-        </nz-select>
-        <p>Date:</p>
-        <nz-date-picker nzPlaceHolder="Date"></nz-date-picker>
-        <p>Start Time:</p>
-        <nz-time-picker nzPlaceHolder="Start Time" [nzUse12Hours]="true" nzFormat="h:mm a"></nz-time-picker>
-        <p>End Time:</p>
-        <nz-time-picker nzPlaceHolder="End Time" [nzUse12Hours]="true" nzFormat="h:mm a"></nz-time-picker>
+  
+      <div *ngIf="showModalType == 'tracker'" class="d-list" style="padding: 0.5%;align-items: center;">
+        <div *ngIf="!isOnEditMode">
+          <p>Name: {{showModalItem.name}}</p>
+          <p>Levels: {{showModalItem.level}}</p> 
+        </div>
+  
+        <div *ngIf="isOnEditMode" class="editable">
+          <p>Name:</p>
+          <input nz-input placeholder="Name" type="text" formControlName="name"/>
+          <p>Levels:</p>
+          <label *ngFor="let item of levelOptions" nz-checkbox>{{item}}</label>
+        </div>
+  
+        <div>
+          <fa-icon [icon]="thumbtackIcon" size="3x"></fa-icon>
+        </div>
       </div>
-      
-      <div>
-        <fa-icon [icon]="calendarIcon" size="5x"></fa-icon>
+  
+      <div *ngIf="showModalType == 'link'" class="d-list" style="padding: 0.5%;align-items: center;justify-content: space-between;">
+        <div *ngIf="!isOnEditMode" style="max-width: 80%;">
+          <p>Name: {{showModalItem.name}}</p>
+          <p>URL: <a [href]="showModalItem.url">{{showModalItem.url}}</a></p>
+          <p>Icon: <a [href]="showModalItem.icon">{{showModalItem.icon}}</a></p>
+        </div>
+        
+        <div *ngIf="isOnEditMode" class="editable">
+          <p>Name:</p>
+          <input nz-input placeholder="Name" type="text" formControlName="name" />
+          <p>URL:</p>
+          <input nz-input placeholder="URL" type="text" formControlName="url" />
+          <p>Icon:</p>
+          <input nz-input placeholder="Icon" type="text" formControlName="icon" />
+        </div>
+  
+        <div>
+          <img [src]="showModalItem.icon" width="60">
+        </div>
       </div>
-    </div>
-
-    <div *ngIf="showModalType == 'tracker'" class="d-list" style="padding: 0.5%;align-items: center;">
-      <div *ngIf="!isOnEditMode">
-        <p>Name: {{showModalItem.name}}</p>
-        <p>Levels: {{showModalItem.level}}</p> 
-      </div>
-
-      <div *ngIf="isOnEditMode" class="editable">
-        <p>Name:</p>
-        <input nz-input placeholder="Name" type="text" />
-        <p>Levels:</p>
-        <label *ngFor="let item of levelOptions" nz-checkbox>{{item}}</label>
-      </div>
-
-      <div>
-        <fa-icon [icon]="thumbtackIcon" size="3x"></fa-icon>
-      </div>
-    </div>
-
-    <div *ngIf="showModalType == 'link'" class="d-list" style="padding: 0.5%;align-items: center;justify-content: space-between;">
-      <div *ngIf="!isOnEditMode" style="max-width: 80%;">
-        <p>Name: {{showModalItem.name}}</p>
-        <p>URL: <a [href]="showModalItem.url">{{showModalItem.url}}</a></p>
-        <p>Icon: <a [href]="showModalItem.icon">{{showModalItem.icon}}</a></p>
-      </div>
-      
-      <div *ngIf="isOnEditMode" class="editable">
-        <p>Name:</p>
-        <input nz-input placeholder="Name" type="text" />
-        <p>URL:</p>
-        <input nz-input placeholder="URL" type="text" />
-        <p>Icon:</p>
-        <input nz-input placeholder="Icon" type="text" />
-      </div>
-
-      <div>
-        <img [src]="showModalItem.icon" width="60">
-      </div>
-    </div>
+    </form>
   </div>
   <div *nzModalFooter>
     <ng-container *ngIf="!isOnEditMode">
