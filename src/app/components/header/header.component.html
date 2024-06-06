@@ -388,11 +388,11 @@
 
     <ng-container *ngIf="isOnEditMode">
       <button nz-button nzType="primary">
-        Save Changes
+        <fa-icon [icon]="saveIcon"></fa-icon>&nbsp;Save
       </button>
 
       <button nz-button nzType="default" (click)="isOnEditMode = false">
-        Cancel
+        <fa-icon [icon]="cancelIcon"></fa-icon>&nbsp;Cancel
       </button>
     </ng-container>
   </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
-import { faStopwatch, faPause, faPlay, faStop, faBars, faLink, faCalendar, faBook, faThumbTack, faVideo, faPlus, faTrash, faFileAlt, faCircleHalfStroke, faMoon, faSun, faBookOpen, faEdit, faGlobe, faCodeBranch } from '@fortawesome/free-solid-svg-icons';
+import { faStopwatch, faPause, faPlay, faStop, faBars, faLink, faCalendar, faBook, faThumbTack, faVideo, faPlus, faTrash, faFileAlt, faCircleHalfStroke, faMoon, faSun, faBookOpen, faEdit, faGlobe, faCodeBranch, faFloppyDisk, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CodebaseService } from '../../services/codebase.service';
 import { HttpClient } from '@angular/common/http';
@@ -97,6 +97,8 @@ export class HeaderComponent implements OnInit {
   editIcon: any = faEdit;
   webIcon: any = faGlobe;
   branchIcon: any = faCodeBranch;
+  saveIcon: any = faFloppyDisk;
+  cancelIcon: any = faXmark;
 
   year = new Date().getFullYear();
 
