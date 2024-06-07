@@ -11,6 +11,7 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { Platform } from '../../data-models/platform';
 import { Reminder } from '../../data-models/reminder';
 import { Tracker } from '../../data-models/tracker';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-header',
@@ -392,6 +393,16 @@ export class HeaderComponent implements OnInit {
     if (this.showModalType == "event") {
       api = `${environment.cbURL}/reminder/operations`;
       object = "reminder";
+      var temp: any = {
+        id: this.showModalItem.id,
+        date: this.editableForm.get('date')?.value ? format(this.editableForm.get('date')?.value, 'yyyy-MM-dd') : null,
+        description: this.editableForm.get('description')?.value,
+        end_time: this.editableForm.get('end_time')?.value ? format(this.editableForm.get('end_time')?.value, 'HH:MM') : null,
+        name: this.editableForm.get('name')?.value,
+        recurrence: '',
+        start_time: this.editableForm.get('start_time')?.value ? format(this.editableForm.get('start_time')?.value, 'HH:MM') : null
+      }
+      objvalue = temp;
     }
     if (this.showModalType == "tracker") {
       api = `${environment.cbURL}/tracker/operations`;

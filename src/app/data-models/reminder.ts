@@ -1,9 +1,9 @@
 export interface Reminder {
-    uid: string,
-    date: string,
+    id: string,
+    date: string | null,
     description: string,
-    end_time: string,
+    end_time: string | null,
     name: string,
     recurrence: string,
-    start_time: string
+    start_time: string | null
 }
