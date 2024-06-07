@@ -263,7 +263,7 @@ export class HeaderComponent implements OnInit {
         name: [this.showModalItem.name, Validators.required],
         description: [this.showModalItem.description],
         recurrence: [recurrenceArray[0], Validators.required],
-        days: [recurrenceArray.length > 1 ? recurrenceArray[1] : ''],
+        days: [recurrenceArray.length > 1 ? recurrenceArray[1] : 'MONDAY'],
         date: [this.convertDateStringToDate(this.showModalItem.date)],
         startTime: [this.convertTimeStringToDate(this.showModalItem.start_time)],
         endTime: [this.convertTimeStringToDate(this.showModalItem.end_time)]
@@ -393,50 +393,60 @@ export class HeaderComponent implements OnInit {
     if (this.showModalType == "event") {
       api = `${environment.cbURL}/reminder/operations`;
       object = "reminder";
-      var temp: any = {
-        id: this.showModalItem.id,
-        date: this.editableForm.get('date')?.value ? format(this.editableForm.get('date')?.value, 'yyyy-MM-dd') : null,
-        description: this.editableForm.get('description')?.value,
-        end_time: this.editableForm.get('end_time')?.value ? format(this.editableForm.get('end_time')?.value, 'HH:MM') : null,
-        name: this.editableForm.get('name')?.value,
-        recurrence: '',
-        start_time: this.editableForm.get('start_time')?.value ? format(this.editableForm.get('start_time')?.value, 'HH:MM') : null
+      if(operation_type == 'update') {
+        var recurrence = this.editableForm.get('recurrence')?.value;
+        if(recurrence == 'EVERY') {
+          recurrence = recurrence + " "+ this.editableForm.get('days')?.value;
+        }
+        var temp: any = {
+          id: this.showModalItem.id,
+          date: this.editableForm.get('date')?.value ? format(this.editableForm.get('date')?.value, 'yyyy-MM-dd') : null,
+          description: this.editableForm.get('description')?.value,
+          end_time: this.editableForm.get('end_time')?.value ? format(this.editableForm.get('end_time')?.value, 'HH:MM') : null,
+          name: this.editableForm.get('name')?.value,
+          recurrence: recurrence,
+          start_time: this.editableForm.get('start_time')?.value ? format(this.editableForm.get('start_time')?.value, 'HH:MM') : null
+        }
+        objvalue = temp;
       }
-      objvalue = temp;
     }
     if (this.showModalType == "tracker") {
       api = `${environment.cbURL}/tracker/operations`;
       object = "tracker";
-      var levels:string[] = [];
-      var tempLevels = this.editableForm.get('levels')?.value;
-      if(tempLevels[0] == true) {
-        levels.push("Easy");
+      if(operation_type == 'update') {
+        var levels:string[] = [];
+        var tempLevels = this.editableForm.get('levels')?.value;
+        if(tempLevels[0] == true) {
+          levels.push("Easy");
+        }
+        if(tempLevels[1] == true) {
+          levels.push("Medium");
+        }
+        if(tempLevels[2] == true) {
+          levels.push("Hard");
+        }
+        var temp: any = {
+          id: this.showModalItem.id,
+          level: levels.join(","),
+          name: this.editableForm.get('name')?.value,
+          slug: this.codebase.createSlug(this.editableForm.get('name')?.value)
+        }
+        objvalue = temp;
       }
-      if(tempLevels[1] == true) {
-        levels.push("Medium");
-      }
-      if(tempLevels[2] == true) {
-        levels.push("Hard");
-      }
-      var temp: any = {
-        id: this.showModalItem.id,
-        level: levels.join(","),
-        name: this.editableForm.get('name')?.value,
-        slug: this.codebase.createSlug(this.editableForm.get('name')?.value)
-      }
-      objvalue = temp;
     }
     if (this.showModalType == "link") {
       api = `${environment.cbURL}/platform/operations`;
       object = "platform";
-      var temp: any = {
-        id: this.showModalItem.id,
-        name: this.editableForm.get('name')?.value,
-        url: this.editableForm.get('url')?.value,
-        slug: this.codebase.createSlug(this.editableForm.get('name')?.value),
-        icon: this.editableForm.get('url')?.value
+      if(operation_type == 'update') {
+        var temp: any = {
+          id: this.showModalItem.id,
+          name: this.editableForm.get('name')?.value,
+          url: this.editableForm.get('url')?.value,
+          slug: this.codebase.createSlug(this.editableForm.get('name')?.value),
+          icon: this.editableForm.get('url')?.value
+        }
+        objvalue = temp;
       }
-      objvalue = temp;
     }
 
     var params: any = {
