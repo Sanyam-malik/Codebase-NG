@@ -1,5 +1,6 @@
 export interface Tracker {
-    uid: string,
+    id: string,
     level: string,
-    name: string
+    name: string,
+    slug: string
 }

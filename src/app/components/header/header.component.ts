@@ -8,6 +8,9 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Branch } from '../../data-models/branch';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { Platform } from '../../data-models/platform';
+import { Reminder } from '../../data-models/reminder';
+import { Tracker } from '../../data-models/tracker';
 
 @Component({
   selector: 'app-header',
@@ -384,6 +387,7 @@ export class HeaderComponent implements OnInit {
   performOperation(operation_type: string) {
     var api = "";
     var object = "";
+    var objvalue: Platform | Reminder | Tracker | any = JSON.stringify(this.showModalItem);
     
     if (this.showModalType == "event") {
       api = `${environment.cbURL}/reminder/operations`;
@@ -392,16 +396,42 @@ export class HeaderComponent implements OnInit {
     if (this.showModalType == "tracker") {
       api = `${environment.cbURL}/tracker/operations`;
       object = "tracker";
+      var levels:string[] = [];
+      var tempLevels = this.editableForm.get('levels')?.value;
+      if(tempLevels[0] == true) {
+        levels.push("Easy");
+      }
+      if(tempLevels[1] == true) {
+        levels.push("Medium");
+      }
+      if(tempLevels[2] == true) {
+        levels.push("Hard");
+      }
+      var temp: any = {
+        id: this.showModalItem.id,
+        level: levels.join(","),
+        name: this.editableForm.get('name')?.value,
+        slug: this.codebase.createSlug(this.editableForm.get('name')?.value)
+      }
+      objvalue = temp;
     }
     if (this.showModalType == "link") {
       api = `${environment.cbURL}/platform/operations`;
       object = "platform";
+      var temp: any = {
+        id: this.showModalItem.id,
+        name: this.editableForm.get('name')?.value,
+        url: this.editableForm.get('url')?.value,
+        slug: this.codebase.createSlug(this.editableForm.get('name')?.value),
+        icon: this.editableForm.get('url')?.value
+      }
+      objvalue = temp;
     }
 
     var params: any = {
       type: operation_type,
     }
-    params[object] = JSON.stringify(this.showModalItem);
+    params[object] = JSON.stringify(objvalue);
     var options: any = {
       'headers': null,
       'params': params
@@ -437,5 +467,13 @@ export class HeaderComponent implements OnInit {
 
     // Note: Months are 0-based in JavaScript's Date object (January is 0, December is 11)
     return new Date(year, month - 1, day);
+  }
+
+  submitForm() {
+    if(this.editableForm.valid) {
+      this.performOperation('update');
+    } else {
+      this.message.info('Please fill all the required fields.');
+    }
   }
 }

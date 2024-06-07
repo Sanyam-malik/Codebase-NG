@@ -387,7 +387,7 @@
     </ng-container>
 
     <ng-container *ngIf="isOnEditMode">
-      <button nz-button nzType="primary">
+      <button nz-button nzType="primary" (click)="submitForm()">
         <fa-icon [icon]="saveIcon"></fa-icon>&nbsp;Save
       </button>
 
