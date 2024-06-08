@@ -427,7 +427,7 @@ export class HeaderComponent implements OnInit {
         }
         var temp: any = {
           id: this.showModalItem.id,
-          level: levels.join(","),
+          level: levels.join(", "),
           name: this.editableForm.get('name')?.value,
           slug: this.codebase.createSlug(this.editableForm.get('name')?.value)
         }
@@ -443,7 +443,7 @@ export class HeaderComponent implements OnInit {
           name: this.editableForm.get('name')?.value,
           url: this.editableForm.get('url')?.value,
           slug: this.codebase.createSlug(this.editableForm.get('name')?.value),
-          icon: this.editableForm.get('url')?.value
+          icon: this.editableForm.get('icon')?.value
         }
         objvalue = temp;
       }
