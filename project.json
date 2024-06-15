@@ -24,10 +24,7 @@
           "highlight.js"
         ],
         "baseHref": "/cb/",
-        "outputPath": {
-          "base": "dist",
-          "browser": ""
-        },
+        "outputPath": "dist",
         "index": "src/index.html",
         "browser": "src/main.ts",
         "polyfills": [

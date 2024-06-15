@@ -1,0 +1,206 @@
+{
+  "graph": {
+    "nodes": {
+      "codebase-ng": {
+        "name": "codebase-ng",
+        "type": "app",
+        "data": {
+          "root": ".",
+          "name": "codebase-ng",
+          "metadata": {
+            "targetGroups": {
+              "NPM Scripts": [
+                "ng",
+                "start",
+                "build",
+                "watch",
+                "test"
+              ]
+            }
+          },
+          "targets": {
+            "ng": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "ng"
+              },
+              "metadata": {
+                "scriptContent": "ng",
+                "runCommand": "npm run ng"
+              },
+              "configurations": {}
+            },
+            "start": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "start"
+              },
+              "metadata": {
+                "scriptContent": "nx serve",
+                "runCommand": "npm run start"
+              },
+              "configurations": {}
+            },
+            "build": {
+              "executor": "@angular-devkit/build-angular:application",
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production"
+              ],
+              "options": {
+                "allowedCommonJsDependencies": [
+                  "highlight.js"
+                ],
+                "baseHref": "/cb/",
+                "outputPath": "dist",
+                "index": "src/index.html",
+                "browser": "src/main.ts",
+                "polyfills": [
+                  "zone.js"
+                ],
+                "tsConfig": "tsconfig.app.json",
+                "inlineStyleLanguage": "scss",
+                "assets": [
+                  "src/favicon.ico",
+                  "src/assets",
+                  {
+                    "glob": "**/*",
+                    "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                    "output": "/assets/"
+                  },
+                  {
+                    "glob": "**/*",
+                    "input": "node_modules/ngx-extended-pdf-viewer/assets/",
+                    "output": "/assets/"
+                  }
+                ],
+                "styles": [
+                  "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+                  "./node_modules/highlight.js/styles/vs2015.css",
+                  "src/assets/prism-vsc-dark-plus.css",
+                  "src/styles.scss"
+                ],
+                "scripts": [
+                  "node_modules/prismjs/prism.js",
+                  "node_modules/prismjs/components/prism-java.min.js",
+                  "node_modules/clipboard/dist/clipboard.min.js"
+                ]
+              },
+              "configurations": {
+                "production": {
+                  "budgets": [
+                    {
+                      "type": "initial",
+                      "maximumWarning": "10mb",
+                      "maximumError": "15mb"
+                    },
+                    {
+                      "type": "anyComponentStyle",
+                      "maximumWarning": "2kb",
+                      "maximumError": "4kb"
+                    }
+                  ],
+                  "outputHashing": "all"
+                },
+                "development": {
+                  "optimization": false,
+                  "extractLicenses": false,
+                  "sourceMap": true,
+                  "fileReplacements": [
+                    {
+                      "replace": "src/environments/environment.ts",
+                      "with": "src/environments/environment.development.ts"
+                    }
+                  ]
+                }
+              },
+              "defaultConfiguration": "production"
+            },
+            "watch": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "watch"
+              },
+              "metadata": {
+                "scriptContent": "nx build --watch --configuration development",
+                "runCommand": "npm run watch"
+              },
+              "configurations": {}
+            },
+            "test": {
+              "executor": "@angular-devkit/build-angular:karma",
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production"
+              ],
+              "options": {
+                "polyfills": [
+                  "zone.js",
+                  "zone.js/testing"
+                ],
+                "tsConfig": "tsconfig.spec.json",
+                "inlineStyleLanguage": "scss",
+                "assets": [
+                  "src/favicon.ico",
+                  "src/assets"
+                ],
+                "styles": [
+                  "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+                  "src/styles.scss"
+                ],
+                "scripts": []
+              },
+              "configurations": {}
+            },
+            "serve": {
+              "executor": "@angular-devkit/build-angular:dev-server",
+              "configurations": {
+                "production": {
+                  "buildTarget": "codebase-ng:build:production"
+                },
+                "development": {
+                  "buildTarget": "codebase-ng:build:development"
+                }
+              },
+              "defaultConfiguration": "development",
+              "options": {}
+            },
+            "extract-i18n": {
+              "executor": "@angular-devkit/build-angular:extract-i18n",
+              "options": {
+                "buildTarget": "codebase-ng:build"
+              },
+              "configurations": {}
+            }
+          },
+          "$schema": "node_modules/nx/schemas/project-schema.json",
+          "projectType": "application",
+          "sourceRoot": "src",
+          "prefix": "app",
+          "generators": {
+            "@schematics/angular:component": {
+              "style": "scss",
+              "standalone": false
+            },
+            "@schematics/angular:directive": {
+              "standalone": false
+            },
+            "@schematics/angular:pipe": {
+              "standalone": false
+            }
+          },
+          "implicitDependencies": [],
+          "tags": []
+        }
+      }
+    },
+    "dependencies": {
+      "codebase-ng": []
+    }
+  }
+}
