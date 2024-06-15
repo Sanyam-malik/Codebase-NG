@@ -1,18 +1,37 @@
 <ngx-ui-loader [fgsSize]="100" [fgsType]="SPINNER.foldingCube" [bgsType]="SPINNER.foldingCube" [pbColor]="color"></ngx-ui-loader>
 
-<nz-layout class="layout">
+<ng-template #baseTemplate>
+  <nz-layout class="layout">
   
-  <app-header></app-header>
-
-  <nz-content>
+    <app-header></app-header>
+  
+    <nz-content class="fixed-header">
+      
+      <app-breadcrumb></app-breadcrumb>
+  
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
     
-    <app-breadcrumb></app-breadcrumb>
+    </nz-content>
+    
+    <app-footer></app-footer>
+  </nz-layout>
+</ng-template>
 
-    <div class="inner-content">
-      <router-outlet></router-outlet>
-    </div>
+<ng-template #emptyTemplate>
+  <nz-layout class="layout">
+    
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
   
-  </nz-content>
-  
-  <app-footer></app-footer>
-</nz-layout>
+    <app-footer></app-footer>
+  </nz-layout>
+</ng-template>
+
+<ng-container switch [EmptyTemplate]="emptyTemplate" [DefaultTemplate]="baseTemplate"></ng-container>
+
+

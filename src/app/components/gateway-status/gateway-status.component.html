@@ -1,0 +1,55 @@
+<ng-container *ngIf="information">
+
+    <div class="grid1">
+        <div class="dashcard">
+            <h1><img src="./../../../assets/logo.png" height="60">&nbsp;&nbsp;Codebase</h1>
+        </div>
+    </div>
+    
+    <div class="grid2">
+        <div class="dashcard">
+            <h2>System Information</h2>
+            <nz-table style="width: 100%;" #t1 [nzData]="systemData | keyvalue" [nzFrontPagination]="false">
+                <tbody>
+                    <tr *ngFor="let data of t1.data">
+                        <td>{{ data.key }}</td>
+                        <td class="color-primary"><b>{{ data.value }}</b></td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+        
+        <div class="dashcard">
+            <h2>System Status</h2>
+            <nz-table style="width: 100%;" #t2 [nzData]="information['status'] | keyvalue" [nzFrontPagination]="false">
+                <tbody>
+                    <tr *ngFor="let data of t2.data">
+                        <td>{{ data.key }}</td>
+                        <td class="color-primary"><b>{{ data.value }}</b></td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+
+    <div class="grid1">
+        <div class="dashcard">
+            <h2>Services Registered with Datacenter</h2>
+    
+            <nz-table style="width: 100%;" #t3 [nzData]="information['services'] | keyvalue" [nzFrontPagination]="false">
+                <thead>
+                    <tr>
+                    <th>Service Name</th>
+                    <th>State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of t3.data">
+                        <td>{{ data.key }}</td>
+                        <td><fa-icon [icon]="healthIcon" [style.color]="data.value == 'Healthy' ? 'green': 'red'"></fa-icon>&nbsp;&nbsp;<b><i>{{ data.value }}</i></b></td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+</ng-container>

@@ -470,6 +470,10 @@
       border-radius: 20px;
       background-color: var(--headerColor);
       padding: 1rem 0px;
+
+      .ant-table-thead, .ant-table-tbody {
+        background: var(--headerColor);
+      }
     }
   }
 
@@ -493,6 +497,10 @@
       border-radius: 20px;
       background-color: var(--headerColor);
       padding: 1rem 0px;
+
+      .ant-table-thead, .ant-table-tbody {
+        background: var(--headerColor);
+      }
     }
   }
 
@@ -516,6 +524,10 @@
       border-radius: 20px;
       background-color: var(--headerColor);
       padding: 1rem 0px;
+
+      .ant-table-thead, .ant-table-tbody {
+        background: var(--headerColor);
+      }
     }
   }
 
@@ -541,6 +553,10 @@
       background-color: var(--headerColor);
       padding: 1rem 0px;
       overflow-x: auto;
+
+      .ant-table-thead, .ant-table-tbody {
+        background: var(--headerColor);
+      }
     }
 
     .timelinecard {

@@ -43,6 +43,8 @@ import { ContentRendererComponent } from './components/content-renderer/content-
 import { SheetViewComponent } from './components/sheet-view/sheet-view.component';
 import { NgxUiLoaderConfig, NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule, SPINNER } from 'ngx-ui-loader';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { GatewayStatusComponent } from './components/gateway-status/gateway-status.component';
+import { TemplateSwitchDirective } from './template-switch.directive';
 
 registerLocaleData(en);
 
@@ -69,7 +71,9 @@ registerLocaleData(en);
     FocusComponent,
     ContentRendererComponent,
     SheetViewComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    GatewayStatusComponent,
+    TemplateSwitchDirective
   ],
   imports: [
     SafePipe,
@@ -94,6 +98,7 @@ registerLocaleData(en);
     NgxUiLoaderHttpModule.forRoot({ 
       showForeground: false,
       excludeRegexp: [
+        "/status",
         "/api/status"
       ]
     })

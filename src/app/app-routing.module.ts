@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ProblemsComponent } from './components/problems/problems.component';
 import { ProblemViewComponent } from './components/problem-view/problem-view.component';
 import { getResolver } from './interceptors/get.resolver';
 import { SessionComponent } from './components/session/session.component';
@@ -18,12 +17,17 @@ import { ContentRendererComponent } from './components/content-renderer/content-
 import { SheetViewComponent } from './components/sheet-view/sheet-view.component';
 import { environment } from '../environments/environment';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { GatewayStatusComponent } from './components/gateway-status/gateway-status.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
     redirectTo: 'dashboard'
+  },
+  {
+    path: 'datacenter',
+    component: GatewayStatusComponent
   },
   {
     path: 'dashboard',
