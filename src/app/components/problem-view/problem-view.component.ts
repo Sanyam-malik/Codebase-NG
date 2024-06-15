@@ -23,7 +23,9 @@ export class ProblemViewComponent {
     codeIcon = faCode;
     Clipboard: any = faClipboard;
     code: string = '';
+    suggested_code: string = '';
     YTSolutions: Solution[] = [];
+
 
     constructor(private route: ActivatedRoute, private codebase: CodebaseService, private router: Router, private http: HttpClient, private message: NzMessageService) {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -99,6 +101,7 @@ export class ProblemViewComponent {
     callChatGPT() {
         var url = `${environment.intgrnURL}/chatgpt/solution`
         this.http.post(url, this.item).subscribe((response: any)=> {
+
         },
         error => {
             this.message.error('ChatGPT Service is currently down. Please try again shortly.');

@@ -63,15 +63,30 @@
                 </nz-tabset>
             </div>
             <div class="split-pane-item">
-                <h3>Code:</h3>
-                <div class="codeblock">
-                    <pre><code [highlight]="code"></code></pre>
-                    <div class="copybutton">
-                        <button class="btn-clipboard" (click)="onCopyToClipboard(code)">
-                            <fa-icon [icon]="Clipboard"></fa-icon>&nbsp;&nbsp;Copy
-                        </button>
-                    </div>
-                </div>
+                <nz-tabset [nzSize]="'large'">
+                    <nz-tab nzTitle="Your Code">
+                        <div class="codeblock">
+                            <pre><code [highlight]="code"></code></pre>
+                            <div class="copybutton">
+                                <button class="btn-clipboard" (click)="onCopyToClipboard(code)">
+                                    <fa-icon [icon]="Clipboard"></fa-icon>&nbsp;&nbsp;Copy
+                                </button>
+                            </div>
+                        </div>
+                    </nz-tab>
+
+                    <nz-tab nzTitle="ChatGPT Code" *ngIf="suggested_code">
+                        <nz-alert nzType="warning" nzMessage="Solution provided may not be accurate." nzShowIcon></nz-alert>
+                        <div class="codeblock">
+                            <pre><code [highlight]="suggested_code"></code></pre>
+                            <div class="copybutton">
+                                <button class="btn-clipboard" (click)="onCopyToClipboard(code)">
+                                    <fa-icon [icon]="Clipboard"></fa-icon>&nbsp;&nbsp;Copy
+                                </button>
+                            </div>
+                        </div>
+                    </nz-tab>
+                </nz-tabset>
             </div>
         </div>
     </ng-template>
