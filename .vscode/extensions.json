@@ -1,6 +1,12 @@
 {
   "recommendations": [
     "angular.ng-template",
-    "nrwl.angular-console"
+    "nrwl.angular-console",
+    "pshershov.blueberry-banana",
+    "equinusocio.vsc-material-theme-icons",
+    "dracula-theme.theme-dracula",
+    "equinusocio.vsc-material-theme",
+    "twin-themes.twin-vsc",
+    "alphabotsec.vscode-eclipse-keybindings"
   ]
 }
