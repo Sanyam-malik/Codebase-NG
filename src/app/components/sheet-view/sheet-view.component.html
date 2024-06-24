@@ -3,7 +3,7 @@
         <div style="width: 80%;">
             <h1 style="margin: 0%;"><span class="color-primary">{{ sheet.title }}</span></h1>
             <h3 class="no-margin-elements" [innerHTML]="sheet.description | safe:'html'"></h3>
-            <h3 *ngIf="sheet.url" style="font-style: italic;">Source: <a [href]="sheet.url | safe:'url'">{{sheet.url}}</a></h3>
+            <h3 *ngIf="sheet.url" style="font-style: italic;">Source: <a class="color-primary" [href]="sheet.url | safe:'url'">{{sheet.url}}</a></h3>
             <h3 *ngIf="sheet.completed_items" style="font-style: italic;">Completed Problems: <span class="color-primary">{{sheet.completed_items}}</span></h3>
             <h3 *ngIf="sheet.total_items" style="font-style: italic;">Total Problems: <span class="color-primary">{{sheet.total_items}}</span></h3>
             <div>
