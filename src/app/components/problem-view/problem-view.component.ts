@@ -27,6 +27,10 @@ export class ProblemViewComponent {
     YTSolutions: Solution[] = [];
 
 
+    get isDesktop(): boolean {
+        return this.codebase.screenSize === 'laptop';
+    }
+
     constructor(private route: ActivatedRoute, private codebase: CodebaseService, private router: Router, private http: HttpClient, private message: NzMessageService) {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }

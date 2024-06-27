@@ -80,7 +80,7 @@
         
         <td>{{ data.status }}</td>
         
-        <td style="text-align: center;">
+        <td style="text-align: center;" *ngIf="isDesktop">
           <span *ngIf="data.companies && data.companies.length > 0">
             <div style="justify-content: center;">
               <nz-tag *ngFor="let company of data.companies.slice(0, 5)" [nzColor]="getCompanyColor(company)" (click)="tagClick(company.name)">{{company.name}}</nz-tag>

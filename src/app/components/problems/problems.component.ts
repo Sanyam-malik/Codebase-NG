@@ -92,87 +92,151 @@ export class ProblemsComponent implements OnInit {
   }
 
   setColumns() {
-    this.listOfColumns = [
-      {
-        name: 'Name',
-        sortOrder: 'ascend',
-        width: '30%',
-        allowFilter: false,
-        allowSort: false,
-        allowSearch: true,
-        sortFn: (a: Problem, b: Problem) => a.name.localeCompare(b.name),
-        sortDirections: ['ascend', 'descend', null],
-        filterMultiple: false,
-        listOfFilter: [],
-        filterFn: null
-      },
-      {
-        name: 'Type',
-        sortOrder: null,
-        width: '15%',
-        allowFilter: true,
-        allowSort: true,
-        allowSearch: false,
-        sortFn: (a: Problem, b: Problem) => a.type.name.localeCompare(b.type.name),
-        sortDirections: ['ascend', 'descend', null],
-        filterMultiple: true,
-        listOfFilter: this.types as NzTableFilterList,
-        filterFn: (list: string[], item: Problem) => list.some(type => item.type.name.toLowerCase().indexOf(type.toLowerCase()) !== -1)
-      },
-      {
-        name: 'Level',
-        sortOrder: null,
-        width: '10%',
-        allowFilter: true,
-        allowSort: true,
-        allowSearch: false,
-        sortFn: (a: Problem, b: Problem) => {
-          const levelOrder = ['easy', 'medium', 'hard'];
-          return levelOrder.indexOf(a.level.toLowerCase()) - levelOrder.indexOf(b.level.toLowerCase());
+    if(this.isDesktop) {
+      this.listOfColumns = [
+        {
+          name: 'Name',
+          sortOrder: 'ascend',
+          width: '30%',
+          allowFilter: false,
+          allowSort: false,
+          allowSearch: true,
+          sortFn: (a: Problem, b: Problem) => a.name.localeCompare(b.name),
+          sortDirections: ['ascend', 'descend', null],
+          filterMultiple: false,
+          listOfFilter: [],
+          filterFn: null
         },
-        sortDirections: ['ascend', 'descend', null],
-        filterMultiple: true,
-        listOfFilter: this.levels as NzTableFilterList,
-        filterFn: (list: string[], item: Problem) => list.some(level => item.level.toLowerCase().indexOf(level.toLowerCase()) !== -1)
-      },
-      {
-        name: 'Status',
-        sortOrder: null,
-        width: '15%',
-        allowFilter: true,
-        allowSort: true,
-        allowSearch: false,
-        sortFn: (a: Problem, b: Problem) => a.status.localeCompare(b.status),
-        sortDirections: ['ascend', 'descend', null],
-        filterMultiple: true,
-        listOfFilter: this.statuses as NzTableFilterList,
-        filterFn: (list: string[], item: Problem) => list.some(status => item.status.toLowerCase().indexOf(status.toLowerCase()) !== -1)
-      },
-      {
-        name: 'Companies',
-        sortOrder: null,
-        width: '30%',
-        allowFilter: true,
-        allowSort: false,
-        allowSearch: false,
-        sortFn: null,
-        sortDirections: [],
-        filterMultiple: true,
-        listOfFilter: this.companies,
-        filterFn: (list: string[], item: Problem) => list.some(company => {
-          if(company.toLowerCase().trim() !== 'none') {
-            if(item.companies.length > 0) {
-              return item.companies.some(c => c.name.includes(company));
+        {
+          name: 'Type',
+          sortOrder: null,
+          width: '15%',
+          allowFilter: true,
+          allowSort: true,
+          allowSearch: false,
+          sortFn: (a: Problem, b: Problem) => a.type.name.localeCompare(b.type.name),
+          sortDirections: ['ascend', 'descend', null],
+          filterMultiple: true,
+          listOfFilter: this.types as NzTableFilterList,
+          filterFn: (list: string[], item: Problem) => list.some(type => item.type.name.toLowerCase().indexOf(type.toLowerCase()) !== -1)
+        },
+        {
+          name: 'Level',
+          sortOrder: null,
+          width: '10%',
+          allowFilter: true,
+          allowSort: true,
+          allowSearch: false,
+          sortFn: (a: Problem, b: Problem) => {
+            const levelOrder = ['easy', 'medium', 'hard'];
+            return levelOrder.indexOf(a.level.toLowerCase()) - levelOrder.indexOf(b.level.toLowerCase());
+          },
+          sortDirections: ['ascend', 'descend', null],
+          filterMultiple: true,
+          listOfFilter: this.levels as NzTableFilterList,
+          filterFn: (list: string[], item: Problem) => list.some(level => item.level.toLowerCase().indexOf(level.toLowerCase()) !== -1)
+        },
+        {
+          name: 'Status',
+          sortOrder: null,
+          width: '15%',
+          allowFilter: true,
+          allowSort: true,
+          allowSearch: false,
+          sortFn: (a: Problem, b: Problem) => a.status.localeCompare(b.status),
+          sortDirections: ['ascend', 'descend', null],
+          filterMultiple: true,
+          listOfFilter: this.statuses as NzTableFilterList,
+          filterFn: (list: string[], item: Problem) => list.some(status => item.status.toLowerCase().indexOf(status.toLowerCase()) !== -1)
+        },
+        {
+          name: 'Companies',
+          sortOrder: null,
+          width: '30%',
+          allowFilter: true,
+          allowSort: false,
+          allowSearch: false,
+          sortFn: null,
+          sortDirections: [],
+          filterMultiple: true,
+          listOfFilter: this.companies,
+          filterFn: (list: string[], item: Problem) => list.some(company => {
+            if(company.toLowerCase().trim() !== 'none') {
+              if(item.companies.length > 0) {
+                return item.companies.some(c => c.name.includes(company));
+              } else {
+                return false;
+              }
             } else {
-              return false;
+              return item.companies.length === 0;
             }
-          } else {
-            return item.companies.length === 0;
-          }
-          
-        })
-      }
-    ];
+            
+          })
+        }
+      ];
+    } else {
+      this.listOfColumns = [
+        {
+          name: 'Name',
+          sortOrder: 'ascend',
+          width: '40%',
+          allowFilter: false,
+          allowSort: false,
+          allowSearch: true,
+          sortFn: (a: Problem, b: Problem) => a.name.localeCompare(b.name),
+          sortDirections: ['ascend', 'descend', null],
+          filterMultiple: false,
+          listOfFilter: [],
+          filterFn: null
+        },
+        {
+          name: 'Type',
+          sortOrder: null,
+          width: '20%',
+          allowFilter: true,
+          allowSort: true,
+          allowSearch: false,
+          sortFn: (a: Problem, b: Problem) => a.type.name.localeCompare(b.type.name),
+          sortDirections: ['ascend', 'descend', null],
+          filterMultiple: true,
+          listOfFilter: this.types as NzTableFilterList,
+          filterFn: (list: string[], item: Problem) => list.some(type => item.type.name.toLowerCase().indexOf(type.toLowerCase()) !== -1)
+        },
+        {
+          name: 'Level',
+          sortOrder: null,
+          width: '20%',
+          allowFilter: true,
+          allowSort: true,
+          allowSearch: false,
+          sortFn: (a: Problem, b: Problem) => {
+            const levelOrder = ['easy', 'medium', 'hard'];
+            return levelOrder.indexOf(a.level.toLowerCase()) - levelOrder.indexOf(b.level.toLowerCase());
+          },
+          sortDirections: ['ascend', 'descend', null],
+          filterMultiple: true,
+          listOfFilter: this.levels as NzTableFilterList,
+          filterFn: (list: string[], item: Problem) => list.some(level => item.level.toLowerCase().indexOf(level.toLowerCase()) !== -1)
+        },
+        {
+          name: 'Status',
+          sortOrder: null,
+          width: '20%',
+          allowFilter: true,
+          allowSort: true,
+          allowSearch: false,
+          sortFn: (a: Problem, b: Problem) => a.status.localeCompare(b.status),
+          sortDirections: ['ascend', 'descend', null],
+          filterMultiple: true,
+          listOfFilter: this.statuses as NzTableFilterList,
+          filterFn: (list: string[], item: Problem) => list.some(status => item.status.toLowerCase().indexOf(status.toLowerCase()) !== -1)
+        }
+      ];
+    }
+  }
+
+  get isDesktop(): boolean {
+    return this.codebase.screenSize === 'laptop';
   }
 
   filterData() {

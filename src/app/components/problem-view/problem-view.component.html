@@ -1,5 +1,5 @@
 <ng-container *ngIf="item">
-    <ng-container *ngTemplateOutlet="newTemplate"></ng-container>
+    <ng-container *ngTemplateOutlet="isDesktop ? newTemplate : oldTemplate"></ng-container>
 
     <ng-template #newTemplate>
         <div class="split-pane">

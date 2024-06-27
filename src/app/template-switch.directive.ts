@@ -25,7 +25,7 @@ export class TemplateSwitchDirective {
       .subscribe(event => {
           this.currentRoute = event.urlAfterRedirects;
           this.viewContainer.clear();
-          if(this.currentRoute.includes('/datacenter')) {
+          if(this.currentRoute.includes('/datacenter') || this.currentRoute.includes('/timer')) {
             this.viewContainer.createEmbeddedView(this.Empty);
           } else {
             this.viewContainer.createEmbeddedView(this.Default);
