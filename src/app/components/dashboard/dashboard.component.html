@@ -1,15 +1,11 @@
-<div style="display: flex;justify-content: space-between;padding: 5px;">
+<div class="grid1">
     <div style="padding: 5px;">
         <h1 style="margin: 0%;">Welcome to your dashboard</h1>
     </div>
     <div style="padding: 5px;">
-        <h1 style="margin: 0%;">
+        <h1 style="margin: 0%;display: flex;flex-wrap: wrap;gap: 2px;">
             <ng-container *ngIf="showStartTimer">
-                <a class="btn-primary" (click)="stopTimer()">
-                    <fa-icon [icon]="stopIcon" ></fa-icon>
-                    &nbsp;Stop Timer
-                </a>&nbsp;
-
+                
                 <ng-container *ngIf="!isPaused">
                     <a class="btn-primary" (click)="pauseTimer()">
                         <fa-icon [icon]="pauseIcon" ></fa-icon>
@@ -23,6 +19,11 @@
                         &nbsp;Resume Timer
                     </a>&nbsp;
                 </ng-container>
+                
+                <a class="btn-primary" (click)="stopTimer()">
+                    <fa-icon [icon]="stopIcon" ></fa-icon>
+                    &nbsp;Stop Timer
+                </a>&nbsp;
 
             </ng-container>
             

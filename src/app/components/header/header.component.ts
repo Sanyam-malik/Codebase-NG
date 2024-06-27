@@ -122,6 +122,10 @@ export class HeaderComponent implements OnInit {
   isOnEditMode = false;
   editableForm!: FormGroup;
 
+  get isSmallScreen(): boolean {
+    return this.codebase.screenSize === 'mobile';
+  }
+
   get switchTheme(): any {
     return this.codebase.runningTheme == 'dark' ? faSun : faMoon;
   }

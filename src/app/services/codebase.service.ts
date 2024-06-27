@@ -34,6 +34,7 @@ export class CodebaseService {
   appIcon = "../assets/logo.png";
   runningTheme: string = "dark";
   isAdditionAllowed: boolean = false;
+  screenSize: string = 'laptop';
   
   branch: Branch | undefined;
   currBranch = '';

@@ -63,6 +63,7 @@
     .sub-menu-div {
       width: 50%;
       display: inline-flex;
+      flex-wrap: wrap;
     }
 
     .sub-menu-div:first-child {

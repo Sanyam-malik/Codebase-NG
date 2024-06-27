@@ -4,6 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { SPINNER } from 'ngx-ui-loader';
 import { ThemeService } from './services/theme.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit {
 
   color: string = '';
 
-  constructor(private codebase: CodebaseService, private router: Router, private themeService: ThemeService) {
+  constructor(private codebase: CodebaseService, private breakpointObserver: BreakpointObserver, private router: Router, private themeService: ThemeService) {
     this.codebase.getData();
     setTimeout(() => {
       this.color = this.themeService.getPrimaryColor();
@@ -30,6 +31,14 @@ export class AppComponent implements OnInit {
       filter((event: any) => event instanceof NavigationEnd)
     ).subscribe(() => {
       window.scrollTo(0, 0);
+    });
+
+    this.breakpointObserver.observe([
+      Breakpoints.Small,
+      Breakpoints.HandsetPortrait,
+      Breakpoints.HandsetLandscape
+    ]).subscribe(result => {
+      this.codebase.screenSize = result.matches ? 'mobile': 'laptop';
     });
   }
 

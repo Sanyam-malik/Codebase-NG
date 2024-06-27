@@ -82,6 +82,7 @@
                   "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
                   "./node_modules/highlight.js/styles/vs2015.css",
                   "src/assets/prism-vsc-dark-plus.css",
+                  "src/responsive.scss",
                   "src/styles.scss"
                 ],
                 "scripts": [
