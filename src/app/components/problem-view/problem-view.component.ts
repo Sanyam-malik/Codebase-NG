@@ -161,11 +161,25 @@ export class ProblemViewComponent {
         }
         this.http.post(url, body).subscribe((response: any)=> {
             if(response['message'] == 'success') {
-                console.log(response);
+                this.outputs.pop();
+                if(response['compile_output']) {
+                    this.outputs.push(response['compile_output']);
+                } else if(response['compile_error']) {
+                    this.outputs.push(response['compile_error']);
+                } else if(response['output']) {
+                    this.outputs.push(response['output']);
+                } else if(response['error']) {
+                    this.outputs.push(response['error']);
+                } else {
+                    this.outputs.push('System is unable to run the code');
+                }
+                this.showOutput = true;
             }
         },
         error => {
-            this.message.error('Youtube Service is currently down. Please try again shortly.');
+            this.outputs.pop();
+            this.outputs.push('System is unable to run the code');
+            this.showOutput = true;
         })
     }
 }
