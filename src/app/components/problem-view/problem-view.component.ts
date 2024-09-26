@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Problem } from '../../data-models/problem';
 import { CodebaseService } from '../../services/codebase.service';
 import { Platform } from '../../data-models/platform';
-import { faClipboard, faCode } from '@fortawesome/free-solid-svg-icons';
+import { faClipboard, faCode, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { Company } from '../../data-models/company';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -16,15 +16,44 @@ import { Solution } from '../../data-models/solution';
   styleUrl: './problem-view.component.scss'
 })
 export class ProblemViewComponent {
+    currentLang = "java";
     showMore: boolean = false;
     id: string | undefined | null = null;
     item: Problem | undefined;
     button: Platform | undefined;
     codeIcon = faCode;
     Clipboard: any = faClipboard;
+    Play: any = faPlay;
     code: string = '';
+    showOutput: boolean = false;
+    outputs: string[] = [
+        'Output:',
+        '\nPlease Run Code to Continue.........'
+    ];
     suggested_code: string = '';
     YTSolutions: Solution[] = [];
+    languages = [
+        {
+            name: "Java",
+            value: "java",
+            icon: "devicon-java-plain"
+        },
+        {
+            name: "Python",
+            value: "python",
+            icon: "devicon-python-plain"
+        },
+        {
+            name: "C++",
+            value: "cpp",
+            icon: "devicon-cplusplus-plain"
+        },
+        {
+            name: "Javascript",
+            value: "javascript",
+            icon: "devicon-javascript-plain"
+        },
+    ]
 
 
     get isDesktop(): boolean {
@@ -117,6 +146,22 @@ export class ProblemViewComponent {
         this.http.post(url, this.item).subscribe((response: any)=> {
             if(response['message'] == 'success') {
                 this.YTSolutions = response['content'];
+            }
+        },
+        error => {
+            this.message.error('Youtube Service is currently down. Please try again shortly.');
+        })
+    }
+
+    runCode() {
+        var url = `${environment.intgrnURL}/run/code`
+        var body = {
+            'language': 'java',
+            'code': this.code
+        }
+        this.http.post(url, body).subscribe((response: any)=> {
+            if(response['message'] == 'success') {
+                console.log(response);
             }
         },
         error => {

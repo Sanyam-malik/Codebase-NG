@@ -958,6 +958,20 @@ code[class*="language-"] {
   border-radius: 10px;
 }
 
+.coderun {
+  .lang-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .run-btns {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+}
+
 .branch-selector-dropdown {
 
   .ant-select-item {
