@@ -14,7 +14,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ZorroModule } from './zorro/zorro.module';
 import { ProblemsComponent } from './components/problems/problems.component';
 import { ProblemViewComponent } from './components/problem-view/problem-view.component';
-import { HIGHLIGHT_OPTIONS, HighlightModule } from 'ngx-highlightjs';
+import { HIGHLIGHT_OPTIONS, HighlightModule, HighlightAuto } from 'ngx-highlightjs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { WidgetModule } from './components/widget/widget.module';
 import { HighchartsChartModule } from 'highcharts-angular';
@@ -45,6 +45,7 @@ import { NgxUiLoaderConfig, NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoade
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { GatewayStatusComponent } from './components/gateway-status/gateway-status.component';
 import { TemplateSwitchDirective } from './template-switch.directive';
+import { ContentEditableDirective } from './content-editable.directive';
 
 registerLocaleData(en);
 
@@ -73,6 +74,7 @@ registerLocaleData(en);
     SheetViewComponent,
     NotFoundComponent,
     GatewayStatusComponent,
+    ContentEditableDirective,
     TemplateSwitchDirective
   ],
   imports: [
@@ -81,6 +83,7 @@ registerLocaleData(en);
     BrowserModule,
     AppRoutingModule,
     HighlightModule,
+    HighlightAuto,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,

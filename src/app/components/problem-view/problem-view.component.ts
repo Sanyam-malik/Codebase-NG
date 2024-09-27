@@ -26,6 +26,7 @@ export class ProblemViewComponent {
     Play: any = faPlay;
     code: string = '';
     showOutput: boolean = false;
+    runAnalysis: any = null;
     outputs: string[] = [
         'Output:',
         '\nPlease Run Code to Continue.........'
@@ -162,13 +163,14 @@ export class ProblemViewComponent {
         this.http.post(url, body).subscribe((response: any)=> {
             if(response['message'] == 'success') {
                 this.outputs.pop();
-                if(response['compile_output']) {
-                    this.outputs.push(response['compile_output']);
-                } else if(response['compile_error']) {
-                    this.outputs.push(response['compile_error']);
-                } else if(response['output']) {
+                if(response['output']) {
+                    this.runAnalysis = {
+                        time: response['time'],
+                        space: response['space']
+                    };
                     this.outputs.push(response['output']);
                 } else if(response['error']) {
+                    this.runAnalysis = null;
                     this.outputs.push(response['error']);
                 } else {
                     this.outputs.push('System is unable to run the code');
@@ -180,6 +182,7 @@ export class ProblemViewComponent {
             this.outputs.pop();
             this.outputs.push('System is unable to run the code');
             this.showOutput = true;
+            this.runAnalysis = null;
         })
     }
 }
