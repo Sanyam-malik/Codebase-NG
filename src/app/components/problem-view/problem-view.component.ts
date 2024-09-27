@@ -157,7 +157,7 @@ export class ProblemViewComponent {
     runCode() {
         var url = `${environment.intgrnURL}/run/code`
         var body = {
-            'language': 'java',
+            'language': this.currentLang,
             'code': this.code
         }
         this.http.post(url, body).subscribe((response: any)=> {
