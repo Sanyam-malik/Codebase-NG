@@ -24,6 +24,7 @@ import { Sheet, SheetBrief } from '../data-models/sheet';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Router } from '@angular/router';
 import { Branch } from '../data-models/branch';
+import { HighlightLoader } from 'ngx-highlightjs';
 
 @Injectable({
   providedIn: 'root'
@@ -69,7 +70,7 @@ export class CodebaseService {
   timer: any;
   isPaused: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router, private message: NzMessageService, private ngxService: NgxUiLoaderService, private title: Title) {
+  constructor(private http: HttpClient, private router: Router, private message: NzMessageService, private ngxService: NgxUiLoaderService, private title: Title, private hlLoader: HighlightLoader) {
     const codestate: Codestate = this.getState('codestate');
     if(codestate?.themePref) {
       this.runningTheme = codestate.themePref;
@@ -140,6 +141,7 @@ export class CodebaseService {
         appIcon: this.appIcon,
       }
     }
+    this.hlLoader.setTheme(this.runningTheme === 'dark' ? 'assets/hljs/vs2015.css' : 'assets/hljs/atom-one-light.css');
     this.saveState("codestate", codeState);
   }
 

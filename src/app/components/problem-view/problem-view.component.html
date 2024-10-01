@@ -53,7 +53,7 @@
                             <tbody>
                               <tr *ngFor="let item of YTTable.data">
                                 <a style="display:flex;align-items: center;" [href]="item.url" target="_blank">
-                                    <img *ngIf="item.image" [src]="item.image" width="120" style="padding: 0.8rem;">&nbsp;
+                                    <img *ngIf="item.image" [src]="item.image" width="120" style="padding: 0.8rem;border-radius: 20px;">&nbsp;
                                     <h3>{{item.title}}</h3>
                                 </a>
                               </tr>
@@ -64,7 +64,7 @@
             </div>
             <div class="split-pane-item">
                 <nz-tabset [nzSize]="'large'">
-                    <nz-tab nzTitle="Code Compiler">
+                    <nz-tab nzTitle="Your Code">
                         <div class="branch-selector coderun">
                             <div class="lang-selector">
                                 <span>
@@ -106,6 +106,35 @@
                                     <h3>Space: <span class="color-primary">{{runAnalysis['space']}} KB</span></h3>
                                 </div>
                                 <pre><code [highlightAuto]="outputs.join('\n')"></code></pre>
+                            </div>
+                        </div>
+                    </nz-tab>
+
+                    <nz-tab nzTitle="Test Cases">
+                        <div style="display: flex;justify-content: space-between;align-items: center;">
+                            <span>
+                                Test Result: <span class="color-primary text-bold">Passed</span>
+                            </span>
+                            <span>
+                                <button class="btn-clipboard" (click)="runTests()">
+                                    <fa-icon [icon]="Play"></fa-icon>&nbsp;&nbsp;Run Tests
+                                </button>
+                            </span>
+                        </div>
+                        <div class="grid1">
+                            <div class="card" *ngFor="let item of testCases;let i = index">
+                                <span class="color-primary">Test Case #{{i+1}}:</span>
+                                <span>
+                                    Input: 
+                                    <span class="text-bold">{{item.call_function}} ({{item.call_input_type == 'list' ? '&nbsp;&nbsp;[' : ''}} <span class="focus-input">{{item.call_inputs.join(", ")}}</span>
+                                        {{item.call_input_type == 'list' ? ']&nbsp;&nbsp;' : ''}})</span>
+                                </span>
+                                <span>
+                                    Output: 
+                                    <span class="color-primary text-bold">
+                                        {{ item.required_output_type == 'list' ? '[ '+item.required_outputs.join(", ")+' ]' : item.required_outputs.join(", ") }}
+                                    </span>
+                                </span>
                             </div>
                         </div>
                     </nz-tab>

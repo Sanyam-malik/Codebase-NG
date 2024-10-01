@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Solution } from '../../data-models/solution';
+import { TestCase } from '../../data-models/testcase';
 
 @Component({
   selector: 'app-problem-view',
@@ -33,6 +34,18 @@ export class ProblemViewComponent {
     ];
     suggested_code: string = '';
     YTSolutions: Solution[] = [];
+    testCases: TestCase[] = [
+        {
+            id: 1,
+            problem_id: "1",
+            call_function: "main",
+            call_inputs: ["1", "2", "3"],
+            call_input_type: "list",
+            required_outputs: ["1", "2", "3"],
+            required_output_type: "list",
+            time_limit: 72.1 
+        }
+    ]
     languages = [
         {
             name: "Java",
@@ -152,6 +165,10 @@ export class ProblemViewComponent {
         error => {
             this.message.error('Youtube Service is currently down. Please try again shortly.');
         })
+    }
+
+    runTests() {
+        
     }
 
     runCode() {
