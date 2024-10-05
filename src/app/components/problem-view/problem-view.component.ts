@@ -26,6 +26,7 @@ export class ProblemViewComponent {
     Clipboard: any = faClipboard;
     Play: any = faPlay;
     code: string = '';
+    modifiedCode: string = ''
     showOutput: boolean = false;
     runAnalysis: any = null;
     outputs: string[] = [
@@ -34,18 +35,7 @@ export class ProblemViewComponent {
     ];
     suggested_code: string = '';
     YTSolutions: Solution[] = [];
-    testCases: TestCase[] = [
-        {
-            id: 1,
-            problem_id: "1",
-            call_function: "main",
-            call_inputs: ["1", "2", "3"],
-            call_input_type: "list",
-            required_outputs: ["1", "2", "3"],
-            required_output_type: "list",
-            time_limit: 72.1 
-        }
-    ]
+    testCases: TestCase[] = [];
     languages = [
         {
             name: "Java",
@@ -76,6 +66,10 @@ export class ProblemViewComponent {
 
     constructor(private route: ActivatedRoute, private codebase: CodebaseService, private router: Router, private http: HttpClient, private message: NzMessageService) {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    }
+
+    onCodeChange(event: any) {
+        this.modifiedCode = event.innerText;
     }
 
     createSlug(text: string) {
@@ -115,7 +109,16 @@ export class ProblemViewComponent {
     getCode() {
         this.http.get(`${environment.cbURL.replace("/api", "/code")}/${this.item?.filename}`).subscribe((response: any) => {
             this.code = response['content'];
+            this.modifiedCode = this.code;
         });
+    }
+
+    showHideOutput() {
+        if(this.showOutput) {
+            this.code = this.modifiedCode;
+        }
+        this.showOutput = !this.showOutput;
+        
     }
 
     getColor(company: Company) {
@@ -175,7 +178,7 @@ export class ProblemViewComponent {
         var url = `${environment.intgrnURL}/run/code`
         var body = {
             'language': this.currentLang,
-            'code': this.code
+            'code': this.modifiedCode
         }
         this.http.post(url, body).subscribe((response: any)=> {
             if(response['message'] == 'success') {

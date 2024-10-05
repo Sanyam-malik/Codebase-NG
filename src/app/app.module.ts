@@ -45,7 +45,6 @@ import { NgxUiLoaderConfig, NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoade
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { GatewayStatusComponent } from './components/gateway-status/gateway-status.component';
 import { TemplateSwitchDirective } from './template-switch.directive';
-import { ContentEditableDirective } from './content-editable.directive';
 
 registerLocaleData(en);
 
@@ -74,7 +73,6 @@ registerLocaleData(en);
     SheetViewComponent,
     NotFoundComponent,
     GatewayStatusComponent,
-    ContentEditableDirective,
     TemplateSwitchDirective
   ],
   imports: [
