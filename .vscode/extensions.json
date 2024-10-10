@@ -7,6 +7,7 @@
     "dracula-theme.theme-dracula",
     "equinusocio.vsc-material-theme",
     "twin-themes.twin-vsc",
-    "alphabotsec.vscode-eclipse-keybindings"
+    "alphabotsec.vscode-eclipse-keybindings",
+    "miguelsolorio.fluent-icons"
   ]
 }
