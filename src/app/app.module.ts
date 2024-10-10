@@ -45,6 +45,8 @@ import { NgxUiLoaderConfig, NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoade
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { GatewayStatusComponent } from './components/gateway-status/gateway-status.component';
 import { TemplateSwitchDirective } from './template-switch.directive';
+import { SizeConvertPipe } from "./pipes/size-convert.pipe";
+import { TimeConvertPipe } from "./pipes/time-convert.pipe";
 
 registerLocaleData(en);
 
@@ -96,14 +98,16 @@ registerLocaleData(en);
     NgxExtendedPdfViewerModule,
     NgxUiLoaderModule,
     NgxUiLoaderRouterModule,
-    NgxUiLoaderHttpModule.forRoot({ 
-      showForeground: false,
-      excludeRegexp: [
-        "/status",
-        "/api/status"
-      ]
-    })
-  ],
+    NgxUiLoaderHttpModule.forRoot({
+        showForeground: false,
+        excludeRegexp: [
+            "/status",
+            "/api/status"
+        ]
+    }),
+    SizeConvertPipe,
+    TimeConvertPipe
+],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
     {

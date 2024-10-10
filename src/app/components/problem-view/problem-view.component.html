@@ -102,8 +102,8 @@
 
                             <div *ngIf="showOutput" class="codeblock">
                                 <div *ngIf="runAnalysis" class="lang-selector" style="padding: 0.8% 0%;">
-                                    <h3>Time: <span class="color-primary">{{runAnalysis['time']}} ms</span></h3>
-                                    <h3>Space: <span class="color-primary">{{runAnalysis['space']}} KB</span></h3>
+                                    <h3>Time: <span class="color-primary">{{runAnalysis['time'] | timeConvert }}</span></h3>
+                                    <h3>Space: <span class="color-primary">{{runAnalysis['space'] | sizeConvert }}</span></h3>
                                 </div>
                                 <pre><code [highlightAuto]="outputs.join('\n')"></code></pre>
                             </div>

@@ -175,7 +175,7 @@ export class ProblemViewComponent {
     }
 
     runCode() {
-        var url = `${environment.intgrnURL}/run/code`
+        var url = `${environment.crunnerURL}/run/code`
         var body = {
             'language': this.currentLang,
             'code': this.modifiedCode
