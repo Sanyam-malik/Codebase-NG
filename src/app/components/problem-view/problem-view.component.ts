@@ -10,6 +10,7 @@ import { environment } from '../../../environments/environment';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Solution } from '../../data-models/solution';
 import { TestCase } from '../../data-models/testcase';
+import { LanguageDetectorService } from '../../services/language-detector.service';
 
 @Component({
   selector: 'app-problem-view',
@@ -17,6 +18,7 @@ import { TestCase } from '../../data-models/testcase';
   styleUrl: './problem-view.component.scss'
 })
 export class ProblemViewComponent {
+    
     currentLang = "java";
     showMore: boolean = false;
     id: string | undefined | null = null;
@@ -64,7 +66,7 @@ export class ProblemViewComponent {
         return this.codebase.screenSize === 'laptop';
     }
 
-    constructor(private route: ActivatedRoute, private codebase: CodebaseService, private router: Router, private http: HttpClient, private message: NzMessageService) {
+    constructor(private route: ActivatedRoute, private codebase: CodebaseService, private router: Router, private http: HttpClient, private message: NzMessageService, private langDetect: LanguageDetectorService) {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
 
@@ -74,6 +76,16 @@ export class ProblemViewComponent {
 
     createSlug(text: string) {
         return this.codebase.createSlug(text);
+    }
+
+    onLangChange() {
+        const detectedLang = this.langDetect.detectLang(this.item?.filename);
+        if(detectedLang != this.currentLang) {
+            this.code = "";
+            this.modifiedCode = "";
+        } else {
+            this.getCode();
+        }
     }
 
     ngOnInit() {
@@ -107,6 +119,10 @@ export class ProblemViewComponent {
     }
 
     getCode() {
+        const detectedLang = this.langDetect.detectLang(this.item?.filename);
+        if(detectedLang) {
+            this.currentLang = detectedLang;
+        }
         this.http.get(`${environment.cbURL.replace("/api", "/code")}/${this.item?.filename}`).subscribe((response: any) => {
             this.code = response['content'];
             this.modifiedCode = this.code;

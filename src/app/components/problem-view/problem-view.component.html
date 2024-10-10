@@ -69,9 +69,9 @@
                             <div class="lang-selector">
                                 <span>
                                     Language:
-                                    <nz-select [nzDisabled]="showOutput" [nzSize]="'large'" [nzDropdownMatchSelectWidth]="false" [nzCustomTemplate]="iconSelectTemplate" [nzDropdownClassName]="'branch-selector-dropdown'" nzPlaceHolder="Select a branch" [(ngModel)]="currentLang">
+                                    <nz-select [nzDisabled]="showOutput" [nzSize]="'large'" [nzDropdownMatchSelectWidth]="false" [nzCustomTemplate]="iconSelectTemplate" [nzDropdownClassName]="'branch-selector-dropdown'" nzPlaceHolder="Select a branch" [(ngModel)]="currentLang" (ngModelChange)="onLangChange()">
                                         <nz-option nzCustomContent *ngFor="let lang of languages" [nzLabel]="lang['name']" [nzValue]="lang['value']">
-                                        <i [ngClass]="lang['icon']"></i>&nbsp;&nbsp;{{lang['name']}}
+                                            <i [ngClass]="lang['icon']"></i>&nbsp;&nbsp;{{lang['name']}}
                                         </nz-option>
                                     </nz-select>
                                 </span>
