@@ -1,4 +1,5 @@
 import { Company } from "./company";
+import { TestCase } from "./testcase";
 
 export interface Problem {
     id: string,
@@ -16,7 +17,8 @@ export interface Problem {
     concepts: string,
     remarks: string,
     slug: string,
-    subdirectory: string
+    subdirectory: string,
+    tests: TestCase[]
 }
 
 export interface ProblemBrief {

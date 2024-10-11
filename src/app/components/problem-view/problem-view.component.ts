@@ -37,7 +37,7 @@ export class ProblemViewComponent {
     ];
     suggested_code: string = '';
     YTSolutions: Solution[] = [];
-    testCases: TestCase[] = [];
+    testCases: TestCase[] | undefined = [];
     languages = [
         {
             name: "Java",
@@ -95,6 +95,7 @@ export class ProblemViewComponent {
             if(this.item) {
                 this.codebase.setTitle(this.item.name);
             }
+            this.testCases = this.item?.tests;
             this.button = this.codebase.getPlatform(this.item?.url);
             this.codebase.runningNav$.next([
                 {
