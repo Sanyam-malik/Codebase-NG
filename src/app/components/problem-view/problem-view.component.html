@@ -122,20 +122,28 @@
                             </span>
                         </div>
                         <div class="grid1">
-                            <!-- <div class="card" *ngFor="let item of testCases;let i = index">
+                            <div class="card" *ngFor="let item of testCases;let i = index">
                                 <span class="color-primary">Test Case #{{i+1}}:</span>
                                 <span>
                                     Input: 
-                                    <span class="text-bold">{{item.call_function}} ({{item.call_input_type == 'list' ? '&nbsp;&nbsp;[' : ''}} <span class="focus-input">{{item.call_inputs.join(", ")}}</span>
-                                        {{item.call_input_type == 'list' ? ']&nbsp;&nbsp;' : ''}})</span>
+                                    <span class="text-bold">{{item.call_function}} (
+                                        <ng-container *ngFor="let input of item.call_inputs;let j = index">
+                                            {{input.type == 'list' || input.type == 'array'  ? '&nbsp;&nbsp;[' : ''}} 
+                                            <span class="focus-input">{{input.values.join(", ")}}</span>
+                                            {{input.type == 'list' || input.type == 'array' ? ']&nbsp;&nbsp;' : ''}}
+                                            <ng-container *ngIf="j < item.call_inputs.length - 1">,</ng-container>
+                                        </ng-container>
+                                    ) </span>
                                 </span>
                                 <span>
                                     Output: 
                                     <span class="color-primary text-bold">
-                                        {{ item.required_output_type == 'list' ? '[ '+item.required_outputs.join(", ")+' ]' : item.required_outputs.join(", ") }}
+                                        <ng-container *ngFor="let output of item.required_outputs">
+                                            {{ output.type == 'list' || output.type == 'array' ? '[ '+output.values.join(", ")+' ]' : output.values.join(", ") }}
+                                        </ng-container>
                                     </span>
                                 </span>
-                            </div> -->
+                            </div>
                         </div>
                     </nz-tab>
 

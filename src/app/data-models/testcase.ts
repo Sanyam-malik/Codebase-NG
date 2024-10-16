@@ -15,12 +15,12 @@ export interface TestInputs {
     id: string,
     type: string,
     subtype: string,
-    values: any[]
+    values: any[],
 }
 
 export interface TestOutputs {
     id: string,
     type: string,
     subtype: string,
-    values: any[]
+    values: any[],
 }
