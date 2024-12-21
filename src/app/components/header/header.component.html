@@ -239,15 +239,19 @@
       </div>
 
       <div class="sub-menu-div">
-        <li *ngIf="showStartTimer && !isDashboardActive" nz-menu-item class="nohover" style="padding-right: 0.5%;">
+        <li *ngIf="(showStartTimer && !isDashboardActive) || isProblemViewActive" nz-menu-item class="nohover" style="padding-right: 0.5%;">
           <span>
             <h3 style="margin: 0%;">
-              <ng-container *ngIf="!isPaused">
+              <ng-container *ngIf="!isPaused && showStartTimer">
                 <fa-icon (click)="pauseTimer()" [icon]="pauseIcon" ></fa-icon>&nbsp;
               </ng-container>
   
               <ng-container *ngIf="isPaused">
                 <fa-icon (click)="resumeTimer()" [icon]="playIcon" ></fa-icon>&nbsp;
+              </ng-container>
+
+              <ng-container *ngIf="!showStartTimer">
+                <fa-icon (click)="startTimer()" [icon]="playIcon" ></fa-icon>&nbsp;
               </ng-container>
   
               <fa-icon (click)="stopTimer()" [icon]="stopIcon" ></fa-icon>&nbsp;
@@ -333,7 +337,7 @@
           <p>Name: {{showModalItem.name}}</p>
           <p *ngIf="showModalItem.description">Description: {{showModalItem.description}}</p>
           <p *ngIf="showModalItem.recurrence">Recurrence: {{showModalItem.recurrence | titlecase}}</p>
-          <p *ngIf="showModalItem.date">Date: {{convertDateStringToDate(showModalItem.date)}}</p>
+          <p *ngIf="showModalItem.date">Date: {{showModalItem.date}}</p>
           <p *ngIf="showModalItem.start_time">Start Time: {{convertTimeStringToDate(showModalItem.start_time) | date: 'h:mm a'}}</p>
           <p *ngIf="showModalItem.end_time">End Time: {{convertTimeStringToDate(showModalItem.end_time) | date: 'h:mm a'}}</p>
         </div>
@@ -347,11 +351,8 @@
           <nz-select nzPlaceHolder="Recurrence" formControlName="recurrence">
             <nz-option *ngFor="let item of recurrance_types" nzValue="{{item.value}}" nzLabel="{{item.text}}"></nz-option>
           </nz-select>
-          <nz-select nzPlaceHolder="Days" formControlName="days" [style]="editableForm.get('recurrence')?.value == 'EVERY' ? '' : 'display:none'">
-            <nz-option *ngFor="let item of recurrance_subtypes" nzValue="{{item.value}}" nzLabel="{{item.text}}"></nz-option>
-          </nz-select>
-          <p [style]="editableForm.get('recurrence')?.value == 'ONCE' ? '' : 'display:none'">Date:</p>
-          <nz-date-picker nzPlaceHolder="Date" formControlName="date" [style]="editableForm.get('recurrence')?.value == 'ONCE' ? '' : 'display:none'"></nz-date-picker>
+          <p [style]="editableForm.get('recurrence')?.value == 'DAILY' ? 'display:none' : ''">Date:</p>
+          <nz-date-picker nzPlaceHolder="Date" formControlName="date" [style]="editableForm.get('recurrence')?.value == 'DAILY' ? 'display:none' : ''"></nz-date-picker>
           <p>Start Time:</p>
           <nz-time-picker nzPlaceHolder="Start Time" [nzUse12Hours]="true" nzFormat="h:mm a" formControlName="startTime"></nz-time-picker>
           <p>End Time:</p>
@@ -389,7 +390,7 @@
         <div *ngIf="!isOnEditMode" style="max-width: 80%;">
           <p>Name: {{showModalItem.name}}</p>
           <p>URL: <a [href]="showModalItem.url">{{showModalItem.url}}</a></p>
-          <p>Icon: <a [href]="showModalItem.icon">{{showModalItem.icon}}</a></p>
+          <p>Icon: <a [href]="showModalItem.icon">{{showModalItem.icon.length > 40 ? showModalItem.icon.substring(0, 40)+"..." : showModalItem.icon}}</a></p>
         </div>
         
         <div *ngIf="isOnEditMode" class="editable">

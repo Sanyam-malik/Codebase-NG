@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Problem } from '../../data-models/problem';
 import { CodebaseService } from '../../services/codebase.service';
@@ -17,7 +17,7 @@ import { LanguageDetectorService } from '../../services/language-detector.servic
   templateUrl: './problem-view.component.html',
   styleUrl: './problem-view.component.scss'
 })
-export class ProblemViewComponent {
+export class ProblemViewComponent implements OnInit, OnDestroy {
     
     currentLang = "java";
     showMore: boolean = false;
@@ -69,6 +69,10 @@ export class ProblemViewComponent {
     constructor(private route: ActivatedRoute, private codebase: CodebaseService, private router: Router, private http: HttpClient, private message: NzMessageService, private langDetect: LanguageDetectorService) {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
+    
+    ngOnDestroy(): void {
+        this.codebase.isProblemViewRunning = false;
+    }
 
     onCodeChange(event: any) {
         this.modifiedCode = event.innerText;
@@ -91,6 +95,7 @@ export class ProblemViewComponent {
     ngOnInit() {
         this.id = this.route.snapshot.paramMap.get('id');
         if(this.id && this.id.length > 0) {
+            this.codebase.isProblemViewRunning = true;
             this.item = this.route.snapshot.data['apiResponse']['problem'];
             if(this.item) {
                 this.codebase.setTitle(this.item.name);

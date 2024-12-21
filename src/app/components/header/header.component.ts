@@ -28,10 +28,6 @@ export class HeaderComponent implements OnInit {
     {
       value: 'WEEKLY',
       text: 'Weekly'
-    }, 
-    {
-      value: 'EVERY',
-      text: 'Every'
     },
     {
       value: 'ONCE',
@@ -40,37 +36,6 @@ export class HeaderComponent implements OnInit {
     {
       value: 'DAILY',
       text: 'Daily'
-    }
-  ]
-
-  recurrance_subtypes = [
-    {
-      value: 'MONDAY',
-      text: 'Monday'
-    }, 
-    {
-      value: 'TUESDAY',
-      text: 'Tuesday'
-    },
-    {
-      value: 'WEDNESDAY',
-      text: 'Wednesday'
-    },
-    {
-      value: 'THURSDAY',
-      text: 'Thursday'
-    },
-    {
-      value: 'FRIDAY',
-      text: 'Friday'
-    },
-    {
-      value: 'SATURDAY',
-      text: 'Saturday'
-    },
-    {
-      value: 'SUNDAY',
-      text: 'Sunday'
     }
   ]
 
@@ -207,6 +172,10 @@ export class HeaderComponent implements OnInit {
     return this.codebase.isDashboardRunning;
   }
 
+  get isProblemViewActive() {
+    return this.codebase.isProblemViewRunning;
+  }
+
   get showStartTimer() {
     return this.codebase.timerRunning;
   }
@@ -260,14 +229,10 @@ export class HeaderComponent implements OnInit {
 
   initForm() {
     if(this.showModalType == 'event') {
-
-      const recurrenceArray = this.showModalItem.recurrence.split(' ');
-
       this.editableForm = this.fb.group({
         name: [this.showModalItem.name, Validators.required],
         description: [this.showModalItem.description],
-        recurrence: [recurrenceArray[0], Validators.required],
-        days: [recurrenceArray.length > 1 ? recurrenceArray[1] : 'MONDAY'],
+        recurrence: [this.showModalItem.recurrence, Validators.required],
         date: [this.convertDateStringToDate(this.showModalItem.date)],
         startTime: [this.convertTimeStringToDate(this.showModalItem.start_time)],
         endTime: [this.convertTimeStringToDate(this.showModalItem.end_time)]
@@ -399,17 +364,14 @@ export class HeaderComponent implements OnInit {
       object = "reminder";
       if(operation_type == 'update') {
         var recurrence = this.editableForm.get('recurrence')?.value;
-        if(recurrence == 'EVERY') {
-          recurrence = recurrence + " "+ this.editableForm.get('days')?.value;
-        }
         var temp: any = {
           id: this.showModalItem.id,
           date: this.editableForm.get('date')?.value ? format(this.editableForm.get('date')?.value, 'yyyy-MM-dd') : null,
           description: this.editableForm.get('description')?.value,
-          end_time: this.editableForm.get('end_time')?.value ? format(this.editableForm.get('end_time')?.value, 'HH:MM') : null,
+          end_time: this.editableForm.get('endTime')?.value ? format(this.editableForm.get('endTime')?.value, 'HH:mm') : null,
           name: this.editableForm.get('name')?.value,
           recurrence: recurrence,
-          start_time: this.editableForm.get('start_time')?.value ? format(this.editableForm.get('start_time')?.value, 'HH:MM') : null
+          start_time: this.editableForm.get('startTime')?.value ? format(this.editableForm.get('startTime')?.value, 'HH:mm') : null
         }
         objvalue = temp;
       }
@@ -484,6 +446,7 @@ export class HeaderComponent implements OnInit {
   }
 
   convertDateStringToDate(dateString: string): Date | null {
+    console.log(dateString);
     if (!dateString) return null;
 
     // Parse the date string assuming the format is "YYYY-MM-DD"

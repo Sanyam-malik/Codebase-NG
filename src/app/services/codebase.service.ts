@@ -65,6 +65,7 @@ export class CodebaseService {
   timerEvents$: Subject<String> = new Subject();
   
   isDashboardRunning = false;
+  isProblemViewRunning = false;
   minutes: number = 0;
   seconds: number = 0;
   timer: any;
@@ -373,6 +374,8 @@ export class CodebaseService {
   stopTimer() {
     this.timerRunning = false;
     this.isPaused = false;
+    this.minutes = 0;
+    this.seconds = 0;
     clearInterval(this.timer);
     this.timerEvents$.next('stopped');
   }
