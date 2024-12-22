@@ -334,6 +334,9 @@ export class CodebaseService {
           if (endpoint.property === 'settings') {
             this.initTheme();
           }
+          if (endpoint.property === 'analytics') {
+            this.isUpdated$.next(true);
+          }
           if (endpoint.property === 'branch' && this.branch) {
             this.currBranch = this.branch?.current;
           }
