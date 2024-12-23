@@ -215,10 +215,16 @@ export class ProblemViewComponent implements OnInit, OnDestroy {
                     this.runAnalysis = null;
                     this.outputs.push(response['error']);
                 } else {
-                    this.outputs.push('System is unable to run the code');
+                    this.outputs.push('Your code produces no output...try adding some print statements');
+                    this.runAnalysis = {
+                        time: response['time'],
+                        space: response['space']
+                    };
                 }
-                this.showOutput = true;
+            } else {
+                this.outputs.push('System is unable to run the code');
             }
+            this.showOutput = true;
         },
         error => {
             this.outputs.pop();
