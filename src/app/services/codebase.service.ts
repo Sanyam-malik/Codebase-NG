@@ -33,6 +33,7 @@ export class CodebaseService {
 
   appName = "Codebase";
   appIcon = "../assets/logo.png";
+  appColor = "";
   runningTheme: string = "dark";
   isAdditionAllowed: boolean = false;
   screenSize: string = 'laptop';
@@ -114,6 +115,9 @@ export class CodebaseService {
     if(Object.keys(theme_data).length > 0) {
       const theme = JSON.parse(theme_data.config);
       for (const key of Object.keys(theme)) {
+        if(key.includes("primaryColor")) {
+          this.appColor = theme[key];
+        }
         document.documentElement.style.setProperty(`--${key}`, theme[key]);
       }
     }

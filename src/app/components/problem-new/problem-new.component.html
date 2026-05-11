@@ -56,14 +56,35 @@
 
                     <nz-tab nzTitle="Remarks">
                         <nz-tag *ngFor="let item of remarks" [nzColor]="getColor()" [nzMode]="'closeable'" (nzOnClose)="removeRemark(item)">{{item}}</nz-tag>
+                        <input
+                            nz-input
+                            placeholder="Add remark"
+                            [(ngModel)]="newRemark"
+                            (keyup.enter)="addRemark()"
+                            style="width: 200px; margin-top: 10px;"
+                        />
                     </nz-tab>
                     
                     <nz-tab nzTitle="Companies">
                         <nz-tag *ngFor="let item of companies" [nzColor]="getColor()" [nzMode]="'closeable'" (nzOnClose)="removeCompany(item)">{{item}}</nz-tag>
+                        <input
+                            nz-input
+                            placeholder="Add Company"
+                            [(ngModel)]="newCompany"
+                            (keyup.enter)="addCompany()"
+                            style="width: 200px; margin-top: 10px;"
+                        />
                     </nz-tab>
 
                     <nz-tab nzTitle="Topics">
                         <nz-tag *ngFor="let item of topics" [nzColor]="getColor()" [nzMode]="'closeable'" (nzOnClose)="removeTopic(item)">{{item}}</nz-tag>
+                        <input
+                            nz-input
+                            placeholder="Add concept"
+                            [(ngModel)]="newTopic"
+                            (keyup.enter)="addTopic()"
+                            style="width: 200px; margin-top: 10px;"
+                        />
                     </nz-tab>
                 </nz-tabset>
             </div>

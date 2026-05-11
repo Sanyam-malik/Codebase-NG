@@ -7,6 +7,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { LanguageDetectorService } from '../../services/language-detector.service';
 import { faClipboard, faCode, faSave } from '@fortawesome/free-solid-svg-icons';
 import { ProblemType } from '../../data-models/problem';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-problem-new',
@@ -54,6 +55,40 @@ export class ProblemNewComponent implements OnInit {
         },
     ]
 
+    newRemark = '';
+    newCompany = '';
+    newTopic = '';
+
+    addRemark() {
+        const value = this.newRemark.trim();
+
+        if (value && !this.remarks.includes(value)) {
+            this.remarks.push(value);
+        }
+
+        this.newRemark = '';
+    }
+
+    addCompany() {
+        const value = this.newCompany.trim();
+
+        if (value && !this.companies.includes(value)) {
+            this.companies.push(value);
+        }
+
+        this.newCompany = '';
+    }
+
+    addTopic() {
+        const value = this.newTopic.trim();
+
+        if (value && !this.topics.includes(value)) {
+            this.topics.push(value);
+        }
+
+        this.newTopic = '';
+    }
+
 
     get isDesktop(): boolean {
         return this.codebase.screenSize === 'laptop';
@@ -83,7 +118,62 @@ export class ProblemNewComponent implements OnInit {
     }
 
     commitCode() {
-        throw new Error('Method not implemented.');
+
+        if (!this.name?.trim()) {
+            this.message.warning("Problem name is required");
+            return;
+        }
+
+        if (!this.url?.trim()) {
+            this.message.warning("Problem URL is required");
+            return;
+        }
+
+        if (!this.status?.trim()) {
+            this.message.warning("Problem status is required");
+            return;
+        }
+
+        if (!this.level?.trim()) {
+            this.message.warning("Problem level is required");
+            return;
+        }
+
+        const metadata = {
+            name: this.name,
+            url: this.url,
+            description: this.description,
+            notes: this.notes,
+            status: this.status,
+            level: this.level,
+            companies: this.companies.join(":"),
+            remarks: this.remarks.join(":"),
+            concepts: this.topics.join(":"),
+            directory: this.dir.replace(" ", "_"),
+            subdirectory: this.subdir.replace(" ", "_"),
+            date: new Date().toISOString().split('T')[0]
+        }
+
+        const code = {
+            content: this.code,
+            lang: this.currentLang,
+            extension: 'java'
+        }
+
+        const request = {
+            "metadata": metadata,
+            "code": code
+        }
+
+        this.http.post(`${environment.cbURL}/problem/add`, request)
+            .subscribe(
+            (response: any )=> {
+                this.message.success("Solution Added Successfully....");
+            },
+            error => {
+                this.message.warning("Unable to save the problem solution");
+            }
+        );
     }
 
     createSlug(text: string) {
@@ -107,7 +197,7 @@ export class ProblemNewComponent implements OnInit {
     ngOnInit() {}
 
     getColor() {
-       return this.codebase.getColor();
+       return this.codebase.appColor;
     }
 
     onCopyToClipboard(text: string) {
