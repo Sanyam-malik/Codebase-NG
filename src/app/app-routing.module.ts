@@ -18,6 +18,7 @@ import { SheetViewComponent } from './components/sheet-view/sheet-view.component
 import { environment } from '../environments/environment';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { GatewayStatusComponent } from './components/gateway-status/gateway-status.component';
+import { ProblemNewComponent } from './components/problem-new/problem-new.component';
 
 const routes: Routes = [
   {
@@ -123,6 +124,10 @@ const routes: Routes = [
         }
       }
     }
+  },
+  {
+    path: 'problem/solution/add',
+    component: ProblemNewComponent,
   },
   {
     path: 'problem/statement/:id',

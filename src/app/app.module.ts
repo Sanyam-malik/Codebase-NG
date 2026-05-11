@@ -47,6 +47,7 @@ import { GatewayStatusComponent } from './components/gateway-status/gateway-stat
 import { TemplateSwitchDirective } from './template-switch.directive';
 import { SizeConvertPipe } from "./pipes/size-convert.pipe";
 import { TimeConvertPipe } from "./pipes/time-convert.pipe";
+import { ProblemNewComponent } from './components/problem-new/problem-new.component';
 
 registerLocaleData(en);
 
@@ -56,6 +57,7 @@ registerLocaleData(en);
     DashboardComponent,
     ProblemsComponent,
     ProblemViewComponent,
+    ProblemNewComponent,
     UrlToolPipe,
     SessionComponent,
     AllComponent,

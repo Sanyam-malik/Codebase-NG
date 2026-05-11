@@ -1,0 +1,111 @@
+<ng-container>
+    <ng-container *ngTemplateOutlet="newTemplate"></ng-container>
+
+    <ng-template #newTemplate>
+        <div class="split-pane">
+            <div class="split-pane-item">
+                <div style="display: flex;justify-content: space-between;">
+                    <div style="width: 40%">
+                        <h3 style="padding: 0.5rem 0px;margin: 0%;">
+                            <p style="margin: 0%;">Name:</p>
+                            <input nz-input type="text" [(ngModel)]="name" placeholder="Problem Name">
+                        </h3>
+                        <h3 style="padding: 0.5rem 0px;margin: 0%;"> 
+                            <p style="margin: 0%;">URL:</p>
+                            <input nz-input type="text" [(ngModel)]="url" placeholder="Problem URL">
+                        </h3>
+                        <h3 style="padding: 0.5rem 0px;margin: 0%;"> 
+                            <p style="margin: 0%;">Level:</p>
+                            <nz-select class="select_input" [(ngModel)]="level">
+                                <nz-option nzValue="Easy" nzLabel="Easy" />
+                                <nz-option nzValue="Medium" nzLabel="Medium" />
+                                <nz-option nzValue="Hard" nzLabel="Hard" />
+                            </nz-select>
+                        </h3>
+                    </div>
+                    <div style="width: 40%">
+                        <h3 style="padding: 0.5rem 0px;margin: 0%;">
+                            <p style="margin: 0%;">Status:</p>
+                            <nz-select class="select_input" [(ngModel)]="status">
+                                <nz-option nzValue="In Progress" nzLabel="In Progress" />
+                                <nz-option nzValue="Completed" nzLabel="Completed" />
+                                <nz-option nzValue="Not Started" nzLabel="Not Started" />
+                            </nz-select>
+                        </h3>
+                        <h3 style="padding: 0.5rem 0px;margin: 0%;">
+                            <p style="margin: 0%;">Directory:</p>
+                            <nz-select class="select_input" [(ngModel)]="dir">
+                                <nz-option *ngFor="let type of types" [nzValue]="type['name']" [nzLabel]="type['name']" />
+                            </nz-select>
+                        </h3>
+                        <h3 style="padding: 0.5rem 0px;margin: 0%;">
+                            <p style="margin: 0%;">SubDirectory:</p>
+                            <input nz-input type="text" [(ngModel)]="subdir" placeholder="Problem SubDirectory">
+                        </h3>
+                    </div>
+                </div>
+
+                <nz-tabset [nzSize]="'large'">
+                    <nz-tab nzTitle="Description">
+                        <pre spellcheck="false"><code contenteditable="true" (input)="onDescriptionChange($event.target)" [highlightAuto]="description"></code></pre>
+                    </nz-tab>
+                    
+                    <nz-tab nzTitle="Notes">
+                        <pre spellcheck="false"><code contenteditable="true" (input)="onNotesChange($event.target)" [highlightAuto]="notes"></code></pre>
+                    </nz-tab>
+
+                    <nz-tab nzTitle="Remarks">
+                        <nz-tag *ngFor="let item of remarks" [nzColor]="getColor()" [nzMode]="'closeable'" (nzOnClose)="removeRemark(item)">{{item}}</nz-tag>
+                    </nz-tab>
+                    
+                    <nz-tab nzTitle="Companies">
+                        <nz-tag *ngFor="let item of companies" [nzColor]="getColor()" [nzMode]="'closeable'" (nzOnClose)="removeCompany(item)">{{item}}</nz-tag>
+                    </nz-tab>
+
+                    <nz-tab nzTitle="Topics">
+                        <nz-tag *ngFor="let item of topics" [nzColor]="getColor()" [nzMode]="'closeable'" (nzOnClose)="removeTopic(item)">{{item}}</nz-tag>
+                    </nz-tab>
+                </nz-tabset>
+            </div>
+            <div class="split-pane-item">
+                <nz-tabset [nzSize]="'large'">
+                    <nz-tab nzTitle="Your Code">
+                        <div class="branch-selector coderun">
+                            <div class="lang-selector">
+                                <span>
+                                    Language:
+                                    <nz-select [nzSize]="'large'" [nzDropdownMatchSelectWidth]="false" [nzCustomTemplate]="iconSelectTemplate" [nzDropdownClassName]="'branch-selector-dropdown'" nzPlaceHolder="Select a branch" [(ngModel)]="currentLang" (ngModelChange)="onLangChange()">
+                                        <nz-option nzCustomContent *ngFor="let lang of languages" [nzLabel]="lang['name']" [nzValue]="lang['value']">
+                                            <i [ngClass]="lang['icon']"></i>&nbsp;&nbsp;{{lang['name']}}
+                                        </nz-option>
+                                    </nz-select>
+                                </span>
+
+                                <span class="run-btns">
+                                    <span style="cursor:pointer;" (click)="commitCode()">
+                                        <fa-icon [icon]="saveIcon"></fa-icon>&nbsp;&nbsp;Save Code
+                                    </span>
+                                </span>
+                            </div>
+
+                            <ng-template #iconSelectTemplate let-selected>
+                                {{ selected.nzLabel }}
+                            </ng-template>
+    
+                            <div class="codeblock">
+                                <pre spellcheck="false"><code contenteditable="true" (input)="onCodeChange($event.target)" [highlightAuto]="code"></code></pre>
+                                <div class="copybutton">
+                                    <button class="btn-clipboard" (click)="onCopyToClipboard(code)">
+                                        <fa-icon [icon]="Clipboard"></fa-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </nz-tab>
+                </nz-tabset>
+            </div>
+        </div>
+    </ng-template>
+
+</ng-container>
+
